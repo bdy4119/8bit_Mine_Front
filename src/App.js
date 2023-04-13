@@ -15,6 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
+          김수빈
           오늘도 파이팅입니다~ 230413!!
     
         </a>
