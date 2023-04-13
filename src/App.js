@@ -15,6 +15,10 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
+
+          나는 내 코드가 있는데 마스터를 가져오면?
+
+
         </a>
       </header>
     </div>
