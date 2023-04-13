@@ -17,14 +17,9 @@ function App() {
         >
           김수빈
           오늘도 파이팅입니다~ 230413!!
-<<<<<<< HEAD
           bis check
           태우_수정
-=======
-          
-          bis
-    
->>>>>>> f7acf6a9bfe39ea7307359ceda651738526dd2c3
+          ?
         </a>
       </header>
     </div>
