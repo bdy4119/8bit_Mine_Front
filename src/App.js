@@ -17,7 +17,7 @@ function App() {
         >
           오늘도 파이팅입니다~ 230413!!
           
-          bis check
+          bis
     
         </a>
       </header>
