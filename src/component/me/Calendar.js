@@ -11,18 +11,19 @@ import { Icon } from '@iconify/react';
     날짜 관련 함수 라이브러리
     : npm install date-fns 
 */
-import { format, addMonths, subMonths } from 'date-fns';
+import { format, addMonths, subMonths, subYears, addYears, subWeeks, addWeeks, subDays } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { isSameMonth, isSameDay, addDays, parse } from 'date-fns';
 
 
 
 
-//현재 날짜, 달력이동 함수
-const RenderHeader = ({currentMonth, preMonth, nextMonth}) => {
+//현재 연월표시& 연월이동 함수
+const RenderHeader = ({currentMonth, currentYear, preMonth, nextMonth, preYear, nextYear}) => {
     return(
         <div>
             <div>
+                <Icon icon="bi:arrow-left-circle-fill" onClick={preYear}/>
                 <Icon icon="bi:arrow-left-circle-fill" onClick={preMonth}/>
                 <span>
                     
@@ -30,10 +31,11 @@ const RenderHeader = ({currentMonth, preMonth, nextMonth}) => {
                         format(변수, "날짜형태")
                         : 원하는 형태의 날짜형태로 문자열로 받을 수 있음
                     */}
-                    {format(currentMonth, 'yyyy')}년
+                    {format(currentYear, 'yyyy')}년
                     {format(currentMonth, 'M')}월
                 </span>
                 <Icon icon="bi:arrow-right-circle-fill" onClick={nextMonth}/>
+                <Icon icon="bi:arrow-right-circle-fill" onClick={nextYear}/>
             </div>
             <div>
                 
@@ -64,7 +66,7 @@ const RenderDays = () => {
 
 
 //날짜 함수
-const RenderCells = ({currentMonth, selectedDate, onDateClick}) => {
+const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => {
     const monthStart = startOfMonth(currentMonth); // 이번달의 시작일, 시작요일
     const startDate = startOfWeek(monthStart);     // 이번주의 시작일, 시작요일
 
@@ -89,15 +91,21 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick}) => {
             );
             day = addDays(day,1); // 시작날짜, 시작 요일 계속해서 늘어남
         }
-        //7일마다 행 추가
+       
         rows.push(
             <tr key={day}>
                 {days}
-            </tr>,
-        );
-        days =[]; //7일동안의 배열 비워놓기
+            </tr>
+           );
+           days=[];
     }
-    return <tbody>{rows}</tbody>
+  //  const rowlist = rows.map((row,idx)=>(<tbody>{row}</tbody>))
+  return (
+       <tbody>{rows}</tbody>
+    //   <tr>
+    //       {days}
+    //   </tr>
+    );    
 }
 
 
@@ -110,7 +118,12 @@ function Calendar() {
 
     // new Date() : 오늘 날짜 가져오기
     const [currentMonth, setCurrentMonth] = useState(new Date());
+    const [currentYear, setCurrentYear] = useState(new Date());
+    const [currentWeek, setCurrentWeek] = useState(new Date());
+
     const [selectedDate, setSelectedDate] = useState(new Date());
+
+
 
     //이전달 이동
     // sub() : 숫자를 입력하면 그 숫자만큼 원하는 날짜나 시간을 뺄 수 있음
@@ -122,6 +135,30 @@ function Calendar() {
         setCurrentMonth(addMonths(currentMonth, 1));
     }
 
+    //이전연도 이동
+    const preYear = () => {
+        setCurrentYear(subYears(currentYear, 1));
+        setCurrentMonth(subMonths(currentMonth, 12));
+    }
+
+    //다음연도 이동
+    const nextYear = () => {
+        setCurrentYear(addYears(currentYear, 1));
+        setCurrentMonth(addMonths(currentMonth, 12));
+    }
+
+    //이전주 이동
+    const preWeek = () => {
+        setCurrentWeek(subWeeks(currentWeek, 1));
+    }
+
+    //다음주 이동
+    const nextWeek = () => {
+        setCurrentWeek(addWeeks(currentWeek, 1));
+    }
+
+
+    //날짜 클릭했을때 함수(아직 지정안함)
     const onDateClick = (day) => {
         setSelectedDate(day);
     }
@@ -129,14 +166,18 @@ function Calendar() {
     return(
         <div>
             <div>
-                <RenderHeader currentMonth={currentMonth} preMonth={preMonth} nextMonth={nextMonth} />
+                <RenderHeader currentYear={currentYear} currentMonth={currentMonth} preMonth={preMonth} nextMonth={nextMonth} preYear={preYear} nextYear={nextYear} />
             </div>
             <table border="1">
                 <thead>
                     <RenderDays />
                 </thead>
-                    <RenderCells currentMonth={currentMonth} selectedDate={selectedDate} onDateClick={onDateClick} />
+                <RenderCells currentMonth={currentMonth} selectedDate={selectedDate} onDateClick={onDateClick} currentWeek={currentWeek}/>
             </table>
+            <div>
+                <Icon icon="bi:arrow-left-circle-fill" onClick={preWeek}/>
+                <Icon icon="bi:arrow-right-circle-fill" onClick={nextWeek}/>
+            </div>
         </div>
     );
 };
