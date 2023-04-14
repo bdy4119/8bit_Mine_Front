@@ -1,7 +1,7 @@
 import React from 'react';
 //import axios from 'axios';
 import Calender from './Calendar';
-import CheckList from './CheckList';
+import CheckList from './TodoList';
 import Diary from './Diary';
 
 import './Me.css';

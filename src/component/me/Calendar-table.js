@@ -48,20 +48,83 @@ const RenderHeader = ({currentMonth, currentYear, preMonth, nextMonth, preYear, 
 //요일 함수
 const RenderDays = () => {
     const week = []; //일주일 배열 생성
-    const days = ['일', '월', '화', '수', '목', '금', '토'];
+    const days = ['일','월', '화', '수', '목', '금', '토'];
 
     for(let i=0; i<7; i++) {
         week.push(
-            <div key={i} style={{ display:"inline-block", border:"1px solid black", height:"30px", width:"100px", textAlign:"center"}} >
+            <th key={i}>
                 {days[i]}
-            </div>
+            </th>
         );
     }
     return (
-        <div style={{}}>
+        <tr>
             {week}
-        </div>
+        </tr>
     );
+}
+
+
+
+//날짜 함수
+const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => {
+
+    const monthStart = startOfMonth(currentMonth); // 이번달의 시작일, 시작요일
+    const startDate = startOfWeek(monthStart);     // 이번주의 시작일, 시작요일
+
+    const monthEnd = endOfMonth(monthStart); // 이번달의 마지막 날짜, 마지막 요일
+    const endDate = endOfWeek(monthEnd);     // 이번주의 마지막 날짜, 마지막 요일
+
+    const rows = []; // 1주 * 4 or 주
+    let days = [];  // 1주
+    let day = startDate; //이번달 시작날짜, 시작요일 넣어놓기
+    let formatedDate = ''; //설정날짜 초기화
+
+    
+    while(day <= endDate) { //day가 endDate보다 커지면 종료
+        for(let i = 0; i < 7; i++) {
+            formatedDate = format(day, 'd'); //마지막 날짜를 formatedDate에 삽입
+            const cloneDay = day; //같은 날짜 복붙
+            days.push(
+                <td key={day} onClick={()=> onDateClick(parse(cloneDay))}>
+                    <span>
+                        {formatedDate}
+                    </span>
+                </td>,
+            );
+            day = addDays(day,1); // 시작날짜, 시작 요일 계속해서 늘어남
+        }
+        rows.push(
+            <tr key={day}>
+                {days}
+            </tr>
+           );
+           days=[];
+       
+          
+     //   rows.push(days);
+    }
+    /*
+    let row = [];
+    for(let i=0; i<7; i++) {
+            if(rows[i]. currentWeek) {
+                row.push(rows[i]);
+            }
+        
+   }
+   */
+  //  const rowlist = rows.map((row,idx)=>(<tbody>{row}</tbody>))
+  
+  
+
+  return (
+       <tbody style={{verticalAlign:"top"}}>
+            {rows}
+        </tbody>
+    //   <tr>
+    //       {days}
+    //   </tr>
+    );    
 }
 
 
@@ -71,23 +134,6 @@ const RenderDays = () => {
 
 
 function Calendar() {
-
-    const[calList, setCalList] = useState([]);
-
-    function getCalList() {
-        axios.get("http://localhost:3000/calList", { params:{} })
-        .then(function(resp){
-             console.log(resp.data);
-            // alert(JSON.stringify(resp.data[0]));
-
-            setCalList(resp.data.list);
-        })
-        .catch(function(err){
-            alert(err);
-        })
-    }
-
-
 
     // new Date() : 오늘 날짜 가져오기
     const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -131,17 +177,26 @@ function Calendar() {
     }
 
 
+    //날짜 클릭했을때 함수(아직 지정안함)
+    const onDateClick = (day) => {
+        setSelectedDate(day);
+    }
+
+
     
 
     return(
         <div>
             <div>
                 <RenderHeader currentYear={currentYear} currentMonth={currentMonth} preMonth={preMonth} nextMonth={nextMonth} preYear={preYear} nextYear={nextYear} />
-                <br/>
-                 <RenderDays />
-
-                <RenderCells currentMonth={currentMonth} selectedDate={selectedDate} currentWeek={format(currentWeek, 'd')} />
             </div>
+            <br/>
+            <table border="1" width="650px" height="500px" style={{float:"left"}}>
+                <thead>
+                    <RenderDays />
+                </thead>
+                <RenderCells currentMonth={currentMonth} selectedDate={selectedDate} currentWeek={format(currentWeek, 'd')} onDateClick={onDateClick} />
+            </table>
         
             {/* 
                 <div>
@@ -152,76 +207,5 @@ function Calendar() {
         </div>
     );
 };
-
-
-
-
-//날짜 함수
-const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => {
-
-    const monthStart = startOfMonth(currentMonth); // 이번달의 시작일, 시작요일
-    const startDate = startOfWeek(monthStart);     // 이번주의 시작일, 시작요일
-
-    const monthEnd = endOfMonth(monthStart); // 이번달의 마지막 날짜, 마지막 요일
-    const endDate = endOfWeek(monthEnd);     // 이번주의 마지막 날짜, 마지막 요일
-
-    const rows = []; // 1주 * 4 or 주
-    let days = [];  // 1주
-    let day = startDate; //이번달 시작날짜, 시작요일 넣어놓기
-    let formatedDate = ''; //설정날짜 초기화
-
-    
-    while(day <= endDate) { //day가 endDate보다 커지면 종료
-        for(let i = 0; i < 7; i++) {
-            formatedDate = format(day, 'd'); //마지막 날짜를 formatedDate에 삽입
-            days.push(
-                <div style={{ display:"inline-block", border:"1px solid black", height:"100px", width:"100px", verticalAlign:"top"}} key={day}>
-                    <span>
-                        {formatedDate}
-                    </span>
-                </div>,
-            );
-            day = addDays(day,1); // 시작날짜, 시작 요일 계속해서 늘어남
-        }
-        rows.push(
-            <div key={day} >
-                {days}
-                {/* {
-                    calList.map(function(cal, idx){
-
-                    })
-                } */}
-            </div>
-        );
-        days=[];
-       
-          
-     //   rows.push(days);
-    }
-    /*
-    let row = [];
-    for(let i=0; i<7; i++) {
-            if(rows[i]. currentWeek) {
-                row.push(rows[i]);
-            }
-        
-   }
-   */
-  //  const rowlist = rows.map((row,idx)=>(<tbody>{row}</tbody>))
-  
-  
-
-  return (
-       <span>
-            {rows}
-        </span>
-    //   <tr>
-    //       {days}
-    //   </tr>
-    );    
-}
-
-
-
 
 export default Calendar;
