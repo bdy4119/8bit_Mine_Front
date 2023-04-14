@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import "./Me.css";
 /* 
   아이콘 관련
   : npm install react-icons
@@ -21,25 +22,21 @@ import { isSameMonth, isSameDay, addDays, parse } from 'date-fns';
 //현재 연월표시& 연월이동 함수
 const RenderHeader = ({currentMonth, currentYear, preMonth, nextMonth, preYear, nextYear}) => {
     return(
-        <div>
-            <div>
-                <Icon icon="bi:arrow-left-circle-fill" onClick={preYear}/>
-                <Icon icon="bi:arrow-left-circle-fill" onClick={preMonth}/>
-                <span>
-                    
-                    {/*
-                        format(변수, "날짜형태")
-                        : 원하는 형태의 날짜형태로 문자열로 받을 수 있음
-                    */}
-                    {format(currentYear, 'yyyy')}년
-                    {format(currentMonth, 'M')}월
-                </span>
-                <Icon icon="bi:arrow-right-circle-fill" onClick={nextMonth}/>
-                <Icon icon="bi:arrow-right-circle-fill" onClick={nextYear}/>
-            </div>
-            <div>
+        <div className='middle'>
+            <Icon icon="bi:arrow-left-circle-fill" onClick={preYear}/> &nbsp;
+            <Icon icon="bi:arrow-left-circle-fill" onClick={preMonth}/> &nbsp;&nbsp;&nbsp;
+            <span>
                 
-            </div>
+                {/*
+                    format(변수, "날짜형태")
+                    : 원하는 형태의 날짜형태로 문자열로 받을 수 있음
+                */}
+                {format(currentYear, 'yyyy')}년
+                {format(currentMonth, 'M')}월
+            </span>
+            &nbsp;&nbsp;&nbsp;
+            <Icon icon="bi:arrow-right-circle-fill" onClick={nextMonth}/> &nbsp;
+            <Icon icon="bi:arrow-right-circle-fill" onClick={nextYear}/>
         </div>
     );
 }
@@ -53,13 +50,15 @@ const RenderDays = () => {
 
     for(let i=0; i<7; i++) {
         week.push(
-            <td key={i}>
+            <th key={i}>
                 {days[i]}
-            </td>
+            </th>
         );
     }
     return (
-        <tr>{week}</tr>
+        <tr>
+            {week}
+        </tr>
     );
 }
 
@@ -67,6 +66,7 @@ const RenderDays = () => {
 
 //날짜 함수
 const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => {
+
     const monthStart = startOfMonth(currentMonth); // 이번달의 시작일, 시작요일
     const startDate = startOfWeek(monthStart);     // 이번주의 시작일, 시작요일
 
@@ -78,6 +78,7 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => 
     let day = startDate; //이번달 시작날짜, 시작요일 넣어놓기
     let formatedDate = ''; //설정날짜 초기화
 
+    
     while(day <= endDate) { //day가 endDate보다 커지면 종료
         for(let i = 0; i < 7; i++) {
             formatedDate = format(day, 'd'); //마지막 날짜를 formatedDate에 삽입
@@ -91,17 +92,33 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => 
             );
             day = addDays(day,1); // 시작날짜, 시작 요일 계속해서 늘어남
         }
-       
         rows.push(
             <tr key={day}>
                 {days}
             </tr>
            );
            days=[];
+       
+          
+     //   rows.push(days);
     }
+    /*
+    let row = [];
+    for(let i=0; i<7; i++) {
+            if(rows[i]. currentWeek) {
+                row.push(rows[i]);
+            }
+        
+   }
+   */
   //  const rowlist = rows.map((row,idx)=>(<tbody>{row}</tbody>))
+  
+  
+
   return (
-       <tbody>{rows}</tbody>
+       <tbody style={{verticalAlign:"top"}}>
+            {rows}
+        </tbody>
     //   <tr>
     //       {days}
     //   </tr>
@@ -163,21 +180,28 @@ function Calendar() {
         setSelectedDate(day);
     }
 
+
+    
+
     return(
         <div>
             <div>
                 <RenderHeader currentYear={currentYear} currentMonth={currentMonth} preMonth={preMonth} nextMonth={nextMonth} preYear={preYear} nextYear={nextYear} />
             </div>
-            <table border="1">
+            <br/>
+            <table border="1" width="650px" height="500px" style={{float:"left"}}>
                 <thead>
                     <RenderDays />
                 </thead>
-                <RenderCells currentMonth={currentMonth} selectedDate={selectedDate} onDateClick={onDateClick} currentWeek={currentWeek}/>
+                <RenderCells currentMonth={currentMonth} selectedDate={selectedDate} currentWeek={format(currentWeek, 'd')} onDateClick={onDateClick} />
             </table>
-            <div>
-                <Icon icon="bi:arrow-left-circle-fill" onClick={preWeek}/>
-                <Icon icon="bi:arrow-right-circle-fill" onClick={nextWeek}/>
-            </div>
+        
+            {/* 
+                <div>
+                    <Icon icon="bi:arrow-left-circle-fill" onClick={preWeek}/>
+                    <Icon icon="bi:arrow-right-circle-fill" onClick={nextWeek}/>
+                </div>
+            */}
         </div>
     );
 };
