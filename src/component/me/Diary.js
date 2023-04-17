@@ -21,9 +21,17 @@ function Diary() {
          .then(function(resp){
           //  console.log(resp.data.list[0].rdate);
           // console.log(today);
-          console.log(resp.data.cnt);
-            setDiarylist(resp.data.list);
-          //  setTotalCnt(resp.data.cnt);
+          console.log(resp.data.list[0].rdate);
+          setDiarylist(resp.data.list);
+          
+          let nottoday = [];
+            for(let i=0; i<resp.data.list.length; i++){
+              if((resp.data.list[i].rdate).substr(0,10) !== format(today, 'yyyy-MM-dd')){
+                    nottoday.push(resp.data.list[i]);
+              }
+            }
+          console.log(nottoday);
+          setTotalCnt(resp.data.cnt - nottoday.length);
          })
          .catch(function(err){
             alert(err);
@@ -31,10 +39,10 @@ function Diary() {
   }
 
 
-  function pageChange(page){
+  function pageChange(page){ 
     setPage(page);
     getDiarylist(page-1);
-}
+  }
 
 
   //클릭하면 글쓰기 함수 나오게
@@ -45,7 +53,6 @@ function Diary() {
      </div>
     );
   }
-
 
   useEffect(function(){
     getDiarylist();
@@ -79,18 +86,41 @@ function Diary() {
                     if(format(today, 'yyyy-MM-dd') === rdateStr 
                         || format(today, 'yyyy-MM-dd') === rdateStr.substr(0,10)){ // 0번째부터 10전까지의 문자열만 가져와라
                         //  setTotalCnt(diary.cnt);
-                    return (
-                        <tr key={idx}>
-                            <td>{idx+1}</td>
-                            <td>
-                              {diary.title}                            
-                            </td>
-                            <td>{diary.content}</td>
+                      return (
+                          <tr key={idx}>
+                              <td>{idx+1}</td>
+                              <td>
+                                {diary.title}                            
+                              </td>
+                              <td>{diary.content}</td>
+                          </tr>
+                      );
+                    } /*else {
+                      return(
+                        <tr key={diary}>
+                          <td colSpan="3">
+                            todo목록이 비어있습니다
+                          </td>
                         </tr>
-                    )
+                      )
                     }
+                    */
                   })
               }
+              {/* {
+                  (() => {
+                    var rdateDiary = diarylist.rdate;
+                      if((rdateDiary === format(today, 'yyyy-MM-dd')) === null || (format(today, 'yyyy-MM-dd') === rdateDiary.substr(0,10)) === null){
+                          return (
+                            <tr>
+                              <td colSpan="3">
+                                todo목록이 비어있습니다
+                              </td>
+                            </tr>
+                          );
+                  }
+                })
+              } */}
               <tr>
                 <td colSpan="3">
                   <Pagination

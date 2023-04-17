@@ -59,16 +59,7 @@ function TodoList() {
                             <td>{todo.content}</td>
                         </tr>
                     )
-                    } /*else {
-                        return(
-                          <tr key={1}>
-                            <td colSpan="3">
-                              todo목록이 비어있습니다
-                            </td>
-                          </tr>
-                        )
                     }
-                    */
                   })
                 }
 
