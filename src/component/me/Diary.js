@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 //import { Link } from 'react-router-dom';
 import Pagination from "react-js-pagination";
 import "./page.css";
+import { Link } from 'react-router-dom';
 
 
 //calendar DB사용
@@ -100,7 +101,9 @@ function Diary() {
                     prevPageText={"이전"}
                     nextPageText={"다음"}
                     onChange={pageChange} />
-                  <button type='submit' onClick={DiaryWrite}>+일지추가</button>
+                    <Link to='/diaryWrite'>
+                      <button type='submit' onClick={DiaryWrite}>+일지추가</button>
+                    </Link>
                 </td>
               </tr>
             </tbody>

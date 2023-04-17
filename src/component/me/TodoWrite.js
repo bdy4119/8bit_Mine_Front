@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-function DiaryWrite() {
+function TodoWrite() {
   let history = useNavigate();  // 변수에 useNavigate 할당
 
   const [rdate, setRdate] = useState(new Date());
@@ -28,7 +28,7 @@ function DiaryWrite() {
 
     //글쓰기는 초기화 시켜줄 게 없으므로 useEffect를 사용하지 않아도 됨
     //작성완료 함수에서 한번에 처리해주기
-    axios.post("http://localhost:3000/diaryWrite", null, {params:{"id":id, "rdate":rdate , "title": title, "content" :content}})
+    axios.post("http://localhost:3000/todoWrite", null, {params:{"id":id, "rdate":rdate , "title": title, "content" :content}})
          .then(function(resp){
             if(resp.data === "YES") {
               alert('글이 등록되었습니다.');
@@ -52,7 +52,7 @@ function DiaryWrite() {
 
   return(
     <div>
-      <h1>일지 추가</h1>
+      <h1>todo 추가</h1>
       <hr/>
 
       <table border='1px'>
@@ -62,7 +62,7 @@ function DiaryWrite() {
         </colgroup>
         <tbody>
           <tr>
-            <th>약속날짜</th>
+            <th>날짜</th>
             <td>
               <input value={format(rdate, 'yyyy-MM-dd')} onChange={(e)=>setRdate(e.target.value)}/>
             </td>
@@ -87,4 +87,4 @@ function DiaryWrite() {
     </div>
   )
 }
-export default DiaryWrite;
+export default TodoWrite;

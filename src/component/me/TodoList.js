@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function TodoList() {
   const[todolist, setTodolist] = useState([]);
@@ -44,8 +45,11 @@ function TodoList() {
           <tbody>
              {
                 todolist.map(function(todo, idx){
+                  var rdateStr = todo.rdate;
+
                     //오늘 날짜와 같은 날짜인 것만 불러와라
-                    if(format(today, 'yyyy-MM-dd') === todo.rdate){
+                    if(format(today, 'yyyy-MM-dd') === todo.rdate
+                        || format(today, 'yyyy-MM-dd') === rdateStr.substr(0,10)){
                     return (
                         <tr key={idx}>
                             <td>{idx+1}</td>
@@ -55,9 +59,42 @@ function TodoList() {
                             <td>{todo.content}</td>
                         </tr>
                     )
+                    } /*else {
+                        return(
+                          <tr key={1}>
+                            <td colSpan="3">
+                              todo목록이 비어있습니다
+                            </td>
+                          </tr>
+                        )
                     }
+                    */
                   })
-              }
+                }
+
+                {/* {
+                  function empty(todolist) {
+                    for(let i=0; i<=todolist.length; i++) {
+
+                      if((todolist.rdate[i] === format(today, 'yyyy-MM-dd')) === null){
+                        return(
+                          <tr>
+                            <td colSpan="3">
+                              todo목록이 비어있습니다
+                            </td>
+                          </tr>
+                        )
+                      }
+                    }
+                  }
+                } */}
+              <tr>
+                <td colSpan="3">
+                  <button type='submit'>
+                    <Link to='/todoWrite'> +할일 추가 </Link>
+                  </button>
+                </td>
+              </tr>
             </tbody>
         </table>
       </div>
