@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 function TodoList() {
   const[todolist, setTodolist] = useState([]);
-  const[today, setToday] = useState(new Date());
+  const[today, setToday] = useState(new Date()); //오늘 날짜로 설정
   
 
   function getTodolist() {
@@ -25,10 +25,10 @@ function TodoList() {
 
   return(
     <div>
-      <div style={{border:"1px solid black", height:"500px", width:"300px", textAlign:"center"}}>
+      <div style={{border:"1px solid black", textAlign:"center"}}>
       <table border="1">
         <colgroup>
-          <col width='70'/><col width='600'/><col width='100'/>
+          <col width='70'/><col width='150'/><col width='600'/>
           </colgroup>
           <thead>
             <tr>
@@ -48,8 +48,8 @@ function TodoList() {
                     if(format(today, 'yyyy-MM-dd') === todo.rdate){
                     return (
                         <tr key={idx}>
-                            <td>{idx + 1}</td>
-                            <td align="left">
+                            <td>{idx+1}</td>
+                            <td>
                               {todo.title}                            
                             </td>
                             <td>{todo.content}</td>
@@ -65,3 +65,6 @@ function TodoList() {
   )
 }
 export default TodoList;
+
+
+

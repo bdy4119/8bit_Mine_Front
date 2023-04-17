@@ -17,9 +17,11 @@ function Me() {
 
         <span style={{paddingLeft:"50px", paddingRight:"30px"}}>
           <Diary />
+          <span style={{paddingLeft:"50px", paddingRight:"30px"}}>
+            <CheckList/>
+          </span>
         </span>
         
-        <CheckList/>
       </div>
 
     </div>
