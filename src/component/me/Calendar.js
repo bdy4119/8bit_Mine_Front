@@ -71,16 +71,13 @@ const RenderDays = () => {
 
 
 function Calendar() {
-
-    const[calList, setCalList] = useState([]);
+    const[diarylist, setDiarylist] = useState([]);
+    const[today, setToday] = useState(new Date()); //오늘 날짜로 설정
 
     function getCalList() {
-        axios.get("http://localhost:3000/calList", { params:{} })
+        axios.get("http://localhost:3000/diaryList", { params:{} })
         .then(function(resp){
-             console.log(resp.data);
-            // alert(JSON.stringify(resp.data[0]));
-
-            setCalList(resp.data.list);
+            setDiarylist(resp.data.list);
         })
         .catch(function(err){
             alert(err);
@@ -120,16 +117,6 @@ function Calendar() {
         setCurrentMonth(addMonths(currentMonth, 12));
     }
 
-    //이전주 이동
-    const preWeek = () => {
-        setCurrentWeek(subWeeks(currentWeek, 1));
-    }
-
-    //다음주 이동
-    const nextWeek = () => {
-        setCurrentWeek(addWeeks(currentWeek, 1));
-    }
-
 
     
 
@@ -138,7 +125,8 @@ function Calendar() {
             <div>
                 <RenderHeader currentYear={currentYear} currentMonth={currentMonth} preMonth={preMonth} nextMonth={nextMonth} preYear={preYear} nextYear={nextYear} />
                 <br/>
-                 <RenderDays />
+                 <RenderDays //요일
+                 />
 
                 <RenderCells currentMonth={currentMonth} selectedDate={selectedDate} currentWeek={format(currentWeek, 'd')} />
             </div>
@@ -169,8 +157,7 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => 
     let days = [];  // 1주
     let day = startDate; //이번달 시작날짜, 시작요일 넣어놓기
     let formatedDate = ''; //설정날짜 초기화
-
-    
+   console.log(day);
     while(day <= endDate) { //day가 endDate보다 커지면 종료
         for(let i = 0; i < 7; i++) {
             formatedDate = format(day, 'd'); //마지막 날짜를 formatedDate에 삽입
@@ -194,21 +181,7 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => 
             </div>
         );
         days=[];
-       
-          
-     //   rows.push(days);
     }
-    /*
-    let row = [];
-    for(let i=0; i<7; i++) {
-            if(rows[i]. currentWeek) {
-                row.push(rows[i]);
-            }
-        
-   }
-   */
-  //  const rowlist = rows.map((row,idx)=>(<tbody>{row}</tbody>))
-  
   
 
   return (

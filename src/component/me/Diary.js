@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { format } from 'date-fns';
-//import { Link } from 'react-router-dom';
 import Pagination from "react-js-pagination";
-import "./page.css";
 import { Link } from 'react-router-dom';
 
+import "./page.css";
 
 //calendar DB사용
 function Diary() {
@@ -21,17 +20,22 @@ function Diary() {
          .then(function(resp){
           //  console.log(resp.data.list[0].rdate);
           // console.log(today);
-          console.log(resp.data.list[0].rdate);
+        //  console.log(resp.data.cnt);
           setDiarylist(resp.data.list);
           
-          let nottoday = [];
-            for(let i=0; i<resp.data.list.length; i++){
-              if((resp.data.list[i].rdate).substr(0,10) !== format(today, 'yyyy-MM-dd')){
-                    nottoday.push(resp.data.list[i]);
-              }
+          let nottoday = []; //오늘이랑 다른 날짜
+          for(let i=0; i<resp.data.list.length; i++){
+            if( resp.data.list[i].rdate !== format(today, 'yyyy-MM-dd')
+                || (resp.data.list[i].rdate).substr(0,10) !== format(today, 'yyyy-MM-dd')){
+                nottoday.push(resp.data.list[i]);
             }
-          console.log(nottoday);
+          }
+        //  console.log(resp.data.cnt);
+        //  console.log(nottoday.length-1);
+
           setTotalCnt(resp.data.cnt - nottoday.length);
+          
+        //  console.log(totalCnt);
          })
          .catch(function(err){
             alert(err);
@@ -56,7 +60,7 @@ function Diary() {
 
   useEffect(function(){
     getDiarylist();
-  }, [])
+  }, []);
 
 
   return(
@@ -124,13 +128,15 @@ function Diary() {
               <tr>
                 <td colSpan="3">
                   <Pagination
-                    activePage={page} 
-                    itemsCountPerPage={5}
-                    totalItemsCount={totalCnt}
-                    pageRangeDisplayed={5}
+                    activePage={page} //현재 페이지
+                    itemsCountPerPage={10} //한 페이지당 보여줄 리스트 개수
+                    totalItemsCount={totalCnt} //총 아이템 수
+                    pageRangeDisplayed={10}   //paginator에서 보여줄 페이지 범위
                     prevPageText={"이전"}
                     nextPageText={"다음"}
-                    onChange={pageChange} />
+                    onChange={pageChange} //페이지 핸들링
+                     />
+
                     <Link to='/diaryWrite'>
                       <button type='submit' onClick={DiaryWrite}>+일지추가</button>
                     </Link>
