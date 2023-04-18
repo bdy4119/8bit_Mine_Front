@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { format } from 'date-fns';
 import Pagination from "react-js-pagination";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import "./page.css";
 
 //calendar DB사용
 function Diary() {
+  let history = useNavigate();
+
+  const [seq, setSeq] = useState('');
+
   const[diarylist, setDiarylist] = useState([]);
   const[today, setToday] = useState(new Date());
 
@@ -58,6 +62,24 @@ function Diary() {
     );
   }
 
+
+  //삭제
+  //같이 보낸 파라미터값 매개변수 하나 더 추가해서 받아주기
+  const diaryDelete = async(seq, e) => {
+    await axios.get("http://localhost:3000/deleteDiary", {params:{"seq":seq}})
+          .then(function(resp){
+            alert("게시물이 삭제되었습니다.");
+            
+            window.location.reload(); //삭제하고 리로딩 시키기
+            history('/me');
+          })
+          .catch(function(err){
+            console.log(seq);
+            alert("삭제에 실패했습니다");
+          })
+  }
+
+
   useEffect(function(){
     getDiarylist();
   }, []);
@@ -68,17 +90,17 @@ function Diary() {
       <div style={{border:"1px solid black", textAlign:"center"}}>
       <table border="1">
         <colgroup>
-          <col width='70'/><col width='150'/><col width='600'/>
+          <col width='70'/><col width='150'/><col width='500'/><col width='100'/><col width='100'/>
           </colgroup>
           <thead>
             <tr>
-              <th colSpan="3">오늘의 일지</th>
+              <th colSpan="5">오늘의 일지</th>
             </tr>
             <tr>
-              <th colSpan="3">{format(today, 'yyyy-MM-dd')}</th>
+              <th colSpan="5">{format(today, 'yyyy-MM-dd')}</th>
             </tr>
             <tr>
-              <th>번호</th><th>제목</th><th>내용</th>
+              <th>번호</th><th>제목</th><th colSpan="3">내용</th>
             </tr>
           </thead>
           <tbody>
@@ -92,11 +114,20 @@ function Diary() {
                         //  setTotalCnt(diary.cnt);
                       return (
                           <tr key={idx}>
-                              <td>{idx+1}</td>
-                              <td>
-                                {diary.title}                            
-                              </td>
-                              <td>{diary.content}</td>
+                            <td>{idx+1}</td>
+                            <td>{diary.title}</td>
+                            <td>{diary.content}</td>
+                            <td>
+                            <Link to={`/diaryUpdate/${diary.seq}/${diary.title}/${diary.content}/${diary.rdate}`}>
+                              <button type='submit'>수정</button>
+                            </Link>
+                            </td>
+                            <td>
+                              <button type="submit" value={diary.seq} 
+                                onClick={(e)=>{diaryDelete(diary.seq, e)}} /*함수(param, e) -> 파라미터값 같이 보내는 방법*/>
+                                  삭제
+                              </button>
+                            </td>
                           </tr>
                       );
                     } /*else {
@@ -126,7 +157,7 @@ function Diary() {
                 })
               } */}
               <tr>
-                <td colSpan="3">
+                <td colSpan="5">
                   <Pagination
                     activePage={page} //현재 페이지
                     itemsCountPerPage={10} //한 페이지당 보여줄 리스트 개수
