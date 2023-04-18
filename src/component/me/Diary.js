@@ -13,7 +13,9 @@ function Diary() {
   const [seq, setSeq] = useState('');
 
   const[diarylist, setDiarylist] = useState([]);
-  const[today, setToday] = useState(new Date());
+  
+  const[today, setToday] = useState(format(new Date(),'yyyy-MM-dd'));
+  let todayStr = today.toString(); // 문자열로 변환
 
   // paging
   const [page, setPage] = useState(1);
@@ -29,8 +31,8 @@ function Diary() {
           
           let nottoday = []; //오늘이랑 다른 날짜
           for(let i=0; i<resp.data.list.length; i++){
-            if( resp.data.list[i].rdate !== format(today, 'yyyy-MM-dd')
-                || (resp.data.list[i].rdate).substr(0,10) !== format(today, 'yyyy-MM-dd')){
+            if( resp.data.list[i].rdate !== todayStr
+                || (resp.data.list[i].rdate).substr(0,10) !== todayStr){
                 nottoday.push(resp.data.list[i]);
             }
           }
@@ -69,8 +71,7 @@ function Diary() {
     await axios.get("http://localhost:3000/deleteDiary", {params:{"seq":seq}})
           .then(function(resp){
             alert("게시물이 삭제되었습니다.");
-            
-            window.location.reload(); //삭제하고 리로딩 시키기
+            window.location.reload(); //삭제하고 리로딩
             history('/me');
           })
           .catch(function(err){
@@ -97,7 +98,7 @@ function Diary() {
               <th colSpan="5">오늘의 일지</th>
             </tr>
             <tr>
-              <th colSpan="5">{format(today, 'yyyy-MM-dd')}</th>
+              <th colSpan="5">{todayStr}</th>
             </tr>
             <tr>
               <th>번호</th><th>제목</th><th colSpan="3">내용</th>
@@ -109,8 +110,8 @@ function Diary() {
                    var rdateStr = diary.rdate;
 
                     //오늘 날짜와 같은 날짜인 것만 불러와라
-                    if(format(today, 'yyyy-MM-dd') === rdateStr 
-                        || format(today, 'yyyy-MM-dd') === rdateStr.substr(0,10)){ // 0번째부터 10전까지의 문자열만 가져와라
+                    if(today === rdateStr 
+                        || today === rdateStr.substr(0,10)){ // 0번째부터 10전까지의 문자열만 가져와라
                         //  setTotalCnt(diary.cnt);
                       return (
                           <tr key={idx}>

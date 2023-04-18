@@ -6,6 +6,7 @@ import Me from "./component/Me/Me";
 import DiaryWrite from "./component/Me/DiaryWrite";
 import TodoWrite from './component/Me/TodoWrite';
 import DiaryUpdate from './component/Me/DiaryUpdate';
+import TodoUpdate from './component/Me/TodoUpdate';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/todoWrite" element={<TodoWrite/>}/>
 
           <Route path="/diaryUpdate/:seq/:title/:content/:rdate" element={<DiaryUpdate/>}/>
+          <Route path="/todoUpdate/:seq/:title/:content/:rdate" element={<TodoUpdate/>}/>
         </Routes>
       </BrowserRouter>
     </div>

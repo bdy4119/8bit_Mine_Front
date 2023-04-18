@@ -1,7 +1,7 @@
 import React from 'react';
 //import axios from 'axios';
 import Calender from './Calendar';
-import CheckList from './TodoList';
+import TodoList from './TodoList';
 import Diary from './Diary';
 
 import './Me.css';
@@ -18,7 +18,7 @@ function Me() {
         <span style={{paddingLeft:"50px", paddingRight:"30px"}}>
           <Diary />
           <span style={{paddingLeft:"50px", paddingRight:"30px"}}>
-            <CheckList/>
+            <TodoList/>
           </span>
         </span>
         

@@ -8,8 +8,10 @@ import { useNavigate } from "react-router-dom";
 function TodoWrite() {
   let history = useNavigate();  // 변수에 useNavigate 할당
 
-  const [rdate, setRdate] = useState(new Date());
-  format(rdate, 'yyyy-MM-dd');
+  const [rdate, setRdate] = useState(format(new Date(),'yyyy-MM-dd'));
+  
+  let rdateStr = rdate.toString(); //rdate -> 문자열 변환
+
   const [id, setId] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -64,7 +66,7 @@ function TodoWrite() {
           <tr>
             <th>날짜</th>
             <td>
-              <input value={format(rdate, 'yyyy-MM-dd')} onChange={(e)=>setRdate(e.target.value)}/>
+              <input value={rdateStr} onChange={(e)=>setRdate(e.target.value)}/>
             </td>
            </tr>
           <tr>

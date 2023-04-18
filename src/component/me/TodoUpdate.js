@@ -1,21 +1,17 @@
 import axios from "axios";
-import { format } from "date-fns";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Diary from "./Diary";
 
 
 
-function DiaryUpdate() {
+function TodoUpdate() {
   let history = useNavigate();  // 변수에 useNavigate 할당
 
   let param = useParams(); //변수에 params의 정보를 저장해놓고 변수 호출해서 사용
 
-  
-  const [rdate, setRdate] = useState(param.rdate.toString());// 불러온 rdate 문자열로 변환해서 저장
-  let rdateArr = [rdate.substring(0,10)]; // 문자열로 변환된 rdate 잘라오기
-  
-//  console.log(rdateArr);
+  const [rdate, setRdate] = useState(param.rdate.toString());
+  let rdateArr = [rdate.substring(0,10)]; // 문자열로 바꾼 rdate를 잘라서 배열에 저장
+
   const [seq, setSeq] = useState(param.seq);
   const [title, setTitle] = useState(param.title);
   const [content, setContent] = useState(param.content);
@@ -23,7 +19,7 @@ function DiaryUpdate() {
   
 
   const handleSubmit = async(e) => {
-    axios.post("http://localhost:3000/diaryUpdate", null, {params:{ "seq":seq, "title":title, "content" :content, "rdate": rdate}})
+    axios.post("http://localhost:3000/TodoUpdate", null, {params:{ "seq":seq, "title":title, "content" :content, "rdate": rdate}})
          .then(function(resp){
             if(resp.data === "YES") {
               alert('글이 수정되었습니다.');
@@ -48,7 +44,7 @@ function DiaryUpdate() {
 
   return(
     <div>
-      <h1>일지 수정</h1>
+      <h1>Todo 수정</h1>
       <hr/>
 
       <table border='1px'>
@@ -58,7 +54,7 @@ function DiaryUpdate() {
         </colgroup>
         <tbody>
           <tr>
-            <th>약속날짜</th>
+            <th>Todo날짜</th>
             <td>
               <input defaultValue={rdateArr}
                 //리액트에서 input은 readonly가 기본값 -> defaultValue에 설정할 value값 넣으면 수정 가능하게 됨
@@ -85,4 +81,4 @@ function DiaryUpdate() {
     </div>
   )
 }
-export default DiaryUpdate;
+export default TodoUpdate;
