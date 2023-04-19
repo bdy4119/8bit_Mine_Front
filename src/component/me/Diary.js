@@ -10,12 +10,10 @@ import "./page.css";
 function Diary() {
   let history = useNavigate();
 
-  const [seq, setSeq] = useState('');
-
   const[diarylist, setDiarylist] = useState([]);
   
-  const[today, setToday] = useState(format(new Date(),'yyyy-MM-dd'));
-  let todayStr = today.toString(); // 문자열로 변환
+//  const[today, setToday] = useState(format(new Date(),'yyyy-MM-dd'));
+//  let todayStr = today.toString(); // 문자열로 변환
 
   // paging
   const [page, setPage] = useState(1);
@@ -27,19 +25,9 @@ function Diary() {
           //  console.log(resp.data.list[0].rdate);
           // console.log(today);
         //  console.log(resp.data.cnt);
+       // console.log(resp.data.list);
           setDiarylist(resp.data.list);
-          
-          let nottoday = []; //오늘이랑 다른 날짜
-          for(let i=0; i<resp.data.list.length; i++){
-            if( resp.data.list[i].rdate !== todayStr
-                || (resp.data.list[i].rdate).substr(0,10) !== todayStr){
-                nottoday.push(resp.data.list[i]);
-            }
-          }
-        //  console.log(resp.data.cnt);
-        //  console.log(nottoday.length-1);
-
-          setTotalCnt(resp.data.cnt - nottoday.length);
+          setTotalCnt(resp.data.cnt);
           
         //  console.log(totalCnt);
          })
@@ -98,24 +86,21 @@ function Diary() {
               <th colSpan="5">오늘의 일지</th>
             </tr>
             <tr>
-              <th colSpan="5">{todayStr}</th>
+              <th colSpan="5">{format(new Date(),'yyyy-MM-dd')}</th>
             </tr>
             <tr>
-              <th colSpan="2">제목</th><th colSpan="3">내용</th>
+              <th>번호</th><th>제목</th><th colSpan="3">내용</th>
             </tr>
           </thead>
           <tbody>
              {
                 diarylist.map(function(diary, idx){
-                   var rdateStr = diary.rdate;
+                   var rdateStr = diary.rdate;  //-> 약속날짜
 
-                    //오늘 날짜와 같은 날짜인 것만 불러와라
-                    if(today === rdateStr 
-                        || today === rdateStr.substr(0,10)){ // 0번째부터 10전까지의 문자열만 가져와라
-                        //  setTotalCnt(diary.cnt);
                       return (
                           <tr key={idx}>
-                            <td colSpan="2">{diary.title}</td>
+                            <td>{idx+1}</td>
+                            <td>{diary.title}</td>
                             <td>{diary.content}</td>
                             <td>
                             <Link to={`/diaryUpdate/${diary.seq}/${diary.title}/${diary.content}/${diary.rdate}`}>
@@ -130,32 +115,10 @@ function Diary() {
                             </td>
                           </tr>
                       );
-                    } /*else {
-                      return(
-                        <tr key={diary}>
-                          <td colSpan="3">
-                            todo목록이 비어있습니다
-                          </td>
-                        </tr>
-                      )
                     }
-                    */
-                  })
+                  )
               }
-              {/* {
-                  (() => {
-                    var rdateDiary = diarylist.rdate;
-                      if((rdateDiary === format(today, 'yyyy-MM-dd')) === null || (format(today, 'yyyy-MM-dd') === rdateDiary.substr(0,10)) === null){
-                          return (
-                            <tr>
-                              <td colSpan="3">
-                                todo목록이 비어있습니다
-                              </td>
-                            </tr>
-                          );
-                  }
-                })
-              } */}
+             
               <tr>
                 <td colSpan="5">
                   <Pagination

@@ -14,8 +14,7 @@ function TodoList() {
   const[checkBoxList, setCheckBoxList] = useState([]); // 체크된 리스트 배열에 넣기
   const[isChecked, setIsChecked] = useState(false);  //체크상태 확인
 
-  const [cookies, setCookies] = useCookies('');
-  const [saveCheck, setSaveCheck] = useState(false);
+  const[checkArr, setCheckArr] = useState([localStorage.getItem("checkArr")])  // 새로고침해도 배열 유지하기
 
 //  const[allChecked,setAllChecked] = useState(false);
 
@@ -25,6 +24,32 @@ function TodoList() {
   // paging
   const [page, setPage] = useState(1);
   const [totalCnt, setTotalCnt] = useState(0);
+
+/*
+//stringify, parse해주는 함수
+  const jsonLocalSorage = {
+    setItem: (key, value) => {
+      localStorage.setItem(key, JSON.stringify(value));
+    },
+    getItem: (key) => {
+      return JSON.parse(localStorage.getItem(key));
+    },
+  }
+*/
+
+   //체크박스 단일 선택
+   const onCheckedElement = (checked, item) => {
+    if (checked) {
+      setCheckBoxList([...checkBoxList, item]);
+      localStorage.setItem("checkArr", checkBoxList);
+    } else if (!checked) {
+      setCheckBoxList(checkBoxList.filter(el => el !== item));
+      localStorage.setItem("checkArr", checkBoxList);
+    }
+  };
+
+
+
 
   function getTodolist() {
     axios.get("http://localhost:3000/todoList", {params:{"pageNumber":page}})
@@ -86,21 +111,7 @@ function TodoList() {
    */
 
 
-   //체크박스 단일 선택
-   const onCheckedElement = (checked, item) => {
-    if (checked) {
-      setCheckBoxList([...checkBoxList, item]);
 
-      if(!saveCheck === true && checkBoxList !== null){            
-        setCookies("checked", true);
-      }else{            
-       setCookies("checked", false);
-      }
-    } else if (!checked) {
-      setCheckBoxList(checkBoxList.filter(el => el !== item));
-   //   setCookies("checked", !checked);
-    }
-  };
 
 
 /*
@@ -122,17 +133,7 @@ function TodoList() {
 
   useEffect(function(){
     getTodolist();
-
-    let checked = cookies.checked;
-      if(checked === true){
-        setIsChecked(checked);
-        setSaveCheck(true);
-      }else{
-        setIsChecked('');
-        setSaveCheck(false);
-      }
-
-  },[cookies]);
+  },[]);
 
 
 
@@ -148,7 +149,7 @@ function TodoList() {
               <th colSpan="5">TodoList</th>
             </tr>
             <tr>
-              <th colSpan="5">{todayStr}</th>
+              <th colSpan="5">{format(new Date(), 'yyyy-MM-dd')}</th>
             </tr>
             <tr>
               {/* <th>
@@ -165,28 +166,17 @@ function TodoList() {
                 todolist.map(function(todo, idx){
                   //오늘 날짜와 같은 날짜인 것만 불러와라
                   var rdateStr = todo.rdate.toString();
-                  console.log(todo.rdate)
-               //   let count = 0;
-                  if(todayStr === rdateStr || todayStr === rdateStr.substr(0,10)){
-                    
-                    /*
-                      //변수 선언해서 count++넣기
-                      for(let i=idx; 0<i<idx; i--) {
-                        count = i-1;
-                        if(todayStr !== rdateStr || todayStr !== rdateStr.substr(0,10)) {
-                          count -= i;
-                        }
-                      //  console.log(count);
-                     }
-                    */
+               //   console.log(todo.rdate)
+                  console.log(checkBoxList);
 
+                  if(todayStr === rdateStr || todayStr === rdateStr.substr(0,10)){
                     return (
                         <tr key={idx}>
                             <td colSpan="2" align='left'>
                               <input type='checkbox' id={todo} value={`${todo.title}/${todo.content}/${todo.rdate}`}
-                              onChange={(e) => {onCheckedElement(e.target.checked, e.target.value)}}
-                              // 체크된 아이템 배열에 해당 아이템이 있을 경우 선택 활성화, 아닐 시 해제
-                              checked={checkBoxList.includes(`${todo.title}/${todo.content}/${todo.rdate}`) ? true : false}/>
+                                onChange={(e) => {onCheckedElement(e.target.checked, e.target.value)}}
+                                // 체크된 아이템 배열에 해당 아이템이 있을 경우 선택 활성화, 아닐 시 해제
+                                checked={checkBoxList.includes(`${todo.title}/${todo.content}/${todo.rdate}`) ? true : false}/>
                               {todo.title}
                             </td>
                             <td>{todo.content}</td>
@@ -203,9 +193,9 @@ function TodoList() {
                             </td>
                         </tr>
                     )
-                    }
-                    console.log(checkBoxList);
-                  })
+                  }
+                })
+                  
                 }
 
                 {/* {
