@@ -101,7 +101,7 @@ function Diary() {
               <th colSpan="5">{todayStr}</th>
             </tr>
             <tr>
-              <th>번호</th><th>제목</th><th colSpan="3">내용</th>
+              <th colSpan="2">제목</th><th colSpan="3">내용</th>
             </tr>
           </thead>
           <tbody>
@@ -115,8 +115,7 @@ function Diary() {
                         //  setTotalCnt(diary.cnt);
                       return (
                           <tr key={idx}>
-                            <td>{idx+1}</td>
-                            <td>{diary.title}</td>
+                            <td colSpan="2">{diary.title}</td>
                             <td>{diary.content}</td>
                             <td>
                             <Link to={`/diaryUpdate/${diary.seq}/${diary.title}/${diary.content}/${diary.rdate}`}>

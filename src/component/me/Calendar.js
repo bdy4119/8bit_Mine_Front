@@ -16,6 +16,8 @@ import { format, addMonths, subMonths, subYears, addYears, subWeeks, addWeeks, s
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { isSameMonth, isSameDay, addDays, parse } from 'date-fns';
 
+import * as getDiaryList from './Diary.js';
+
 
 
 
@@ -71,18 +73,10 @@ const RenderDays = () => {
 
 
 function Calendar() {
-    const[diarylist, setDiarylist] = useState([]);
-    const[today, setToday] = useState(new Date()); //오늘 날짜로 설정
-
-    function getCalList() {
-        axios.get("http://localhost:3000/diaryList", { params:{} })
-        .then(function(resp){
-            setDiarylist(resp.data.list);
-        })
-        .catch(function(err){
-            alert(err);
-        })
-    }
+    
+//    const[today, setToday] = useState(new Date()); //오늘 날짜로 설정
+    const[today, setToday] = useState(format(new Date(),'yyyy-MM-dd'));
+    let todayStr = today.toString(); // 문자열로 변환
 
 
 
@@ -146,12 +140,25 @@ function Calendar() {
 
 //날짜 함수
 const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => {
+    const[diarylist, setDiarylist] = useState([]);
 
     const monthStart = startOfMonth(currentMonth); // 이번달의 시작일, 시작요일
     const startDate = startOfWeek(monthStart);     // 이번주의 시작일, 시작요일
 
     const monthEnd = endOfMonth(monthStart); // 이번달의 마지막 날짜, 마지막 요일
     const endDate = endOfWeek(monthEnd);     // 이번주의 마지막 날짜, 마지막 요일
+
+
+    function getCalList() {
+        axios.get("http://localhost:3000/diaryList", {params:{}})
+         .then(function(resp){
+          setDiarylist(resp.data.list);
+         })
+         .catch(function(err){
+            alert(err);
+         })
+    }
+    
 
     const rows = []; // 1주 * 4 or 주
     let days = [];  // 1주
@@ -160,7 +167,8 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => 
    console.log(day);
     while(day <= endDate) { //day가 endDate보다 커지면 종료
         for(let i = 0; i < 7; i++) {
-            formatedDate = format(day, 'd'); //마지막 날짜를 formatedDate에 삽입
+            formatedDate = format(day, 'd');
+             //마지막 날짜를 formatedDate에 삽입
             days.push(
                 <div style={{ display:"inline-block", border:"1px solid black", height:"100px", width:"100px", verticalAlign:"top"}} key={day}>
                     <span>
@@ -168,6 +176,8 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => 
                     </span>
                 </div>,
             );
+
+
             day = addDays(day,1); // 시작날짜, 시작 요일 계속해서 늘어남
         }
         rows.push(
