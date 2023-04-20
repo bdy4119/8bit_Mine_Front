@@ -79,7 +79,7 @@ function Diary() {
       <div style={{border:"1px solid black", textAlign:"center"}}>
       <table border="1">
         <colgroup>
-          <col width='70'/><col width='150'/><col width='500'/><col width='100'/><col width='100'/>
+          <col width='70'/><col width='150'/><col width='450'/><col width='50'/><col width='50'/>
           </colgroup>
           <thead>
             <tr>

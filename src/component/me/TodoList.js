@@ -11,10 +11,12 @@ function TodoList() {
   const[todolist, setTodolist] = useState([]);
 
   //체크박스
-  const[checkBoxList, setCheckBoxList] = useState([]); // 체크된 리스트 배열에 넣기
   const[isChecked, setIsChecked] = useState(false);  //체크상태 확인
-
+  
   const[checkArr, setCheckArr] = useState([localStorage.getItem("checkArr")])  // 새로고침해도 배열 유지하기
+  const[checkBoxList, setCheckBoxList] = useState([]); // 체크된 리스트 배열에 넣기
+
+ 
 
 //  const[allChecked,setAllChecked] = useState(false);
 
@@ -42,9 +44,12 @@ function TodoList() {
     if (checked) {
       setCheckBoxList([...checkBoxList, item]);
       localStorage.setItem("checkArr", checkBoxList);
+
+    //  window.sessionStorage.setItem("check", isChecked);
+   //   window.localStorage.setItem("checkArr", JSON.stringify(checkBoxList));
     } else if (!checked) {
       setCheckBoxList(checkBoxList.filter(el => el !== item));
-      localStorage.setItem("checkArr", checkBoxList);
+   //   localStorage.setItem("checkArr", checkBoxList);
     }
   };
 
@@ -133,6 +138,7 @@ function TodoList() {
 
   useEffect(function(){
     getTodolist();
+    console.log(localStorage.getItem("checkArr"));
   },[]);
 
 
@@ -142,7 +148,7 @@ function TodoList() {
       <div style={{border:"1px solid black", textAlign:"center"}}>
       <table border="1">
         <colgroup>
-          <col width='70'/><col width='150'/><col width='500'/><col width='100'/><col width='100'/>
+          <col width='70'/><col width='150'/><col width='450'/><col width='50'/><col width='50'/>
           </colgroup>
           <thead>
             <tr>

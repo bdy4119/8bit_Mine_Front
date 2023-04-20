@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import "./Me.css";
 /* 
@@ -17,6 +17,7 @@ import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { isSameMonth, isSameDay, addDays, parse } from 'date-fns';
 
 import * as getDiaryList from './Diary.js';
+import { Link } from 'react-router-dom';
 
 
 
@@ -74,6 +75,9 @@ const RenderDays = () => {
 
 function Calendar() {
     
+
+    
+
 //    const[today, setToday] = useState(new Date()); //오늘 날짜로 설정
     const[today, setToday] = useState(format(new Date(),'yyyy-MM-dd'));
     let todayStr = today.toString(); // 문자열로 변환
@@ -112,7 +116,7 @@ function Calendar() {
     }
 
 
-    
+   
 
     return(
         <div>
@@ -134,13 +138,12 @@ function Calendar() {
         </div>
     );
 };
-
+export default Calendar;
 
 
 
 //날짜 함수
 const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => {
-    const[diarylist, setDiarylist] = useState([]);
 
     const monthStart = startOfMonth(currentMonth); // 이번달의 시작일, 시작요일
     const startDate = startOfWeek(monthStart);     // 이번주의 시작일, 시작요일
@@ -149,8 +152,13 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => 
     const endDate = endOfWeek(monthEnd);     // 이번주의 마지막 날짜, 마지막 요일
 
 
+    const[diarylist, setDiarylist] = useState([]);
+    const[todolist, setTodolist] = useState([]);
+    const[rdate, setRdate] = useState(new Date());
+
+    //다이어리 리스트
     function getCalList() {
-        axios.get("http://localhost:3000/diaryList", {params:{}})
+        axios.get("http://localhost:3000/diaryCalList", {params:{}})
          .then(function(resp){
           setDiarylist(resp.data.list);
          })
@@ -158,21 +166,66 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => 
             alert(err);
          })
     }
+
+
+    //todo리스트
+    function getTodoCallist() {
+        axios.get("http://localhost:3000/todoList", {params:{}})
+            .then(function(resp){
+              setTodolist(resp.data.list);
+            })
+            .catch(function(err){
+                alert(err);
+            })
+      }
+
+      //해당 날짜칸 클릭시 수행할 함수
+      function todayDiary() {
+        window.location.href = "/"
+      }
+
     
 
     const rows = []; // 1주 * 4 or 주
     let days = [];  // 1주
     let day = startDate; //이번달 시작날짜, 시작요일 넣어놓기
     let formatedDate = ''; //설정날짜 초기화
-   console.log(day);
+   console.log(diarylist);
     while(day <= endDate) { //day가 endDate보다 커지면 종료
         for(let i = 0; i < 7; i++) {
             formatedDate = format(day, 'd');
              //마지막 날짜를 formatedDate에 삽입
             days.push(
-                <div style={{ display:"inline-block", border:"1px solid black", height:"100px", width:"100px", verticalAlign:"top"}} key={day}>
+                <div key={day} style={{ display:"inline-block", border:"1px solid black", height:"100px", width:"100px", verticalAlign:"top"}} onClick={(e)=>{todayDiary()}}>
                     <span>
                         {formatedDate}
+                        {
+                            diarylist.map(function(diary, idx){
+                               if(diary.rdate === format(day,'yyyy-MM-dd') || diary.rdate === format(day,'yyyy-MM-d')){
+                                return (
+                                    <span key={idx} style={{color:'blueviolet'}}>
+                                        <div>
+                                            {diary.title}
+                                        </div>
+                                     </span>
+                                 );
+                                }
+                            })
+                        }
+                        <hr/>
+                        {
+                            todolist.map(function(todo, idx){
+                                if(todo.rdate === format(day,'yyyy-MM-dd') || todo.rdate === format(day,'yyyy-MM-d')){
+                                    return (
+                                        <span key={idx} style={{color:'orange'}}>
+                                            <div>
+                                                {todo.title}
+                                            </div>
+                                         </span>
+                                     );
+                                    }
+                            })
+                        }
                     </span>
                 </div>,
             );
@@ -183,16 +236,16 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => 
         rows.push(
             <div key={day} >
                 {days}
-                {/* {
-                    calList.map(function(cal, idx){
-
-                    })
-                } */}
             </div>
+            
         );
         days=[];
     }
   
+    useEffect(function(){
+        getCalList();
+        getTodoCallist();
+      }, []);
 
   return (
        <span>
@@ -207,4 +260,3 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => 
 
 
 
-export default Calendar;
