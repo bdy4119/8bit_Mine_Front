@@ -3,10 +3,11 @@ import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import Pagination from 'react-js-pagination';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 function TodoList() {
   let history = useNavigate();
+  let param = useParams();
 
   const[todolist, setTodolist] = useState([]);
 
@@ -155,15 +156,11 @@ function TodoList() {
               <th colSpan="5">TodoList</th>
             </tr>
             <tr>
-              <th colSpan="5">{format(new Date(), 'yyyy-MM-dd')}</th>
+              <th colSpan="5">
+              {param.rdate || format(new Date(),'yyyy-MM-dd')}
+              </th>
             </tr>
             <tr>
-              {/* <th>
-                <input type='checkbox' value={checkBoxList} name='select-all'
-                onChange={(e) => handleAllCheck(e.target.checked)}
-                checked={isChecked.length === checkBoxList.length ? true : false}
-                />
-              </th> */}
               <th colSpan="2">제목</th><th colSpan="3">내용</th>
             </tr>
           </thead>
@@ -175,7 +172,8 @@ function TodoList() {
                //   console.log(todo.rdate)
                   console.log(checkBoxList);
 
-                  if(todayStr === rdateStr || todayStr === rdateStr.substr(0,10)){
+                  if(param.rdate === rdateStr || param.rdate === rdateStr.substr(0,10)
+                      || param.rdate === (todo.rdate.slice(0,8) + '0' + todo.rdate.slice(8, 10))){
                     return (
                         <tr key={idx}>
                             <td colSpan="2" align='left'>
@@ -231,7 +229,7 @@ function TodoList() {
                     nextPageText={"다음"}
                     onChange={pageChange} />
 
-                    <Link to='/todoWrite'>
+                    <Link to={`/todoWrite/${param.rdate || format(new Date(),'yyyy-MM-dd')}`}>
                       <button type='submit'> +할일 추가 </button>
                     </Link>
                 </td>

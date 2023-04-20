@@ -5,9 +5,11 @@ import TodoList from './TodoList';
 import Diary from './Diary';
 
 import './Me.css';
+import { useParams } from 'react-router-dom';
 
 
 function Me() {
+  let param = useParams();
 
   return(
     <div>

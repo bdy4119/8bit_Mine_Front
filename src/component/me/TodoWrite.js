@@ -1,12 +1,13 @@
 import axios from "axios";
 import { format } from "date-fns";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 
 function TodoWrite() {
   let history = useNavigate();  // 변수에 useNavigate 할당
+  let param = useParams();
 
   const [rdate, setRdate] = useState(format(new Date(),'yyyy-MM-dd'));
   
@@ -66,7 +67,7 @@ function TodoWrite() {
           <tr>
             <th>날짜</th>
             <td>
-              <input value={rdateStr} onChange={(e)=>setRdate(e.target.value)}/>
+              <input value={param.rdate} onChange={(e)=>setRdate(e.target.value)}/>
             </td>
            </tr>
           <tr>

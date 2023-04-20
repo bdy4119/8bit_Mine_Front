@@ -25,7 +25,7 @@ import { Link } from 'react-router-dom';
 
 
 //현재 연월표시& 연월이동 함수
-const RenderHeader = ({currentMonth, currentYear, preMonth, nextMonth, preYear, nextYear}) => {
+export const RenderHeader = ({currentMonth, currentYear, preMonth, nextMonth, preYear, nextYear}) => {
     return(
         <div className='middle'>
             <Icon icon="bi:arrow-left-circle-fill" onClick={preYear}/> &nbsp;
@@ -49,7 +49,7 @@ const RenderHeader = ({currentMonth, currentYear, preMonth, nextMonth, preYear, 
 
 
 //요일 함수
-const RenderDays = () => {
+export const RenderDays = () => {
     const week = []; //일주일 배열 생성
     const days = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -73,7 +73,7 @@ const RenderDays = () => {
 
 
 
-function Calendar() {
+export const Calendar = () => {
     
 
     
@@ -114,6 +114,9 @@ function Calendar() {
         setCurrentYear(addYears(currentYear, 1));
         setCurrentMonth(addMonths(currentMonth, 12));
     }
+    const onDateClick = (day) => {
+        setSelectedDate(day);
+    };
 
 
    
@@ -143,7 +146,7 @@ export default Calendar;
 
 
 //날짜 함수
-const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => {
+export const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => {
 
     const monthStart = startOfMonth(currentMonth); // 이번달의 시작일, 시작요일
     const startDate = startOfWeek(monthStart);     // 이번주의 시작일, 시작요일
@@ -154,7 +157,6 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => 
 
     const[diarylist, setDiarylist] = useState([]);
     const[todolist, setTodolist] = useState([]);
-    const[rdate, setRdate] = useState(new Date());
 
     //다이어리 리스트
     function getCalList() {
@@ -180,12 +182,6 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => 
       }
 
 
-      
-      //해당 날짜칸 클릭시 수행할 함수
-      function todayDiary() {
-        window.location.href = "/"
-      }
-
     
 
     const rows = []; // 1주 * 4 or 주
@@ -196,42 +192,39 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => 
     while(day <= endDate) { //day가 endDate보다 커지면 종료
         for(let i = 0; i < 7; i++) {
             formatedDate = format(day, 'd');
-             //마지막 날짜를 formatedDate에 삽입
             days.push(
-                <div key={day} style={{ display:"inline-block", border:"1px solid black", height:"100px", width:"100px", verticalAlign:"top"}} onClick={(e)=>{todayDiary()}}>
+                
+                <div key={day} style={{ display:"inline-block", border:"1px solid black", height:"100px", width:"100px", verticalAlign:"top"}}>
                     <span>
-                        {formatedDate}
+                        <Link to={`/me/${format(day,'yyyy-MM-dd')}`} style={{textDecoration: "none"}}>
+                            {formatedDate}
+                        </Link>
                         {
                             diarylist.map(function(diary, idx){
-                               if(diary.rdate === format(day,'yyyy-MM-dd') || diary.rdate === format(day,'yyyy-MM-d')){
-                                return (
-                                    <span key={idx} style={{color:'blueviolet'}}>
-                                        <div>
-                                            {diary.title}
-                                        </div>
-                                     </span>
-                                 );
+                                if(diary.rdate === format(day,'yyyy-MM-dd') || diary.rdate === format(day,'yyyy-MM-d')){
+                                    return (
+                                        <span key={idx} style={{color:'green'}}>
+                                            <div> -{diary.title} </div>
+                                        </span>
+                                    );
                                 }
                             })
                         }
-                        <hr/>
                         {
                             todolist.map(function(todo, idx){
                                 if(todo.rdate === format(day,'yyyy-MM-dd') || todo.rdate === format(day,'yyyy-MM-d')){
                                     return (
                                         <span key={idx} style={{color:'orange'}}>
-                                            <div>
-                                                {todo.title}
-                                            </div>
-                                         </span>
-                                     );
+                                            <div> -{todo.title} </div>
+                                        </span>
+                                    );
                                     }
                             })
                         }
                     </span>
                 </div>,
-            );
 
+            );
 
             day = addDays(day,1); // 시작날짜, 시작 요일 계속해서 늘어남
         }
@@ -243,6 +236,7 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => 
         );
         days=[];
     }
+
   
     useEffect(function(){
         getCalList();

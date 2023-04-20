@@ -9,11 +9,14 @@ import "./page.css";
 //calendar DB사용
 function Diary() {
   let history = useNavigate();
+  let param = useParams();
 
   const[diarylist, setDiarylist] = useState([]);
   
-//  const[today, setToday] = useState(format(new Date(),'yyyy-MM-dd'));
-//  let todayStr = today.toString(); // 문자열로 변환
+  const[today, setToday] = useState(format(new Date(),'yyyy-MM-dd')); //오늘 날짜로 설정
+  let todayStr = today.toString(); // 문자열로 변환
+
+  console.log(param.rdate);
 
   // paging
   const [page, setPage] = useState(1);
@@ -27,9 +30,15 @@ function Diary() {
         //  console.log(resp.data.cnt);
        // console.log(resp.data.list);
           setDiarylist(resp.data.list);
-          setTotalCnt(resp.data.cnt);
-          
-        //  console.log(totalCnt);
+          let nottoday = []; //오늘이랑 다른 날짜
+          for(let i=0; i<resp.data.list.length; i++){
+            if(resp.data.list[i].rdate !== todayStr
+              || (resp.data.list[i].rdate).substr(0,10) !== todayStr){
+                nottoday.push(resp.data.list[i]);
+            }
+          }
+        //  console.log(nottoday);
+          setTotalCnt(resp.data.cnt - nottoday.length);
          })
          .catch(function(err){
             alert(err);
@@ -86,21 +95,28 @@ function Diary() {
               <th colSpan="5">오늘의 일지</th>
             </tr>
             <tr>
-              <th colSpan="5">{format(new Date(),'yyyy-MM-dd')}</th>
+              <th colSpan="5">
+                { //요거 없으면 ||이 뒤에 있는 값 넣으라는 뜻
+                  param.rdate || format(new Date(),'yyyy-MM-dd')
+                }
+              </th>
             </tr>
             <tr>
-              <th>번호</th><th>제목</th><th colSpan="3">내용</th>
+              {/* <th>번호</th> */}
+              <th colSpan="2">제목</th><th colSpan="3">내용</th>
             </tr>
           </thead>
           <tbody>
              {
                 diarylist.map(function(diary, idx){
-                   var rdateStr = diary.rdate;  //-> 약속날짜
-
+                  console.log(diary.rdate);
+                  console.log(param.rdate);
+                    if(param.rdate === diary.rdate
+                          || param.rdate === (diary.rdate.slice(0,8) + '0' + diary.rdate.slice(8, 10))) {
                       return (
                           <tr key={idx}>
-                            <td>{idx+1}</td>
-                            <td>{diary.title}</td>
+                            {/* <td>{idx+1}</td> */}
+                            <td colSpan="2">{diary.title}</td>
                             <td>{diary.content}</td>
                             <td>
                             <Link to={`/diaryUpdate/${diary.seq}/${diary.title}/${diary.content}/${diary.rdate}`}>
@@ -114,8 +130,8 @@ function Diary() {
                               </button>
                             </td>
                           </tr>
-                      );
-                    }
+                      )}
+                    } 
                   )
               }
              
@@ -131,7 +147,7 @@ function Diary() {
                     onChange={pageChange} //페이지 핸들링
                      />
 
-                    <Link to='/diaryWrite'>
+                    <Link to={`/diaryWrite/${param.rdate || format(new Date(),'yyyy-MM-dd')}`}>
                       <button type='submit' onClick={DiaryWrite}>+일지추가</button>
                     </Link>
                 </td>
