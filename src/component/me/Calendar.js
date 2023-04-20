@@ -179,6 +179,8 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => 
             })
       }
 
+
+      
       //해당 날짜칸 클릭시 수행할 함수
       function todayDiary() {
         window.location.href = "/"
