@@ -109,8 +109,12 @@ function Diary() {
           <tbody>
              {
                 diarylist.map(function(diary, idx){
-                  console.log(diary.rdate);
-                  console.log(param.rdate);
+                  
+                  var rdateStr = diary.rdate.toString();
+                  // console.log(diary.rdate);
+                  // console.log(param.rdate);
+
+                   //1. 클릭한 값이 있을때
                     if(param.rdate === diary.rdate
                           || param.rdate === (diary.rdate.slice(0,8) + '0' + diary.rdate.slice(8, 10))) {
                       return (
@@ -130,7 +134,32 @@ function Diary() {
                               </button>
                             </td>
                           </tr>
-                      )}
+                      )
+                      }  //2. 클릭한 값이 없을때, 오늘 날짜만 불러와라
+                        else if(param.rdate === undefined
+                                  && (format(new Date(),'yyyy-MM-dd') === rdateStr
+                                      || format(new Date(),'yyyy-MM-dd') === rdateStr.substr(0,10)
+                                      || format(new Date(),'yyyy-MM-dd') === (diary.rdate.slice(0,8) + '0' + diary.rdate.slice(8, 10)))) {
+                            
+                            return (
+                              <tr key={idx}>
+                                {/* <td>{idx+1}</td> */}
+                                <td colSpan="2">{diary.title}</td>
+                                <td>{diary.content}</td>
+                                <td>
+                                <Link to={`/diaryUpdate/${diary.seq}/${diary.title}/${diary.content}/${diary.rdate}`}>
+                                  <button type='submit'>수정</button>
+                                </Link>
+                                </td>
+                                <td>
+                                  <button type="submit" value={diary.seq} 
+                                    onClick={(e)=>{diaryDelete(diary.seq, e)}} /*함수(param, e) -> 파라미터값 같이 보내는 방법*/>
+                                      삭제
+                                  </button>
+                                </td>
+                              </tr>
+                          )
+                        }
                     } 
                   )
               }

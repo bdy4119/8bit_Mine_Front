@@ -167,11 +167,11 @@ function TodoList() {
           <tbody>
              {
                 todolist.map(function(todo, idx){
-                  //오늘 날짜와 같은 날짜인 것만 불러와라
                   var rdateStr = todo.rdate.toString();
                //   console.log(todo.rdate)
                   console.log(checkBoxList);
-
+                  
+                  //1. 클릭한 값이 있을때
                   if(param.rdate === rdateStr || param.rdate === rdateStr.substr(0,10)
                       || param.rdate === (todo.rdate.slice(0,8) + '0' + todo.rdate.slice(8, 10))){
                     return (
@@ -197,27 +197,48 @@ function TodoList() {
                             </td>
                         </tr>
                     )
-                  }
+
+                    //2. 클릭한 값이 없을때, 오늘 날짜만 불러와라
+                  } else if(param.rdate === undefined
+                            && (format(new Date(),'yyyy-MM-dd') === rdateStr
+                                || format(new Date(),'yyyy-MM-dd') === rdateStr.substr(0,10)
+                                || format(new Date(),'yyyy-MM-dd') === (todo.rdate.slice(0,8) + '0' + todo.rdate.slice(8, 10)))) {
+
+                          return (
+                            <tr key={idx}>
+                                <td colSpan="2" align='left'>
+                                  <input type='checkbox' id={todo} value={`${todo.title}/${todo.content}/${todo.rdate}`}
+                                    onChange={(e) => {onCheckedElement(e.target.checked, e.target.value)}}
+                                    // 체크된 아이템 배열에 해당 아이템이 있을 경우 선택 활성화, 아닐 시 해제
+                                    checked={checkBoxList.includes(`${todo.title}/${todo.content}/${todo.rdate}`) ? true : false}/>
+                                  {todo.title}
+                                </td>
+                                <td>{todo.content}</td>
+                                <td>
+                                  <Link to={`/todoUpdate/${todo.seq}/${todo.title}/${todo.content}/${todo.rdate}`}>
+                                    <button type='submit'>수정</button>
+                                  </Link>
+                                </td>
+                                <td>
+                                  <button type="submit" value={todo.seq} 
+                                    onClick={(e)=>{TodoDelete(todo.seq, e)}} /*함수(param, e) -> 파라미터값 같이 보내는 방법*/>
+                                      삭제
+                                  </button>
+                                </td>
+                            </tr>
+                          )
+                    //3. 데이터가 없는 상태에서, 클릭한 값이 없거나, 클릭한 값이 있을때
+                    // } else if(todo.title === null && todo.content === null) {
+                    //   <tr key={idx}>
+                    //     <td>
+                    //       일정이 없습니다.
+                    //     </td>
+                    //   </tr>
+                     }
                 })
                   
                 }
 
-                {/* {
-                  function empty(todolist) {
-                    for(let i=0; i<=todolist.length; i++) {
-
-                      if((todolist.rdate[i] === format(today, 'yyyy-MM-dd')) === null){
-                        return(
-                          <tr>
-                            <td colSpan="3">
-                              todo목록이 비어있습니다
-                            </td>
-                          </tr>
-                        )
-                      }
-                    }
-                  }
-                } */}
               <tr>
                 <td colSpan="5">
                   <Pagination

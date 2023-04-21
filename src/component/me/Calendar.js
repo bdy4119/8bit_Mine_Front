@@ -126,6 +126,7 @@ export const Calendar = () => {
             <div>
                 <RenderHeader currentYear={currentYear} currentMonth={currentMonth} preMonth={preMonth} nextMonth={nextMonth} preYear={preYear} nextYear={nextYear} />
                 <br/>
+                
                  <RenderDays //요일
                  />
 
