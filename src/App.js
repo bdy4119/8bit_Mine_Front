@@ -9,6 +9,7 @@ import DiaryUpdate from './component/Me/DiaryUpdate';
 import TodoUpdate from './component/Me/TodoUpdate';
 
 import Card from "./component/BusinessCard/Card";
+import CustomUpdate from './component/BusinessCard/CustomUpdate';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
 
 
           <Route path="/card" element={<Card></Card>}/>
+          <Route path="/customUpdate/:id/:thumbnail/:introduce/:name/:phoneNum/:email/:url/*" element={<CustomUpdate/>}/>
         </Routes>
       </BrowserRouter>
     </div>
