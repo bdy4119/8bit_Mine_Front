@@ -17,7 +17,7 @@ import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { isSameMonth, isSameDay, addDays, parse } from 'date-fns';
 
 import * as getDiaryList from './Diary.js';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -41,7 +41,7 @@ export const RenderHeader = ({currentMonth, currentYear, preMonth, nextMonth, pr
             </span>
             &nbsp;&nbsp;&nbsp;
             <Icon icon="bi:arrow-right-circle-fill" onClick={nextMonth}/> &nbsp;
-            <Icon icon="bi:arrow-right-circle-fill" onClick={nextYear}/>
+            <Icon icon="bi:arrow-right-circle-fill" onClick={nextYear}/>  
         </div>
     );
 }
@@ -82,7 +82,7 @@ export const Calendar = () => {
     const[today, setToday] = useState(format(new Date(),'yyyy-MM-dd'));
     let todayStr = today.toString(); // 문자열로 변환
 
-
+    let history = useNavigate();
 
     // new Date() : 오늘 날짜 가져오기
     const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -97,6 +97,7 @@ export const Calendar = () => {
     // sub() : 숫자를 입력하면 그 숫자만큼 원하는 날짜나 시간을 뺄 수 있음
     const preMonth = () => {
         setCurrentMonth(subMonths(currentMonth, 1));
+      //  history(`/date/${format(subMonths(currentMonth, 1), 'M')}`);
     }
     //다음달 이동
     const nextMonth = () => {
@@ -107,6 +108,8 @@ export const Calendar = () => {
     const preYear = () => {
         setCurrentYear(subYears(currentYear, 1));
         setCurrentMonth(subMonths(currentMonth, 12));
+
+    //    history(`/me/${format(subYears(currentYear, 1), 'yyyy')}/${format(subMonths(currentMonth, 12), 'M')}`);
     }
 
     //다음연도 이동
@@ -126,7 +129,7 @@ export const Calendar = () => {
             <div>
                 <RenderHeader currentYear={currentYear} currentMonth={currentMonth} preMonth={preMonth} nextMonth={nextMonth} preYear={preYear} nextYear={nextYear} />
                 <br/>
-                
+
                  <RenderDays //요일
                  />
 

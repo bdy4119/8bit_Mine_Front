@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import Pagination from 'react-js-pagination';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import Session from "react-session-api";
 
 function TodoList() {
   let history = useNavigate();
@@ -17,7 +18,7 @@ function TodoList() {
   const[checkArr, setCheckArr] = useState([localStorage.getItem("checkArr")])  // 새로고침해도 배열 유지하기
   const[checkBoxList, setCheckBoxList] = useState([]); // 체크된 리스트 배열에 넣기
 
- 
+  const [cookies, setCookies] = useCookies('checkArr');
 
 //  const[allChecked,setAllChecked] = useState(false);
 
@@ -44,13 +45,16 @@ function TodoList() {
    const onCheckedElement = (checked, item) => {
     if (checked) {
       setCheckBoxList([...checkBoxList, item]);
-      localStorage.setItem("checkArr", checkBoxList);
+      // localStorage.setItem("checkArr", checkBoxList);
+      setCookies("checkArr", checkBoxList);
+      Session.set("checkArr", checkBoxList);
 
     //  window.sessionStorage.setItem("check", isChecked);
    //   window.localStorage.setItem("checkArr", JSON.stringify(checkBoxList));
     } else if (!checked) {
       setCheckBoxList(checkBoxList.filter(el => el !== item));
    //   localStorage.setItem("checkArr", checkBoxList);
+        setCookies("checkArr", checkBoxList);
     }
   };
 
@@ -139,8 +143,9 @@ function TodoList() {
 
   useEffect(function(){
     getTodolist();
-    console.log(localStorage.getItem("checkArr"));
-  },[]);
+  //  localStorage.getItem("checkArr");
+  //  setCheckBoxList(cookies.checkBoxList);
+  },[cookies]);
 
 
 

@@ -20,7 +20,7 @@ function App() {
         
         <Routes>
           <Route path="/me" element={<Me></Me>}/>
-
+          
           <Route path="/diaryWrite/:rdate" element={<DiaryWrite/>}/>
           <Route path="/todoWrite/:rdate" element={<TodoWrite/>}/>
           
@@ -29,6 +29,7 @@ function App() {
               - 여기서 보내주는 매개변수를 useparam을 사용해서 받을 수 있음
           */}
           <Route path="/me/:rdate" element={<Me/>}/> 
+          <Route path="/me/:year/:month" element={<Me/>}/> 
 
 
           <Route path="/diaryUpdate/:seq/:title/:content/:rdate" element={<DiaryUpdate/>}/>

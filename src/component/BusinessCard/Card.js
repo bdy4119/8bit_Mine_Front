@@ -1,12 +1,18 @@
 import React from "react";
+
 import "./card.css";
-import background from "./card-Bg.jpg";
+
+import Character from './Character';
+import Inform from "./Inform";
 
 function Card() {
   return(
-    <div style={{ backgroundImage: `url(${background})` }}>
-      <div style={{alignItems:"center"}}>
-
+    <div className="middle">
+      <div style={{position: "relative", backgroundColor:"#9CA8F0", height:"600px", width:"900px", marginTop:"100px"}} // 명함틀
+      />
+      <Character/>
+      <div style={{position: "relative", marginLeft:"-780px", marginTop:"-100px", fontSize:"20px"}}>
+        <Inform/>
       </div>
     </div>
   );

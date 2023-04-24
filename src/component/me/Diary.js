@@ -16,7 +16,7 @@ function Diary() {
   const[today, setToday] = useState(format(new Date(),'yyyy-MM-dd')); //오늘 날짜로 설정
   let todayStr = today.toString(); // 문자열로 변환
 
-  console.log(param.rdate);
+ // console.log(param.year);
 
   // paging
   const [page, setPage] = useState(1);
@@ -97,7 +97,8 @@ function Diary() {
             <tr>
               <th colSpan="5">
                 { //요거 없으면 ||이 뒤에 있는 값 넣으라는 뜻
-                  param.rdate || format(new Date(),'yyyy-MM-dd')
+                 param.rdate || format(new Date(),'yyyy-MM-dd')
+               //   ( param.year + "-" + param.month + "-" + param.rdate.slice(7, 10))
                 }
               </th>
             </tr>
