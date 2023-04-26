@@ -9,7 +9,6 @@ import { useParams } from 'react-router-dom';
 
 
 function Me() {
-  let param = useParams();
 
   return(
     <div>

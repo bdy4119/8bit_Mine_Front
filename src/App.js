@@ -10,6 +10,9 @@ import TodoUpdate from './component/Me/TodoUpdate';
 
 import Card from "./component/BusinessCard/Card";
 import CustomUpdate from './component/BusinessCard/CustomUpdate';
+import Back from './component/BusinessCard/Back';
+import BackUpdate from './component/BusinessCard/BackUpdate';
+import InformDetail from './component/BusinessCard/InformDetail';
 
 
 function App() {
@@ -32,13 +35,16 @@ function App() {
           <Route path="/me/:rdate" element={<Me/>}/> 
           <Route path="/me/:year/:month" element={<Me/>}/> 
 
-
           <Route path="/diaryUpdate/:seq/:title/:content/:rdate" element={<DiaryUpdate/>}/>
           <Route path="/todoUpdate/:seq/:title/:content/:rdate" element={<TodoUpdate/>}/>
 
-
           <Route path="/card" element={<Card></Card>}/>
-          <Route path="/customUpdate/:id/:thumbnail/:introduce/:name/:phoneNum/:email/:url/*" element={<CustomUpdate/>}/>
+
+          <Route path="/informDetail/:id" element={<InformDetail/>}/>
+          <Route path="/customUpdate/:id" element={<CustomUpdate/>}/>
+          
+          <Route path="/back/:id" element={<Back/>}/>
+          <Route path="/backUpdate/:seq" element={<BackUpdate/>}/>
         </Routes>
       </BrowserRouter>
     </div>
