@@ -10,6 +10,8 @@ function CustomUpdate() {
   let history = useNavigate();
   let param = useParams();
 
+  let path = './Business-img/'; // 이미지 경로
+
   //데이터를 모두 읽을 때까지 rendering을 조절하는 변수
   const [loading, setLoading] = useState(false);
 
@@ -21,7 +23,8 @@ function CustomUpdate() {
   const[email, setEmail] = useState('');
   const[url, setUrl] = useState('');
   
-  
+  const[hair, setHair] = useState([]);
+
   //시퀀스,id로 불러올 수 있는 함수 넣기
   function busiDetail(id) {
     axios.get("http://localhost:3000/businessDetail", {params:{"id": id}})
@@ -43,6 +46,18 @@ function CustomUpdate() {
   }
 
 
+  function Hair() {
+    axios.get("http://localhost:3000/hair", {params:{}})
+      .then(function(resp){    
+        console.log(resp.data.list);
+        setHair(resp.data.list);
+      })
+      .catch(function(err){
+        alert("정보를 불러오지 못했습니다.");
+      })
+  }
+
+
 
   const handleSubmit = async(e) => {
     axios.post("http://localhost:3000/businessUpdate", null,
@@ -61,10 +76,18 @@ function CustomUpdate() {
             alert(err);
          })
   }
+
+
+
+
+  function changeHair(e) {
+    setThumbnail(e);
+  }
   
 
   useEffect(function(){
     busiDetail(param.id);
+    Hair();
   },[param.id]);
 
 
@@ -76,15 +99,29 @@ function CustomUpdate() {
 
   return(
     <div className="middle">
-      <div style={{position: "relative", backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px"}} /*명함틀*/ />
 
-      <div style={{position: "relative", marginLeft:"-780px", marginTop:"0px", fontSize:"20px"}}>    
-        <div className="circle" style={{position: "relative", left:"-70px", height:"300px", width:"300px"}}/>
-        <img src={thumbnail} defaultValue={thumbnail} alt="" style={{position: "relative", left:"-765px", marginTop:"-500px", width:"220px", marginBottom:"60px"}}
-              onChange={(e)=>setThumbnail(e.target.value)}/>
+      <div style={{backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px", fontSize:"20px"}}>
 
-        <div style={{ float:"left", marginLeft:"300px", marginTop:"-300px"}}>
-          <div style={{backgroundColor:"white", textAlign:"center", padding:"10px"}}>
+        <div className="circle" style={{ position:"relative", left:"30px", marginTop:"50px", height:"300px", width:"300px"}}/>
+        <img src={`/Business-img/${thumbnail}`} defaultValue={thumbnail} alt="" style={{position:"relative", left:"70px", marginTop:"-800px", width:"220px", marginBottom:"60px"}}
+              onChange={(e)=>setThumbnail(e.target.src)}/>
+
+        <div style={{marginLeft:"50px"}}>
+          {
+            hair.map(function(h, idx){
+            // console.log(path + h.thumbnail);
+              let altStr = "머리" + (idx+1);
+              return(
+                <span key={idx}>
+                  <img src={`${h.thumbnail}`} alt={altStr} style={{width:"50px", padding:"10px"}} onClick={(e)=>setThumbnail(`${h.thumbnail}`)}/>
+                </span>
+              );
+            })
+          }
+        </div>
+
+        <div style={{ marginLeft:"400px", marginTop:"-350px"}}>
+          <div style={{backgroundColor:"white", textAlign:"center", padding:"5px", width:"450px"}}>
             <h3>소개글</h3>
             <input defaultValue={introduce} onChange={(e)=>setIntroduce(e.target.value)}/>
           </div>
@@ -108,7 +145,7 @@ function CustomUpdate() {
           </div>
         </div>
 
-        <div style={{marginLeft:"220px", marginBottom:"-500px", marginTop:"100px"}}>
+        <div className="middle" style={{marginTop:"50px"}}>
           <button onClick={handleSubmit} style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
             수정완료
           </button>

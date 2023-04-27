@@ -77,7 +77,7 @@ function Inform() {
             )
           })
       }
-    </div>
+      </div>
   )
 }
 export default Inform;
