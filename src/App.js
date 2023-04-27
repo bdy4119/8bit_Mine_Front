@@ -13,6 +13,7 @@ import CustomUpdate from './component/BusinessCard/CustomUpdate';
 import Back from './component/BusinessCard/Back';
 import BackUpdate from './component/BusinessCard/BackUpdate';
 import InformDetail from './component/BusinessCard/InformDetail';
+import BackWrite from './component/BusinessCard/BackWrite';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
           
           <Route path="/back/:id" element={<Back/>}/>
           <Route path="/backUpdate/:seq" element={<BackUpdate/>}/>
+          <Route path="/backWrite/:id" element={<BackWrite/>}/>
         </Routes>
       </BrowserRouter>
     </div>

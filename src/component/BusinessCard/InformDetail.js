@@ -23,10 +23,10 @@ function InformDetail() {
   function busiDetail() {
     axios.get("http://localhost:3000/businessDetail", {params:{"id": param.id}})
          .then(function(resp){
-            console.log(resp.data);
+            console.log(resp.data.thumbnail);
             setbusinessDetail(resp.data);
             setLoading(true);   //렌더링 시작해주기
-            console.log(businessDetail);
+
          })
          .catch(function(err){
             alert("정보를 불러오지 못했습니다.");
