@@ -1,7 +1,7 @@
 
 
 import axios from "axios";
-import React, { useRef } from "react";
+import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -13,30 +13,10 @@ function InformDetail() {
 
   let param = useParams();
 
-  let path = "Business-img"
-
   const[businessDetail, setbusinessDetail] = useState(); //객체로 접근하기 때문에 값을 넣지 않아도 됨
   
-
   //데이터를 모두 읽을 때까지 rendering을 조절하는 변수
   const [loading, setLoading] = useState(false);
-
-
-
-  const [imgFile, setImgFile] = useState();
-  const imgRef = useRef();  //useRef.current -> useRef는 무조건 current를 통해서 감
-
-
-
-   // 이미지 업로드 input의 onChange
-   function imageLoad() {
-    const file= imgRef.current.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImgFile(reader.result);
-    }
-  }
 
 
   function busiDetail() {
@@ -51,30 +31,6 @@ function InformDetail() {
             alert("정보를 불러오지 못했습니다.");
          })
   }
-
-
-
-  function onSubmit(e) {
-      e.preventDefault();
-
-      let formData = new FormData();
-      formData.append("uploadFile", document.frm.uploadFile.files[0]);
-
-      axios.post("http://localhost:3000/fileUpload", formData)
-            .then(function(res){
-              console.log(JSON.stringify(res.data));
-              if(res.data === "file upload success") {
-                alert('업로드 성공');
-              }
-            })
-            .catch(function(err){
-              alert(err);
-            })
-  }
-
-
-
-
 
 
 
@@ -99,18 +55,18 @@ function InformDetail() {
       
       <div style={{backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px", fontSize:"20px"}}>
                
-          <div style={{float:"left", position:"relative", marginLeft:"100px", marginTop:"50px"}}>
+          <div style={{float:"left", position:"relative", marginLeft:"70px", marginTop:"50px"}}>
               <div>
-                <form name="frm" onSubmit={onSubmit} encType="multipart/form-data">
+                <form name="frm" encType="multipart/form-data">
                         {/* <img src={imgFile} alt="" style={{width:"200px"}} /> */}
                         
-                  <img src={`/Business-img/${businessDetail.thumbnail}`} alt="프로필 이미지" onChange={imageLoad} style={{width:"200px"}} />    
+                  <img src={`/Business-img/${businessDetail.thumbnail}`} alt="프로필 이미지" style={{width:"200px"}} />    
                   <br/>
                 </form>
               </div>
           </div>
 
-          <div style={{ marginLeft:"400px", marginTop:"0px"}}>
+          <div style={{ marginLeft:"400px", marginTop:"50px"}}>
             <div style={{backgroundColor:"white", textAlign:"center", padding:"5px", width:"450px"}}>
               <h3>소개글</h3>
               <div>{businessDetail.introduce}</div>

@@ -123,9 +123,9 @@ console.log(imgRef);
         <div style={{backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px", fontSize:"20px"}}>
 
           <form name="frm" onSubmit={onSubmit} encType="multipart/form-data">
-            <div style={{float:"left", position:"relative", marginLeft:"100px", marginTop:"50px"}}>
+            <div style={{float:"left", position:"relative", marginLeft:"70px", marginTop:"50px"}}>
               <div>
-                  <img src={`${imgFile}`} alt="프로필" style={{width:"150px"}} />
+                  <img src={`${imgFile}`} alt="프로필" style={{width:"200px"}} />
                   <br/>
                   <input type="file" name='uploadFile' onChange={imageLoad} ref={imgRef} />
                   <br/>
@@ -133,7 +133,7 @@ console.log(imgRef);
               </div>
             </div>
 
-              <div style={{ float:"left", marginLeft:"400px", marginTop:"-300px"}}>
+              <div style={{ float:"left", marginLeft:"400px", marginTop:"-250px"}}>
                 <div style={{backgroundColor:"white", textAlign:"center", padding:"5px", width:"450px"}}>
                   <h3>소개글</h3>
                   <input name="introduce" defaultValue={introduce} onChange={(e)=>setIntroduce(e.target.value)}/>

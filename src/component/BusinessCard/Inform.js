@@ -37,12 +37,15 @@ function Inform() {
             return(
               <div className="middle" key={{idx}}>
                 <div style={{position: "relative", backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px"}} /*명함틀*/ />
-                <div style={{position:"relative", marginLeft:"-850px", marginTop:"250px"}}>
-                  <img src={`${business.thumbnail}` || thumbnail} alt=""/>
+                <div style={{float:"left", position:"relative", marginLeft:"-800px", marginTop:"20px"}}>
+                 
+                    <form name="frm" encType="multipart/form-data">
+                      <img src={`/Business-img/${business.thumbnail}`} alt="프로필 이미지" style={{width:"200px"}} />    
+                      <br/>
+                    </form>
                 </div>
-              
                 {/* 글정보 및 버튼 */}
-                <div style={{position: "relative", marginTop:"150px", marginLeft:"-500px", fontSize:"20px"}}>
+                <div style={{position: "relative", marginTop:"150px", marginLeft:"-200px", fontSize:"20px"}}>
 
                   <div style={{ float:"left", marginLeft:"300px", marginTop:"0px"}}>
                       <div value={business.introduce} style={{backgroundColor:"white", textAlign:"center", padding:"10px"}}>
