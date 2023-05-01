@@ -9,7 +9,7 @@ import DiaryUpdate from './component/Me/DiaryUpdate';
 import TodoUpdate from './component/Me/TodoUpdate';
 
 import Card from "./component/BusinessCard/Card";
-import CustomUpdate from './component/BusinessCard/CustomUpdate';
+import InformUpdate from './component/BusinessCard/InformUpdate';
 import Back from './component/BusinessCard/Back';
 import BackUpdate from './component/BusinessCard/BackUpdate';
 import InformDetail from './component/BusinessCard/InformDetail';
@@ -22,10 +22,13 @@ function App() {
       <BrowserRouter>
         <Link to="/me">me</Link>
         <Link to="/card">온라인 명함</Link>
+        {/* <Link to="/avatar">아바타 테스트</Link> */}
         
         <Routes>
           <Route path="/me" element={<Me></Me>}/>
           
+          {/* <Route path="/avatar" element={<Avatar></Avatar>}/> */}
+
           <Route path="/diaryWrite/:rdate" element={<DiaryWrite/>}/>
           <Route path="/todoWrite/:rdate" element={<TodoWrite/>}/>
           
@@ -42,7 +45,8 @@ function App() {
           <Route path="/card" element={<Card></Card>}/>
 
           <Route path="/informDetail/:id" element={<InformDetail/>}/>
-          <Route path="/customUpdate/:id" element={<CustomUpdate/>}/>
+          <Route path="/informDetail/:id/:imgFile" element={<InformDetail/>}/>
+          <Route path="/informUpdate/:id" element={<InformUpdate/>}/>
           
           <Route path="/back/:id" element={<Back/>}/>
           <Route path="/backUpdate/:seq" element={<BackUpdate/>}/>

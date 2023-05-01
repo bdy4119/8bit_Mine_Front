@@ -51,7 +51,7 @@ function BackOrder() {
             //짝수 오른쪽 정렬
             if(back.historyDate.slice(5,7)%2 === 0) {
               return(
-                <div style={{paddingRight:"417px"}}>
+                <div key={idx} style={{paddingRight:"430px", marginTop:"70px"}}>
                   <div key={idx} style={{textAlign:"right"}}>
                     <div className="sCircle" style={{float:"right", height:"15px", width:"15px", marginLeft:"10px"}}/>
                     <h3>{back.historyDate} {back.historyTitle}</h3>
@@ -79,7 +79,7 @@ function BackOrder() {
             } else if(back.historyDate.slice(5,7)%2 === 1) {
               //홀수는 왼쪽정렬
               return(
-                <div style={{paddingLeft:"455px"}}>
+                <div key={idx}style={{paddingLeft:"455px", marginTop:"70px"}}>
                   <div key={idx} style={{textAlign:"left"}}>
                       <div className="sCircle" style={{float:"left", height:"15px", width:"15px", marginRight:"10px"}}/>
                       <h3>{back.historyDate} {back.historyTitle}</h3>
