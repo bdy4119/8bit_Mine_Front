@@ -19,7 +19,7 @@ function CustomUpdate() {
   const[phoneNum, setPhoneNum] = useState('');
   const[email, setEmail] = useState('');
   const[url, setUrl] = useState('');
-
+  const[thumbnail, setThumbnail] = useState('');
 
 
   const [imgFile, setImgFile] = useState('');
@@ -49,7 +49,8 @@ console.log(imgRef);
       setPhoneNum(resp.data.phoneNum);
       setEmail(resp.data.email);
       setUrl(resp.data.url);
-      setImgFile('/Business-img/' + resp.data.thumbnail);
+      setImgFile('/Business-img/' + resp.data.thumbnail); 
+      setThumbnail(resp.data.thumbnail);  // 보낼 수정 데이터
 
       setLoading(true);   //렌더링 시작해주기
     })
@@ -63,15 +64,27 @@ console.log(imgRef);
     e.preventDefault();
    
    let formData = new FormData();
-   formData.append("uploadFile", document.frm.uploadFile.files[0]);
-   formData.append("thumbnail", document.frm.uploadFile.files[0].name);
-   formData.append("name", document.frm.name.value);
-   formData.append("introduce", document.frm.introduce.value);
-   formData.append("phoneNum", document.frm.phoneNum.value);
-   formData.append("email", document.frm.email.value);
-   formData.append("url", document.frm.url.value);
-   formData.append("seq", seq);
-   formData.append("id", param.id);
+   if(document.frm.uploadFile.files[0]) {
+     formData.append("uploadFile", document.frm.uploadFile.files[0]);
+     formData.append("thumbnail", thumbnail);
+     formData.append("name", document.frm.name.value);
+     formData.append("introduce", document.frm.introduce.value);
+     formData.append("phoneNum", document.frm.phoneNum.value);
+     formData.append("email", document.frm.email.value);
+     formData.append("url", document.frm.url.value);
+     formData.append("seq", seq);
+     formData.append("id", param.id);
+   } else {
+    formData.append("uploadFile", thumbnail);
+    formData.append("thumbnail", thumbnail);
+    formData.append("name", document.frm.name.value);
+    formData.append("introduce", document.frm.introduce.value);
+    formData.append("phoneNum", document.frm.phoneNum.value);
+    formData.append("email", document.frm.email.value);
+    formData.append("url", document.frm.url.value);
+    formData.append("seq", seq);
+    formData.append("id", param.id);
+   }
 
   // console.log(document.frm.uploadFile.files[0].name);
 
@@ -83,13 +96,13 @@ console.log(imgRef);
            }
         })
         .catch(function(err){
-           alert(err);
+          // alert(err);
         })
 
 
   //수정 */
   axios.post("http://localhost:3000/businessUpdate", null,
-                {params:{"seq":seq, "id":param.id, "thumbnail": document.frm.uploadFile.files[0].name, "name":name, "email":email,
+                {params:{"seq":seq, "id":param.id, "thumbnail": thumbnail, "name":name, "email":email,
                           "url":url, "phoneNum":phoneNum, "introduce":introduce}})
          .then(function(resp){
             if(resp.data === "YES") {
