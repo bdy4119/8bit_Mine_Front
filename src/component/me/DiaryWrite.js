@@ -2,8 +2,7 @@ import axios from "axios";
 import { format } from "date-fns";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-
+import Summernote from "./Summernote.tsx";
 
 function DiaryWrite() {
   let history = useNavigate();  // 변수에 useNavigate 할당
@@ -17,6 +16,8 @@ function DiaryWrite() {
   const [id, setId] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+
+
 
   //작성완료 함수
   const handleSubmit = async(e) => {
@@ -53,12 +54,11 @@ function DiaryWrite() {
     */
     e.preventDefault();
   }
-
+  
   return(
     <div>
       <h1>일지 추가</h1>
-      <hr/>
-
+      <Summernote/>
       <table border='1px'>
         <colgroup>
           <col width="100px"/>
@@ -88,6 +88,7 @@ function DiaryWrite() {
 
       <br/>
       <button onClick={handleSubmit}>작성완료</button>
+      
     </div>
   )
 }

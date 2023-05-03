@@ -12,13 +12,11 @@ function TodoList() {
 
   const[todolist, setTodolist] = useState([]);
 
-  //체크박스
-  const[isChecked, setIsChecked] = useState(false);  //체크상태 확인
-  
-  const[checkArr, setCheckArr] = useState([localStorage.getItem("checkArr")])  // 새로고침해도 배열 유지하기
+  const[del, setDel] = useState('0');  // 새로고침해도 배열 유지하기
+  const[seq, setSeq] = useState('');
+  const[check, setCheck] = useState();
   const[checkBoxList, setCheckBoxList] = useState([]); // 체크된 리스트 배열에 넣기
 
-  const [cookies, setCookies] = useCookies('checkArr');
 
 //  const[allChecked,setAllChecked] = useState(false);
 
@@ -29,34 +27,45 @@ function TodoList() {
   const [page, setPage] = useState(1);
   const [totalCnt, setTotalCnt] = useState(0);
 
-/*
-//stringify, parse해주는 함수
-  const jsonLocalSorage = {
-    setItem: (key, value) => {
-      localStorage.setItem(key, JSON.stringify(value));
-    },
-    getItem: (key) => {
-      return JSON.parse(localStorage.getItem(key));
-    },
+
+
+   
+
+
+
+  //del이 0이면 체크 해제, del이 1이면 체크 유지
+  const checkUpdate = (checked, item) => {
+  //  console.log(item[0]); del
+  //  console.log(item[1]); seq
+  //  setDel(item[0]);
+  //  setSeq(item[1]);
+
+    
+
+  setSeq(item.substring(1));
+    axios.post("http://localhost:3000/updateCheck", null, {params:{"seq": item.substring(1), "del":del}})
+    .then(function(resp){
+      if(resp.data === "YES") {
+        console.log(del);
+        console.log(item.substring(1));
+       // console.log(checked);
+
+        if (checked) {
+          setCheckBoxList([...checkBoxList, item]);
+          console.log(checkBoxList);
+          setDel(1);
+        } else if (!checked) {
+          setCheckBoxList(checkBoxList.filter(e => e !== item));
+          setDel(0);
+        }
+      }
+    })
+    .catch(function(err){
+      
+    })
+   
+
   }
-*/
-
-   //체크박스 단일 선택
-   const onCheckedElement = (checked, item) => {
-    if (checked) {
-      setCheckBoxList([...checkBoxList, item]);
-      // localStorage.setItem("checkArr", checkBoxList);
-      setCookies("checkArr", checkBoxList);
-      Session.set("checkArr", checkBoxList);
-
-    //  window.sessionStorage.setItem("check", isChecked);
-   //   window.localStorage.setItem("checkArr", JSON.stringify(checkBoxList));
-    } else if (!checked) {
-      setCheckBoxList(checkBoxList.filter(el => el !== item));
-   //   localStorage.setItem("checkArr", checkBoxList);
-        setCookies("checkArr", checkBoxList);
-    }
-  };
 
 
 
@@ -65,7 +74,7 @@ function TodoList() {
     axios.get("http://localhost:3000/todoList", {params:{"pageNumber":page}})
         .then(function(resp){
           setTodolist(resp.data.list);
-
+          
           let nottoday = []; //오늘이랑 다른 날짜
           for(let i=0; i<resp.data.list.length; i++){
             if(resp.data.list[i].rdate !== todayStr
@@ -121,31 +130,21 @@ function TodoList() {
    */
 
 
+  
+  useEffect(()=>{
 
-
-
-/*
-  // 체크박스 전체 선택
-  const handleAllCheck = (checked) => {
-    if(checked) {
-      // 전체 선택 클릭 시 데이터의 모든 아이템(id)를 담은 배열로 isCheck 상태 업데이트
-      const idArray = [];
-      checkBoxList.forEach((el) => idArray.push(el.id));
-      setIsChecked(idArray);
+    for(let i = 0; i<todolist.length; i++) {
+      if(todolist[i].del === 1) {
+        console.log(todolist);
+        setCheck(true);
+      } else if(todolist[i].del === 0) {
+        setCheck(false);
+      }
     }
-    else {
-      // 전체 선택 해제 시 isChecked 를 빈 배열로 상태 업데이트
-      setIsChecked([]);
-    }
-  }
-*/
 
-
-  useEffect(function(){
     getTodolist();
-  //  localStorage.getItem("checkArr");
-  //  setCheckBoxList(cookies.checkBoxList);
-  },[cookies]);
+
+  },[]);
 
 
 
@@ -173,19 +172,17 @@ function TodoList() {
              {
                 todolist.map(function(todo, idx){
                   var rdateStr = todo.rdate.toString();
-               //   console.log(todo.rdate)
-                  console.log(checkBoxList);
-                  
-                  //1. 클릭한 값이 있을때
+          
+                  //1. 달력 날짜를 클릭한 값이 있을때
                   if(param.rdate === rdateStr || param.rdate === rdateStr.substr(0,10)
                       || param.rdate === (todo.rdate.slice(0,8) + '0' + todo.rdate.slice(8, 10))){
                     return (
                         <tr key={idx}>
                             <td colSpan="2" align='left'>
-                              <input type='checkbox' id={todo} value={`${todo.title}/${todo.content}/${todo.rdate}`}
-                                onChange={(e) => {onCheckedElement(e.target.checked, e.target.value)}}
+                            <input type='checkbox' id={todo} value={`${todo.del}${todo.seq}`}
+                                      onChange={(e) => {checkUpdate(e.target.checked, e.target.value)}}
                                 // 체크된 아이템 배열에 해당 아이템이 있을 경우 선택 활성화, 아닐 시 해제
-                                checked={checkBoxList.includes(`${todo.title}/${todo.content}/${todo.rdate}`) ? true : false}/>
+                                checked={check}/>
                               {todo.title}
                             </td>
                             <td>{todo.content}</td>
@@ -203,7 +200,7 @@ function TodoList() {
                         </tr>
                     )
 
-                    //2. 클릭한 값이 없을때, 오늘 날짜만 불러와라
+                    //2. 달력날짜를 클릭한 값이 없을때, 오늘 날짜만 불러와라
                   } else if(param.rdate === undefined
                             && (format(new Date(),'yyyy-MM-dd') === rdateStr
                                 || format(new Date(),'yyyy-MM-dd') === rdateStr.substr(0,10)
@@ -212,10 +209,10 @@ function TodoList() {
                           return (
                             <tr key={idx}>
                                 <td colSpan="2" align='left'>
-                                  <input type='checkbox' id={todo} value={`${todo.title}/${todo.content}/${todo.rdate}`}
-                                    onChange={(e) => {onCheckedElement(e.target.checked, e.target.value)}}
-                                    // 체크된 아이템 배열에 해당 아이템이 있을 경우 선택 활성화, 아닐 시 해제
-                                    checked={checkBoxList.includes(`${todo.title}/${todo.content}/${todo.rdate}`) ? true : false}/>
+                                   <input type='checkbox' id={todo} value={`${todo.del}${todo.seq}`}
+                                      onChange={(e) => {checkUpdate(e.target.checked, e.target.value)}}
+                                // 체크된 아이템 배열에 해당 아이템이 있을 경우 선택 활성화, 아닐 시 해제
+                                checked={check}/>
                                   {todo.title}
                                 </td>
                                 <td>{todo.content}</td>
@@ -232,13 +229,6 @@ function TodoList() {
                                 </td>
                             </tr>
                           )
-                    //3. 데이터가 없는 상태에서, 클릭한 값이 없거나, 클릭한 값이 있을때
-                    // } else if(todo.title === null && todo.content === null) {
-                    //   <tr key={idx}>
-                    //     <td>
-                    //       일정이 없습니다.
-                    //     </td>
-                    //   </tr>
                      }
                 })
                   
