@@ -1,6 +1,11 @@
-
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
 
+import Main from "./component/main/main";
+import Mine from "./component/mine/mine_main";
+import Fullmine from "./component/mine/mine_full";
+import MineEdi from "./component/mine/mine_edi";
+import Chatbot from "./component/chatbot/chatbot";
 
 import Me from "./component/Me/Me";
 import DiaryWrite from "./component/Me/DiaryWrite";
@@ -15,7 +20,6 @@ import BackUpdate from './component/BusinessCard/BackUpdate';
 import InformDetail from './component/BusinessCard/InformDetail';
 import BackWrite from './component/BusinessCard/BackWrite';
 
-import React, { useEffect, useState } from "react";
 import Imain from "./component/I/Imain";
 import Iadd from "./component/I/Iadd";
 import Idetail from "./component/I/Idetail";
@@ -83,7 +87,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div>      
      
       <button onClick={go}>재생</button>
       <button onClick={stop}>정지</button>
@@ -149,6 +153,13 @@ function App() {
           <Route path="/back/:id" element={<Back/>}/>
           <Route path="/backUpdate/:seq" element={<BackUpdate/>}/>
           <Route path="/backWrite/:id" element={<BackWrite/>}/>
+
+          <Route path="/main" element={ <Main /> } />
+          <Route path="/mine" element={ <Mine /> } />
+          <Route path="/mine_full" element={ <Fullmine /> } />
+          <Route path="/mine_edi/:pos" element={ <MineEdi /> } />
+          <Route path="/chatbot" element={ <Chatbot /> } />
+          
         </Routes>
 
       </BrowserRouter>

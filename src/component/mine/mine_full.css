@@ -1,0 +1,278 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+#fulltoolbox {
+    z-index: 999;
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    width: 1400px;
+    height: 700px;
+    position: absolute;
+    top: 3%;
+    left: 2%;
+}
+
+#close {
+    position: absolute;
+    top: 3%;
+    left: 2%;
+}
+
+#mine_btn {
+    float:left;
+    margin-right: 30px;
+    width: 50px;
+    height: 100px;
+    text-align: center;
+    border-radius: 20%;
+    background-color: white;
+}
+
+.title {
+    width: 60%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    z-index: 10;
+}
+
+#fullgame {
+    width: 1200px;
+    height: 650px;
+    padding: 10px;
+    position: relative;
+    top: 20px;
+    left: 50%;
+    margin-left:-600px;
+    border: 2px solid #000;
+    background-color: gray;
+    float: left;
+}
+
+.fullkeybutton {
+    display: inline-block;
+    background-image: url(./images/keyboard.png);
+    background-size: contain;
+    border: 2px solid #000;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 30px;
+    bottom: 50px;
+}
+
+.fullleft {
+    display: inline-block;
+    background-image: url(./images/l_btn.png);
+    background-size: contain;
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    right: 190px;
+    bottom: 200px;
+}
+.fullup {
+    display: inline-block;
+    background-image: url(./images/u_btn.png);
+    background-size: contain;
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    right: 120px;
+    bottom: 250px;
+}
+.fulldown {
+    display: inline-block;
+    background-image: url(./images/d_btn.png);
+    background-size: contain;
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    right: 120px;
+    bottom: 150px;
+}
+.fullright {
+    display: inline-block;
+    background-image: url(./images/r_btn.png);
+    background-size: contain;
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin-top: 5px;
+    position: absolute;
+    right: 50px;
+    bottom: 200px;
+}
+
+.fullplay {
+    display: inline-block;
+    background-image: url(./images/play.png);
+    background-size: contain;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 130px;
+    bottom: 55px;
+}
+
+.fullpause {
+    display: inline-block;
+    background-image: url(./images/pause.png);
+    background-size: contain;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+    position: absolute;
+    right: 230px;
+    bottom: 50px;
+}
+
+
+.fullrefresh {
+    border: 1px solid #000;
+    width: 30px;
+    top: 20px;
+    height: 30px;
+    position:absolute;
+    border-radius: 5px;
+    z-index: 10;
+    background-image: url(./images/direction.png);
+    background-size: contain;
+}
+
+.fullcontainer {
+    z-index: 0;
+    border: 1px solid #000;
+    top: 10px;
+    width: 900px;
+    height: 600px;
+    position: relative;
+    background-position: 0px 0px;
+    transition: background-position 10000s linear;
+    float: left;
+}
+
+.fulltextbox {
+    border: 1px solid #000;
+    background-color: #aaa;
+    margin-left: 5px;
+    top: 10px;
+    padding: 5px;
+    width: 270px;
+    height: 270px;
+    position: relative;
+    background-position: 0px 0px;
+    transition: background-position 10000s linear;
+    float: left;
+}
+
+.fullchild {
+    z-index: 1;
+    position:absolute;
+    top: 300px;
+    left: 30px;
+    background-size: contain;
+    background-position: center;
+    transform: translate(-50%,-50%);
+}
+.fullstart {
+    background-color: #fff;
+    z-index: 2;
+    width: 260px;
+    height: 100px;
+    position:absolute;
+    border-radius: 7%;
+    top: 300px;
+    left: 450px;
+    background-image: url(./images/start.png);
+    background-size: contain;
+    background-position: center;
+    transform: translate(-50%,-50%);
+}
+.fullportal {
+    background-color: #fff;
+    width: 50px;
+    height: 50px;
+    position:absolute;
+    border-radius: 50%;
+    top: 300px;
+    left: 850px;
+    background-image: url(./images/portal.png);
+    background-size: contain;
+    background-position: center;
+    transform: translate(-50%,-50%);
+}
+
+#keybutton {
+    z-index: -1;
+    position:absolute;
+    top: 130px;
+    left: 150px;
+}
+
+.fullvictory {
+    visibility: hidden;
+    position:absolute;
+    top: 220px;
+    left: 320px;
+}
+
+.fullpoint#fullfirst {
+    position:absolute;
+    top: 90px;
+    left: 60px;
+}
+
+.fullpoint#fullsecond {
+    position:absolute;
+    top: 390px;
+    left: 160px;
+}
+
+.fullpoint#fullthird {
+    position:absolute;
+    top: 40px;
+    left: 260px;
+}
+
+.fullpoint#fullfourth {
+    position:absolute;
+    top: 540px;
+    left: 360px;
+}
+
+.fullpoint#fullfifth {
+    position:absolute;
+    top: 140px;
+    left: 460px;
+}
+
+.fullpoint#fullsixth {
+    position:absolute;
+    top: 40px;
+    left: 560px;
+}
+
+.fullpoint#fullseventh {
+    position:absolute;
+    top: 190px;
+    left: 660px;
+}
+
+.fullpoint#fulleight {
+    position:absolute;
+    top: 440px;
+    left: 760px;
+}
