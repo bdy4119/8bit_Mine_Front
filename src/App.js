@@ -1,4 +1,20 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+
+
+import Me from "./component/Me/Me";
+import DiaryWrite from "./component/Me/DiaryWrite";
+import TodoWrite from './component/Me/TodoWrite';
+import DiaryUpdate from './component/Me/DiaryUpdate';
+import TodoUpdate from './component/Me/TodoUpdate';
+
+import Card from "./component/BusinessCard/Card";
+import InformUpdate from './component/BusinessCard/InformUpdate';
+import Back from './component/BusinessCard/Back';
+import BackUpdate from './component/BusinessCard/BackUpdate';
+import InformDetail from './component/BusinessCard/InformDetail';
+import BackWrite from './component/BusinessCard/BackWrite';
+
 import React, { useEffect, useState } from "react";
 import Imain from "./component/I/Imain";
 import Iadd from "./component/I/Iadd";
@@ -68,6 +84,7 @@ function App() {
 
   return (
     <div>
+     
       <button onClick={go}>재생</button>
       <button onClick={stop}>정지</button>
       <select onChange={(e)=>{music_change(e.target.value)}}>
@@ -84,10 +101,12 @@ function App() {
         <p>현재 플레이중인 음악 : 🎶 {artist} - {title}</p>
 
       <BrowserRouter>
-        <nav>
-          <Link to='/i'>I 페이지</Link>&nbsp;
-          <Link to='/gbmain'>방명록</Link>&nbsp;
-        </nav>
+        <Link to="/me">me</Link>
+        <Link to="/card">온라인 명함</Link>
+        
+        <Link to='/i'>I 페이지</Link>&nbsp;
+        <Link to='/gbmain'>방명록</Link>&nbsp;
+        
         <Routes>
           <Route path="/i" element={<Imain />} />
           <Route path="/i_add" element={<Iadd />} />
@@ -108,6 +127,28 @@ function App() {
           <Route path="/gbvoice" element={<Gbvoice />} />
           <Route path="/gbupdate/:seq" element={<Gbupdate />} />
 
+
+          {/* me ,명함 */}
+          <Route path="/me" element={<Me></Me>}/>
+          
+          <Route path="/diaryWrite/:rdate" element={<DiaryWrite/>}/>
+          <Route path="/todoWrite/:rdate" element={<TodoWrite/>}/>
+          
+          <Route path="/me/:rdate" element={<Me/>}/> 
+          <Route path="/me/:year/:month" element={<Me/>}/> 
+
+          <Route path="/diaryUpdate/:seq/:title/:content/:rdate" element={<DiaryUpdate/>}/>
+          <Route path="/todoUpdate/:seq/:title/:content/:rdate" element={<TodoUpdate/>}/>
+
+          <Route path="/card" element={<Card></Card>}/>
+
+          <Route path="/informDetail/:id" element={<InformDetail/>}/>
+          <Route path="/informDetail/:id/:imgFile" element={<InformDetail/>}/>
+          <Route path="/informUpdate/:id" element={<InformUpdate/>}/>
+          
+          <Route path="/back/:id" element={<Back/>}/>
+          <Route path="/backUpdate/:seq" element={<BackUpdate/>}/>
+          <Route path="/backWrite/:id" element={<BackWrite/>}/>
         </Routes>
 
       </BrowserRouter>
