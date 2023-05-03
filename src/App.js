@@ -39,6 +39,11 @@ import Bgm from "./component/Bgm/bgm";
 import Bgmadd from "./component/Bgm/bgmadd";
 import axios from "axios";
 
+import FileListSample from "./component/My/FileListSample";
+import FileLobby from "./component/My/FileLobby";
+import UpdateFile from "./component/My/UpdateFile";
+import FileUpload from "./component/My/FileUpload";
+
 function App() {
 
   const [state, setState] = useState(false);
@@ -105,11 +110,13 @@ function App() {
         <p>현재 플레이중인 음악 : 🎶 {artist} - {title}</p>
 
       <BrowserRouter>
-        <Link to="/me">me</Link>
-        <Link to="/card">온라인 명함</Link>
+        <Link to="/me">me</Link>&nbsp;&nbsp;
+        <Link to="/card">온라인 명함</Link>&nbsp;&nbsp;
         
-        <Link to='/i'>I 페이지</Link>&nbsp;
-        <Link to='/gbmain'>방명록</Link>&nbsp;
+        <Link to='/i'>I 페이지</Link>&nbsp;&nbsp;
+        <Link to='/gbmain'>방명록</Link>&nbsp;&nbsp;
+
+        <Link to="/Filelist">MY File</Link>&nbsp;&nbsp;
         
         <Routes>
           <Route path="/i" element={<Imain />} />
@@ -160,6 +167,16 @@ function App() {
           <Route path="/mine_edi/:pos" element={ <MineEdi /> } />
           <Route path="/chatbot" element={ <Chatbot /> } />
           
+        {<Route path="/FileLobby" element={ <FileLobby /> } />}
+        {<Route path="/Filelist" element={ <FileListSample /> } />}
+        {<Route path="/Filelist/:choice/:search" element={ <FileListSample /> } />}
+        {<Route path="/FileUpload/:project" exact element={ <FileUpload /> } />}
+        {<Route path="/FileUpload/:certificate" exact element={ <FileUpload /> } />}
+        {<Route path="/FileUpload/:portfolio" exact element={ <FileUpload /> } />}
+        {<Route path="/FileUpload/:picture" exact element={ <FileUpload /> } />}
+        {<Route path="/UpdateFile/:seq" exact element={ <UpdateFile /> } />}
+        {<Route path="/FileLobby/:mfuserId" exact element={ <updateFile /> } />}
+        {<Route path="/FileUpload/:mfuserId" exact element={ <updateFile /> } />}
         </Routes>
 
       </BrowserRouter>
