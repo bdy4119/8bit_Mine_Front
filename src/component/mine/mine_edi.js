@@ -3,12 +3,12 @@ import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 
 import "./mine_edi.css";
-import ModalBasic from 'C:/react/8bit_Mine_Front/src/component/chatbot/chatbot';
+import ModalBasic from '../chatbot/chatbot';
 import logo from './images/logo.png';
 import stage1 from './images/stage1.png';
 import stage2 from './images/stage2.png';
 import stage3 from './images/stage3.png';
-import "C:/react/8bit_Mine_Front/src/component/mine_back.css"
+import "../mine_back.css"
 
 function Mine_edi(){
 
