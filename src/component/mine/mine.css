@@ -1,0 +1,276 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+
+#mine_btn {
+    float:left;
+    margin-right: 30px;
+    width: 50px;
+    height: 100px;
+    text-align: center;
+    border-radius: 20%;
+    background-color: white;
+}
+
+.title {
+    width: 60%;
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    z-index: 10;
+}
+
+#game {
+    width: 600px;
+    height: 500px;
+    padding: 10px;
+    position: relative;
+    top: 40px;
+    left: 50%;
+    margin-left:-300px;
+    border: 2px solid #000;
+    background-color: gray;
+    float: left;
+}
+
+.keybutton {
+    display: inline-block;
+    background-image: url(./images/keyboard.png);
+    background-size: contain;
+    border: 2px solid #000;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+}
+
+.left {
+    display: inline-block;
+    background-image: url(./images/l_btn.png);
+    background-size: contain;
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 30%;
+    bottom: 10px;
+}
+.up {
+    display: inline-block;
+    background-image: url(./images/u_btn.png);
+    background-size: contain;
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 41%;
+    bottom: 10px;
+}
+.down {
+    display: inline-block;
+    background-image: url(./images/d_btn.png);
+    background-size: contain;
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 41%;
+    bottom: 10px;
+}
+.right {
+    display: inline-block;
+    background-image: url(./images/r_btn.png);
+    background-size: contain;
+    border: 2px solid #000;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+    position: absolute;
+    right: 30%;
+    bottom: 10px;
+}
+
+.play {
+    display: inline-block;
+    background-image: url(./images/play.png);
+    background-size: contain;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 10%;
+    bottom: 15px;
+}
+
+.pause {
+    display: inline-block;
+    background-image: url(./images/pause.png);
+    background-size: contain;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+    position: absolute;
+    right: 3%;
+    bottom: 10px;
+}
+
+.showfull {
+    display: inline-block;
+    background-image: url(./images/fullshow.png);
+    background-size: contain;
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+    position: absolute;
+    left: 60px;
+    bottom: 10px;
+}
+
+
+
+.refresh {
+    border: 1px solid #000;
+    width: 30px;
+    height: 30px;
+    position:absolute;
+    border-radius: 5px;
+    z-index: 10;
+    background-image: url(./images/direction.png);
+    background-size: contain;
+}
+
+.container {
+    z-index: 0;
+    border: 1px solid #000;
+    width: 580px;
+    height: 350px;
+    position: relative;
+    background-position: 0px 0px;
+    transition: background-position 10000s linear;
+}
+
+.textbox {
+    border: 1px solid #000;
+    background-color: #aaa;
+    margin-top: 3px;
+    padding: 5px;
+    width: 580px;
+    height: 77px;
+    position: relative;
+    background-position: 0px 0px;
+}
+
+.child {
+    z-index: 1;
+    position:absolute;
+    top: 200px;
+    left: 20px;
+    background-size: contain;
+    background-position: center;
+    transform: translate(-50%,-50%);
+}
+.start {
+    background-color: #fff;
+    z-index: 2;
+    width: 200px;
+    height: 80px;
+    position:absolute;
+    border-radius: 7%;
+    top: 200px;
+    left: 300px;
+    background-image: url(./images/start.png);
+    background-size: contain;
+    background-position: center;
+    transform: translate(-50%,-50%);
+}
+.portal {
+    background-color: #fff;
+    width: 40px;
+    height: 40px;
+    position:absolute;
+    border-radius: 50%;
+    top: 200px;
+    left: 540px;
+    background-image: url(./images/portal.png);
+    background-size: contain;
+    background-position: center;
+    transform: translate(-50%,-50%);
+}
+
+#keybutton {
+    z-index: -1;
+    position:absolute;
+}
+
+.victory {
+    visibility: hidden;
+    position:absolute;
+    top: 130px;
+    left: 150px;
+}
+
+.point#first {
+    position:absolute;
+    top: 100px;
+    left: 70px;
+}
+
+.point#second {
+    position:absolute;
+    top: 280px;
+    left: 130px;
+}
+
+.point#third {
+    position:absolute;
+    top: 70px;
+    left: 190px;
+}
+
+.point#fourth {
+    position:absolute;
+    top: 310px;
+    left: 250px;
+}
+
+.point#fifth {
+    position:absolute;
+    top: 130px;
+    left: 310px;
+}
+
+.point#sixth {
+    position:absolute;
+    top: 40px;
+    left: 370px;
+}
+
+.point#seventh {
+    position:absolute;
+    top: 100px;
+    left: 430px;
+}
+
+.point#eight {
+    position:absolute;
+    top: 250px;
+    left: 490px;
+}
+
+#question {
+    visibility: hidden;
+    width: 577px;
+    height: 347px;
+    position: absolute;
+    padding: 30px;
+    top: 0px;
+    left: 0px;
+    background-color: antiquewhite;
+    z-index: 999;
+}

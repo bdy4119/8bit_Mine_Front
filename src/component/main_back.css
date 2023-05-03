@@ -1,0 +1,55 @@
+#back {
+    height: 100vh;
+    background: url(images/배경.png) no-repeat center;
+    background-size: cover;
+}
+
+#topbar {
+    position: relative;
+    left: 5%;
+    height: 15%;
+    width: 90%;
+    text-align: center;
+    margin: 0;
+}
+
+#barbtns {
+    float:left;
+    position: relative;
+    top: 50%;
+    left: 1%;
+    width: 33.3%;
+    text-align: left;
+}
+
+#mainbtn {
+    width: 50px;
+    height: 100px;
+    text-align: center;
+    border-radius: 20%;
+    background-color: white;
+}
+
+#logo {
+    position: relative;
+    float:left;
+    width: 33.3%;
+    top: 15%;
+}
+
+#topbtns {
+    position: relative;
+    float:left;
+    top: 50%;
+    width: 33.3%;
+    text-align: right;
+}
+
+
+#toolbox {
+    position: relative;
+    left: 5%;
+    width: 90%;
+    height: 80%;
+    background-color: white;
+}
