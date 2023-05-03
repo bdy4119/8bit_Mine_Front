@@ -2,8 +2,8 @@ import React, {useState, useLayoutEffect} from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
-import "C:/react/8bit_Mine_Front/src/component/mine_back.css"
-import ModalBasic from 'C:/react/8bit_Mine_Front/src/component/chatbot/chatbot';
+import "../mine_back.css"
+import ModalBasic from '../chatbot/chatbot';
 import Fullpage from './mine_full';
 import "./mine.css";
 import bgm from './images/bgm.mp3';

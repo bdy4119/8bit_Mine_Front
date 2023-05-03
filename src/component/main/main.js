@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
-import "C:/react/8bit_Mine_Front/src/component/main_back.css"
-import ModalBasic from 'C:/react/8bit_Mine_Front/src/component/chatbot/chatbot';
+import "../main_back.css"
+import ModalBasic from '../chatbot/chatbot';
 import logo from './images/logo.png';
 import mine_icon from './images/mine_icon.png';
 import profile_img from './images/profileimg.png';
