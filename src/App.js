@@ -1,6 +1,20 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 
+import Gate from './component/login/gate';
+import GoogleLogin from './component/login/googleLogin';
+import MicrosoftLogin from './component/login/microsoftLogin';
+import KakaoLogin from './component/login/kakaoLogin';
+import KakaoWait from './component/login/kakaoWait';
+import MainPage from './component/login/mainPage';
+import LogoutAfter from './component/login/logoutAfter';
+import Withdrawal from './component/login/withdrawal';
+import Edit from './component/login/edit';
+import Admin from './component/login/admin';
+import UserList from './component/login/userList';
+import ReportList from './component/login/reportList';
+import Ban from './component/login/ban';
+
 import Main from "./component/main/main";
 import Mine from "./component/mine/mine_main";
 import Fullmine from "./component/mine/mine_full";
@@ -119,6 +133,20 @@ function App() {
         <Link to="/Filelist">MY File</Link>&nbsp;&nbsp;
         
         <Routes>
+          <Route path='/' element={<Gate />} />
+          <Route path='/google' element={<GoogleLogin />} />
+          <Route path='/microsoft' element={<MicrosoftLogin />} />
+          <Route path='/kakao' element={<KakaoLogin />} />
+          <Route path='/callback/kakao/*' element={<KakaoWait />} />
+          <Route path='/mainpage' element={<MainPage />} />
+          <Route path='/kakao/logout' element={<LogoutAfter />} />
+          <Route path='/kakao/withdrawal' element={<Withdrawal />} />
+          <Route path='/edit' element={<Edit />} />
+          <Route path='/admin' element={<Admin />} />
+          <Route path="/userlist" element={<UserList />} />
+          <Route path="/reportlist" element={<ReportList />} />
+          <Route path='/ban' element={<Ban />} />
+
           <Route path="/i" element={<Imain />} />
           <Route path="/i_add" element={<Iadd />} />
           <Route path="/i_detail/:id/:classify" exact element={<Idetail />} />

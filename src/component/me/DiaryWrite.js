@@ -2,7 +2,6 @@ import axios from "axios";
 import { format } from "date-fns";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Summernote from "./Summernote.tsx";
 
 function DiaryWrite() {
   let history = useNavigate();  // 변수에 useNavigate 할당
@@ -58,7 +57,6 @@ function DiaryWrite() {
   return(
     <div>
       <h1>일지 추가</h1>
-      <Summernote/>
       <table border='1px'>
         <colgroup>
           <col width="100px"/>
