@@ -1,0 +1,20 @@
+* {
+  background-image: image('/src/component/BusinessCard/card.css');
+}
+
+.middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle {
+  border-radius: 50%;
+  background-color: rgb(255, 227, 71);
+}
+
+
+.sCircle {
+  border-radius: 50%;
+  background-color: rgb(255, 227, 71);
+}
