@@ -32,6 +32,7 @@ function InformWrite() {
     const reader = new FileReader();  // FileReader API
     reader.readAsDataURL(file);
     reader.onloadend = () => {
+      console.log(imgRef.current.files[0].name);
       setThumbnail(imgRef.current.files[0].name);
       setImgFile(reader.result);
     }
@@ -49,7 +50,6 @@ function InformWrite() {
      formData.append("phoneNum", document.frm.phoneNum.value);
      formData.append("email", document.frm.email.value);
      formData.append("url", document.frm.url.value);
-     formData.append("seq", seq);
      formData.append("id", param.email);
    } else {
     formData.append("uploadFile", thumbnail);
@@ -59,7 +59,6 @@ function InformWrite() {
     formData.append("phoneNum", document.frm.phoneNum.value);
     formData.append("email", document.frm.email.value);
     formData.append("url", document.frm.url.value);
-    formData.append("seq", seq);
     formData.append("id", param.email);
    }
 

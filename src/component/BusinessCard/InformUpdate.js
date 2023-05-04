@@ -74,7 +74,7 @@ function CustomUpdate() {
      formData.append("email", document.frm.email.value);
      formData.append("url", document.frm.url.value);
      formData.append("seq", seq);
-     formData.append("id", param.id);
+     formData.append("id", param.email);
    } else {
     formData.append("uploadFile", thumbnail);
     formData.append("thumbnail", thumbnail);
@@ -84,7 +84,7 @@ function CustomUpdate() {
     formData.append("email", document.frm.email.value);
     formData.append("url", document.frm.url.value);
     formData.append("seq", seq);
-    formData.append("id", param.id);
+    formData.append("id", param.email);
    }
 
   // console.log(document.frm.uploadFile.files[0].name);
