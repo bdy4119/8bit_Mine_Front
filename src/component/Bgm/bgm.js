@@ -32,7 +32,7 @@ function Bgm() {
     }
 
     const fetchData = async () => {
-        const resp = await axios.get('http://localhost:3000/bgm_list', { params: { "id": email } });
+        const resp = await axios.get('http://localhost:3000/bgm_list', { params: { "id": "snaro0123@gmail.com" } });
         setBgmlist(resp.data);
     }
 

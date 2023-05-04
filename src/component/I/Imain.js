@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../main_back.css"
@@ -8,7 +8,8 @@ function I_main() {
   const history = useNavigate();
   const jwt = localStorage.getItem("token");
   const [email, setEmail] = useState('');
-  function getUser() {
+
+  const getUser = async() => {
     if (jwt === null) {
       history("/");
     }
@@ -25,12 +26,14 @@ function I_main() {
     }
   }
 
+  console.log(email);
+
   const [classiList, setClassiList] = useState([]);
   const [wise, setWise] = useState('');
   
 
-  const fetchData = async () => {
-    const resp = await axios.get('http://localhost:3000/i_classi_list', { params: { "id": email } });
+  const fetchData = async (email) => {
+    const resp = await axios.get('http://localhost:3000/i_classi_list', { params: { "id":"snaro0123@gmail.com" } });
 
     console.log(resp.data);
     setClassiList(resp.data);
@@ -50,12 +53,10 @@ function I_main() {
     setWise(resp.data[1].respond);
   }
 
-
-
   useEffect(() => {
+    getUser();
     fetchData();
     wiseData();
-    getUser();
   }, []);
 
 

@@ -51,7 +51,7 @@ function I_add() {
 
     // 참고 : 특수문자는 추가가 안됨.
     for (let i = 0; i < ans.length; i++) {
-      axios.get('http://localhost:3000/i_add', { params: { "id": email, "classify": classi, "item": ans[i], "detail": det[i], "ref": i } })
+      axios.get('http://localhost:3000/i_add', { params: { "id": "snaro0123@gmail.com", "classify": classi, "item": ans[i], "detail": det[i], "ref": i } })
         .then(function () {
         })
         .catch(function (err) {
@@ -59,13 +59,14 @@ function I_add() {
         })
     }
 
-    axios.get('http://localhost:3000/i_add_classi', { params: { "id": email, "classify": classi } })
+    axios.get('http://localhost:3000/i_add_classi', { params: { "id": "snaro0123@gmail.com", "classify": classi } })
       .then(function () {
       })
       .catch(function (err) {
         alert(err);
       });
 
+    alert(classi + " 항목이 추가되었습니다.")
     movePage('/i');
   }
 

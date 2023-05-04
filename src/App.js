@@ -78,7 +78,7 @@ function App() {
   };
 
   const fetchData = async () => {
-    const resp = await axios.get('http://localhost:3000/bgm_list', { params: { "id": "test" } });
+    const resp = await axios.get('http://localhost:3000/bgm_list', { params: { "id": "snaro0123@gmail.com" } });
     setBgmlist(resp.data);
     console.log(resp);
   }
@@ -173,14 +173,14 @@ function App() {
 
           <Route path="/i" element={<Imain />} />
           <Route path="/i_add" element={<Iadd />} />
-          <Route path="/i_detail/:id/:classify" exact element={<Idetail />} />
-          <Route path="/i_update/:id/:classify" exact element={<Iupdate />} />
+          <Route path="/i_detail/:classify" exact element={<Idetail />} />
+          <Route path="/i_update/:classify" exact element={<Iupdate />} />
           <Route path="/place" element={<Place />} />
           <Route path="/book" element={<Book />} />
           <Route path="/movie" element={<Movie />} />
           <Route path="/drama" element={<Drama />} />
 
-          <Route path="/qna10/:id" exact element={<Qna10 />} />
+          <Route path="/qna10" exact element={<Qna10 />} />
 
           <Route path="/bgm" element={<Bgm />} />
           <Route path="/bgmadd" element={<Bgmadd />} />

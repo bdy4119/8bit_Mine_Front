@@ -46,7 +46,7 @@ function I_update() {
 
     // 데이터 불러오기
     const detailData = async () => {
-        const resp = await axios.get("http://localhost:3000/i_detail", { params: { "id": email, "classify": params.classify } })
+        const resp = await axios.get("http://localhost:3000/i_detail", { params: { "id": "snaro0123@gmail.com", "classify": params.classify } })
 
         setClassi(resp.data[0].classify);
 
@@ -84,6 +84,7 @@ function I_update() {
                 axios.get('http://localhost:3000/i_add_classi', { params: { "id": email, "classify": classi } })
                     .then(function () {
                         alert(classi + " 항목이 수정되었습니다.");
+                        movePage(`/i_detail/${classi}`);
                     })
                     .catch(function (err) {
                         alert(err);

@@ -39,7 +39,7 @@ function Qna10() {
     const [ans10, setAns10] = useState('');
 
     const detailData = async () => {
-        const resp = await axios.get("http://localhost:3000/i_qna", { params: { "id": email} });
+        const resp = await axios.get("http://localhost:3000/i_qna", { params: { "id": "snaro0123@gmail.com"} });
         setAns1(resp.data.q1);
         setAns2(resp.data.q2);
         setAns3(resp.data.q3);
@@ -54,16 +54,15 @@ function Qna10() {
     
       useEffect(() => {
         detailData();
-        getUser();
       }, []);
 
     function i_add_qna() {
-        axios.get('http://localhost:3000/i_del_qna', { params: { "id": email } })
+        axios.get('http://localhost:3000/i_del_qna', { params: { "id": "snaro0123@gmail.com" } })
             .then(function () {
                 axios.get('http://localhost:3000/i_add_qna',
                     {
                         params: {
-                            "id": params.id, "q1": ans1, "q2": ans2, "q3": ans3, "q4": ans4,
+                            "id": "snaro0123@gmail.com", "q1": ans1, "q2": ans2, "q3": ans3, "q4": ans4,
                             "q5": ans5, "q6": ans6, "q7": ans7, "q8": ans8, "q9": ans9, "q10": ans10
                         }
                     })

@@ -31,7 +31,7 @@ function I_detail() {
 
   // 데이터 불러오기
   const detailData = async () => {
-    const resp = await axios.get("http://localhost:3000/i_detail", { params: { "id": email, "classify": params.classify } });
+    const resp = await axios.get("http://localhost:3000/i_detail", { params: { "id": "snaro0123@gmail.com", "classify": params.classify } });
 
     console.log(resp);
     setDetList(resp.data);
@@ -71,14 +71,13 @@ function I_detail() {
 
   return (
     <div id="backwhite">
-      {params.classify}
       <table border="1">
         <colgroup>
           <col width="200px" /><col width="200px" />
         </colgroup>
         <thead>
           <tr>
-            <td colSpan="2"><input placeholder="분류 내용 입력" style={{ width: "400px" }} defaultValue={params.classify} /></td>
+            <td colSpan="2">{params.classify}</td>
           </tr>
         </thead>
         <tbody>

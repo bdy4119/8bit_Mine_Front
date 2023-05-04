@@ -36,7 +36,7 @@ function Bgmadd() {
     const [list, setList] = useState([]);
 
     function bgm_add() {
-        axios.get('http://localhost:3000/bgm_add', { params: { "id": email, "artist": artist, "title": title, "url": url } })
+        axios.get('http://localhost:3000/bgm_add', { params: { "id": "snaro0123@gmail.com", "artist": artist, "title": title, "url": url } })
             .then(function (resp) {
                 if (resp.data === "bgm_add_OK") {
                     alert('배경음악이 추가되었습니다.');
