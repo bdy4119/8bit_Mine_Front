@@ -45,7 +45,7 @@ function Inform() {
        return(
            <Link to={`/informWrite/${userEmail}`}>
              <button style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
-               글추가
+               명함추가
              </button>
            </Link>
        );
@@ -55,7 +55,7 @@ function Inform() {
   return(
     <div className="middle">
       <div style={{position: "relative", backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px"}} /*명함틀*/ />
-      <div style={{position: "relative", marginLeft:"-50px", marginBottom:"0px", marginTop:"200px"}}>
+      <div style={{position: "relative", marginLeft:"-550px", marginBottom:"0px", marginTop:"200px"}}>
         {renderAverage()}
       </div>
       {//글정보
