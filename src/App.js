@@ -61,7 +61,6 @@ import FileLobby from "./component/My/FileLobby";
 import UpdateFile from "./component/My/UpdateFile";
 import FileUpload from "./component/My/FileUpload";
 
-import ModalBasic from './component/chatbot/chatbot';
 
 function App() {
 
@@ -110,7 +109,7 @@ function App() {
   useEffect(() => {
     fetchData();
 
-    if (jwt===null){
+    if (jwt === null) {
       document.getElementById("backtop").style.visibility = "hidden";
     } else {
       document.getElementById("backtop").style.visibility = "visible";
@@ -124,12 +123,6 @@ function App() {
   function stop() {
     setState(false);
   }
-
-  const [modalOpen, setModalOpen] = useState(false);
-  const showModal = () => {
-    setModalOpen(true);
-  };
-
 
   useEffect(function () {
     const jwt = localStorage.getItem("token");
@@ -147,12 +140,12 @@ function App() {
 
 
   return (
-    <div id="back">      
+    <div id="back">
 
       <div id="backtop">
         <button onClick={go}>재생</button>
         <button onClick={stop}>정지</button>
-        <select onChange={(e)=>{music_change(e.target.value)}}>
+        <select onChange={(e) => { music_change(e.target.value) }}>
           <option value="">bgm을 선택하세요.</option>
           {
             bgmlist.map(function (object, i) {
@@ -163,22 +156,22 @@ function App() {
           }
         </select>
         <button onClick={() => window.open('http://localhost:9001/bgm', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>bgm 관리</button>
-          <p id="pwhite">현재 플레이중인 음악 : 🎶 {artist} - {title}</p>
+        <p id="pwhite">현재 플레이중인 음악 : 🎶 {artist} - {title}</p>
 
-        <div id="logo" onClick={(e) => {window.location.href = "/main"}}>
-            <img src={logo} alt="no" height="80px"/>
+        <div id="logo" onClick={(e) => { window.location.href = "/main" }}>
+          <img src={logo} alt="no" height="80px" />
         </div>
 
         <div id="topbtns">
-            <button onClick={(e) => {window.location.href = "/edit"}}>내 정보 수정</button>
-            <button onClick={(e) => {window.location.href = "/kakao/withdrawal"}}>회원탈퇴</button>
-            <button><a href={kakaologout}>로그아웃</a></button>
-            <button onClick={showModal}>상담챗봇</button>
-            {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
+          <button onClick={(e) => { window.location.href = "/edit" }}>내 정보 수정</button>
+          <button onClick={(e) => { window.location.href = "/kakao/withdrawal" }}>회원탈퇴</button>
+          <button><a href={kakaologout}>로그아웃</a></button>
+          <button onClick={showModal}>상담챗봇</button>
+          {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
         </div>
       </div>
 
-      <BrowserRouter>        
+      <BrowserRouter>
         <Routes>
           <Route path='/' element={<Gate />} />
           <Route path='/google' element={<GoogleLogin />} />
