@@ -13,8 +13,8 @@ function Microsoft(){
         axios.get("http://localhost:3000/callback/microsoft", {params:{"id":response.uniqueId, "email":response.idTokenClaims.preferred_username}})
         .then(function(resp){
             localStorage.setItem("token", JSON.stringify(resp));
-
-            history("/mainpage");
+            document.getElementById("backtop").style.visibility = "visible";
+            history("/main");
         })
         .catch(function(err){
             alert(err);
@@ -25,7 +25,8 @@ function Microsoft(){
         const jwt = localStorage.getItem("token");
 
         if(jwt !== null){
-            history("/mainpage");
+            document.getElementById("backtop").style.visibility = "visible";
+            history("/main");
         }
     }, []);
 
