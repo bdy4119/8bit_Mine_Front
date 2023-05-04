@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 
 import "../main_back.css"
 import ModalBasic from '../chatbot/chatbot';
@@ -13,6 +14,8 @@ function Main(){
     const [modalOpen, setModalOpen] = useState(false);
     const movePage = useNavigate();
 
+    const jwt = localStorage.getItem("token");
+
     const showModal = () => {
         setModalOpen(true);
     };
@@ -25,20 +28,49 @@ function Main(){
         document.getElementById("hover_i").style.visibility = "hidden";
     }
 
+    function Check(){
+        if(jwt === null){
+          window.location.href = "/";
+        }
+        else{
+            const token = jwt.split('"')[3];
+        
+            axios.get("http://localhost:3000/authcheck", {params:{"token":token}})
+            .then(function(resp){
+                if(resp.data === 0){
+                  window.location.href = "/admin";
+                }
+                else if(resp.data === 2){
+                  window.location.href = "/ban";
+                }
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+            
+            axios.get("http://localhost:3000/jwtcheck", {params:{"token":token}})
+            .then(function(resp){
+                if(resp.data === "fail"){
+                    localStorage.removeItem("token");
+                    document.getElementById("backtop").style.visibility = "none";
+                    window.location.href = "/";
+                }
+            })
+            .catch(function(err){
+                alert(err);
+            })
+        }
+      }
+
+    useEffect(() => {
+        Check();
+      }, []);
+
     return (
         <div id="back">
             <div id="topbar">
                 <div id="barbtns">
                     <div id="mainbtn" onClick={(e) => {window.location.href = "/main"}}>MAIN</div>
-                </div>
-                <div id="logo">
-                    <img src={logo} alt="no" height="80px"/>
-                </div>
-                <div id="topbtns">
-                    <button>정보수정</button>
-                    <button>로그아웃</button>
-                    <button onClick={showModal}>상담챗봇</button>
-                    {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
                 </div>
             </div>
             <div id="toolbox">

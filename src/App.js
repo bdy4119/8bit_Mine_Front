@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
+import ModalBasic from './component/chatbot/chatbot';
+import logo from './component/mine/images/logo.png';
 import Gate from './component/login/gate';
 import GoogleLogin from './component/login/googleLogin';
 import MicrosoftLogin from './component/login/microsoftLogin';
@@ -68,12 +70,21 @@ function App() {
   const [artist, setArtist] = useState('');
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const jwt = localStorage.getItem("token");
+
+  const showModal = () => {
+    setModalOpen(true);
+  };
 
   const fetchData = async () => {
     const resp = await axios.get('http://localhost:3000/bgm_list', { params: { "id": "test" } });
     setBgmlist(resp.data);
     console.log(resp);
   }
+
+  const kakaologout = "https://kauth.kakao.com/oauth/logout?client_id=746d748ae3421ccabe20af6703c55dac&logout_redirect_uri=http://localhost:9001/kakao/logout";
 
   function Option(props) {
     return (
@@ -97,6 +108,12 @@ function App() {
 
   useEffect(() => {
     fetchData();
+
+    if (jwt===null){
+      document.getElementById("backtop").style.visibility = "hidden";
+    } else {
+      document.getElementById("backtop").style.visibility = "visible";
+    }
   }, []);
 
   function go() {
@@ -109,31 +126,37 @@ function App() {
 
   return (
     <div id="back">      
-     
-      <button onClick={go}>재생</button>
-      <button onClick={stop}>정지</button>
-      <select onChange={(e)=>{music_change(e.target.value)}}>
-        <option value="">bgm을 선택하세요.</option>
-        {
-          bgmlist.map(function (object, i) {
-            return (
-              <Option obj={object} key={i} cnt={i + 1} />
-            )
-          })
-        }
-      </select>
-      <button onClick={() => window.open('http://localhost:9001/bgm', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>bgm 관리</button>
-        <p id="pwhite">현재 플레이중인 음악 : 🎶 {artist} - {title}</p>
 
-      <BrowserRouter>
-        <Link to="/me">me</Link>&nbsp;&nbsp;
-        <Link to="/card">온라인 명함</Link>&nbsp;&nbsp;
-        
-        <Link to='/i'>I 페이지</Link>&nbsp;&nbsp;
-        <Link to='/gbmain'>방명록</Link>&nbsp;&nbsp;
+      <div id="backtop">
+        <button onClick={go}>재생</button>
+        <button onClick={stop}>정지</button>
+        <select onChange={(e)=>{music_change(e.target.value)}}>
+          <option value="">bgm을 선택하세요.</option>
+          {
+            bgmlist.map(function (object, i) {
+              return (
+                <Option obj={object} key={i} cnt={i + 1} />
+              )
+            })
+          }
+        </select>
+        <button onClick={() => window.open('http://localhost:9001/bgm', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>bgm 관리</button>
+          <p id="pwhite">현재 플레이중인 음악 : 🎶 {artist} - {title}</p>
 
-        <Link to="/Filelist">MY File</Link>&nbsp;&nbsp;
-        
+        <div id="logo" onClick={(e) => {window.location.href = "/main"}}>
+            <img src={logo} alt="no" height="80px"/>
+        </div>
+
+        <div id="topbtns">
+            <button onClick={(e) => {window.location.href = "/edit"}}>내 정보 수정</button>
+            <button onClick={(e) => {window.location.href = "/kakao/withdrawal"}}>회원탈퇴</button>
+            <button><a href={kakaologout}>로그아웃</a></button>
+            <button onClick={showModal}>상담챗봇</button>
+            {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
+        </div>
+      </div>
+
+      <BrowserRouter>        
         <Routes>
           <Route path='/' element={<Gate />} />
           <Route path='/google' element={<GoogleLogin />} />

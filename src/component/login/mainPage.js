@@ -34,7 +34,7 @@ function Main(){
             .then(function(resp){
                 if(resp.data === "fail"){
                     localStorage.removeItem("token");
-
+                    document.getElementById("backtop").style.visibility = "none";
                     history("/");
                 }
             })

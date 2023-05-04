@@ -284,15 +284,6 @@ function Mine_edi(){
                     <div id="cardbtn">CARD</div>
                     <div id="bookbtn">GUEST</div>
                 </div>
-                <div id="logo" onClick={(e) => {window.location.href = "/main"}}>
-                    <img src={logo} alt="no" height="80px"/>
-                </div>
-                <div id="topbtns">
-                    <button>정보수정</button>
-                    <button>로그아웃</button>
-                    <button onClick={showModal}>상담챗봇</button>
-                    {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
-                </div>
             </div>
             <div id="toolbox">
                 <div>

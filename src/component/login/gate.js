@@ -8,8 +8,11 @@ function Gate(){
     useEffect(function(){
         const jwt = localStorage.getItem("token");
 
+        document.getElementById("backtop").style.visibility = "hidden";
+
         if(jwt !== null){
-            history("/mainpage");
+            document.getElementById("backtop").style.visibility = "visible";
+            history("/main");
         }
     }, []);
 

@@ -3,7 +3,6 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 
 import "../mine_back.css"
-import ModalBasic from '../chatbot/chatbot';
 import Fullpage from './mine_full';
 import "./mine.css";
 import bgm from './images/bgm.mp3';
@@ -17,14 +16,9 @@ import cat from './images/cat.png';
 
 function Mine_main(){
 
-    const [modalOpen, setModalOpen] = useState(false);
     const [fullOpen, setfullOpen] = useState(false);
     const [b, setB] = useState('');
     const [a, setA] = useState('');
-
-    const showModal = () => {
-        setModalOpen(true);
-    };
 
     const showFull = () => {
         setfullOpen(true);
@@ -217,15 +211,6 @@ function Mine_main(){
 
                     <div id="cardbtn">CARD</div>
                     <div id="bookbtn">GUEST</div>
-                </div>
-                <div id="logo" onClick={(e) => {window.location.href = "/main"}}>
-                    <img src={logo} alt="no" height="80px"/>
-                </div>
-                <div id="topbtns">
-                    <button>정보수정</button>
-                    <button>로그아웃</button>
-                    <button onClick={showModal}>상담챗봇</button>
-                    {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
                 </div>
             </div>
             <div id="toolbox">
