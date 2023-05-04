@@ -97,7 +97,7 @@ function InformWrite() {
   return(
     <div className="middle">
 
-        <div style={{backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px", fontSize:"20px"}}>
+        <div style={{backgroundColor:"#9CA8F0", marginTop:"70px", height:"600px", width:"900px", fontSize:"20px"}}>
 
           <form name="frm" onSubmit={onSubmit} encType="multipart/form-data">
             <div style={{float:"left", position:"relative", marginLeft:"70px", marginTop:"50px"}}>

@@ -49,7 +49,7 @@ console.log(busiDetail.thumbnail);
   return(
     <div className="middle">
       
-      <div style={{backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px", fontSize:"20px"}}>
+      <div style={{backgroundColor:"#9CA8F0", marginTop:"70px", height:"600px", width:"900px", fontSize:"20px"}}>
                
           <div style={{float:"left", position:"relative", marginLeft:"70px", marginTop:"70px"}}>
               <div>

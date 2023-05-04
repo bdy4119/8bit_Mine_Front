@@ -103,12 +103,12 @@ function CustomUpdate() {
 
   //수정 */
   axios.post("http://localhost:3000/businessUpdate", null,
-                {params:{"seq":seq, "id":param.id, "thumbnail": thumbnail, "name":name, "email":email,
+                {params:{"seq":seq, "id":param.id, "thumbnail": thumbnail, "name":name, "email":param.email,
                           "url":url, "phoneNum":phoneNum, "introduce":introduce}})
          .then(function(resp){
             if(resp.data === "YES") {
               alert('정보가 수정되었습니다.');
-              history(`/informDetail/${param.id}`);
+              history(`/informDetail/${param.email}`);
             } else {
               alert('정보를 수정하지 못했습니다.');
               history('/card');
@@ -134,7 +134,7 @@ function CustomUpdate() {
   return(
     <div className="middle">
 
-        <div style={{backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px", fontSize:"20px"}}>
+        <div style={{backgroundColor:"#9CA8F0", marginTop:"70px", height:"600px", width:"900px", fontSize:"20px"}}>
 
           <form name="frm" onSubmit={onSubmit} encType="multipart/form-data">
             <div style={{float:"left", position:"relative", marginLeft:"70px", marginTop:"50px"}}>
