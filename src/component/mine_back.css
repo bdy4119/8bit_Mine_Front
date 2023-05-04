@@ -75,21 +75,6 @@
   background-color: mediumpurple;
 }
 
-#logo {
-  position: relative;
-  float:left;
-  width: 33.3%;
-  top: 15%;
-}
-
-#topbtns {
-  position: relative;
-  float:left;
-  top: 50%;
-  width: 33.3%;
-  text-align: right;
-}
-
 
 #toolbox {
   position: relative;
