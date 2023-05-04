@@ -20,24 +20,23 @@ function InformDetail() {
 
 
   function busiDetail() {
-    axios.get("http://localhost:3000/businessDetail", {params:{"id": param.id}})
+    axios.get("http://localhost:3000/businessDetail", {params:{"email": param.email}})
          .then(function(resp){
+            console.log(resp.data);
             setbusinessDetail(resp.data);
-
-
             setLoading(true);   //렌더링 시작해주기
          })
          .catch(function(err){
             alert("정보를 불러오지 못했습니다.");
          })
   }
-
+console.log(busiDetail.thumbnail);
 
 
   useEffect(function(){
-    busiDetail(param.id);
+    busiDetail(param.email);
 
-  },[param.id]);
+  },[param.email]);
 
 
 
@@ -47,18 +46,14 @@ function InformDetail() {
   }
 
 
-  
-  console.log(businessDetail.thumbnail);
-
   return(
     <div className="middle">
       
-      <div style={{backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px", fontSize:"20px"}}>
+      <div style={{backgroundColor:"#9CA8F0", marginTop:"70px", height:"600px", width:"900px", fontSize:"20px"}}>
                
-          <div style={{float:"left", position:"relative", marginLeft:"70px", marginTop:"50px"}}>
+          <div style={{float:"left", position:"relative", marginLeft:"70px", marginTop:"70px"}}>
               <div>
                 <form name="frm" encType="multipart/form-data">
-                        {/* <img src={imgFile} alt="" style={{width:"200px"}} /> */}
                         
                   <img src={`/Business-img/${businessDetail.thumbnail}`} alt="프로필 이미지" style={{width:"200px"}} />    
                   <br/>
@@ -66,7 +61,7 @@ function InformDetail() {
               </div>
           </div>
 
-          <div style={{ marginLeft:"400px", marginTop:"50px"}}>
+          <div style={{ marginLeft:"400px", marginTop:"70px"}}>
             <div style={{backgroundColor:"white", textAlign:"center", padding:"5px", width:"450px"}}>
               <h3>소개글</h3>
               <div>{businessDetail.introduce}</div>
@@ -92,9 +87,9 @@ function InformDetail() {
           </div>
         
           <div className="middle" style={{marginTop:"100px"}}>
-            <Link to={`/informUpdate/${businessDetail.id}`}>
+            <Link to={`/informUpdate/${param.email}`}>
               <button style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
-                정보수정
+                명함수정
               </button>
             </Link>
             &nbsp;&nbsp;&nbsp;&nbsp;

@@ -7,20 +7,30 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 import "./card.css";
 
+
 function Inform() {
-  let history = useNavigate();
 
   const[businessList, setBusinessList] = useState([]);
-  const[thumbnail, setThumbnail] = useState();
-
+  const [userEmail, setUserEmail] = useState("");
+  const jwt = localStorage.getItem("token");
   function business() {
+
+    const token = jwt.split('"')[3];
+    axios.get("http://localhost:3000/show", {params:{"token":token}})
+            .then(function(resp){
+                setUserEmail(resp.data.email);
+            })
+            .catch(function(err){
+                alert(err);
+            })
+
     axios.get("http://localhost:3000/businesscard", {params:{}})
          .then(function(resp){
           //  console.log(resp.data.list);
           setBusinessList(resp.data.list);
          })
          .catch(function(err){
-            alert("정보를 불러오지 못했습니다.");
+            alert("정보를 추가해주세요");
          })
   }
 
@@ -30,13 +40,28 @@ function Inform() {
   },[]);
   
 
+  const renderAverage = () => {
+    if(businessList.length === 0) {
+       return(
+           <Link to={`/informWrite/${userEmail}`}>
+             <button style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
+               명함추가
+             </button>
+           </Link>
+       );
+    }
+};
+ 
   return(
     <div className="middle">
+      <div style={{position: "relative", backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px"}} /*명함틀*/ />
+      <div style={{position: "relative", marginLeft:"-550px", marginBottom:"0px", marginTop:"200px"}}>
+        {renderAverage()}
+      </div>
       {//글정보
           businessList.map(function(business, idx){
             return(
               <div className="middle" key={{idx}}>
-                <div style={{position: "relative", backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px"}} /*명함틀*/ />
                 <div style={{float:"left", position:"relative", marginLeft:"-800px", marginTop:"20px"}}>
                  
                     <form name="frm" encType="multipart/form-data">
@@ -48,7 +73,7 @@ function Inform() {
                 <div style={{position: "relative", marginTop:"150px", marginLeft:"-200px", fontSize:"20px"}}>
 
                   <div style={{ float:"left", marginLeft:"300px", marginTop:"0px"}}>
-                      <div value={business.introduce} style={{backgroundColor:"white", textAlign:"center", padding:"10px"}}>
+                      <div style={{backgroundColor:"white", textAlign:"center", padding:"10px", width:"400px"}}>
                         <h3>소개글</h3>
                         <div>{business.introduce}</div>
                       </div>
@@ -65,7 +90,7 @@ function Inform() {
                   </div>
                   
                   <div style={{marginLeft:"250px", marginBottom:"0px", marginTop:"350px"}}>
-                    <Link to={`/informDetail/${business.id}`}>
+                    <Link to={`/informDetail/${userEmail}`}>
                       <button style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
                         상세보기
                       </button>

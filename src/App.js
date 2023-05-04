@@ -35,6 +35,7 @@ import InformUpdate from './component/BusinessCard/InformUpdate';
 import Back from './component/BusinessCard/Back';
 import BackUpdate from './component/BusinessCard/BackUpdate';
 import InformDetail from './component/BusinessCard/InformDetail';
+import InformWrite from './component/BusinessCard/InformWrite';
 import BackWrite from './component/BusinessCard/BackWrite';
 
 import Imain from "./component/I/Imain";
@@ -205,9 +206,9 @@ function App() {
 
           <Route path="/card" element={<Card></Card>}/>
 
-          <Route path="/informDetail/:id" element={<InformDetail/>}/>
-          <Route path="/informDetail/:id/:imgFile" element={<InformDetail/>}/>
-          <Route path="/informUpdate/:id" element={<InformUpdate/>}/>
+          <Route path="/informDetail/:email" element={<InformDetail/>}/>
+          <Route path="/informUpdate/:email" element={<InformUpdate/>}/>
+          <Route path="/informWrite/:email" element={<InformWrite/>}/>
           
           <Route path="/back/:id" element={<Back/>}/>
           <Route path="/backUpdate/:seq" element={<BackUpdate/>}/>

@@ -73,7 +73,7 @@ function BackOrder() {
 
   return(
     <div className="middle">
-      <div style={{backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px"}}>
+      <div style={{backgroundColor:"#9CA8F0", marginTop:"70px", height:"600px", width:"900px"}}>
         <div style={{marginLeft:"320px", marginTop:"100px"}}>
           <div>
             <h3>

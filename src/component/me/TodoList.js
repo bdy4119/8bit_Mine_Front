@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import Pagination from 'react-js-pagination';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import Session from "react-session-api";
+import '../main_back.css';
 
 function TodoList() {
   let history = useNavigate();
@@ -151,7 +151,7 @@ function TodoList() {
   return(
     <div>
       <div style={{border:"1px solid black", textAlign:"center"}}>
-      <table border="1">
+      <table border="1" id="backwhite">
         <colgroup>
           <col width='70'/><col width='150'/><col width='450'/><col width='50'/><col width='50'/>
           </colgroup>
