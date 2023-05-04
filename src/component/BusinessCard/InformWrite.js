@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import "./card.css";
 
-function CustomUpdate() {
+function InformWrite() {
   let history = useNavigate();
   let param = useParams();
 
@@ -22,7 +22,7 @@ function CustomUpdate() {
   const[thumbnail, setThumbnail] = useState('');
 
 
-  const [imgFile, setImgFile] = useState('');
+  const [imgFile, setImgFile] = useState(`/Business-img/나에대해 알아보기.png`);
   const imgRef = useRef();  //useRef.current -> useRef는 무조건 current를 통해서 감
 
 
@@ -32,38 +32,14 @@ function CustomUpdate() {
     const reader = new FileReader();  // FileReader API
     reader.readAsDataURL(file);
     reader.onloadend = () => {
-      //console.log(imgRef.current.files[0].name);
       setThumbnail(imgRef.current.files[0].name);
       setImgFile(reader.result);
     }
   }
 
-
-  //시퀀스,id로 불러올 수 있는 함수 넣기
-  function busiDetail(id) {
-    axios.get("http://localhost:3000/businessDetail", {params:{"email": param.email}})
-    .then(function(resp){    
-     // console.log(resp.data.)
-      setSeq(resp.data.seq);
-      setIntroduce(resp.data.introduce);
-      setName(resp.data.name);
-      setPhoneNum(resp.data.phoneNum);
-      setEmail(resp.data.email);
-      setUrl(resp.data.url);
-      setImgFile('/Business-img/' + resp.data.thumbnail); 
-      setThumbnail(resp.data.thumbnail);  // 보낼 수정 데이터
-
-      setLoading(true);   //렌더링 시작해주기
-    })
-    .catch(function(err){
-      alert("정보를 불러오지 못했습니다.");
-    })
-  }
-
-
   function onSubmit(e) {
     e.preventDefault();
-   
+
    let formData = new FormData();
    if(document.frm.uploadFile.files[0]) {
      formData.append("uploadFile", document.frm.uploadFile.files[0]);
@@ -74,7 +50,7 @@ function CustomUpdate() {
      formData.append("email", document.frm.email.value);
      formData.append("url", document.frm.url.value);
      formData.append("seq", seq);
-     formData.append("id", param.id);
+     formData.append("id", param.email);
    } else {
     formData.append("uploadFile", thumbnail);
     formData.append("thumbnail", thumbnail);
@@ -84,7 +60,7 @@ function CustomUpdate() {
     formData.append("email", document.frm.email.value);
     formData.append("url", document.frm.url.value);
     formData.append("seq", seq);
-    formData.append("id", param.id);
+    formData.append("id", param.email);
    }
 
   // console.log(document.frm.uploadFile.files[0].name);
@@ -100,17 +76,15 @@ function CustomUpdate() {
           // alert(err);
         })
 
-
-  //수정 */
-  axios.post("http://localhost:3000/businessUpdate", null,
-                {params:{"seq":seq, "id":param.id, "thumbnail": thumbnail, "name":name, "email":param.email,
+  axios.post("http://localhost:3000/businessWrite", null,
+                {params:{"id":email, "thumbnail": thumbnail, "name":name, "email":email,
                           "url":url, "phoneNum":phoneNum, "introduce":introduce}})
          .then(function(resp){
             if(resp.data === "YES") {
-              alert('정보가 수정되었습니다.');
-              history(`/informDetail/${param.email}`);
+              alert('정보가 추가되었습니다.');
+              history(`/informDetail/${email}`);
             } else {
-              alert('정보를 수정하지 못했습니다.');
+              alert('정보를 추가하지 못했습니다.');
               history('/card');
             }
          })
@@ -118,17 +92,6 @@ function CustomUpdate() {
             alert(err);
          })
  }
-  
-
-  useEffect(function(){
-    busiDetail(param.id);
-  },[param.id]);
-
-
-  //딜레이 한번 주기
-  if(loading === false) {
-    return <div>Loading...</div>
-  }
 
 
   return(
@@ -143,7 +106,6 @@ function CustomUpdate() {
                   <br/>
                   <input type="file" name='uploadFile' onChange={imageLoad} ref={imgRef} />
                   <br/>
-                  {/* <input type="submit" value="file upload"/>         */}
               </div>
             </div>
 
@@ -176,7 +138,7 @@ function CustomUpdate() {
 
           <div className="middle" style={{clear:"left", paddingTop:"100px"}}>
             <button type="submit" style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
-              수정완료
+              추가완료
             </button>
           </div>
           
@@ -185,4 +147,4 @@ function CustomUpdate() {
     </div>
   );
 }
-export default CustomUpdate;
+export default InformWrite;

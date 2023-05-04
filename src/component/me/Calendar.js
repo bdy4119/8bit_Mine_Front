@@ -126,7 +126,7 @@ export const Calendar = () => {
 
     return(
         <div>
-            <div>
+            <div id="backwhite">
                 <RenderHeader currentYear={currentYear} currentMonth={currentMonth} preMonth={preMonth} nextMonth={nextMonth} preYear={preYear} nextYear={nextYear} />
                 <br/>
 

@@ -86,7 +86,7 @@ function Diary() {
   return(
     <div>
       <div style={{border:"1px solid black", textAlign:"center"}}>
-      <table border="1">
+      <table border="1" id="backwhite">
         <colgroup>
           <col width='70'/><col width='150'/><col width='450'/><col width='50'/><col width='50'/>
           </colgroup>

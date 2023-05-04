@@ -45,7 +45,7 @@ function BackOrder() {
 
   return(
     <div>
-      <div style={{backgroundColor:"#9CA8F0", marginTop:"150px", height:"450px", width:"900px", overflow:"auto"}}>
+      <div style={{backgroundColor:"#9CA8F0", marginTop:"70px", height:"450px", width:"900px", overflow:"auto"}}>
         {
           businessbackList.map(function(back, idx) {
             //짝수 오른쪽 정렬
