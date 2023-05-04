@@ -6,6 +6,27 @@ import "../main_back.css"
 function I_update() {
 
     let params = useParams();
+    const movePage = useNavigate();
+    const jwt = localStorage.getItem("token");
+    const [email, setEmail] = useState('');
+
+    function getUser() {
+        if (jwt === null) {
+            movePage("/");
+        }
+        else {
+            const token = jwt.split('"')[3];
+
+            axios.get("http://localhost:3000/show", { params: { "token": token } })
+                .then(function (resp) {
+                    setEmail(resp.data.email);
+                })
+                .catch(function (err) {
+                    alert(err);
+                })
+        }
+    }
+
     const [classi, setClassi] = useState('');
 
     const [ans1, setAns1] = useState('');
@@ -25,7 +46,7 @@ function I_update() {
 
     // 데이터 불러오기
     const detailData = async () => {
-        const resp = await axios.get("http://localhost:3000/i_detail", { params: { "id": params.id, "classify": params.classify } })
+        const resp = await axios.get("http://localhost:3000/i_detail", { params: { "id": email, "classify": params.classify } })
 
         setClassi(resp.data[0].classify);
 
@@ -43,24 +64,24 @@ function I_update() {
     }
 
     useEffect(() => {
-        detailData()
-    },[]);
+        detailData();
+        getUser();
+    }, []);
 
     function i_upd() {
-        axios.get('http://localhost:3000/i_del', { params: { "id": params.id, "classify": params.classify } })
+        axios.get('http://localhost:3000/i_del', { params: { "id": email, "classify": params.classify } })
             .then(function (resp) {
-                
+
                 for (let i = 0; i < ans.length; i++) {
-                    axios.get('http://localhost:3000/i_add', { params: { "id": "test", "classify": classi, "item": ans[i], "detail": det[i], "ref": i } })
+                    axios.get('http://localhost:3000/i_add', { params: { "id": email, "classify": classi, "item": ans[i], "detail": det[i], "ref": i } })
                         .then(function () {
-                            alert(det[i]);
                         })
                         .catch(function (err) {
                             alert(err);
                         })
                 }
 
-                axios.get('http://localhost:3000/i_add_classi', { params: { "id": "test", "classify": classi } })
+                axios.get('http://localhost:3000/i_add_classi', { params: { "id": email, "classify": classi } })
                     .then(function () {
                         alert(classi + " 항목이 수정되었습니다.");
                     })

@@ -7,6 +7,25 @@ function Qna10() {
 
     let params = useParams();
     const movePage = useNavigate();
+    const jwt = localStorage.getItem("token");
+    const [email, setEmail] = useState('');
+
+    function getUser() {
+        if (jwt === null) {
+            movePage("/");
+        }
+        else {
+            const token = jwt.split('"')[3];
+
+            axios.get("http://localhost:3000/show", { params: { "token": token } })
+                .then(function (resp) {
+                    setEmail(resp.data.email);
+                })
+                .catch(function (err) {
+                    alert(err);
+                })
+        }
+    }
 
     const [ans1, setAns1] = useState('');
     const [ans2, setAns2] = useState('');
@@ -20,7 +39,7 @@ function Qna10() {
     const [ans10, setAns10] = useState('');
 
     const detailData = async () => {
-        const resp = await axios.get("http://localhost:3000/i_qna", { params: { "id": params.id} });
+        const resp = await axios.get("http://localhost:3000/i_qna", { params: { "id": email} });
         setAns1(resp.data.q1);
         setAns2(resp.data.q2);
         setAns3(resp.data.q3);
@@ -34,11 +53,12 @@ function Qna10() {
       }
     
       useEffect(() => {
-        detailData()
+        detailData();
+        getUser();
       }, []);
 
     function i_add_qna() {
-        axios.get('http://localhost:3000/i_del_qna', { params: { "id": params.id } })
+        axios.get('http://localhost:3000/i_del_qna', { params: { "id": email } })
             .then(function () {
                 axios.get('http://localhost:3000/i_add_qna',
                     {

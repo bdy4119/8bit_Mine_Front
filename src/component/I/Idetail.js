@@ -7,18 +7,39 @@ function I_detail() {
 
   let params = useParams();
   const movePage = useNavigate();
+  const jwt = localStorage.getItem("token");
+  const [email, setEmail] = useState('');
+
+  function getUser() {
+    if (jwt === null) {
+      movePage("/");
+    }
+    else {
+      const token = jwt.split('"')[3];
+
+      axios.get("http://localhost:3000/show", { params: { "token": token } })
+        .then(function (resp) {
+          setEmail(resp.data.email);
+        })
+        .catch(function (err) {
+          alert(err);
+        })
+    }
+  }
+  
   const [detList, setDetList] = useState([]);
 
   // 데이터 불러오기
   const detailData = async () => {
-    const resp = await axios.get("http://localhost:3000/i_detail", { params: { "id": params.id, "classify": params.classify } });
+    const resp = await axios.get("http://localhost:3000/i_detail", { params: { "id": email, "classify": params.classify } });
 
     console.log(resp);
     setDetList(resp.data);
   }
 
   useEffect(() => {
-    detailData()
+    detailData();
+    getUser();
   }, []);
 
   // 데이터 테이블에 담기
@@ -36,7 +57,7 @@ function I_detail() {
 
   // 삭제
   function i_del() {
-    axios.get('http://localhost:3000/i_del', { params: { "id": params.id, "classify": params.classify } })
+    axios.get('http://localhost:3000/i_del', { params: { "id": email, "classify": params.classify } })
       .then(function (resp) {
         if (resp.data === 'i_del_OK') {
           alert("'" + params.classify + "'" + " 항목이 삭제되었습니다.");
@@ -71,7 +92,7 @@ function I_detail() {
           }
         </tbody>
       </table>
-      <Link to={`/i_update/${params.id}/${params.classify}`}>
+      <Link to={`/i_update/${params.classify}`}>
         <button>수정</button>
       </Link>
       <button onClick={i_del}>삭제</button>

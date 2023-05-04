@@ -59,6 +59,8 @@ import FileLobby from "./component/My/FileLobby";
 import UpdateFile from "./component/My/UpdateFile";
 import FileUpload from "./component/My/FileUpload";
 
+import ModalBasic from './component/chatbot/chatbot';
+
 function App() {
 
   const [state, setState] = useState(false);
@@ -67,6 +69,7 @@ function App() {
   const [artist, setArtist] = useState('');
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
+
 
   const fetchData = async () => {
     const resp = await axios.get('http://localhost:3000/bgm_list', { params: { "id": "test" } });
@@ -83,15 +86,15 @@ function App() {
   function music_change(seq) {
     setSeq(seq);
 
-    axios.get('http://localhost:3000/bgm_detail', {params : {"seq" : seq}})
-    .then(function(resp){
-      setArtist(resp.data.artist);
-      setTitle(resp.data.title);
-      setUrl(resp.data.url);
-    })
-    .catch(function(err){
-      alert(err);
-    })
+    axios.get('http://localhost:3000/bgm_detail', { params: { "seq": seq } })
+      .then(function (resp) {
+        setArtist(resp.data.artist);
+        setTitle(resp.data.title);
+        setUrl(resp.data.url);
+      })
+      .catch(function (err) {
+        alert(err);
+      })
   }
 
   useEffect(() => {
@@ -106,33 +109,61 @@ function App() {
     setState(false);
   }
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const showModal = () => {
+    setModalOpen(true);
+  };
+
+
+  useEffect(function () {
+    const jwt = localStorage.getItem("token");
+
+    if (jwt == null) {
+      document.getElementById("logShow").style.display = "none";
+      document.getElementById("brLink").style.display = "none";
+    } else {
+      alert('로그인되었습니다.');
+      document.getElementById("logShow").style.display = "visible";
+      document.getElementById("brLink").style.display = "visible";
+    }
+
+  }, []);
+
+
   return (
-    <div id="back">      
-     
-      <button onClick={go}>재생</button>
-      <button onClick={stop}>정지</button>
-      <select onChange={(e)=>{music_change(e.target.value)}}>
-        <option value="">bgm을 선택하세요.</option>
-        {
-          bgmlist.map(function (object, i) {
-            return (
-              <Option obj={object} key={i} cnt={i + 1} />
-            )
-          })
-        }
-      </select>
-      <button onClick={() => window.open('http://localhost:9001/bgm', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>bgm 관리</button>
+    <div id="back">
+      <div id="logShow">
+        <button onClick={go}>재생</button>
+        <button onClick={stop}>정지</button>
+        <select onChange={(e) => { music_change(e.target.value) }}>
+          <option value="">bgm을 선택하세요.</option>
+          {
+            bgmlist.map(function (object, i) {
+              return (
+                <Option obj={object} key={i} cnt={i + 1} />
+              )
+            })
+          }
+        </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button id="userUpd">정보수정</button>
+        <button id="logout">로그아웃</button>
+        <button onClick={showModal}>상담챗봇</button>
+        {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
+
+        <button onClick={() => window.open('http://localhost:9001/bgm', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>bgm 관리</button>
         <p id="pwhite">현재 플레이중인 음악 : 🎶 {artist} - {title}</p>
+      </div>
 
       <BrowserRouter>
-        <Link to="/me">me</Link>&nbsp;&nbsp;
-        <Link to="/card">온라인 명함</Link>&nbsp;&nbsp;
-        
-        <Link to='/i'>I 페이지</Link>&nbsp;&nbsp;
-        <Link to='/gbmain'>방명록</Link>&nbsp;&nbsp;
+        <div id="brLink">
+          <Link to="/me">me</Link>&nbsp;&nbsp;
+          <Link to="/card">온라인 명함</Link>&nbsp;&nbsp;
 
-        <Link to="/Filelist">MY File</Link>&nbsp;&nbsp;
-        
+          <Link to='/i'>I 페이지</Link>&nbsp;&nbsp;
+          <Link to='/gbmain'>방명록</Link>&nbsp;&nbsp;
+
+          <Link to="/Filelist">MY File</Link>&nbsp;&nbsp;
+        </div>
         <Routes>
           <Route path='/' element={<Gate />} />
           <Route path='/google' element={<GoogleLogin />} />
@@ -150,14 +181,14 @@ function App() {
 
           <Route path="/i" element={<Imain />} />
           <Route path="/i_add" element={<Iadd />} />
-          <Route path="/i_detail/:id/:classify" exact element={<Idetail />} />
-          <Route path="/i_update/:id/:classify" exact element={<Iupdate />} />
+          <Route path="/i_detail/:classify" exact element={<Idetail />} />
+          <Route path="/i_update/:classify" exact element={<Iupdate />} />
           <Route path="/place" element={<Place />} />
           <Route path="/book" element={<Book />} />
           <Route path="/movie" element={<Movie />} />
           <Route path="/drama" element={<Drama />} />
 
-          <Route path="/qna10/:id" exact element={<Qna10 />} />
+          <Route path="/qna10" exact element={<Qna10 />} />
 
           <Route path="/bgm" element={<Bgm />} />
           <Route path="/bgmadd" element={<Bgmadd />} />
@@ -169,43 +200,43 @@ function App() {
 
 
           {/* me ,명함 */}
-          <Route path="/me" element={<Me></Me>}/>
-          
-          <Route path="/diaryWrite/:rdate" element={<DiaryWrite/>}/>
-          <Route path="/todoWrite/:rdate" element={<TodoWrite/>}/>
-          
-          <Route path="/me/:rdate" element={<Me/>}/> 
-          <Route path="/me/:year/:month" element={<Me/>}/> 
+          <Route path="/me" element={<Me></Me>} />
 
-          <Route path="/diaryUpdate/:seq/:title/:content/:rdate" element={<DiaryUpdate/>}/>
-          <Route path="/todoUpdate/:seq/:title/:content/:rdate" element={<TodoUpdate/>}/>
+          <Route path="/diaryWrite/:rdate" element={<DiaryWrite />} />
+          <Route path="/todoWrite/:rdate" element={<TodoWrite />} />
 
-          <Route path="/card" element={<Card></Card>}/>
+          <Route path="/me/:rdate" element={<Me />} />
+          <Route path="/me/:year/:month" element={<Me />} />
 
-          <Route path="/informDetail/:id" element={<InformDetail/>}/>
-          <Route path="/informDetail/:id/:imgFile" element={<InformDetail/>}/>
-          <Route path="/informUpdate/:id" element={<InformUpdate/>}/>
-          
-          <Route path="/back/:id" element={<Back/>}/>
-          <Route path="/backUpdate/:seq" element={<BackUpdate/>}/>
-          <Route path="/backWrite/:id" element={<BackWrite/>}/>
+          <Route path="/diaryUpdate/:seq/:title/:content/:rdate" element={<DiaryUpdate />} />
+          <Route path="/todoUpdate/:seq/:title/:content/:rdate" element={<TodoUpdate />} />
 
-          <Route path="/main" element={ <Main /> } />
-          <Route path="/mine" element={ <Mine /> } />
-          <Route path="/mine_full" element={ <Fullmine /> } />
-          <Route path="/mine_edi/:pos" element={ <MineEdi /> } />
-          <Route path="/chatbot" element={ <Chatbot /> } />
-          
-        {<Route path="/FileLobby" element={ <FileLobby /> } />}
-        {<Route path="/Filelist" element={ <FileListSample /> } />}
-        {<Route path="/Filelist/:choice/:search" element={ <FileListSample /> } />}
-        {<Route path="/FileUpload/:project" exact element={ <FileUpload /> } />}
-        {<Route path="/FileUpload/:certificate" exact element={ <FileUpload /> } />}
-        {<Route path="/FileUpload/:portfolio" exact element={ <FileUpload /> } />}
-        {<Route path="/FileUpload/:picture" exact element={ <FileUpload /> } />}
-        {<Route path="/UpdateFile/:seq" exact element={ <UpdateFile /> } />}
-        {<Route path="/FileLobby/:mfuserId" exact element={ <updateFile /> } />}
-        {<Route path="/FileUpload/:mfuserId" exact element={ <updateFile /> } />}
+          <Route path="/card" element={<Card></Card>} />
+
+          <Route path="/informDetail/:id" element={<InformDetail />} />
+          <Route path="/informDetail/:id/:imgFile" element={<InformDetail />} />
+          <Route path="/informUpdate/:id" element={<InformUpdate />} />
+
+          <Route path="/back/:id" element={<Back />} />
+          <Route path="/backUpdate/:seq" element={<BackUpdate />} />
+          <Route path="/backWrite/:id" element={<BackWrite />} />
+
+          <Route path="/main" element={<Main />} />
+          <Route path="/mine" element={<Mine />} />
+          <Route path="/mine_full" element={<Fullmine />} />
+          <Route path="/mine_edi/:pos" element={<MineEdi />} />
+          <Route path="/chatbot" element={<Chatbot />} />
+
+          {<Route path="/FileLobby" element={<FileLobby />} />}
+          {<Route path="/Filelist" element={<FileListSample />} />}
+          {<Route path="/Filelist/:choice/:search" element={<FileListSample />} />}
+          {<Route path="/FileUpload/:project" exact element={<FileUpload />} />}
+          {<Route path="/FileUpload/:certificate" exact element={<FileUpload />} />}
+          {<Route path="/FileUpload/:portfolio" exact element={<FileUpload />} />}
+          {<Route path="/FileUpload/:picture" exact element={<FileUpload />} />}
+          {<Route path="/UpdateFile/:seq" exact element={<UpdateFile />} />}
+          {<Route path="/FileLobby/:mfuserId" exact element={<updateFile />} />}
+          {<Route path="/FileUpload/:mfuserId" exact element={<updateFile />} />}
         </Routes>
 
       </BrowserRouter>

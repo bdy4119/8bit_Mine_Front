@@ -1,15 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../main_back.css"
 
 function I_main() {
 
+  const history = useNavigate();
+  const jwt = localStorage.getItem("token");
+  const [email, setEmail] = useState('');
+  function getUser() {
+    if (jwt === null) {
+      history("/");
+    }
+    else {
+      const token = jwt.split('"')[3];
+
+      axios.get("http://localhost:3000/show", { params: { "token": token } })
+        .then(function (resp) {
+          setEmail(resp.data.email);
+        })
+        .catch(function (err) {
+          alert(err);
+        })
+    }
+  }
+
   const [classiList, setClassiList] = useState([]);
   const [wise, setWise] = useState('');
+  
 
   const fetchData = async () => {
-    const resp = await axios.get('http://localhost:3000/i_classi_list', { params: { "id": "test" } });
+    const resp = await axios.get('http://localhost:3000/i_classi_list', { params: { "id": email } });
 
     console.log(resp.data);
     setClassiList(resp.data);
@@ -18,7 +39,7 @@ function I_main() {
   function TableRow(props) {
     return (
       <tr>
-        <td><Link to={`/i_detail/${props.obj.id}/${props.obj.classify}`}>{props.obj.classify}</Link></td>
+        <td><Link to={`/i_detail/${props.obj.classify}`}>{props.obj.classify}</Link></td>
       </tr>
     );
   }
@@ -29,9 +50,12 @@ function I_main() {
     setWise(resp.data[1].respond);
   }
 
+
+
   useEffect(() => {
     fetchData();
     wiseData();
+    getUser();
   }, []);
 
 
@@ -56,7 +80,7 @@ function I_main() {
       </table>
       <Link to="/i_add">분류 추가</Link>
       <br />
-      <Link to="/qna10/test">10문10답</Link>
+      <Link to="/qna10">10문10답</Link>
       <br /><br />
       {wise}
       <br />

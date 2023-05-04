@@ -1,12 +1,34 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Bgmadd() {
 
     const movePage = useNavigate();
+    const jwt = localStorage.getItem("token");
+    const [email, setEmail] = useState('');
 
-    const [id, setId] = useState('');
+    function getUser() {
+        if (jwt === null) {
+            movePage("/");
+        }
+        else {
+            const token = jwt.split('"')[3];
+
+            axios.get("http://localhost:3000/show", { params: { "token": token } })
+                .then(function (resp) {
+                    setEmail(resp.data.email);
+                })
+                .catch(function (err) {
+                    alert(err);
+                })
+        }
+    }
+
+    useEffect(()=>{
+        getUser();
+    },[]);
+
     const [artist, setArtist] = useState('');
     const [title, setTitle] = useState('');
     const [url, setUrl] = useState('');
@@ -14,7 +36,7 @@ function Bgmadd() {
     const [list, setList] = useState([]);
 
     function bgm_add() {
-        axios.get('http://localhost:3000/bgm_add', { params: { "id": "test", "artist": artist, "title": title, "url": url } })
+        axios.get('http://localhost:3000/bgm_add', { params: { "id": email, "artist": artist, "title": title, "url": url } })
             .then(function (resp) {
                 if (resp.data === "bgm_add_OK") {
                     alert('배경음악이 추가되었습니다.');
