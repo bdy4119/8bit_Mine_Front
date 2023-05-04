@@ -6,10 +6,12 @@ import logo from './images/logo.png';
 import mine_icon from './images/mine_icon.png';
 import profile_img from './images/profileimg.png';
 import "./main.css";
+import { useNavigate } from "react-router-dom";
 
 function Main(){
 
     const [modalOpen, setModalOpen] = useState(false);
+    const movePage = useNavigate();
 
     const showModal = () => {
         setModalOpen(true);
@@ -41,7 +43,7 @@ function Main(){
             </div>
             <div id="toolbox">
                 <div>
-                    <div id="i_area" onMouseOver={hover_over} onMouseOut={hover_out}>
+                    <div id="i_area" onMouseOver={hover_over} onMouseOut={hover_out} onClick={()=>{movePage('/i')}}>
                         <div>I</div>
                         <div id="profile"><img src={profile_img} alt="no"></img></div>
                         <div id="protext">안녕 여기는 I</div>
@@ -52,13 +54,13 @@ function Main(){
                             프로필 작성, N문 N답
                         </div>
                     </div>
-                    <div id="me_area">
+                    <div id="me_area" onClick={()=>{movePage('/me')}}>
                         ME
                     </div>
-                    <div id="card_area">
+                    <div id="card_area" onClick={()=>{movePage('/card')}}>
                         ONLINE CRAD
                     </div>
-                    <div id="my_area">
+                    <div id="my_area" onClick={()=>{movePage('/Filelist')}}>
                         MY
                     </div>
                     <div id="mine_area" onClick={(e) => {window.location.href = "/mine"}}>
@@ -67,7 +69,7 @@ function Main(){
                             <img src={mine_icon} alt="no" width="200px"></img>
                         </div>
                     </div>
-                    <div id="book_area">
+                    <div id="book_area" onClick={()=>{movePage('/gbmain')}}>
                         GUEST BOOK
                     </div>
                 </div>

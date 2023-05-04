@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
+import "./App.css";
 
 import Gate from './component/login/gate';
 import GoogleLogin from './component/login/googleLogin';
@@ -106,7 +107,7 @@ function App() {
   }
 
   return (
-    <div>      
+    <div id="back">      
      
       <button onClick={go}>재생</button>
       <button onClick={stop}>정지</button>
@@ -121,7 +122,7 @@ function App() {
         }
       </select>
       <button onClick={() => window.open('http://localhost:9001/bgm', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>bgm 관리</button>
-        <p>현재 플레이중인 음악 : 🎶 {artist} - {title}</p>
+        <p id="pwhite">현재 플레이중인 음악 : 🎶 {artist} - {title}</p>
 
       <BrowserRouter>
         <Link to="/me">me</Link>&nbsp;&nbsp;

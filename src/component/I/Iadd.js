@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../main_back.css"
 
 function I_add() {
 
@@ -45,7 +46,7 @@ function I_add() {
   }
 
   return (
-    <div>
+    <div id="backwhite">
       <table border="1">
         <colgroup>
           <col width="200px" /><col width="200px" />

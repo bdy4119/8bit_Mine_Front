@@ -4,6 +4,8 @@ import axios from "axios";
 import { ReactMediaRecorder } from "react-media-recorder";
 import { useNavigate } from "react-router-dom";
 
+import "../main_back.css"
+
 function Gbadd() {
 
   const [checkVal, setCheckVal] = useState(false);
@@ -45,7 +47,7 @@ function Gbadd() {
   function VoiceComm() {
     if (checkVal === true) {
       return (
-        <div style={{ marginLeft: "20px" }}>
+        <div style={{ marginLeft: "20px", backgroundColor:"white"}}>
 
           <br />
           <ReactMediaRecorder
@@ -102,7 +104,7 @@ function Gbadd() {
 
 
   return (
-    <div>
+    <div id="backwhite">
       <h2>방명록 작성</h2>
       <textarea value={comm} onChange={(e) => setComm(e.target.value)}></textarea><br />
       <input type="checkbox" onChange={changeVal} value={checkVal} /> 음성방명록 여부<br />

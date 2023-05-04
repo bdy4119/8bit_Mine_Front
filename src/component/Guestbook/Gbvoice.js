@@ -1,9 +1,10 @@
 import { ReactMediaRecorder } from "react-media-recorder";
+import "../main_back.css"
 
 function Gbvoice() {
 
     return (
-        <div>
+        <div id="backwhite">
             <ReactMediaRecorder
                 audio
                 render={({ status, startRecording, stopRecording, mediaBlobUrl }) => (
