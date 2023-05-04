@@ -57,7 +57,7 @@ function DiaryWrite() {
   return(
     <div>
       <h1>일지 추가</h1>
-      <table border='1px'>
+      <table border='1px' id="backwhite">
         <colgroup>
           <col width="100px"/>
           <col width="500px"/>

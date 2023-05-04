@@ -47,7 +47,7 @@ function TodoUpdate() {
       <h1>Todo 수정</h1>
       <hr/>
 
-      <table border='1px'>
+      <table border='1px' id="backwhite">
         <colgroup>
           <col width="100px"/>
           <col width="500px"/>
