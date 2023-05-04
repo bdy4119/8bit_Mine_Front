@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../main_back.css"
+
 function Gbmain() {
 
     const [gblist, setGblist] = useState([]);
@@ -78,7 +80,7 @@ function Gbmain() {
     }, []);
 
     return (
-        <div>
+        <div id="backwhite">
             <h3>방명록 main</h3>
 
             <p>[1] Mine 주인한테 보이는 방명록들(타인이 나에게 쓴)</p>

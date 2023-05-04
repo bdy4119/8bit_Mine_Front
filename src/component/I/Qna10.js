@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-
+import "../main_back.css"
 
 function Qna10() {
 
@@ -68,8 +68,8 @@ function Qna10() {
     }
 
     return (
-        <div>
-            <table border="1" style={{float:"left"}}>
+        <div id="backwhite">
+            <table border="1" style={{float:"left", backgroundColor:"white"}}>
                 <colgroup>
                     <col width="50px" /><col width="500px" />
                 </colgroup>

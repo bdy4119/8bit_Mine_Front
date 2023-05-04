@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import "../main_back.css"
 
 function I_main() {
 
@@ -35,7 +36,7 @@ function I_main() {
 
 
   return (
-    <div>
+    <div id="backwhite">
 
       <br />
       <br />

@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+#back {
+  height: 100vh;
+  background: url(component/images/배경.png) no-repeat center;
+  background-size: cover;
+}
+
+#pwhite{
+  color: aliceblue;
+}

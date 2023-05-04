@@ -3,6 +3,8 @@ import axios from "axios";
 
 import { ReactMediaRecorder } from "react-media-recorder";
 
+import "../main_back.css"
+
 function Gbtest() {
 
     const [resp, setResp] = useState('');
@@ -33,7 +35,7 @@ function Gbtest() {
     }
 
     return (
-        <div>
+        <div id="backwhite">
             
             <ReactMediaRecorder
                 audio

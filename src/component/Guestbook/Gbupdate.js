@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ReactMediaRecorder } from "react-media-recorder";
 
+import "../main_back.css"
+
 function Gbupdate() {
 
     let params = useParams();
@@ -84,7 +86,7 @@ function Gbupdate() {
     }
 
     return (
-        <div>
+        <div id="backwhite">
             <h2>방명록 수정</h2>
             <table border="1">
                 <thead />

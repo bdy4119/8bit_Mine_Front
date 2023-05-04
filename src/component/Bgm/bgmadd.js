@@ -29,7 +29,7 @@ function Bgmadd() {
     function yt_search() {
         axios
             .get(
-                'http://localhost:3000/ytSearch', { params: { "query": search } }
+                'http://localhost:3000/ytSearch', { params: { "query": encodeURIComponent(search) } }
             )
             .then(function (resp) {
                 console.log(resp);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import "../main_back.css"
 
 function I_update() {
 
@@ -73,7 +74,7 @@ function I_update() {
     }
 
     return (
-        <div>
+        <div id="backwhite">
             {params.classify}
             <table border="1">
                 <colgroup>

@@ -1,7 +1,5 @@
-#back {
-    height: 100vh;
-    background: url(images/배경.png) no-repeat center;
-    background-size: cover;
+#backwhite {
+    background-color: white;
 }
 
 #topbar {
