@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -7,12 +6,12 @@ function Gate() {
 
     useEffect(function () {
         const jwt = localStorage.getItem("token");
-        document.getElementById("logShow").style.display = "none";
-        document.getElementById("brLink").style.display = "none";
 
-        if (jwt !== null) {
-            document.getElementById("logShow").style.display = "visible";
-            history("/mainpage");
+        document.getElementById("backtop").style.visibility = "hidden";
+
+        if(jwt !== null){
+            document.getElementById("backtop").style.visibility = "visible";
+            history("/main");
         }
     }, []);
 

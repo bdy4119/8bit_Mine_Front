@@ -12,7 +12,8 @@ function KakaoAPI(){
         const jwt = localStorage.getItem("token");
 
         if(jwt !== null){
-            history("/mainpage");
+            document.getElementById("backtop").style.visibility = "visible";
+            history("/main");
         }
     }, []);
 
