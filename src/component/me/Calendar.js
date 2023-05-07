@@ -12,7 +12,7 @@ import { Icon } from '@iconify/react';
     날짜 관련 함수 라이브러리
     : npm install date-fns 
 */
-import { format, addMonths, subMonths, subYears, addYears, subWeeks, addWeeks, subDays } from 'date-fns';
+import { format, addMonths, subMonths, subYears, addYears, subWeeks, addWeeks, subDays, parseJSON } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
 import { isSameMonth, isSameDay, addDays, parse } from 'date-fns';
 
@@ -74,15 +74,7 @@ export const RenderDays = () => {
 
 
 export const Calendar = () => {
-    
 
-    
-
-//    const[today, setToday] = useState(new Date()); //오늘 날짜로 설정
-    const[today, setToday] = useState(format(new Date(),'yyyy-MM-dd'));
-    let todayStr = today.toString(); // 문자열로 변환
-
-    let history = useNavigate();
 
     // new Date() : 오늘 날짜 가져오기
     const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -90,8 +82,6 @@ export const Calendar = () => {
     const [currentWeek, setCurrentWeek] = useState(new Date());
 
     const [selectedDate, setSelectedDate] = useState(new Date());
-
-
 
     //이전달 이동
     // sub() : 숫자를 입력하면 그 숫자만큼 원하는 날짜나 시간을 뺄 수 있음
@@ -117,11 +107,13 @@ export const Calendar = () => {
         setCurrentYear(addYears(currentYear, 1));
         setCurrentMonth(addMonths(currentMonth, 12));
     }
-    const onDateClick = (day) => {
-        setSelectedDate(day);
-    };
 
 
+
+
+    useEffect(function(){
+        
+      }, [currentYear, currentMonth]);
    
 
     return(
@@ -133,7 +125,7 @@ export const Calendar = () => {
                  <RenderDays //요일
                  />
 
-                <RenderCells currentMonth={currentMonth} selectedDate={selectedDate} currentWeek={format(currentWeek, 'd')} />
+                <RenderCells currentYear={currentYear} currentMonth={currentMonth} selectedDate={selectedDate} currentWeek={format(currentWeek, 'd')} />
             </div>
         
             {/* 
@@ -150,7 +142,7 @@ export default Calendar;
 
 
 //날짜 함수
-export const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => {
+export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateClick, currentWeek}) => {
 
     const monthStart = startOfMonth(currentMonth); // 이번달의 시작일, 시작요일
     const startDate = startOfWeek(monthStart);     // 이번주의 시작일, 시작요일
@@ -162,10 +154,15 @@ export const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWee
     const[diarylist, setDiarylist] = useState([]);
     const[todolist, setTodolist] = useState([]);
 
+
+    const [dateName, setDateName] = useState([]);   //기념일 이름
+    const [locdate, setLocdate] = useState([]);   //기념일 날짜
+
     //다이어리 리스트
     function getCalList() {
         axios.get("http://localhost:3000/diaryCalList", {params:{}})
          .then(function(resp){
+          //  console.log(resp.data)
           setDiarylist(resp.data.list);
          })
          .catch(function(err){
@@ -186,23 +183,54 @@ export const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWee
       }
 
 
-    
+
+ //공공데이터 API *******************************************
+ function getHoliday(currentYear) {
+
+    axios.get("http://localhost:3000/CalendarApi", {params:{"year":format(currentYear, 'yyyy')}})
+         .then(function(resp){
+      //      console.log(JSON.stringify(resp.data.response.body.items.item));
+
+            for(let i=0; i<JSON.stringify(resp.data.response.body.items.item.length); i++) {
+                locdate[i] = JSON.stringify(resp.data.response.body.items.item[i].locdate);
+                dateName[i] = JSON.stringify(resp.data.response.body.items.item[i].dateName);
+              //  console.log(locdate[1] + dateName[1]);
+            }
+         })
+         .catch(function(err){
+            alert("불러오기 실패");
+         })
+}
+
 
     const rows = []; // 1주 * 4 or 주
     let days = [];  // 1주
     let day = startDate; //이번달 시작날짜, 시작요일 넣어놓기
     let formatedDate = ''; //설정날짜 초기화
-   console.log(diarylist);
+ //  console.log(diarylist);
+
     while(day <= endDate) { //day가 endDate보다 커지면 종료
         for(let i = 0; i < 7; i++) {
             formatedDate = format(day, 'd');
             days.push(
-                
                 <div key={day} style={{ display:"inline-block", border:"1px solid black", height:"100px", width:"100px", verticalAlign:"top"}}>
                     <span>
                         <Link to={`/me/${format(day,'yyyy-MM-dd')}`} style={{textDecoration: "none"}}>
                             {formatedDate}
                         </Link>
+                        {
+                            dateName.map(function(n, idx){
+                             //   console.log(format(day,'yyyyMMdd'));
+                             //   console.log(dateName);
+                                if( locdate[idx] === format(day,'yyyyMMdd')) {
+                                    return(
+                                        <span key={idx}>
+                                            {dateName[idx]}
+                                        </span>
+                                    );
+                                }
+                            })
+                        }
                         {
                             diarylist.map(function(diary, idx){
                                 if(diary.rdate === format(day,'yyyy-MM-dd') || diary.rdate === format(day,'yyyy-MM-d')){
@@ -222,7 +250,7 @@ export const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWee
                                             <div> -{todo.title} </div>
                                         </span>
                                     );
-                                    }
+                                }
                             })
                         }
                     </span>
@@ -245,6 +273,7 @@ export const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWee
     useEffect(function(){
         getCalList();
         getTodoCallist();
+        getHoliday(currentYear);
       }, []);
 
   return (
