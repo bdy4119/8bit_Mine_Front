@@ -3,7 +3,6 @@ import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 
 import "./mine_edi.css";
-import ModalBasic from '../chatbot/chatbot';
 import logo from './images/logo.png';
 import stage1 from './images/stage1.png';
 import stage2 from './images/stage2.png';
@@ -13,7 +12,6 @@ import "../mine_back.css"
 function Mine_edi(){
 
     const [loading, setLoading] = useState(false);
-    const [modalOpen, setModalOpen] = useState(false);
     const [check, setCheck] = useState(true);
     const [question1, setquestion1] = useState('');
     const [question2, setquestion2] = useState('');
@@ -25,6 +23,9 @@ function Mine_edi(){
     const [backimg, setBackimg] = useState(stage1);
     const [stagenum, setStagenum] = useState('');
     const imgRef = useRef('');
+    
+    const id = localStorage.getItem("id");
+
 
     function imageLoad(){
         const file = imgRef.current.files[0];
@@ -37,12 +38,8 @@ function Mine_edi(){
 
     let params = useParams();
 
-    const showModal = () => {
-        setModalOpen(true);
-    };
-
     const mineData = async(pos) => {
-        const response = await axios.post('http://localhost:3000/minedata', null, { params:{"position":pos} });
+        const response = await axios.post('http://localhost:3000/minedata', null, { params:{"id":id, "position":pos} });
 
         if (params.pos === '11'){
             setquestion1(response.data.filename);
@@ -56,7 +53,7 @@ function Mine_edi(){
     }
     
     const mineList = async() => {
-        const response = await axios.post('http://localhost:3000/minelist', null, { params:{"id":"123"} });
+        const response = await axios.post('http://localhost:3000/minelist', null, { params:{"id":id} });
         const c = {};
         
         for (let i = 0; i < response.data.length; i++) {
@@ -72,7 +69,7 @@ function Mine_edi(){
         const yn = {};
 
         for(let i = 1; i <= 11; i++){
-            axios.post("http://localhost:3000/checkmine", null, { params:{ "id":'123', "position":i} })
+            axios.post("http://localhost:3000/checkmine", null, { params:{ "id":id, "position":i} })
             .then(res => {
                 if(res.data === "YES"){
                     yn[i] = true;
@@ -91,14 +88,13 @@ function Mine_edi(){
     useLayoutEffect(()=>{
         mineList();
         checkList();
-
     }, []);
 
     useEffect(()=>{
 
         const checkmine = async(pos) => {
 
-            await axios.post("http://localhost:3000/checkmine", null, { params:{ "id":'123', "position":pos} })
+            await axios.post("http://localhost:3000/checkmine", null, { params:{ "id":id, "position":pos} })
                  .then(res => {
                     if(res.data === "YES"){
                         mineData(params.pos);
@@ -126,7 +122,7 @@ function Mine_edi(){
 
     const deletemine = () => {
         axios.post("http://localhost:3000/deletemine", null, 
-                    { params:{ "id":'123', "position":params.pos } })
+                    { params:{ "id":id, "position":params.pos } })
              .then(res => {
                 console.log(res.data);
                 if(res.data === "YES"){
@@ -146,7 +142,7 @@ function Mine_edi(){
     
         // file + form field -> 짐을 싼다
         let formData = new FormData();
-        formData.append("id", "123");
+        formData.append("id", id);
         formData.append("position", params.pos);
         formData.append("imgtext", text);
     
@@ -169,7 +165,7 @@ function Mine_edi(){
     
         // file + form field -> 짐을 싼다
         let formData = new FormData();
-        formData.append("id", "123");
+        formData.append("id", id);
         formData.append("position", params.pos);
         formData.append("imgtext", text);
     
@@ -203,7 +199,7 @@ function Mine_edi(){
     const select = () => {
         if (a[10] === false){
         axios.post("http://localhost:3000/stageinsert", null, 
-                    { params:{ "id":'123', "position":10, "imgtext": stagenum }})
+                    { params:{ "id":id, "position":10, "imgtext": stagenum }})
              .then(res => {
                 console.log(res.data);
                 if(res.data === "YES"){
@@ -219,7 +215,7 @@ function Mine_edi(){
         }  
         if (a[10] === true){
             axios.post("http://localhost:3000/stageupdate", null, 
-                    { params:{ "id":'123', "position":10, "imgtext": stagenum }})
+                    { params:{ "id":id, "position":10, "imgtext": stagenum }})
              .then(res => {
                 console.log(res.data);
                 if(res.data === "YES"){
@@ -239,7 +235,7 @@ function Mine_edi(){
     const updateQuestion = () => {
         if (a[11] === false){
         axios.post("http://localhost:3000/queinsert", null, 
-                    { params:{ "id":'123', "position":11, "filename": question1, "newfilename": question2, "imgtext": question3 }})
+                    { params:{ "id":id, "position":11, "filename": question1, "newfilename": question2, "imgtext": question3 }})
              .then(res => {
                 console.log(res.data);
                 if(res.data === "YES"){
@@ -255,7 +251,7 @@ function Mine_edi(){
         }  
         if (a[11] === true){
             axios.post("http://localhost:3000/queupdate", null, 
-                    { params:{ "id":'123', "position":11, "filename": question1, "newfilename": question2, "imgtext": question3 }})
+                    { params:{ "id":id, "position":11, "filename": question1, "newfilename": question2, "imgtext": question3 }})
              .then(res => {
                 console.log(res.data);
                 if(res.data === "YES"){
@@ -287,8 +283,12 @@ function Mine_edi(){
             </div>
             <div id="toolbox">
                 <div>
-                    <div><Link to={`/mine`}>사용자 모드</Link></div>
-                    <div><Link to={`/mine_edi/${1}`}>에디터 모드</Link></div>
+                    <div>
+                        <button onClick={(e) => {window.location.href = "/mine"}}>사용자 모드</button>
+                        <button onClick={(e) => {window.location.href = "/mine_edi/1"}}>에디터 모드</button>
+                        <button onClick={(e) => {window.location.href = "/mine_guestbook"}}>방명록</button>
+                    </div>
+                    <div><button onClick={(e) => {window.location.href = "/guest_mine/qwe46200@naver.com"}}>테스트</button></div>
                 </div>
 
                 <div id="gamebox">

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
 import Pagination from 'react-js-pagination';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import '../main_back.css';
@@ -11,12 +10,6 @@ function TodoList() {
   let param = useParams();
 
   const[todolist, setTodolist] = useState([]);
-
-  const[del, setDel] = useState('0');  // 새로고침해도 배열 유지하기
-  const[seq, setSeq] = useState('');
-  const[check, setCheck] = useState();
-  const[checkBoxList, setCheckBoxList] = useState([]); // 체크된 리스트 배열에 넣기
-
 
 //  const[allChecked,setAllChecked] = useState(false);
 
@@ -33,44 +26,34 @@ function TodoList() {
 
 
 
-  //del이 0이면 체크 해제, del이 1이면 체크 유지
-  const checkUpdate = (checked, item) => {
-  //  console.log(item[0]); del
-  //  console.log(item[1]); seq
-  //  setDel(item[0]);
-  //  setSeq(item[1]);
-
-    
-
-  setSeq(item.substring(1));
-    axios.post("http://localhost:3000/updateCheck", null, {params:{"seq": item.substring(1), "del":del}})
-    .then(function(resp){
-      if(resp.data === "YES") {
-        console.log(del);
-        console.log(item.substring(1));
-       // console.log(checked);
-
-        if (checked) {
-          setCheckBoxList([...checkBoxList, item]);
-          console.log(checkBoxList);
-          setDel(1);
-        } else if (!checked) {
-          setCheckBoxList(checkBoxList.filter(e => e !== item));
-          setDel(0);
-        }
-      }
-    })
-    .catch(function(err){
-      
-    })
-   
+  //체크여부
+  const checkUpdate = (checked, seq) => {
+    if(!checked) { //체크 해제되면 del 0으로 설정
+      axios.post("http://localhost:3000/updateCheck", null, {params:{"seq": seq, "del":0}})
+          .then(function(resp){
+            
+          })
+          .catch(function(err){
+            
+          })
+    }
+    if(checked) { //체크되면 del 1으로 설정
+      axios.post("http://localhost:3000/updateCheck", null, {params:{"seq": seq, "del":1}})
+      .then(function(resp){
+        
+      })
+      .catch(function(err){
+        
+      })
+    }
 
   }
 
 
 
 
-  function getTodolist() {
+  //todo리스트 받아오기
+  function getTodolist(page) {
     axios.get("http://localhost:3000/todoList", {params:{"pageNumber":page}})
         .then(function(resp){
           setTodolist(resp.data.list);
@@ -98,6 +81,7 @@ function TodoList() {
   }
 
 
+
   //삭제
   //같이 보낸 파라미터값 매개변수 하나 더 추가해서 받아주기
   const TodoDelete = async(seq, e) => {
@@ -116,34 +100,8 @@ function TodoList() {
 
 
   
-
-
-  /*
-  const checkedItemHandler = (e) => {
-    setCheckBoxList(e.target.value);
-    if(!isChecked && checkBoxList.includes(e.target.value)){
-      //filter : true면 요소를 유지, false면 버림
-        setCheckBoxList(checkBoxList.filter((todo) => todo !== e.target.value));
-        return;
-     }
-   } 
-   */
-
-
-  
   useEffect(()=>{
-
-    for(let i = 0; i<todolist.length; i++) {
-      if(todolist[i].del === 1) {
-        console.log(todolist);
-        setCheck(true);
-      } else if(todolist[i].del === 0) {
-        setCheck(false);
-      }
-    }
-
     getTodolist();
-
   },[]);
 
 
@@ -179,10 +137,8 @@ function TodoList() {
                     return (
                         <tr key={idx}>
                             <td colSpan="2" align='left'>
-                            <input type='checkbox' id={todo} value={`${todo.del}${todo.seq}`}
-                                      onChange={(e) => {checkUpdate(e.target.checked, e.target.value)}}
-                                // 체크된 아이템 배열에 해당 아이템이 있을 경우 선택 활성화, 아닐 시 해제
-                                checked={check}/>
+                            <input type='checkbox' onChange={(e) => {checkUpdate(e.target.checked,`${todo.seq}`)}}
+                                   defaultChecked={todo.del === 1 ? true : false}/>
                               {todo.title}
                             </td>
                             <td>{todo.content}</td>
@@ -209,10 +165,9 @@ function TodoList() {
                           return (
                             <tr key={idx}>
                                 <td colSpan="2" align='left'>
-                                   <input type='checkbox' id={todo} value={`${todo.del}${todo.seq}`}
-                                      onChange={(e) => {checkUpdate(e.target.checked, e.target.value)}}
-                                // 체크된 아이템 배열에 해당 아이템이 있을 경우 선택 활성화, 아닐 시 해제
-                                checked={check}/>
+                                   <input type='checkbox'
+                                      onChange={(e) => {checkUpdate(e.target.checked,`${todo.seq}`)}}
+                                     defaultChecked={todo.del === 1 ? true : false}/>
                                   {todo.title}
                                 </td>
                                 <td>{todo.content}</td>

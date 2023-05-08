@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
 import "../main_back.css"
 import ModalBasic from '../chatbot/chatbot';
 import logo from './images/logo.png';
 import mine_icon from './images/mine_icon.png';
 import profile_img from './images/profileimg.png';
 import "./main.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Topbar from "./topbar";
 
-function Main() {
+function Main(){
 
     const [modalOpen, setModalOpen] = useState(false);
     const movePage = useNavigate();
-
-    const [profPic, setProfPic] = useState('');
     const [profMsg, setProfMsg] = useState('');
-
+    const [profPic, setProfPic] = useState('');
     const history = useNavigate();
 
     const jwt = localStorage.getItem("token");
@@ -101,9 +98,9 @@ function Main() {
             </div>
             <div id="toolbox">
                 <div>
-                    <div id="i_area" onMouseOver={hover_over} onMouseOut={hover_out} onClick={() => { movePage('/i') }}>
+                    <div id="i_area" onMouseOver={hover_over} onMouseOut={hover_out} onClick={()=>{movePage('/i')}}>
                         <div>I</div>
-                        <div id="profile"><img src={`${process.env.PUBLIC_URL}/profPic/${profPic}`} alt="X" width="200px" height="200px"/></div>
+                        <div id="profile"><img src={`${process.env.PUBLIC_URL}/profPic/${profPic}`} alt="no"></img></div>
                         <div id="protext">{profMsg}</div>
 
                         <div id="hover_i">
@@ -121,7 +118,7 @@ function Main() {
                     <div id="my_area" onClick={() => { movePage('/Filelist') }}>
                         MY
                     </div>
-                    <div id="mine_area" onClick={(e) => { window.location.href = "/mine" }}>
+                    <div id="mine_area" onClick={(e) => {window.location.href = "/mine"}}>
                         <div>MINE</div>
                         <div>
                             <img src={mine_icon} alt="no" width="200px"></img>
