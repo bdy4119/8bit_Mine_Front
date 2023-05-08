@@ -20,8 +20,11 @@ import Ban from './component/login/ban';
 
 import Main from "./component/main/main";
 import Mine from "./component/mine/mine_main";
+import GuestMine from "./component/mine/guest_mine";
 import Fullmine from "./component/mine/mine_full";
+import GuestFullmine from "./component/mine/guest_mine_full";
 import MineEdi from "./component/mine/mine_edi";
+import MineGuestbook from "./component/mine/mine_guestbook";
 import Chatbot from "./component/chatbot/chatbot";
 
 import Me from "./component/Me/Me";
@@ -78,6 +81,16 @@ function App() {
     setModalOpen(true);
   };
 
+  const show = () => {
+    axios.get("http://localhost:3000/show", {params:{"token":jwt.split('"')[3]}})
+            .then(function(resp){
+                localStorage.setItem("id", resp.data.email);
+            })
+            .catch(function(err){
+                alert(err);
+            })
+  };
+
   const fetchData = async () => {
     const resp = await axios.get('http://localhost:3000/bgm_list', { params: { "id": "test" } });
     setBgmlist(resp.data);
@@ -112,6 +125,7 @@ function App() {
     if (jwt===null){
       document.getElementById("backtop").style.visibility = "hidden";
     } else {
+      show();
       document.getElementById("backtop").style.visibility = "visible";
     }
   }, []);
@@ -216,8 +230,11 @@ function App() {
 
           <Route path="/main" element={ <Main /> } />
           <Route path="/mine" element={ <Mine /> } />
+          <Route path="/guest_mine/:id" element={ <GuestMine /> } />
           <Route path="/mine_full" element={ <Fullmine /> } />
+          <Route path="/guest_mine_full/:id" element={ <GuestFullmine /> } />
           <Route path="/mine_edi/:pos" element={ <MineEdi /> } />
+          <Route path="/mine_guestbook" element={ <MineGuestbook /> } />
           <Route path="/chatbot" element={ <Chatbot /> } />
           
         {<Route path="/FileLobby" element={ <FileLobby /> } />}
