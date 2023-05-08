@@ -122,7 +122,10 @@ function Diary() {
                           <tr key={idx}>
                             {/* <td>{idx+1}</td> */}
                             <td colSpan="2">{diary.title}</td>
-                            <td>{diary.content}</td>
+                            <td>
+                              <img src={`/Me-img/${diary.thumbnail}`} alt="" style={{width:"200px"}} />
+                              {diary.content}
+                            </td>
                             <td>
                             <Link to={`/diaryUpdate/${diary.seq}/${diary.title}/${diary.content}/${diary.rdate}`}>
                               <button type='submit'>수정</button>
@@ -146,7 +149,10 @@ function Diary() {
                               <tr key={idx}>
                                 {/* <td>{idx+1}</td> */}
                                 <td colSpan="2">{diary.title}</td>
-                                <td>{diary.content}</td>
+                                <td>
+                                <img src={`/Me-img/${diary.thumbnail}`} alt="" style={{width:"100px"}} />
+                                  {diary.content}
+                                </td>
                                 <td>
                                 <Link to={`/diaryUpdate/${diary.seq}/${diary.title}/${diary.content}/${diary.rdate}`}>
                                   <button type='submit'>수정</button>
