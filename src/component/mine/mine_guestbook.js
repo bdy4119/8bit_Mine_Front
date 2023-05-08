@@ -3,6 +3,7 @@ import axios from "axios";
 
 import "../mine_back.css"
 import "./mine.css";
+import Topbar from "../main/topbar";
 
 function Mine_main(){
 
@@ -42,6 +43,7 @@ function Mine_main(){
     
     return (
         <div id="back">
+            <Topbar/>
             <div id="topbar">
                 <div id="barbtns">
                     <div id="ibtn">I</div>
