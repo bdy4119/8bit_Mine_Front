@@ -7,8 +7,8 @@ import logo from './component/mine/images/logo.png';
 import Gate from './component/login/gate';
 import GoogleLogin from './component/login/googleLogin';
 import MicrosoftLogin from './component/login/microsoftLogin';
-import NaverLogin from './component/naverLogin';
-import NaverWait from './component/naverWait';
+import NaverLogin from './component/login/naverLogin';
+import NaverWait from './component/login/naverWait';
 import KakaoLogin from './component/login/kakaoLogin';
 import KakaoWait from './component/login/kakaoWait';
 import MainPage from './component/login/mainPage';
@@ -144,18 +144,6 @@ function App() {
         </select>
         <button onClick={() => window.open('http://localhost:9001/bgm', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>bgm 관리</button>
           <p id="pwhite">현재 플레이중인 음악 : 🎶 {artist} - {title}</p>
-
-        <div id="logo" onClick={(e) => {window.location.href = "/main"}}>
-            <img src={logo} alt="no" height="80px"/>
-        </div>
-
-        <div id="topbtns">
-            <button onClick={(e) => {window.location.href = "/edit"}}>내 정보 수정</button>
-            <button onClick={(e) => {window.location.href = "/kakao/withdrawal"}}>회원탈퇴</button>
-            <button><a href={kakaologout}>로그아웃</a></button>
-            <button onClick={showModal}>상담챗봇</button>
-            {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
-        </div>
       </div>
 
       <BrowserRouter>        
