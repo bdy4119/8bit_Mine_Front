@@ -11,6 +11,7 @@ import stage2 from './images/stage2.png';
 import stage3 from './images/stage3.png';
 import logo from './images/logo.png';
 import cat from './images/cat.png';
+import Topbar from "../main/topbar";
 
 function Mine_main(){
 
@@ -203,6 +204,7 @@ function Mine_main(){
     
     return (
         <div id="back">
+            <Topbar/>
             <div id="topbar">
                 <div id="barbtns">
                     <div id="ibtn">I</div>
