@@ -1,6 +1,6 @@
 import axios from "axios";
 import { format } from "date-fns";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function DiaryWrite() {
@@ -15,11 +15,59 @@ function DiaryWrite() {
   const [id, setId] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [thumbnail, setThumbnail] = useState('');
+
+  const [imgFile, setImgFile] = useState();
+  const imgRef = useRef();  //useRef.current -> useRef는 무조건 current를 통해서 감
+
+
+   // 이미지 업로드 input의 onChange
+   function imageLoad() {
+      const file= imgRef.current.files[0];
+      const reader = new FileReader();  // FileReader API
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+      console.log(imgRef.current.files[0].name);
+      setThumbnail(imgRef.current.files[0].name);
+      setImgFile(reader.result);
+      }
+    }
 
 
 
   //작성완료 함수
   const handleSubmit = async(e) => {
+    
+     let formData = new FormData();
+   if(document.frm.uploadFile.files[0]) {
+      formData.append("id", "");
+      formData.append("rdate", document.frm.rdate.value);
+      formData.append("title", document.frm.title.value);
+      formData.append("content", document.frm.content.value);
+      formData.append("uploadFile", document.frm.uploadFile.files[0]);
+      formData.append("thumbnail", thumbnail);
+   } else {
+      formData.append("id", "");
+      formData.append("title", document.frm.title.value);
+      formData.append("content", document.frm.content.value);
+      formData.append("uploadFile", thumbnail);
+      formData.append("thumbnail", thumbnail);
+   }
+
+  // console.log(document.frm.uploadFile.files[0].name);
+
+   axios.post("http://localhost:3000/diaryUpload", formData)
+        .then(function(res){
+          console.log(JSON.stringify(res.data));
+          if(res.data === "file upload success") {
+            alert('업로드 성공');
+           }
+        })
+        .catch(function(err){
+          // alert(err);
+        })
+
+
     
     if(title === undefined || title.trim() === '') {
       alert('제목을 입력해주세요');
@@ -32,7 +80,7 @@ function DiaryWrite() {
 
     //글쓰기는 초기화 시켜줄 게 없으므로 useEffect를 사용하지 않아도 됨
     //작성완료 함수에서 한번에 처리해주기
-    axios.post("http://localhost:3000/diaryWrite", null, {params:{"id":id, "rdate":rdate , "title": title, "content" :content}})
+    axios.post("http://localhost:3000/diaryWrite", null, {params:{"id":id, "thumbnail":thumbnail, "rdate":rdate , "title": title, "content" :content}})
          .then(function(resp){
             if(resp.data === "YES") {
               alert('글이 등록되었습니다.');
@@ -57,35 +105,43 @@ function DiaryWrite() {
   return(
     <div>
       <h1>일지 추가</h1>
-      <table border='1px' id="backwhite">
-        <colgroup>
-          <col width="100px"/>
-          <col width="500px"/>
-        </colgroup>
-        <tbody>
-          <tr>
-            <th>약속날짜</th>
-            <td>
-              <input value={rdateStr} onChange={(e)=>setRdate(e.target.value)}/>
-            </td>
-           </tr>
-          <tr>
-            <th>제목</th>
-            <td>
-              <input value={title} onChange={(e)=>setTitle(e.target.value)}/>
-            </td>
-          </tr>
-          <tr>
-            <th>내용</th>
-            <td>
-              <input value={content} onChange={(e)=>setContent(e.target.value)}/>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <form name="frm" onSubmit={handleSubmit} encType="multipart/form-data">
+        <table border='1px' id="backwhite">
+          <colgroup>
+            <col width="100px"/>
+            <col width="500px"/>
+          </colgroup>
+          <tbody>
+            <tr>
+              <th>약속날짜</th>
+              <td>
+                <input name="rdate" value={rdateStr} onChange={(e)=>setRdate(e.target.value)}/>
+              </td>
+            </tr>
+            <tr>
+              <th>제목</th>
+              <td>
+                <input name="title" value={title} onChange={(e)=>setTitle(e.target.value)}/>
+              </td>
+            </tr>
+            <tr>
+                <img src={`${imgFile}`} alt="" style={{width:"200px"}} />
+                <br/>
+                <input type="file" name='uploadFile' onChange={imageLoad} ref={imgRef} />
+                <br/>
+            </tr>
+            <tr>
+              <th>내용</th>
+              <td>
+                <input name="content" value={content} onChange={(e)=>setContent(e.target.value)}/>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
       <br/>
-      <button onClick={handleSubmit}>작성완료</button>
+      <button type="submit">작성완료</button>
+      </form>
       
     </div>
   )

@@ -30,7 +30,7 @@ function InformDetail() {
             alert("정보를 불러오지 못했습니다.");
          })
   }
-console.log(busiDetail.thumbnail);
+//console.log(businessDetail.thumbnail);
 
 
   useEffect(function(){
@@ -44,7 +44,8 @@ console.log(busiDetail.thumbnail);
   if(loading === false) {
     return <div>Loading...</div>
   }
-
+  
+console.log("/Business-img/" + businessDetail.thumbnail);
 
   return(
     <div className="middle">

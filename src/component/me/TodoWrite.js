@@ -11,8 +11,6 @@ function TodoWrite() {
 
   const [rdate, setRdate] = useState(format(new Date(),'yyyy-MM-dd'));
   
-  let rdateStr = rdate.toString(); //rdate -> 문자열 변환
-
   const [id, setId] = useState('');
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
