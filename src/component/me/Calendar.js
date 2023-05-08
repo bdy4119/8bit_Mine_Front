@@ -61,7 +61,7 @@ export const RenderDays = () => {
         );
     }
     return (
-        <div style={{}}>
+        <div>
             {week}
         </div>
     );
@@ -113,7 +113,7 @@ export const Calendar = () => {
 
     useEffect(function(){
         
-      }, [currentYear, currentMonth]);
+      }, []);
    
 
     return(
@@ -158,6 +158,9 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
     const [dateName, setDateName] = useState([]);   //기념일 이름
     const [locdate, setLocdate] = useState([]);   //기념일 날짜
 
+  //데이터를 모두 읽을 때까지 rendering을 조절하는 변수
+  const [loading, setLoading] = useState(false);
+
     //다이어리 리스트
     function getCalList() {
         axios.get("http://localhost:3000/diaryCalList", {params:{}})
@@ -183,24 +186,23 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
       }
 
 
+    function getHoliday() {
+        axios.get("http://localhost:3000/CalendarApi", {params:{"year":format(currentYear, 'yyyy')}})
+                 .then(function(resp){
+                 //      console.log(JSON.stringify(resp.data.response.body.items.item));
+                 setLoading(true);   //렌더링 시작해주기
+                    for(let i=0; i<JSON.stringify(resp.data.response.body.items.item.length); i++) {
+                        locdate[i] = JSON.stringify(resp.data.response.body.items.item[i].locdate);
+                        dateName[i] = JSON.stringify(resp.data.response.body.items.item[i].dateName);
+                    //  console.log(locdate[1] + dateName[1]);
+                    }
+                })
+                .catch(function(err){
+                    alert(err);
+                })
+    }
 
- //공공데이터 API *******************************************
- function getHoliday(currentYear) {
 
-    axios.get("http://localhost:3000/CalendarApi", {params:{"year":format(currentYear, 'yyyy')}})
-         .then(function(resp){
-      //      console.log(JSON.stringify(resp.data.response.body.items.item));
-
-            for(let i=0; i<JSON.stringify(resp.data.response.body.items.item.length); i++) {
-                locdate[i] = JSON.stringify(resp.data.response.body.items.item[i].locdate);
-                dateName[i] = JSON.stringify(resp.data.response.body.items.item[i].dateName);
-              //  console.log(locdate[1] + dateName[1]);
-            }
-         })
-         .catch(function(err){
-            alert("불러오기 실패");
-         })
-}
 
 
     const rows = []; // 1주 * 4 or 주
@@ -219,13 +221,13 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
                             {formatedDate}
                         </Link>
                         {
-                            dateName.map(function(n, idx){
-                             //   console.log(format(day,'yyyyMMdd'));
-                             //   console.log(dateName);
-                                if( locdate[idx] === format(day,'yyyyMMdd')) {
+                            dateName.map(function(dn, idx){
+                              //  console.log(format(day,'MMdd'));
+                              //  console.log(locdate[idx].substring(4,9));
+                                if( locdate[idx].substring(4,9) === format(day,'MMdd')) {
                                     return(
                                         <span key={idx}>
-                                            {dateName[idx]}
+                                            {dn}
                                         </span>
                                     );
                                 }
@@ -273,8 +275,12 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
     useEffect(function(){
         getCalList();
         getTodoCallist();
-        getHoliday(currentYear);
-      }, []);
+        }, [getHoliday()]);
+
+    //딜레이 한번 주기
+    if(loading === false) {
+        return <div>Loading...</div>
+    }
 
   return (
        <span>

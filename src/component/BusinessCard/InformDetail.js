@@ -44,7 +44,8 @@ function InformDetail() {
   if(loading === false) {
     return <div>Loading...</div>
   }
-console.log(busiDetail.thumbnail);
+  
+console.log("/Business-img/" + businessDetail.thumbnail);
 
   return(
     <div className="middle">
