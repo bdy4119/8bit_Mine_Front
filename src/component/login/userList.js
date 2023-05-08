@@ -7,6 +7,9 @@ function UserList(){
     const history = useNavigate();
 
     const [list, setList] = useState([]);
+    const [search, setSearch] = useState("");
+    const [email, setEmail] = useState("");
+    const [auth, setAuth] = useState("");
     const [cause, setCause] = useState("");
 
     const jwt = localStorage.getItem("token");
@@ -55,51 +58,61 @@ function UserList(){
         })
     }
 
-    function state(dto){
-        const selectedValue = dto.auth === 0 ? '관리자' : dto.auth === 1 ? '활성' : '비활성';
-      
-        return (
-            <td>
-                <select defaultValue={selectedValue}>
-                <option>활성</option>
-                <option>비활성</option>
-                <option>관리자</option>
-                </select>
-            </td>
-        );
-    }
-
-    function causeValue(dto){
-        //setCause(dto.cause);
-
-        let Cause = dto.cause;
-
-        return(
-            <td><input type="text" value={dto.cause} onChange={() => Cause} /></td>
-        );
-    }
-
-    function writeCause(event, dto){
-        dto.cause = event.target.value;
+    function searchUser(){
+        axios.get("http://localhost:3000/searchlist", {params:{"search":search}})
+        .then(function(resp){
+            setSearch("");
+            setList(resp.data.list);
+        })
+        .catch(function(err){
+            alert(err);
+        })
     }
 
     function updateState(){
-        alert("click");
+        axios.get("http://localhost:3000/updateState", {params:{"email":email, "auth":auth, "cause":cause}})
+        .then(function(resp){
+            setEmail("");
+            setAuth("");
+            setCause("");
+            alert("설정 완료");
+        })
+        .catch(function(err){
+            console.log(err);
+            alert("설정 내용을 입력해 주세요");
+        })
     }
 
     useEffect(function(){
         Check();
         userList();
-    }, [])
+    }, [auth, cause]);
 
     return(
         <>
             <h1>사용자 목록</h1>
             <a href="/admin">돌아가기</a>
+
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="text" placeholder="이메일로 사용자 검색" />
+
+            <input type="text" placeholder="이메일로 사용자 검색" value={search} onChange={(e) => setSearch(e.target.value)} />
             &nbsp;
-            <button type="button">검색</button>
+            <button type="button" onClick={searchUser}>검색</button>
+
+            <br /><br />&nbsp;
+
+            <input type="text" placeholder="설정할 사용자의 이메일" value={email} onChange={(e) => setEmail(e.target.value)} />
+            &nbsp;
+            <select value={auth} onChange={(e) => setAuth(e.target.value)}>
+                <option value="">선택</option>
+                <option value="1">활성</option>
+                <option value="2">비활성</option>
+                <option value="0">관리자</option>
+            </select>
+            &nbsp;
+            <input type="text" placeholder="비고" value={cause} onChange={(e) => setCause(e.target.value)} />
+            &nbsp;
+            <button type="button" onClick={updateState}>설정</button>
 
             <table border="">
                 <thead>
@@ -110,7 +123,6 @@ function UserList(){
                         <th>가입 날짜</th>
                         <th>상태</th>
                         <th>비고</th>
-                        <th>수정</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -121,10 +133,8 @@ function UserList(){
                         <td>{dto.email}</td>
                         <td>{dto.social}</td>
                         <td>{dto.regidate}</td>
-                        {state(dto)}
-                        {/* {causeValue(dto)} */}
-                        <td><input type="text" value={dto.cause} onChange={(event) => writeCause(event, dto)} /></td>
-                        <td><button type="button" onClick={updateState}>저장</button></td>
+                        <td>{dto.auth === 0 ? '관리자' : dto.auth === 1 ? '활성' : '비활성'}</td>
+                        <td>{dto.cause}</td>
                     </tr>
                     );
                 })}

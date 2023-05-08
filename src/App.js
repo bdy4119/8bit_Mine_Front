@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 
 import ModalBasic from './component/chatbot/chatbot';
-
 import logo from './component/mine/images/logo.png';
 import Gate from './component/login/gate';
 import GoogleLogin from './component/login/googleLogin';
 import MicrosoftLogin from './component/login/microsoftLogin';
+import NaverLogin from './component/naverLogin';
+import NaverWait from './component/naverWait';
 import KakaoLogin from './component/login/kakaoLogin';
 import KakaoWait from './component/login/kakaoWait';
 import MainPage from './component/login/mainPage';
@@ -21,11 +22,8 @@ import Ban from './component/login/ban';
 
 import Main from "./component/main/main";
 import Mine from "./component/mine/mine_main";
-import GuestMine from "./component/mine/guest_mine";
 import Fullmine from "./component/mine/mine_full";
-import GuestFullmine from "./component/mine/guest_mine_full";
 import MineEdi from "./component/mine/mine_edi";
-import MineGuestbook from "./component/mine/mine_guestbook";
 import Chatbot from "./component/chatbot/chatbot";
 
 import Me from "./component/Me/Me";
@@ -56,9 +54,6 @@ import Gbadd from "./component/Guestbook/Gbadd";
 import Gbupdate from "./component/Guestbook/Gbupdate";
 import Gbvoice from "./component/Guestbook/Gbvoice";
 
-import ModalBCW from './component/BCWallet/WalletMain';
-import WalletUpdate from './component/BCWallet/WalletUpdate';
-
 import ReactPlayer from "react-player/youtube";
 import Bgm from "./component/Bgm/bgm";
 import Bgmadd from "./component/Bgm/bgmadd";
@@ -73,28 +68,20 @@ function App() {
 
   const [state, setState] = useState(false);
   const [bgmlist, setBgmlist] = useState([]);
-  const [id, setId] = useState('');
   const [seq, setSeq] = useState(0);
   const [artist, setArtist] = useState('');
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
-  const [bcwOpen, setBcwOpen] = useState(false);
 
   const jwt = localStorage.getItem("token");
 
-  const show = () => {
-    axios.get("http://localhost:3000/show", {params:{"token":jwt.split('"')[3]}})
-            .then(function(resp){
-                localStorage.setItem("id", resp.data.email);
-            })
-            .catch(function(err){
-                alert(err);
-            })
+  const showModal = () => {
+    setModalOpen(true);
   };
 
   const fetchData = async () => {
-    const resp = await axios.get('http://localhost:3000/bgm_list', { params: { "id": "snaro0123@gmail.com" } });
+    const resp = await axios.get('http://localhost:3000/bgm_list', { params: { "id": "test" } });
     setBgmlist(resp.data);
     console.log(resp);
   }
@@ -110,30 +97,23 @@ function App() {
   function music_change(seq) {
     setSeq(seq);
 
-    axios.get('http://localhost:3000/bgm_detail', { params: { "seq": seq } })
-      .then(function (resp) {
-        setArtist(resp.data.artist);
-        setTitle(resp.data.title);
-        setUrl(resp.data.url);
-      })
-      .catch(function (err) {
-        alert(err);
-      })
-  }
-
-  const userData = async() => {
-    const resp = await axios.get('http://localhost:3000/show', {params:{"token":jwt}});
-    setId(resp.data.email);
+    axios.get('http://localhost:3000/bgm_detail', {params : {"seq" : seq}})
+    .then(function(resp){
+      setArtist(resp.data.artist);
+      setTitle(resp.data.title);
+      setUrl(resp.data.url);
+    })
+    .catch(function(err){
+      alert(err);
+    })
   }
 
   useEffect(() => {
     fetchData();
-    userData();
 
-    if (jwt === null) {
+    if (jwt===null){
       document.getElementById("backtop").style.visibility = "hidden";
     } else {
-      show();
       document.getElementById("backtop").style.visibility = "visible";
     }
   }, []);
@@ -147,12 +127,12 @@ function App() {
   }
 
   return (
-    <div id="back">
+    <div id="back">      
 
       <div id="backtop">
         <button onClick={go}>재생</button>
         <button onClick={stop}>정지</button>
-        <select onChange={(e) => { music_change(e.target.value) }}>
+        <select onChange={(e)=>{music_change(e.target.value)}}>
           <option value="">bgm을 선택하세요.</option>
           {
             bgmlist.map(function (object, i) {
@@ -163,30 +143,30 @@ function App() {
           }
         </select>
         <button onClick={() => window.open('http://localhost:9001/bgm', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>bgm 관리</button>
-        <p id="pwhite">현재 플레이중인 음악 : 🎶 {artist} - {title}</p>
+          <p id="pwhite">현재 플레이중인 음악 : 🎶 {artist} - {title}</p>
 
-        {/* <div id="logo" onClick={(e) => { window.location.href = "/main" }}>
-          <img src={logo} alt="no" height="80px" />
+        <div id="logo" onClick={(e) => {window.location.href = "/main"}}>
+            <img src={logo} alt="no" height="80px"/>
         </div>
 
         <div id="topbtns">
-          <button onClick={(e) => { window.location.href = "/edit" }}>내 정보 수정</button>
-          <button onClick={(e) => { window.location.href = "/kakao/withdrawal" }}>회원탈퇴</button>
-          <button><a href={kakaologout}>로그아웃</a></button>
-          <button onClick={showModal}>상담챗봇</button>
-          {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
-          <button onClick={showBcwModal}>명함지갑</button>
-          {bcwOpen && <ModalBCW setModalOpen={setBcwOpen} />}
-        </div> */}
+            <button onClick={(e) => {window.location.href = "/edit"}}>내 정보 수정</button>
+            <button onClick={(e) => {window.location.href = "/kakao/withdrawal"}}>회원탈퇴</button>
+            <button><a href={kakaologout}>로그아웃</a></button>
+            <button onClick={showModal}>상담챗봇</button>
+            {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
+        </div>
       </div>
 
-      <BrowserRouter>
+      <BrowserRouter>        
         <Routes>
           <Route path='/' element={<Gate />} />
           <Route path='/google' element={<GoogleLogin />} />
           <Route path='/microsoft' element={<MicrosoftLogin />} />
           <Route path='/kakao' element={<KakaoLogin />} />
           <Route path='/callback/kakao/*' element={<KakaoWait />} />
+          <Route path='/naver' element={<NaverLogin />} />
+          <Route path='/callback/naver/*' element={<NaverWait />} />
           <Route path='/mainpage' element={<MainPage />} />
           <Route path='/kakao/logout' element={<LogoutAfter />} />
           <Route path='/kakao/withdrawal' element={<Withdrawal />} />
@@ -198,19 +178,17 @@ function App() {
 
           <Route path="/i" element={<Imain />} />
           <Route path="/i_add" element={<Iadd />} />
-          <Route path="/i_detail/:classify" exact element={<Idetail />} />
-          <Route path="/i_update/:classify" exact element={<Iupdate />} />
+          <Route path="/i_detail/:id/:classify" exact element={<Idetail />} />
+          <Route path="/i_update/:id/:classify" exact element={<Iupdate />} />
           <Route path="/place" element={<Place />} />
           <Route path="/book" element={<Book />} />
           <Route path="/movie" element={<Movie />} />
           <Route path="/drama" element={<Drama />} />
 
-          <Route path="/qna10" exact element={<Qna10 />} />
+          <Route path="/qna10/:id" exact element={<Qna10 />} />
 
           <Route path="/bgm" element={<Bgm />} />
           <Route path="/bgmadd" element={<Bgmadd />} />
-
-          <Route path="/walletupdate/:seq" exact element={<WalletUpdate/>} />
 
           <Route path="/gbmain" element={<Gbmain />} />
           <Route path="/gbadd" element={<Gbadd />} />
@@ -219,43 +197,43 @@ function App() {
 
 
           {/* me ,명함 */}
-          <Route path="/me" element={<Me></Me>} />
+          <Route path="/me" element={<Me></Me>}/>
+          
+          <Route path="/diaryWrite/:rdate" element={<DiaryWrite/>}/>
+          <Route path="/todoWrite/:rdate" element={<TodoWrite/>}/>
+          
+          <Route path="/me/:rdate" element={<Me/>}/> 
+          <Route path="/me/:year/:month" element={<Me/>}/> 
 
-          <Route path="/diaryWrite/:rdate" element={<DiaryWrite />} />
-          <Route path="/todoWrite/:rdate" element={<TodoWrite />} />
+          <Route path="/diaryUpdate/:seq/:title/:content/:rdate" element={<DiaryUpdate/>}/>
+          <Route path="/todoUpdate/:seq/:title/:content/:rdate" element={<TodoUpdate/>}/>
 
-          <Route path="/me/:rdate" element={<Me />} />
-          <Route path="/me/:year/:month" element={<Me />} />
+          <Route path="/card" element={<Card></Card>}/>
 
-          <Route path="/diaryUpdate/:seq/:title/:content/:rdate" element={<DiaryUpdate />} />
-          <Route path="/todoUpdate/:seq/:title/:content/:rdate" element={<TodoUpdate />} />
+          <Route path="/informDetail/:email" element={<InformDetail/>}/>
+          <Route path="/informUpdate/:email" element={<InformUpdate/>}/>
+          <Route path="/informWrite/:email" element={<InformWrite/>}/>
+          
+          <Route path="/back/:id" element={<Back/>}/>
+          <Route path="/backUpdate/:seq" element={<BackUpdate/>}/>
+          <Route path="/backWrite/:id" element={<BackWrite/>}/>
 
-          <Route path="/card" element={<Card></Card>} />
-
-          <Route path="/informDetail/:email" element={<InformDetail />} />
-          <Route path="/informUpdate/:email" element={<InformUpdate />} />
-          <Route path="/informWrite/:email" element={<InformWrite />} />
-
-          <Route path="/back/:id" element={<Back />} />
-          <Route path="/backUpdate/:seq" element={<BackUpdate />} />
-          <Route path="/backWrite/:id" element={<BackWrite />} />
-
-          <Route path="/main" element={<Main />} />
-          <Route path="/mine" element={<Mine />} />
-          <Route path="/mine_full" element={<Fullmine />} />
-          <Route path="/mine_edi/:pos" element={<MineEdi />} />
-          <Route path="/chatbot" element={<Chatbot />} />
-
-          <Route path="/FileLobby" element={<FileLobby />} />
-          <Route path="/Filelist" element={<FileListSample />} />
-          <Route path="/Filelist/:choice/:search" element={<FileListSample />} />
-          <Route path="/FileUpload/:project" exact element={<FileUpload />} />
-          <Route path="/FileUpload/:certificate" exact element={<FileUpload />} />
-          <Route path="/FileUpload/:portfolio" exact element={<FileUpload />} />
-          <Route path="/FileUpload/:picture" exact element={<FileUpload />} />
-          <Route path="/UpdateFile/:seq" exact element={<UpdateFile />} />
-          <Route path="/FileLobby/:mfuserId" exact element={<updateFile />} />
-          <Route path="/FileUpload/:mfuserId" exact element={<updateFile />} />
+          <Route path="/main" element={ <Main /> } />
+          <Route path="/mine" element={ <Mine /> } />
+          <Route path="/mine_full" element={ <Fullmine /> } />
+          <Route path="/mine_edi/:pos" element={ <MineEdi /> } />
+          <Route path="/chatbot" element={ <Chatbot /> } />
+          
+        {<Route path="/FileLobby" element={ <FileLobby /> } />}
+        {<Route path="/Filelist" element={ <FileListSample /> } />}
+        {<Route path="/Filelist/:choice/:search" element={ <FileListSample /> } />}
+        {<Route path="/FileUpload/:project" exact element={ <FileUpload /> } />}
+        {<Route path="/FileUpload/:certificate" exact element={ <FileUpload /> } />}
+        {<Route path="/FileUpload/:portfolio" exact element={ <FileUpload /> } />}
+        {<Route path="/FileUpload/:picture" exact element={ <FileUpload /> } />}
+        {<Route path="/UpdateFile/:seq" exact element={ <UpdateFile /> } />}
+        {<Route path="/FileLobby/:mfuserId" exact element={ <updateFile /> } />}
+        {<Route path="/FileUpload/:mfuserId" exact element={ <updateFile /> } />}
         </Routes>
 
       </BrowserRouter>
@@ -266,7 +244,7 @@ function App() {
         url={url}
         width="0%"
         height="0%"
-        muted={false}
+        muted={false} //chrome정책으로 인해 자동 재생을 위해 mute 옵션을 true로 해주었다.
         playing={state}
         loop={true} />
     </div>
