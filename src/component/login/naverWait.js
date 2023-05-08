@@ -29,7 +29,7 @@ function NaverWait(){
                 .then(function(resp){
                     localStorage.setItem("token", JSON.stringify(resp));
                     
-                    history("/mainpage");
+                    history("/main");
                 })
                 .catch(function(err){
                     alert(err);

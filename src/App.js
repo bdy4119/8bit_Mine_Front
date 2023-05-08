@@ -22,8 +22,11 @@ import Ban from './component/login/ban';
 
 import Main from "./component/main/main";
 import Mine from "./component/mine/mine_main";
+import GuestMine from "./component/mine/guest_mine";
 import Fullmine from "./component/mine/mine_full";
+import GuestFullmine from "./component/mine/guest_mine_full";
 import MineEdi from "./component/mine/mine_edi";
+import MineGuestbook from "./component/mine/mine_guestbook";
 import Chatbot from "./component/chatbot/chatbot";
 
 import Me from "./component/Me/Me";
@@ -208,8 +211,11 @@ function App() {
 
           <Route path="/main" element={ <Main /> } />
           <Route path="/mine" element={ <Mine /> } />
+          <Route path="/guest_mine/:mineid" element={ <GuestMine /> } />
           <Route path="/mine_full" element={ <Fullmine /> } />
+          <Route path="/guest_mine_full/:mineid" element={ <GuestFullmine /> } />
           <Route path="/mine_edi/:pos" element={ <MineEdi /> } />
+          <Route path="/mine_guestbook" element={ <MineGuestbook /> } />
           <Route path="/chatbot" element={ <Chatbot /> } />
           
         <Route path="/Filelist" element={ <FileMain /> } />
