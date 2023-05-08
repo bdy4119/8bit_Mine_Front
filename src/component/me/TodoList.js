@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { format } from 'date-fns';
 import React, { useEffect, useState } from 'react';
-import { useCookies } from 'react-cookie';
 import Pagination from 'react-js-pagination';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import '../main_back.css';
@@ -11,12 +10,6 @@ function TodoList() {
   let param = useParams();
 
   const[todolist, setTodolist] = useState([]);
-
-  const[del, setDel] = useState('1');  // 새로고침해도 배열 유지하기
-  const[seq, setSeq] = useState('');
-  const[check, setCheck] = useState();
-  const[checkBoxList, setCheckBoxList] = useState([]); // 체크된 리스트 배열에 넣기
-
 
 //  const[allChecked,setAllChecked] = useState(false);
 
@@ -33,37 +26,33 @@ function TodoList() {
 
 
 
-  //del이 0이면 체크 해제, del이 1이면 체크 유지
-  const checkUpdate = (checked, item) => {
-  //  console.log(item[0]); todo.del
-  //  console.log(item[1]); todo.seq
-  //  setDel(item[0]);
-  //  setSeq(item[1]);
-  if (checked) {
-    setDel(1);
-  } else if (!checked) {
-    setDel(0);
-  }
-  
-  setSeq(item.substring(1));
-  axios.post("http://localhost:3000/updateCheck", null, {params:{"seq": item.substring(1), "del":del}})
-  .then(function(resp){
-    if(resp.data === "YES") {
-      // console.log(del);
-      // console.log(item.substring(1));
+  //체크여부
+  const checkUpdate = (checked, seq) => {
+    if(!checked) { //체크 해제되면 del 0으로 설정
+      axios.post("http://localhost:3000/updateCheck", null, {params:{"seq": seq, "del":0}})
+          .then(function(resp){
+            
+          })
+          .catch(function(err){
+            
+          })
     }
-  })
-  .catch(function(err){
-    
-  })
-//  window.location.reload();
-   
+    if(checked) { //체크되면 del 1으로 설정
+      axios.post("http://localhost:3000/updateCheck", null, {params:{"seq": seq, "del":1}})
+      .then(function(resp){
+        
+      })
+      .catch(function(err){
+        
+      })
+    }
 
   }
 
 
 
 
+  //todo리스트 받아오기
   function getTodolist(page) {
     axios.get("http://localhost:3000/todoList", {params:{"pageNumber":page}})
         .then(function(resp){
@@ -92,6 +81,7 @@ function TodoList() {
   }
 
 
+
   //삭제
   //같이 보낸 파라미터값 매개변수 하나 더 추가해서 받아주기
   const TodoDelete = async(seq, e) => {
@@ -110,31 +100,8 @@ function TodoList() {
 
 
   
-
-
-  /*
-  const checkedItemHandler = (e) => {
-    setCheckBoxList(e.target.value);
-    if(!isChecked && checkBoxList.includes(e.target.value)){
-      //filter : true면 요소를 유지, false면 버림
-        setCheckBoxList(checkBoxList.filter((todo) => todo !== e.target.value));
-        return;
-     }
-   } 
-   */
-
-
-  
   useEffect(()=>{
     getTodolist();
-
-    //  for(let i = 0; i<todolist.length; i++) {
-    //    if(todolist[i].del === 1) {
-    //      setCheck(true);
-    //    } else if(todolist[i].del === 0) {
-    //      setCheck(false);
-    //    }
-    //  }
   },[]);
 
 
@@ -170,9 +137,8 @@ function TodoList() {
                     return (
                         <tr key={idx}>
                             <td colSpan="2" align='left'>
-                            <input type='checkbox' id={todo} value={`${todo.del}${todo.seq}`}
-                                      onChange={(e) => {checkUpdate(e.target.checked, e.target.value)}}
-                                checked={todo.del === 1 ? true : false}/>
+                            <input type='checkbox' onChange={(e) => {checkUpdate(e.target.checked,`${todo.seq}`)}}
+                                   defaultChecked={todo.del === 1 ? true : false}/>
                               {todo.title}
                             </td>
                             <td>{todo.content}</td>
@@ -199,10 +165,9 @@ function TodoList() {
                           return (
                             <tr key={idx}>
                                 <td colSpan="2" align='left'>
-                                   <input type='checkbox' id={todo} value={`${todo.del}${todo.seq}`}
-                                      onChange={(e) => {checkUpdate(e.target.checked, e.target.value)}}
-                                checked={todo.del === 1 ? true : false}/>
-
+                                   <input type='checkbox'
+                                      onChange={(e) => {checkUpdate(e.target.checked,`${todo.seq}`)}}
+                                     defaultChecked={todo.del === 1 ? true : false}/>
                                   {todo.title}
                                 </td>
                                 <td>{todo.content}</td>

@@ -125,7 +125,7 @@ export const Calendar = () => {
                  <RenderDays //요일
                  />
 
-                <RenderCells currentYear={currentYear} currentMonth={currentMonth} selectedDate={selectedDate} currentWeek={format(currentWeek, 'd')} />
+                <RenderCells currentYear={currentYear}  currentMonth={currentMonth} selectedDate={selectedDate} currentWeek={format(currentWeek, 'd')} />
             </div>
         
             {/* 
