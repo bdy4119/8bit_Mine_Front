@@ -1,11 +1,10 @@
-
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Gate(){
+function Gate() {
     const history = useNavigate();
 
-    useEffect(function(){
+    useEffect(function () {
         const jwt = localStorage.getItem("token");
 
         document.getElementById("backtop").style.visibility = "hidden";
@@ -16,7 +15,7 @@ function Gate(){
         }
     }, []);
 
-    return(
+    return (
         <div>
             <h1>Mine에 오신것을 환영합니다</h1>
             <a href="/google">구글로 접속</a>

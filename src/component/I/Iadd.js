@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../main_back.css"
@@ -6,6 +6,30 @@ import "../main_back.css"
 function I_add() {
 
   const movePage = useNavigate();
+  const jwt = localStorage.getItem("token");
+  const [email, setEmail] = useState('');
+
+  function getUser() {
+    if (jwt === null) {
+      movePage("/");
+    }
+    else {
+      const token = jwt.split('"')[3];
+
+      axios.get("http://localhost:3000/show", { params: { "token": token } })
+        .then(function (resp) {
+          setEmail(resp.data.email);
+        })
+        .catch(function (err) {
+          alert(err);
+        })
+    }
+  }
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
 
   const [classi, setClassi] = useState('');
 
@@ -27,7 +51,7 @@ function I_add() {
 
     // 참고 : 특수문자는 추가가 안됨.
     for (let i = 0; i < ans.length; i++) {
-      axios.get('http://localhost:3000/i_add', { params: { "id": "test", "classify": classi, "item": ans[i], "detail": det[i], "ref": i } })
+      axios.get('http://localhost:3000/i_add', { params: { "id": "snaro0123@gmail.com", "classify": classi, "item": ans[i], "detail": det[i], "ref": i } })
         .then(function () {
         })
         .catch(function (err) {
@@ -35,13 +59,14 @@ function I_add() {
         })
     }
 
-    axios.get('http://localhost:3000/i_add_classi', { params: { "id": "test", "classify": classi } })
+    axios.get('http://localhost:3000/i_add_classi', { params: { "id": "snaro0123@gmail.com", "classify": classi } })
       .then(function () {
       })
       .catch(function (err) {
         alert(err);
       });
 
+    alert(classi + " 항목이 추가되었습니다.")
     movePage('/i');
   }
 

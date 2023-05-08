@@ -29,7 +29,7 @@ function Gbadd() {
   function gb_add() {
     axios.get('http://localhost:3000/gb_add', {
       params: {
-        "toid": "test", "fromid": "gbtest",
+        "toid": "snaro0123@gmail.com", "toname":"준", "fromid": "gbtest@abc.com", "fromname" : "테스트",
         "comment": comm, "isvoice": isvoice, "filename": filename
       }
     })

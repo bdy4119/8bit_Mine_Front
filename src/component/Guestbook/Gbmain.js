@@ -18,7 +18,7 @@ function Gbmain() {
 
     // Mine 본인 계정에 보이는 axios
     const fetchData = async () => {
-        const resp = await axios.get('http://localhost:3000/gb_list', { params: { "id": "test" } });
+        const resp = await axios.get('http://localhost:3000/gb_list', { params: { "id": "snaro0123@gmail.com" } });
         console.log(resp);
         setGblist(resp.data);
     }
@@ -57,7 +57,7 @@ function Gbmain() {
 
     // 방문자에게 보이는(방문자 본인이 남긴 방명록) axios
     const fetData = async () => {
-        const resp = await axios.get('http://localhost:3000/gb_visit', { params: { "id": "gbtest" } });
+        const resp = await axios.get('http://localhost:3000/gb_visit', { params: { "id": "gbtest@abc.com" } });
         console.log(resp);
         setVilist(resp.data);
     }

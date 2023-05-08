@@ -4,6 +4,7 @@ import { useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 
 function Main(){
+
     const history = useNavigate();
 
     const kakaologout = "https://kauth.kakao.com/oauth/logout?client_id=746d748ae3421ccabe20af6703c55dac&logout_redirect_uri=http://localhost:9001/kakao/logout";
@@ -46,7 +47,7 @@ function Main(){
 
     useEffect(function(){
         Check();
-    }, []);
+    }, [jwt]);
 
     return(
         <div>
