@@ -23,6 +23,8 @@ function Gate() {
             <a href="/microsoft">마소로 접속</a>
             <br />
             <a href="/kakao">카카오로 접속</a>
+            <br />
+            <a href="/naver">네이버로 접속</a>
         </div>
     );
 }
