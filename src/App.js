@@ -59,8 +59,8 @@ import Bgm from "./component/Bgm/bgm";
 import Bgmadd from "./component/Bgm/bgmadd";
 import axios from "axios";
 
-import FileListSample from "./component/My/FileListSample";
-import FileLobby from "./component/My/FileLobby";
+
+import FileMain from "./component/My/FileMain";
 import UpdateFile from "./component/My/UpdateFile";
 import FileUpload from "./component/My/FileUpload";
 
@@ -212,16 +212,13 @@ function App() {
           <Route path="/mine_edi/:pos" element={ <MineEdi /> } />
           <Route path="/chatbot" element={ <Chatbot /> } />
           
-        {<Route path="/FileLobby" element={ <FileLobby /> } />}
-        {<Route path="/Filelist" element={ <FileListSample /> } />}
-        {<Route path="/Filelist/:choice/:search" element={ <FileListSample /> } />}
-        {<Route path="/FileUpload/:project" exact element={ <FileUpload /> } />}
-        {<Route path="/FileUpload/:certificate" exact element={ <FileUpload /> } />}
-        {<Route path="/FileUpload/:portfolio" exact element={ <FileUpload /> } />}
-        {<Route path="/FileUpload/:picture" exact element={ <FileUpload /> } />}
-        {<Route path="/UpdateFile/:seq" exact element={ <UpdateFile /> } />}
-        {<Route path="/FileLobby/:mfuserId" exact element={ <updateFile /> } />}
-        {<Route path="/FileUpload/:mfuserId" exact element={ <updateFile /> } />}
+        <Route path="/Filelist" element={ <FileMain /> } />
+        <Route path="/Filelist/:choice/:search" element={ <FileMain /> } />
+        <Route path="/FileUpload" exact element={ <FileUpload /> } />
+        <Route path="/UpdateFile/:seq" exact element={ <UpdateFile /> } />
+        <Route path="/FileLobby/:mfuserId" exact element={ <updateFile /> } />
+        <Route path="/FileUpload/:mfuserId" exact element={ <updateFile /> } />
+
         </Routes>
 
       </BrowserRouter>

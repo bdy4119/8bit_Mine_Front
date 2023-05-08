@@ -1,18 +1,14 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
-
 export default function UpdateFile() {
-
   let params = useParams();
-
   const [json, setJson] = useState('');
   const [memo, setMemo] = useState('');
-
   console.log(params.seq);
   // 원본 데이터 가져오기
   const fetchData = async() => {
-
     axios.get("http://localhost:3000/fileDetail", {params:{"mfSeq":params.seq}} )
     .then(function(res){
       console.log(res);
@@ -22,17 +18,13 @@ export default function UpdateFile() {
       console.log(err);
     })
   }
-
   const memoChange = (e) => {
     setMemo(e.target.value);
   }
-
    //함수
   const submitBtn = (e) => {
-
   
   }
-
   useEffect(()=>{
     fetchData();
   },[params.seq])
@@ -74,9 +66,6 @@ export default function UpdateFile() {
     
    </form>
     </>
-
     
   )
-
 }
-
