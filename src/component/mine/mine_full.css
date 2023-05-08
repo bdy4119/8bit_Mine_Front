@@ -276,3 +276,15 @@
     top: 440px;
     left: 760px;
 }
+
+#fullquestion {
+    visibility: hidden;
+    width: 897px;
+    height: 597px;
+    position: absolute;
+    padding: 30px;
+    top: 0px;
+    left: 0px;
+    background-color: antiquewhite;
+    z-index: 999;
+}

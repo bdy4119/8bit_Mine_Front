@@ -1,5 +1,6 @@
-import React, {useState, useEffect, useLayoutEffect} from "react";
+import React, {useState, useLayoutEffect} from "react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 import "../mine_back.css"
 import "./mine.css";
@@ -14,57 +15,71 @@ import cat from './images/cat.png';
 
 function Mine_main(){
 
-    const id = localStorage.getItem("id");
-
-    const [b, setB] = useState({});
-    const [a, setA] = useState({});
+    const [b, setB] = useState('');
+    const [a, setA] = useState('');
     const [answer1, setanswer1] = useState('');
     const [answer2, setanswer2] = useState('');
     const [answer3, setanswer3] = useState('');
     const [guestid, setguestid] = useState('');
-    
 
-    useEffect(() => {
-        const mineList = async () => {
-            const response = await axios.post("http://localhost:3000/minelist", null, {
-              params: { "id": id },
-            });
-        
-            const c = {};
-            for (let i = 0; i < response.data.length; i++) {
-              const d = response.data[i];
-              c[d.position] = d;
-            }
-            setB(c);
-            console.log(b);
-        };
+    let params = useParams();
 
-        const checkList = async () => {
-          const yn = {};
-    
-          for (let i = 1; i <= 11; i++) {
-            try {
-              const res = await axios.post(
-                "http://localhost:3000/checkmine",
-                null,
-                { params: { "id": id, "position": i } }
-              );
-              if (res.data === "YES") {
-                yn[i] = true;
-              } else {
-                yn[i] = false;
-              }
-            } catch (err) {
-              alert(err);
-            }
-          }
-          setA(yn);
-          console.log(a);
-        };
-    
+    let mineid = params.id;
+
+    const id = localStorage.getItem("id");
+
+    const mineList = async() => {
+        const response = await axios.post('http://localhost:3000/minelist', null, { params:{"id":mineid} });
+
+        const c = {};
+        for (let i = 0; i < response.data.length; i++) {
+            const d = response.data[i];
+            c[d.position] = d; 
+        }
+        setB(c);
+    }
+
+    const checkList = () => {
+        const yn = {};
+
+        for(let i = 1; i <= 11; i++){
+            axios.post("http://localhost:3000/checkmine", null, { params:{ "id":mineid, "position":i} })
+            .then(res => {
+                if(res.data === "YES"){
+                    yn[i] = true;
+                }else{
+                    yn[i] = false;
+                }
+                })
+                .catch(function(err){
+                alert(err);
+                }) 
+        }
+        setA(yn);
+    }
+
+    useLayoutEffect(()=>{
         mineList();
         checkList();
-      }, []);
+    }, []);
+
+    const updateanswer = () => {
+        axios.post("http://localhost:3000/updateanswer", null, 
+                    { params:{ "userid":guestid, "mineid":mineid, "answer1": answer1, "answer2": answer2, "answer3": answer3 }})
+             .then(res => {
+                console.log(res.data);
+                if(res.data === "YES"){
+                    alert("성공적으로 등록되었습니다");
+                    window.location.reload();
+                }else{
+                    alert("등록되지 않았습니다");
+                }
+             })
+             .catch(function(err){
+                alert(err);
+             }) 
+    }
+
 
     function gostart(e){
         document.getElementsByClassName("child")[0].style.left = "20px";
@@ -131,7 +146,7 @@ function Mine_main(){
 
             setTimeout(function() {
                 document.getElementById("question").style.visibility = "visible";
-                document.getElementsByClassName("textbox")[0].innerHTML = id + "님이 설정하신 질문에 답변을 제출해주세요."
+                document.getElementsByClassName("textbox")[0].innerHTML = mineid + "님이 설정하신 질문에 답변을 제출해주세요."
             }, 3000);
         }
     }
@@ -200,9 +215,14 @@ function Mine_main(){
         var audio = document.getElementById("audio");
         audio.pause();
     }
+
+    function gofull(e){
+        window.location.href = '/guest_mine_full/' + 'qwe46200@naver.com';
+    }
     
     return (
         <div id="back">
+
             <div id="topbar">
                 <div id="barbtns">
                     <div id="ibtn">I</div>
@@ -219,12 +239,6 @@ function Mine_main(){
                     <audio id="audio" src={bgm} />
                     <audio id="blop" src={blop} />
                     <audio id="clear" src={clear} />
-
-                    <div>
-                        <button onClick={(e) => {window.location.href = "/mine"}}>사용자 모드</button>
-                        <button onClick={(e) => {window.location.href = "/mine_edi/1"}}>에디터 모드</button>
-                        <button onClick={(e) => {window.location.href = "/mine_guestbook"}}>방명록</button>
-                    </div>
                 </div>
 
                 <div id="game">
@@ -236,7 +250,7 @@ function Mine_main(){
                     <div className="keybutton" onClick={gokey}></div>
                     <div className="play" onClick={play}></div>
                     <div className="pause" onClick={pause}></div>
-                    <div className="showfull" onClick={(e) => {window.location.href = "/mine_full"}}></div>
+                    <div className="showfull" onClick={gofull}></div>
 
                     <div className="container">
                         <div className="start" onClick={gostart}></div>
@@ -249,7 +263,7 @@ function Mine_main(){
 
                         <div className="child">
                             { a[9] && (<img src={process.env.PUBLIC_URL + "/img/" + b[9].newfilename} alt="child" width="40px"/>)}
-                            {!a[9] && (<img src={cat} alt="cat" width="40px"/>)}
+                            { !a[9] && (<img src={cat} alt="cat" width="40px"/>)}
                         </div>
                         <div className="portal"></div>
                         <div className="victory"><img src={logo} alt="vic"/></div>
@@ -292,13 +306,13 @@ function Mine_main(){
                                         3. {b[11].imgtext}
                                         <br/><input value={answer3} onChange={(e)=>setanswer3(e.target.value)}></input><br/><br/>
                                     </div>
-                                    <button>제출</button>
+                                    <button onClick={updateanswer}>제출</button>
                                 </div>
                             )}
                         </div>
                     </div>
 
-                    <div className="textbox">START 버튼을 눌러주세요</div>
+                    <div className="textbox">Welcome, {id}! START 버튼을 눌러주세요</div>
                     <div><input id="keybutton" onKeyDown={handleKeyPress} /></div>
                 </div>
 

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, {useState, useLayoutEffect} from "react";
+import { useParams } from "react-router-dom";
 
 import "./mine_full.css";
 import bgm from './images/bgm.mp3';
@@ -20,14 +21,18 @@ function Mine_full(){
     const [answer3, setanswer3] = useState('');
     const [guestid, setguestid] = useState('');
 
+    let params = useParams();
+
+    let mineid = params.id;
+
     const id = localStorage.getItem("id");
 
     const close = () => {
-        window.location.href = "/mine"
+        window.location.href = "/guest_mine" + '/qwe46200@naver.com';
     };
 
     const mineList = async() => {
-        const response = await axios.post('http://localhost:3000/minelist', null, { params:{"id":id} });
+        const response = await axios.post('http://localhost:3000/minelist', null, { params:{"id":mineid} });
 
         const c = {};
         for (let i = 0; i < response.data.length; i++) {
@@ -42,7 +47,7 @@ function Mine_full(){
         const yn = {};
 
         for(let i = 1; i <= 11; i++){
-            axios.post("http://localhost:3000/checkmine", null, { params:{ "id":id, "position":i} })
+            axios.post("http://localhost:3000/checkmine", null, { params:{ "id":mineid, "position":i} })
             .then(res => {
                 if(res.data === "YES"){
                     yn[i] = true;
@@ -63,6 +68,23 @@ function Mine_full(){
         checkList();
     }, []);
 
+    const updateanswer = () => {
+        axios.post("http://localhost:3000/updateanswer", null, 
+                    { params:{ "userid":guestid, "mineid":mineid, "answer1": answer1, "answer2": answer2, "answer3": answer3 }})
+             .then(res => {
+                console.log(res.data);
+                if(res.data === "YES"){
+                    alert("성공적으로 등록되었습니다");
+                    window.location.reload();
+                }else{
+                    alert("등록되지 않았습니다");
+                }
+             })
+             .catch(function(err){
+                alert(err);
+             }) 
+    }
+
 
     function gostart(e){
 
@@ -71,7 +93,6 @@ function Mine_full(){
 
         document.getElementsByClassName("fullstart")[0].style.visibility = "hidden";
         document.getElementsByClassName("fullvictory")[0].style.visibility = "hidden";
-        document.getElementById("fullquestion").style.visibility = "hidden";
 
         if (a[9]){
             document.getElementsByClassName("fulltextbox")[0].innerHTML = b[9].imgtext;
@@ -130,7 +151,7 @@ function Mine_full(){
 
             setTimeout(function() {
                 document.getElementById("fullquestion").style.visibility = "visible";
-                document.getElementsByClassName("fulltextbox")[0].innerHTML = id + "님이 설정하신 질문에 답변을 제출해주세요."
+                document.getElementsByClassName("fulltextbox")[0].innerHTML = mineid + "님이 설정하신 질문에 답변을 제출해주세요."
             }, 3000);
         }
     }
@@ -271,13 +292,13 @@ function Mine_full(){
                                         3. {b[11].imgtext}
                                         <br/><input value={answer3} onChange={(e)=>setanswer3(e.target.value)}></input><br/><br/>
                                     </div>
-                                    <button>제출</button>
+                                    <button onClick={updateanswer}>제출</button>
                                 </div>
                             )}
                     </div>
                 </div>
 
-                <div className="fulltextbox">START 버튼을 눌러주세요</div>
+                <div className="fulltextbox">Welcome, {id}! START 버튼을 눌러주세요</div>
                 <div><input id="keybutton" onKeyDown={handleKeyPress} /></div>
             </div>
         </div>
