@@ -3,6 +3,9 @@ import { format } from "date-fns";
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import "../mine_back.css"
+import Topbar from "../main/topbar";
+
 function DiaryWrite() {
   let history = useNavigate();  // 변수에 useNavigate 할당
 
@@ -103,46 +106,60 @@ function DiaryWrite() {
   }
   
   return(
-    <div>
-      <h1>일지 추가</h1>
-      <form name="frm" onSubmit={handleSubmit} encType="multipart/form-data">
-        <table border='1px' id="backwhite">
-          <colgroup>
-            <col width="100px"/>
-            <col width="500px"/>
-          </colgroup>
-          <tbody>
-            <tr>
-              <th>약속날짜</th>
-              <td>
-                <input name="rdate" value={rdateStr} onChange={(e)=>setRdate(e.target.value)}/>
-              </td>
-            </tr>
-            <tr>
-              <th>제목</th>
-              <td>
-                <input name="title" value={title} onChange={(e)=>setTitle(e.target.value)}/>
-              </td>
-            </tr>
-            <tr>
-                <img src={`${imgFile}`} alt="" style={{width:"200px"}} />
-                <br/>
-                <input type="file" name='uploadFile' onChange={imageLoad} ref={imgRef} />
-                <br/>
-            </tr>
-            <tr>
-              <th>내용</th>
-              <td>
-                <input name="content" value={content} onChange={(e)=>setContent(e.target.value)}/>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <div id="back">
+            <Topbar/>
+            <div id="topbar">
+                <div id="barbtns">
+                    <div id="ibtn" onClick={(e) => { window.location.href = "/i" }}>I</div>
+                    <div id="mybtn" onClick={(e) => { window.location.href = "/Filelist" }}>MY</div>
+                    <div id="mebtn" onClick={(e) => { window.location.href = "/me" }}>ME</div>
+                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
 
-      <br/>
-      <button type="submit">작성완료</button>
-      </form>
+                    <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
+                    <div id="bookbtn" onClick={(e) => { window.location.href = "/gbmain" }}>GUEST</div>
+                </div>
+            </div>
+            <div id="toolbox">
+              <h1>일지 추가</h1>
+              <form name="frm" onSubmit={handleSubmit} encType="multipart/form-data">
+                <table border='1px' id="backwhite">
+                  <colgroup>
+                    <col width="100px"/>
+                    <col width="500px"/>
+                  </colgroup>
+                  <tbody>
+                    <tr>
+                      <th>약속날짜</th>
+                      <td>
+                        <input name="rdate" value={rdateStr} onChange={(e)=>setRdate(e.target.value)}/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>제목</th>
+                      <td>
+                        <input name="title" value={title} onChange={(e)=>setTitle(e.target.value)}/>
+                      </td>
+                    </tr>
+                    <tr>
+                        <img src={`${imgFile}`} alt="" style={{width:"200px"}} />
+                        <br/>
+                        <input type="file" name='uploadFile' onChange={imageLoad} ref={imgRef} />
+                        <br/>
+                    </tr>
+                    <tr>
+                      <th>내용</th>
+                      <td>
+                        <input name="content" value={content} onChange={(e)=>setContent(e.target.value)}/>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              <br/>
+              <button type="submit">작성완료</button>
+              </form>
       
+            </div>
     </div>
   )
 }

@@ -2,6 +2,9 @@ import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import "../mine_back.css"
+import Topbar from "../main/topbar";
+
 
 
 import "./card.css";
@@ -94,6 +97,20 @@ function InformWrite() {
 
 
   return(
+    <div id="back">
+            <Topbar/>
+            <div id="topbar">
+                <div id="barbtns">
+                    <div id="ibtn" onClick={(e) => { window.location.href = "/i" }}>I</div>
+                    <div id="mybtn" onClick={(e) => { window.location.href = "/Filelist" }}>MY</div>
+                    <div id="mebtn" onClick={(e) => { window.location.href = "/me" }}>ME</div>
+                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
+
+                    <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
+                    <div id="bookbtn" onClick={(e) => { window.location.href = "/gbmain" }}>GUEST</div>
+                </div>
+            </div>
+            <div id="toolbox">
     <div className="middle">
 
         <div style={{backgroundColor:"#9CA8F0", marginTop:"70px", height:"600px", width:"900px", fontSize:"20px"}}>
@@ -143,6 +160,8 @@ function InformWrite() {
           
           </form>
         </div>
+    </div>
+    </div>
     </div>
   );
 }

@@ -89,6 +89,12 @@ function Chatbot({ setModalOpen}){
         // chatbox 에 추가
     }
 
+    const activeEnter = (e) => {
+        if(e.key === "Enter") {
+            sendBtnClick();
+        }
+      }
+
 
     return (
         <div className="wrapper">
@@ -103,7 +109,7 @@ function Chatbot({ setModalOpen}){
 
             <div className="myform">
                 <input type="text" className="usermsgwrite" 
-                    value={umessage} onChange={(e)=>setUmessage(e.target.value)} placeholder="메시지 기입" />
+                    value={umessage} onChange={(e)=>setUmessage(e.target.value)} onKeyDown={(e) => activeEnter(e)} placeholder="메시지 기입" />
                 
                 <input type="button" className="submitmsg" onClick={sendBtnClick} value="send" />
             </div>

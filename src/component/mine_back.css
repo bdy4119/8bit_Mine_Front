@@ -1,7 +1,22 @@
+#logo {
+  position: absolute;
+  left: 50%;
+  margin-left:-95px;
+  top: 3%;
+  z-index: 999;
+}
+
+#topbtns{
+  position: absolute;
+  right: 5%;
+  top: 10%;
+  z-index: 999;
+}
+
 #topbar {
   position: relative;
   left: 5%;
-  height: 15%;
+  height: 10%;
   width: 90%;
   text-align: center;
   margin: 0;
@@ -10,17 +25,19 @@
 #barbtns {
   float:left;
   position: relative;
-  top: 50%;
+  top: 30%;
   left: 1%;
   width: 33.3%;
   text-align: left;
 }
 
+
+
 #ibtn {
   float:left;
   margin-right: 10px;
   width: 50px;
-  height: 100px;
+  height: 70px;
   text-align: center;
   border-radius: 20%;
   background-color: mediumpurple;
@@ -30,7 +47,7 @@
   float:left;
   margin-right: 10px;
   width: 50px;
-  height: 100px;
+  height: 70px;
   text-align: center;
   border-radius: 20%;
   background-color: mediumpurple;
@@ -40,7 +57,7 @@
   float:left;
   margin-right: 10px;
   width: 50px;
-  height: 100px;
+  height: 70px;
   text-align: center;
   border-radius: 20%;
   background-color: mediumpurple;
@@ -50,7 +67,7 @@
   float:left;
   margin-right: 30px;
   width: 50px;
-  height: 100px;
+  height: 70px;
   text-align: center;
   border-radius: 20%;
   background-color: mediumpurple;
@@ -60,7 +77,7 @@
   float:left;
   margin-right: 10px;
   width: 50px;
-  height: 100px;
+  height: 70px;
   text-align: center;
   border-radius: 20%;
   background-color: mediumpurple;
@@ -69,7 +86,7 @@
 #bookbtn {
   float:left;
   width: 50px;
-  height: 100px;
+  height: 70px;
   text-align: center;
   border-radius: 20%;
   background-color: mediumpurple;
@@ -77,7 +94,7 @@
 
 
 #toolbox {
-  position: relative;
+  position: absolute;
   left: 5%;
   width: 90%;
   height: 80%;

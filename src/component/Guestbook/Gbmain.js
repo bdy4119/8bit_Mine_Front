@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../main_back.css"
 import Topbar from "../main/topbar";
 
+
 function Gbmain() {
 
     const [gblist, setGblist] = useState([]);
@@ -81,10 +82,20 @@ function Gbmain() {
     }, []);
 
     return (
-        <div>
-            <Topbar />
+        <div id="back">
+            <Topbar/>
+            <div id="topbar">
+                <div id="barbtns">
+                    <div id="ibtn" onClick={(e) => { window.location.href = "/i" }}>I</div>
+                    <div id="mybtn" onClick={(e) => { window.location.href = "/Filelist" }}>MY</div>
+                    <div id="mebtn" onClick={(e) => { window.location.href = "/me" }}>ME</div>
+                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
 
-            <div id="backwhite">
+                    <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
+                    <div id="bookbtn" onClick={(e) => { window.location.href = "/gbmain" }}>GUEST</div>
+                </div>
+            </div>
+            <div id="toolbox">
                 <h3>방명록 main</h3>
                 <p>[1] Mine 주인한테 보이는 방명록들(타인이 나에게 쓴)</p>
                 <table border="1">

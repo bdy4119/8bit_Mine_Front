@@ -3,11 +3,11 @@ import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 
 import "./mine_edi.css";
-import logo from './images/logo.png';
 import stage1 from './images/stage1.png';
 import stage2 from './images/stage2.png';
 import stage3 from './images/stage3.png';
 import "../mine_back.css"
+import Topbar from "../main/topbar";
 
 function Mine_edi(){
 
@@ -270,15 +270,16 @@ function Mine_edi(){
 
     return (
         <div id="back">
+            <Topbar/>
             <div id="topbar">
                 <div id="barbtns">
-                    <div id="ibtn">I</div>
-                    <div id="mybtn">MY</div>
-                    <div id="mebtn">ME</div>
-                    <div id="mine_btn">MINE</div>
+                    <div id="ibtn" onClick={(e) => { window.location.href = "/i" }}>I</div>
+                    <div id="mybtn" onClick={(e) => { window.location.href = "/Filelist" }}>MY</div>
+                    <div id="mebtn" onClick={(e) => { window.location.href = "/me" }}>ME</div>
+                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
 
-                    <div id="cardbtn">CARD</div>
-                    <div id="bookbtn">GUEST</div>
+                    <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
+                    <div id="bookbtn" onClick={(e) => { window.location.href = "/gbmain" }}>GUEST</div>
                 </div>
             </div>
             <div id="toolbox">
