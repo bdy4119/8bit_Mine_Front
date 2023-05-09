@@ -17,7 +17,7 @@ function Main(){
     const [profPic, setProfPic] = useState('');
     const history = useNavigate();
 
-    const jwt = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     const showModal = () => {
         setModalOpen(true);
@@ -32,12 +32,10 @@ function Main(){
     }
 
     function getUser() {
-        if (jwt === null) {
+        if (token === null) {
             history("/");
         }
         else {
-            const token = jwt.split('"')[3];
-
             axios.get("http://localhost:3000/show", { params: { "token": token } })
                 .then(function (resp) {
                     setProfMsg(resp.data.profMsg);
@@ -50,12 +48,10 @@ function Main(){
     }
 
     function Check() {
-        if (jwt === null) {
+        if (token === null) {
             window.location.href = "/";
         }
         else {
-            const token = jwt.split('"')[3];
-
             axios.get("http://localhost:3000/authcheck", { params: { "token": token } })
                 .then(function (resp) {
                     if (resp.data === 0) {

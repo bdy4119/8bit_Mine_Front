@@ -5,11 +5,11 @@ function Gate() {
     const history = useNavigate();
 
     useEffect(function () {
-        const jwt = localStorage.getItem("token");
+        const token = localStorage.getItem("token");
 
         document.getElementById("backtop").style.visibility = "hidden";
 
-        if(jwt !== null){
+        if(token !== null){
             document.getElementById("backtop").style.visibility = "visible";
             history("/main");
         }

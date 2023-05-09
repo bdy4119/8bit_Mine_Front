@@ -13,7 +13,8 @@ const GoogleButton = () => {
     const onSuccess = (response) => {
         axios.get("http://localhost:3000/callback/google", {params:{"id":response.profileObj.googleId, "email":response.profileObj.email}})
         .then(function(resp){
-          localStorage.setItem("token", JSON.stringify(resp));
+          localStorage.setItem("token", JSON.stringify(resp.data.token).replace(/\"/gi, ""));
+					localStorage.setItem("id", JSON.stringify(resp.data.email).replace(/\"/gi, ""));
           document.getElementById("backtop").style.visibility = "visible";
           history("/main");
         })
@@ -25,9 +26,9 @@ const GoogleButton = () => {
     };
 
     useEffect(function(){
-      const jwt = localStorage.getItem("token");
+      const token = localStorage.getItem("token");
 
-      if(jwt !== null){
+      if(token !== null){
         document.getElementById("backtop").style.visibility = "visible";
         history("/main");
       }

@@ -7,6 +7,7 @@ function LogoutAfter(){
 
     useEffect(function(){
         localStorage.removeItem("token");
+        localStorage.removeItem("id");
         document.getElementById("backtop").style.visibility = "hidden";
         history("/");
     }, [])

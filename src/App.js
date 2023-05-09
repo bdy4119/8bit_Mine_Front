@@ -11,7 +11,6 @@ import NaverLogin from './component/login/naverLogin';
 import NaverWait from './component/login/naverWait';
 import KakaoLogin from './component/login/kakaoLogin';
 import KakaoWait from './component/login/kakaoWait';
-import MainPage from './component/login/mainPage';
 import LogoutAfter from './component/login/logoutAfter';
 import Withdrawal from './component/login/withdrawal';
 import Edit from './component/login/edit';
@@ -157,7 +156,6 @@ function App() {
           <Route path='/callback/kakao/*' element={<KakaoWait />} />
           <Route path='/naver' element={<NaverLogin />} />
           <Route path='/callback/naver/*' element={<NaverWait />} />
-          <Route path='/mainpage' element={<MainPage />} />
           <Route path='/kakao/logout' element={<LogoutAfter />} />
           <Route path='/kakao/withdrawal' element={<Withdrawal />} />
           <Route path='/edit' element={<Edit />} />

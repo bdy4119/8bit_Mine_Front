@@ -11,7 +11,8 @@ function Kakaowait(){
     function sendcode(){
         axios.get("http://localhost:3000/callback/kakao", {params:{"code":code}})
         .then(function(resp){
-            localStorage.setItem("token", JSON.stringify(resp));
+            localStorage.setItem("token", JSON.stringify(resp.data.token).replace(/\"/gi, ""));
+			localStorage.setItem("id", JSON.stringify(resp.data.email).replace(/\"/gi, ""));
             document.getElementById("backtop").style.visibility = "visible";
             history("/main");
         })
