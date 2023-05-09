@@ -9,9 +9,9 @@ function KakaoAPI(){
     const KAKAO_AUTH_URI = "https://kauth.kakao.com/oauth/authorize?client_id=746d748ae3421ccabe20af6703c55dac&redirect_uri=http://localhost:9001/callback/kakao&response_type=code";
 
     useEffect(function(){
-        const jwt = localStorage.getItem("token");
+        const token = localStorage.getItem("token");
 
-        if(jwt !== null){
+        if(token !== null){
             document.getElementById("backtop").style.visibility = "visible";
             history("/main");
         }

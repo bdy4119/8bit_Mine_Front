@@ -12,7 +12,8 @@ function Microsoft(){
     const callback = (error, response) => {
         axios.get("http://localhost:3000/callback/microsoft", {params:{"id":response.uniqueId, "email":response.idTokenClaims.preferred_username}})
         .then(function(resp){
-            localStorage.setItem("token", JSON.stringify(resp));
+            localStorage.setItem("token", JSON.stringify(resp.data.token).replace(/\"/gi, ""));
+			localStorage.setItem("id", JSON.stringify(resp.data.email).replace(/\"/gi, ""));
             document.getElementById("backtop").style.visibility = "visible";
             history("/main");
         })
@@ -22,9 +23,9 @@ function Microsoft(){
     };
 
     useEffect(function(){
-        const jwt = localStorage.getItem("token");
+        const token = localStorage.getItem("token");
 
-        if(jwt !== null){
+        if(token !== null){
             document.getElementById("backtop").style.visibility = "visible";
             history("/main");
         }

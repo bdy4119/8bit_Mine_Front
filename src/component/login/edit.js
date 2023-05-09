@@ -191,6 +191,8 @@ function Edit() {
             <br />
             <button type="button" onClick={editAf}>수정</button>
             <br />
+            <button onClick={(e) => { window.location.href = "/kakao/withdrawal" }}>회원탈퇴</button>
+            <br />
             <button type="button" onClick={goback}>돌아가기</button>
         </div>
     );

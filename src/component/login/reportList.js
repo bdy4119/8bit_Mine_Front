@@ -6,15 +6,13 @@ import { useNavigate } from "react-router-dom";
 function ReportList(){
     const history = useNavigate();
 
-    const jwt = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     function Check(){
-        if(jwt === null){
+        if(token === null){
             history("/");
         }
         else{
-            const token = jwt.split('"')[3];
-
             axios.get("http://localhost:3000/authcheck", {params:{"token":token}})
             .then(function(resp){
                 if(resp.data === 1){
