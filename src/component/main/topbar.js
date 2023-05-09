@@ -23,7 +23,7 @@ function Topbar() {
     return (
         <div>
             <div id="logo" onClick={() => {movePage('/main')}}>
-                <img src={logo} alt="no" height="80px" />
+                <img src={logo} alt="no" width="190px" height="80px" />
             </div>
 
             <div id="topbtns">

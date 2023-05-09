@@ -225,11 +225,7 @@ function Mine_main(){
 
             <div id="topbar">
                 <div id="barbtns">
-                    <div id="ibtn">I</div>
-                    <div id="mybtn">MY</div>
-                    <div id="mebtn">ME</div>
-                    <div id="mine_btn">MINE</div>
-
+                    <div id="minebtn">MINE</div>
                     <div id="cardbtn">CARD</div>
                     <div id="bookbtn">GUEST</div>
                 </div>

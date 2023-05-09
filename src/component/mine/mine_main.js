@@ -2,6 +2,7 @@ import React, {useState, useEffect, useLayoutEffect} from "react";
 import axios from "axios";
 
 import "../mine_back.css"
+import Topbar from "../main/topbar";
 import "./mine.css";
 import bgm from './images/bgm.mp3';
 import blop from './images/blop.mp3';
@@ -11,7 +12,6 @@ import stage2 from './images/stage2.png';
 import stage3 from './images/stage3.png';
 import logo from './images/logo.png';
 import cat from './images/cat.png';
-import Topbar from "../main/topbar";
 
 function Mine_main(){
 
@@ -207,13 +207,13 @@ function Mine_main(){
             <Topbar/>
             <div id="topbar">
                 <div id="barbtns">
-                    <div id="ibtn">I</div>
-                    <div id="mybtn">MY</div>
-                    <div id="mebtn">ME</div>
-                    <div id="mine_btn">MINE</div>
+                    <div id="ibtn" onClick={(e) => { window.location.href = "/i" }}>I</div>
+                    <div id="mybtn" onClick={(e) => { window.location.href = "/Filelist" }}>MY</div>
+                    <div id="mebtn" onClick={(e) => { window.location.href = "/me" }}>ME</div>
+                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
 
-                    <div id="cardbtn">CARD</div>
-                    <div id="bookbtn">GUEST</div>
+                    <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
+                    <div id="bookbtn" onClick={(e) => { window.location.href = "/gbmain" }}>GUEST</div>
                 </div>
             </div>
             <div id="toolbox">

@@ -2,16 +2,6 @@
     box-sizing: border-box;
 }
 
-#mine_btn {
-    float:left;
-    margin-right: 30px;
-    width: 50px;
-    height: 100px;
-    text-align: center;
-    border-radius: 20%;
-    background-color: white;
-}
-
 .title {
     width: 60%;
     text-align: center;
