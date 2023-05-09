@@ -28,7 +28,7 @@ function Mine_main(){
     useEffect(() => {
         const mineList = async () => {
             const response = await axios.post("http://localhost:3000/minelist", null, {
-              params: { "id": "123" },
+              params: { "id": "snaro0123@gmail.com" },
             });
         
             const c = {};
@@ -48,7 +48,7 @@ function Mine_main(){
               const res = await axios.post(
                 "http://localhost:3000/checkmine",
                 null,
-                { params: { "id": "123", "position": i } }
+                { params: { "id": "snaro0123@gmail.com", "position": i } }
               );
               if (res.data === "YES") {
                 yn[i] = true;

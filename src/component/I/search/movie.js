@@ -50,7 +50,7 @@ function Movie() {
 
 
     return (
-        <div>
+        <div id="backwhite">
             <input placeholder="영화 정보를 입력하세요." onChange={(e) => { setMovie(e.target.value); }} />
             <button onClick={findMovie}>검색</button>
             <br />

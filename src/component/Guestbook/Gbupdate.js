@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ReactMediaRecorder } from "react-media-recorder";
 
 import "../main_back.css"
+import Topbar from "../main/topbar";
 
 function Gbupdate() {
 
@@ -86,43 +87,46 @@ function Gbupdate() {
     }
 
     return (
-        <div id="backwhite">
-            <h2>방명록 수정</h2>
-            <table border="1">
-                <thead />
-                <tbody>
-                    <tr>
-                        <th>작성자</th>
-                        <td>{id}</td>
-                    </tr>
-                    <tr>
-                        <th>작성일시</th>
-                        <td>{regdate}</td>
-                    </tr>
-                    <tr>
-                        <th>내용</th>
-                        <td><textarea defaultValue={comm} onChange={(e) => { setComm(e.target.value) }}></textarea></td>
-                    </tr>
-                    <tr>
-                        <th>음성파일</th>
-                        <td><audio id="aud" src={`${process.env.PUBLIC_URL}/voice/${filename}`} controls /></td>
-                    </tr>
-                    <tr>
-                        <th>음성파일 관리</th>
-                        <td><button onClick={voice_del}>파일 삭제</button><br />
-                            <form name="frm" onSubmit={fileUpload} encType="multipart/form-data">
-                                <input type="file" name="uploadFile" accept="*" />
-                                <input type="submit" value="파일 수정" />
-                            </form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colSpan="2"><button onClick={gb_upd}>수정하기</button></td>
-                    </tr>
-                </tbody>
-            </table>
-            <br />
-           <p onClick={changeVal}>음성 파일을 새로 녹음하고 싶어요.</p>
+        <div>
+            <Topbar/>
+            <div id="backwhite">
+                <h2>방명록 수정</h2>
+                <table border="1">
+                    <thead />
+                    <tbody>
+                        <tr>
+                            <th>작성자</th>
+                            <td>{id}</td>
+                        </tr>
+                        <tr>
+                            <th>작성일시</th>
+                            <td>{regdate}</td>
+                        </tr>
+                        <tr>
+                            <th>내용</th>
+                            <td><textarea defaultValue={comm} onChange={(e) => { setComm(e.target.value) }}></textarea></td>
+                        </tr>
+                        <tr>
+                            <th>음성파일</th>
+                            <td><audio id="aud" src={`${process.env.PUBLIC_URL}/voice/${filename}`} controls /></td>
+                        </tr>
+                        <tr>
+                            <th>음성파일 관리</th>
+                            <td><button onClick={voice_del}>파일 삭제</button><br />
+                                <form name="frm" onSubmit={fileUpload} encType="multipart/form-data">
+                                    <input type="file" name="uploadFile" accept="*" />
+                                    <input type="submit" value="파일 수정" />
+                                </form>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colSpan="2"><button onClick={gb_upd}>수정하기</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br />
+                <p onClick={changeVal}>음성 파일을 새로 녹음하고 싶어요.</p>
+            </div>
         </div>
     );
 }

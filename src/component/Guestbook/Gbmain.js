@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../main_back.css"
+import Topbar from "../main/topbar";
 
 function Gbmain() {
 
@@ -49,7 +50,7 @@ function Gbmain() {
                 <td>{props.cnt}</td>
                 <td>{props.obj.fromid}</td>
                 <td>{props.obj.comment}</td>
-                <td><audio src={`${process.env.PUBLIC_URL}/voice/${props.obj.filename}`} controls/></td>
+                <td><audio src={`${process.env.PUBLIC_URL}/voice/${props.obj.filename}`} controls /></td>
                 <td><button onClick={() => gb_del(`${props.obj.seq}`)}>삭제</button></td>
             </tr>
         );
@@ -67,7 +68,7 @@ function Gbmain() {
             <tr>
                 <td>{props.cnt}</td>
                 <td>{props.obj.comment}</td>
-                <td><audio src={`${process.env.PUBLIC_URL}/voice/${props.obj.filename}`} controls/></td>
+                <td><audio src={`${process.env.PUBLIC_URL}/voice/${props.obj.filename}`} controls /></td>
                 <td><button onClick={() => gb_del(`${props.obj.seq}`)}>삭제</button></td>
                 <td><button onClick={() => go_upd(`${props.obj.seq}`)}>수정</button></td>
             </tr>
@@ -80,59 +81,62 @@ function Gbmain() {
     }, []);
 
     return (
-        <div id="backwhite">
-            <h3>방명록 main</h3>
+        <div>
+            <Topbar />
 
-            <p>[1] Mine 주인한테 보이는 방명록들(타인이 나에게 쓴)</p>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>작성자</th>
-                        <th>내용</th>
-                        <th>음성</th>
-                        <th>관리</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        gblist.map(function (object, i) {
-                            return (
-                                <TableRow obj={object} key={i} cnt={i + 1} />
-                                /* key를 지정 안하면, Each child in a list should have a unique "key" prop. 가 나옴 */
-                            )
-                        })
-                    }
-                </tbody>
-            </table>
-            <br /><br />
+            <div id="backwhite">
+                <h3>방명록 main</h3>
+                <p>[1] Mine 주인한테 보이는 방명록들(타인이 나에게 쓴)</p>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>작성자</th>
+                            <th>내용</th>
+                            <th>음성</th>
+                            <th>관리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            gblist.map(function (object, i) {
+                                return (
+                                    <TableRow obj={object} key={i} cnt={i + 1} />
+                                    /* key를 지정 안하면, Each child in a list should have a unique "key" prop. 가 나옴 */
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
+                <br /><br />
 
-            <p>[2] 방문한 사람한테 보이는 방명록 (내가 해당 Mine 주인에게 쓴)</p>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>내용</th>
-                        <th>음성</th>
-                        <th colSpan="2">관리</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        vilist.map(function (object, i) {
-                            return (
-                                <TableRow2 obj={object} key={i} cnt={i + 1} />
-                                /* key를 지정 안하면, Each child in a list should have a unique "key" prop. 가 나옴 */
-                            )
-                        })
-                    }
-                    <tr>
-                        <td colSpan="4"><button onClick={go_gbadd}>방명록 쓰기</button></td>
-                    </tr>
-                </tbody>
-            </table>
+                <p>[2] 방문한 사람한테 보이는 방명록 (내가 해당 Mine 주인에게 쓴)</p>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>내용</th>
+                            <th>음성</th>
+                            <th colSpan="2">관리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            vilist.map(function (object, i) {
+                                return (
+                                    <TableRow2 obj={object} key={i} cnt={i + 1} />
+                                    /* key를 지정 안하면, Each child in a list should have a unique "key" prop. 가 나옴 */
+                                )
+                            })
+                        }
+                        <tr>
+                            <td colSpan="4"><button onClick={go_gbadd}>방명록 쓰기</button></td>
+                        </tr>
+                    </tbody>
+                </table>
 
 
+            </div>
         </div>
     );
 }
