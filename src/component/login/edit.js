@@ -17,6 +17,8 @@ function Edit() {
     const [address, setAddress] = useState('');
     const [birthdate, setBirthdate] = useState('');
 
+    const [noprof, setNoprof] = useState(false);
+
     const jwt = localStorage.getItem("token");
 
     function Check() {
@@ -80,6 +82,7 @@ function Edit() {
 
     function editAf() {
         const token = jwt.split('"')[3];
+        const img = process.env.PUBLIC_URL
         let formData = new FormData();
         formData.append("name", userName);
         formData.append("birthdate", birthdate);
@@ -87,15 +90,55 @@ function Edit() {
         formData.append("address", address);
         formData.append("profMsg", profMsg);
         formData.append("token", token);
-        formData.append("uploadFile", document.frm.uploadFile.files[0]);
 
-        axios.post("http://localhost:3000/edit", formData)
-            .then(function (resp) {
-                alert(resp.data);
+        // 사진 변경 있을 때
+        if (document.frm.uploadFile.files[0]) {
+            formData.append("uploadFile", document.frm.uploadFile.files[0]);
+            axios.post("http://localhost:3000/edit", formData)
+                .then(function (resp) {
+                    alert(resp.data);
+                })
+                .catch(function (err) {
+                    alert(err);
+                })
+
+            // 사진 삭제했을 때
+        } else if (noprof) {
+            axios.get("http://localhost:3000/edit_n", {
+                params: {
+                    "name": userName, "birthdate": birthdate,
+                    "job": job, "address": address, "profMsg": profMsg, "token": token
+                }
             })
-            .catch(function (err) {
-                alert(err);
+                .then(function (resp) {
+                    alert(resp.data);
+                })
+                .catch(function (err) {
+                    alert(err);
+                })
+
+            // 사진 변경 없을 때
+        } else {
+            axios.get("http://localhost:3000/edit_nc", {
+                params: {
+                    "name": userName, "birthdate": birthdate,
+                    "job": job, "address": address, "profMsg": profMsg, "token": token
+                }
             })
+                .then(function (resp) {
+                    alert(resp.data);
+                })
+                .catch(function (err) {
+                    alert(err);
+                })
+        }
+
+
+    }
+
+    function delProf() {
+        document.getElementById("prof").setAttribute('src', logo);
+        setNoprof(true);
     }
 
     function goback() {
@@ -138,12 +181,14 @@ function Edit() {
             <input type="text" value={profMsg} onChange={(e) => setProfMsg(e.target.value)} />
             <br />
             프로필사진: &nbsp;
-            <img src={`${process.env.PUBLIC_URL}/profPic/${profPic}`} alt="X" width="200px" height="200px"/>
+            <img id="prof" src={`${process.env.PUBLIC_URL}/profPic/${profPic}`} alt="X" width="200px" height="200px" />
             <form name="frm" encType="multipart/form-data">
-                <input type="file" name="uploadFile" accept="*" />
+                <input type="file" onClick={() => { setNoprof(false) }} name="uploadFile" accept="*" />
             </form>
+            <button onClick={delProf}>사진 삭제</button>
+            <br /><br />
+            <hr />
             <br />
-
             <button type="button" onClick={editAf}>수정</button>
             <br />
             <button type="button" onClick={goback}>돌아가기</button>

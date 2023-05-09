@@ -56,7 +56,7 @@ console.log("/Business-img/" + businessDetail.thumbnail);
               <div>
                 <form name="frm" encType="multipart/form-data">
                         
-                  <img src={`/Business-img/${businessDetail.thumbnail}`} alt="프로필 이미지" style={{width:"200px"}} />    
+                  <img src={`${process.env.PUBLIC_URL}/Business-img/${businessDetail.thumbnail}`} alt="프로필 이미지" style={{width:"200px"}} />    
                   <br/>
                 </form>
               </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../main_back.css"
+import Topbar from "../main/topbar";
 
 function I_add() {
 
@@ -71,51 +72,54 @@ function I_add() {
   }
 
   return (
-    <div id="backwhite">
-      <table border="1">
-        <colgroup>
-          <col width="200px" /><col width="200px" />
-        </colgroup>
-        <thead>
-          <tr>
-            <td colSpan="2"><input placeholder="분류 내용 입력" style={{ width: "400px" }} onChange={(e) => { setClassi(e.target.value) }} /></td>
-          </tr>
-        </thead>
+    <div>
+      <Topbar />
+      <div id="backwhite">
+        <table border="1">
+          <colgroup>
+            <col width="200px" /><col width="200px" />
+          </colgroup>
+          <thead>
+            <tr>
+              <td colSpan="2"><input placeholder="분류 내용 입력" style={{ width: "400px" }} onChange={(e) => { setClassi(e.target.value) }} /></td>
+            </tr>
+          </thead>
 
-        <tbody>
-          <tr>
-            <td><input placeholder="항목1" onChange={(e) => { setAns1(e.target.value) }} /></td>
-            <td><input placeholder="상세내용" onChange={(e) => { setDet1(e.target.value) }} /></td>
-          </tr>
-          <tr>
-            <td><input placeholder="항목2" onChange={(e) => { setAns2(e.target.value) }} /></td>
-            <td><input placeholder="상세내용" onChange={(e) => { setDet2(e.target.value) }} /></td>
-          </tr>
-          <tr>
-            <td><input placeholder="항목3" onChange={(e) => { setAns3(e.target.value) }} /></td>
-            <td><input placeholder="상세내용" onChange={(e) => { setDet3(e.target.value) }} /></td>
-          </tr>
-          <tr>
-            <td><input placeholder="항목4" onChange={(e) => { setAns4(e.target.value) }} /></td>
-            <td><input placeholder="상세내용" onChange={(e) => { setDet4(e.target.value) }} /></td>
-          </tr>
-          <tr>
-            <td><input placeholder="항목5" onChange={(e) => { setAns5(e.target.value) }} /></td>
-            <td><input placeholder="상세내용" onChange={(e) => { setDet5(e.target.value) }} /></td>
-          </tr>
-        </tbody>
-      </table>
+          <tbody>
+            <tr>
+              <td><input placeholder="항목1" onChange={(e) => { setAns1(e.target.value) }} /></td>
+              <td><input placeholder="상세내용" onChange={(e) => { setDet1(e.target.value) }} /></td>
+            </tr>
+            <tr>
+              <td><input placeholder="항목2" onChange={(e) => { setAns2(e.target.value) }} /></td>
+              <td><input placeholder="상세내용" onChange={(e) => { setDet2(e.target.value) }} /></td>
+            </tr>
+            <tr>
+              <td><input placeholder="항목3" onChange={(e) => { setAns3(e.target.value) }} /></td>
+              <td><input placeholder="상세내용" onChange={(e) => { setDet3(e.target.value) }} /></td>
+            </tr>
+            <tr>
+              <td><input placeholder="항목4" onChange={(e) => { setAns4(e.target.value) }} /></td>
+              <td><input placeholder="상세내용" onChange={(e) => { setDet4(e.target.value) }} /></td>
+            </tr>
+            <tr>
+              <td><input placeholder="항목5" onChange={(e) => { setAns5(e.target.value) }} /></td>
+              <td><input placeholder="상세내용" onChange={(e) => { setDet5(e.target.value) }} /></td>
+            </tr>
+          </tbody>
+        </table>
 
-      <button onClick={i_add}>추가</button>
+        <button onClick={i_add}>추가</button>
 
-      <div>
-        <br />
-        [참고] 혹시 정확한 정보가 기억이 나지 않는다면? 아래 검색도우미를 활용해보세요!
-        <br />
-        <button onClick={() => window.open('http://localhost:9001/place', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>위치 정보 검색</button>
-        <button onClick={() => window.open('http://localhost:9001/book', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>책 정보 검색</button>
-        <button onClick={() => window.open('http://localhost:9001/movie', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>영화 정보 검색</button>
-        <button onClick={() => window.open('http://localhost:9001/drama', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>TV/드라마/OTT 정보 검색</button>
+        <div>
+          <br />
+          [참고] 혹시 정확한 정보가 기억이 나지 않는다면? 아래 검색도우미를 활용해보세요!
+          <br />
+          <button onClick={() => window.open('http://localhost:9001/place', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>위치 정보 검색</button>
+          <button onClick={() => window.open('http://localhost:9001/book', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>책 정보 검색</button>
+          <button onClick={() => window.open('http://localhost:9001/movie', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>영화 정보 검색</button>
+          <button onClick={() => window.open('http://localhost:9001/drama', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>TV/드라마/OTT 정보 검색</button>
+        </div>
       </div>
     </div>
   );

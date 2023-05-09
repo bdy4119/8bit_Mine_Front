@@ -46,7 +46,7 @@ function Place() {
 
 
     return (
-        <div>
+        <div id="backwhite">
             <input placeholder="장소명을 입력하세요." onChange={(e) => { setPlace(e.target.value); }} />
             <button onClick={findPlace}>검색</button>
             <br />

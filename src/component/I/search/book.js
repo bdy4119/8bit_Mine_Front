@@ -63,7 +63,7 @@ function Book() {
 
 
     return (
-        <div>
+        <div id="backwhite">
             <input placeholder="책 정보를 입력하세요." onChange={(e) => { setBook(e.target.value) }} />
             <button onClick={findBook}>검색</button>
             <br />

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import "../main_back.css"
+import Topbar from "../main/topbar";
 
 function I_detail() {
 
@@ -26,7 +27,7 @@ function I_detail() {
         })
     }
   }
-  
+
   const [detList, setDetList] = useState([]);
 
   // 데이터 불러오기
@@ -70,31 +71,34 @@ function I_detail() {
   }
 
   return (
-    <div id="backwhite">
-      <table border="1">
-        <colgroup>
-          <col width="200px" /><col width="200px" />
-        </colgroup>
-        <thead>
-          <tr>
-            <td colSpan="2">{params.classify}</td>
-          </tr>
-        </thead>
-        <tbody>
-          {
-            detList.map(function (object, i) {
-              return (
-                <TableRow obj={object} key={i} cnt={i + 1} />
-                /* key를 지정 안하면, Each child in a list should have a unique "key" prop. 가 나옴 */
-              )
-            })
-          }
-        </tbody>
-      </table>
-      <Link to={`/i_update/${params.classify}`}>
-        <button>수정</button>
-      </Link>
-      <button onClick={i_del}>삭제</button>
+    <div>
+      <Topbar />
+      <div id="backwhite">
+        <table border="1">
+          <colgroup>
+            <col width="200px" /><col width="200px" />
+          </colgroup>
+          <thead>
+            <tr>
+              <td colSpan="2">{params.classify}</td>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              detList.map(function (object, i) {
+                return (
+                  <TableRow obj={object} key={i} cnt={i + 1} />
+                  /* key를 지정 안하면, Each child in a list should have a unique "key" prop. 가 나옴 */
+                )
+              })
+            }
+          </tbody>
+        </table>
+        <Link to={`/i_update/${params.classify}`}>
+          <button>수정</button>
+        </Link>
+        <button onClick={i_del}>삭제</button>
+      </div>
     </div>
   );
 }

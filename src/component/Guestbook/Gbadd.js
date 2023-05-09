@@ -5,6 +5,7 @@ import { ReactMediaRecorder } from "react-media-recorder";
 import { useNavigate } from "react-router-dom";
 
 import "../main_back.css"
+import Topbar from "../main/topbar";
 
 function Gbadd() {
 
@@ -29,7 +30,7 @@ function Gbadd() {
   function gb_add() {
     axios.get('http://localhost:3000/gb_add', {
       params: {
-        "toid": "snaro0123@gmail.com", "toname":"준", "fromid": "gbtest@abc.com", "fromname" : "테스트",
+        "toid": "snaro0123@gmail.com", "toname": "준", "fromid": "gbtest@abc.com", "fromname": "테스트",
         "comment": comm, "isvoice": isvoice, "filename": filename
       }
     })
@@ -47,7 +48,7 @@ function Gbadd() {
   function VoiceComm() {
     if (checkVal === true) {
       return (
-        <div style={{ marginLeft: "20px", backgroundColor:"white"}}>
+        <div style={{ marginLeft: "20px", backgroundColor: "white" }}>
 
           <br />
           <ReactMediaRecorder
@@ -104,13 +105,17 @@ function Gbadd() {
 
 
   return (
-    <div id="backwhite">
-      <h2>방명록 작성</h2>
-      <textarea value={comm} onChange={(e) => setComm(e.target.value)}></textarea><br />
-      <input type="checkbox" onChange={changeVal} value={checkVal} /> 음성방명록 여부<br />
-      <button onClick={gb_add}>방명록 작성</button>
-      {/* <button onClick={gb_add}>방명록 작성</button> */}
-      <VoiceComm />
+    <div>
+      <Topbar />
+      <div id="backwhite">
+
+        <h2>방명록 작성</h2>
+        <textarea value={comm} onChange={(e) => setComm(e.target.value)}></textarea><br />
+        <input type="checkbox" onChange={changeVal} value={checkVal} /> 음성방명록 여부<br />
+        <button onClick={gb_add}>방명록 작성</button>
+        {/* <button onClick={gb_add}>방명록 작성</button> */}
+        <VoiceComm />
+      </div>
     </div>
   );
 }

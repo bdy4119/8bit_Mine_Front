@@ -50,7 +50,7 @@ function Drama() {
 
 
     return (
-        <div>
+        <div id="backwhite">
             <input placeholder="영화 정보를 입력하세요." onChange={(e) => { setTv(e.target.value); }} />
             <button onClick={findTv}>검색</button>
             <br />
