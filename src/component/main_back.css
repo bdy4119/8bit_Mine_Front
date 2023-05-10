@@ -11,6 +11,8 @@
     right: 5%;
     top: 10%;
     z-index: 999;
+    margin-top: 30px;
+    margin-right: -40px;
 }
 
 #backwhite {
@@ -27,27 +29,29 @@
 }
 
 #barbtns {
-    float:left;
+    float:right;
     position: relative;
-    top: 30%;
-    left: 1%;
-    width: 33.3%;
     text-align: left;
 }
 
 #mainbtn {
-    width: 50px;
-    height: 70px;
+    color:white;
+    width: 100px;
+    height: 100px;
+    float:right;
+    position: relative;
+    margin-right: -820px;
+    margin-top: 33px;
     text-align: center;
-    border-radius: 20%;
-    background-color: white;
+    background: url(./images/책갈피1.png);
+    background-size: cover;
+    background-position:center top;
+
 }
 
 
-#toolbox {
-    position: absolute;
-    left: 5%;
-    width: 90%;
-    height: 80%;
-    background-color: white;
-}
+/* #toolbox {
+    background: url(./images/book.png);
+    background-size: cover;
+    background-position:center top;
+} */
