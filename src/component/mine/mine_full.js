@@ -27,7 +27,7 @@ function Mine_full(){
     };
 
     const mineList = async() => {
-        const response = await axios.post('http://localhost:3000/minelist', null, { params:{"id":"123"} });
+        const response = await axios.post('http://localhost:3000/minelist', null, { params:{"id":id} });
 
         const c = {};
         for (let i = 0; i < response.data.length; i++) {
@@ -42,7 +42,7 @@ function Mine_full(){
         const yn = {};
 
         for(let i = 1; i <= 11; i++){
-            axios.post("http://localhost:3000/checkmine", null, { params:{ "id":"123", "position":i} })
+            axios.post("http://localhost:3000/checkmine", null, { params:{ "id":id, "position":i} })
             .then(res => {
                 if(res.data === "YES"){
                     yn[i] = true;

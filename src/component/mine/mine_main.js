@@ -28,7 +28,7 @@ function Mine_main(){
     useEffect(() => {
         const mineList = async () => {
             const response = await axios.post("http://localhost:3000/minelist", null, {
-              params: { "id": "snaro0123@gmail.com" },
+              params: { "id": id },
             });
         
             const c = {};
@@ -48,7 +48,7 @@ function Mine_main(){
               const res = await axios.post(
                 "http://localhost:3000/checkmine",
                 null,
-                { params: { "id": "snaro0123@gmail.com", "position": i } }
+                { params: { "id": id, "position": i } }
               );
               if (res.data === "YES") {
                 yn[i] = true;
@@ -242,8 +242,8 @@ function Mine_main(){
 
                     <div className="container">
                         <div className="start" onClick={gostart}></div>
-                        <div>
-                            { !a[10] && (<img src={stage1} alt="" width="577px" height="347px" />)}
+                        <div id="stage">
+                            { !a[10] && (<img src={stage1} alt="" width="574px" height="347px" />)}
                             { a[10] && (b[10].imgtext === '1' ) && (<img src={stage1} alt="" width="577px" height="347px" />)}
                             { a[10] && (b[10].imgtext === '2' ) && (<img src={stage2} alt="" width="577px" height="347px" />)}
                             { a[10] && (b[10].imgtext === '3' ) && (<img src={stage3} alt="" width="577px" height="347px" />)}

@@ -289,13 +289,12 @@ function Mine_edi(){
                         <button onClick={(e) => {window.location.href = "/mine_edi/1"}}>에디터 모드</button>
                         <button onClick={(e) => {window.location.href = "/mine_guestbook"}}>방명록</button>
                     </div>
-                    <div><button onClick={(e) => {window.location.href = "/guest_mine/qwe46200@naver.com"}}>테스트</button></div>
                 </div>
 
                 <div id="gamebox">
                     <div className="container">
-                        <div>
-                            { !a[10] && (<img src={stage1} alt="" width="577px" height="347px" />)}
+                        <div id="stage">
+                            { !a[10] && (<img src={stage1} alt="" width="574px" height="347px" />)}
                             { a[10] && (b[10].imgtext === '1' ) && (<img src={stage1} alt="" width="577px" height="347px" />)}
                             { a[10] && (b[10].imgtext === '2' ) && (<img src={stage2} alt="" width="577px" height="347px" />)}
                             { a[10] && (b[10].imgtext === '3' ) && (<img src={stage3} alt="" width="577px" height="347px" />)}

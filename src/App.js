@@ -28,6 +28,8 @@ import MineEdi from "./component/mine/mine_edi";
 import MineGuestbook from "./component/mine/mine_guestbook";
 import Chatbot from "./component/chatbot/chatbot";
 
+import Friendcard from "./component/friend/friendcard";
+
 import Me from "./component/Me/Me";
 import DiaryWrite from "./component/Me/DiaryWrite";
 import TodoWrite from './component/Me/TodoWrite';
@@ -52,6 +54,7 @@ import Book from "./component/I/search/book";
 import Movie from "./component/I/search/movie";
 import Drama from "./component/I/search/drama";
 import Gbmain from "./component/Guestbook/Gbmain";
+import GuestGbmain from "./component/Guestbook/guest_Gbmain";
 import Gbadd from "./component/Guestbook/Gbadd";
 import Gbupdate from "./component/Guestbook/Gbupdate";
 
@@ -202,7 +205,8 @@ function App() {
           <Route path="/bgmadd" element={<Bgmadd />} />
 
           <Route path="/gbmain" element={<Gbmain />} />
-          <Route path="/gbadd" element={<Gbadd />} />
+          <Route path="/guest_gbmain/:mineid" element={<GuestGbmain />} />
+          <Route path="/gbadd/:mineid" element={<Gbadd />} />
           <Route path="/gbupdate/:seq" element={<Gbupdate />} />
 
 
@@ -236,6 +240,8 @@ function App() {
           <Route path="/mine_edi/:pos" element={<MineEdi />} />
           <Route path="/mine_guestbook" element={<MineGuestbook />} />
           <Route path="/chatbot" element={<Chatbot />} />
+
+          <Route path="/friendcard/:mineid" element={<Friendcard />} />
 
           <Route path="/walletupdate/:seq" element={<WalletUpdate />} />
 

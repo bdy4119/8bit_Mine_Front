@@ -11,6 +11,7 @@ function Gbupdate() {
     let params = useParams();
 
     const [id, setId] = useState('');
+    const [mineid, setMineid] = useState('');
     const [regdate, setRegdate] = useState('');
     const [comm, setComm] = useState('');
     const [filename, setFilename] = useState('');
@@ -22,6 +23,7 @@ function Gbupdate() {
     const fetchData = async () => {
         const resp = await axios.get('http://localhost:3000/gb_detail', { params: { "seq": params.seq } });
 
+        setMineid(resp.data.toid);
         setId(resp.data.fromid);
         setRegdate(resp.data.regdate);
         setComm(resp.data.comment);
@@ -54,7 +56,7 @@ function Gbupdate() {
                 console.log(resp);
                 if (resp.data === 'gb_upd_OK') {
                     alert('방명록이 수정되었습니다.');
-                    movePage('/gbmain');
+                    movePage('/guest_gbmain/' + mineid);
                 }
             })
             .catch(function (err) {
@@ -88,16 +90,12 @@ function Gbupdate() {
 
     return (
         <div id="back">
-            <Topbar/>
             <div id="topbar">
                 <div id="barbtns">
-                    <div id="ibtn" onClick={(e) => { window.location.href = "/i" }}>I</div>
-                    <div id="mybtn" onClick={(e) => { window.location.href = "/Filelist" }}>MY</div>
-                    <div id="mebtn" onClick={(e) => { window.location.href = "/me" }}>ME</div>
-                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
-
-                    <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
-                    <div id="bookbtn" onClick={(e) => { window.location.href = "/gbmain" }}>GUEST</div>
+                    <div id="guestminebtn" onClick={(e) => { window.location.href = "/guest_mine/" + mineid }}>MINE</div>
+                    <div id="guestcardbtn">CARD</div>
+                    <div id="guestbookbtn" onClick={(e) => { window.location.href = "/guest_gbmain/" + mineid }}>GUEST</div>
+                    <div id="gohomebtn" onClick={(e) => { window.location.href = "/gbmain" }}>HOME</div>
                 </div>
             </div>
             <div id="toolbox">

@@ -137,12 +137,14 @@
 
 .container {
     z-index: 0;
-    border: 1px solid #000;
     width: 580px;
     height: 350px;
     position: relative;
-    background-position: 0px 0px;
-    transition: background-position 10000s linear;
+}
+
+#stage {
+    position: absolute;
+    left: 0px;
 }
 
 .textbox {
@@ -150,7 +152,7 @@
     background-color: #aaa;
     margin-top: 3px;
     padding: 5px;
-    width: 580px;
+    width: 577px;
     height: 77px;
     position: relative;
     background-position: 0px 0px;
