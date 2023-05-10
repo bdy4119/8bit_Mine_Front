@@ -7,23 +7,11 @@ import Topbar from "../main/topbar";
 function I_add() {
 
   const movePage = useNavigate();
-  const jwt = localStorage.getItem("token");
-  const [email, setEmail] = useState('');
 
   function getUser() {
+    const jwt = localStorage.getItem("token");
     if (jwt === null) {
       movePage("/");
-    }
-    else {
-      const token = jwt.split('"')[3];
-
-      axios.get("http://localhost:3000/show", { params: { "token": token } })
-        .then(function (resp) {
-          setEmail(resp.data.email);
-        })
-        .catch(function (err) {
-          alert(err);
-        })
     }
   }
 
@@ -49,10 +37,11 @@ function I_add() {
   const det = [det1, det2, det3, det4, det5];
 
   function i_add() {
+    const id = localStorage.getItem("id");
 
     // 참고 : 특수문자는 추가가 안됨.
     for (let i = 0; i < ans.length; i++) {
-      axios.get('http://localhost:3000/i_add', { params: { "id": "snaro0123@gmail.com", "classify": classi, "item": ans[i], "detail": det[i], "ref": i } })
+      axios.get('http://localhost:3000/i_add', { params: { "id": id, "classify": classi, "item": ans[i], "detail": det[i], "ref": i } })
         .then(function () {
         })
         .catch(function (err) {
@@ -60,7 +49,7 @@ function I_add() {
         })
     }
 
-    axios.get('http://localhost:3000/i_add_classi', { params: { "id": "snaro0123@gmail.com", "classify": classi } })
+    axios.get('http://localhost:3000/i_add_classi', { params: { "id": id, "classify": classi } })
       .then(function () {
       })
       .catch(function (err) {
@@ -73,17 +62,17 @@ function I_add() {
 
   return (
     <div id="back">
-      <Topbar/>
+      <Topbar />
       <div id="topbar">
-          <div id="barbtns">
-              <div id="ibtn" onClick={(e) => { window.location.href = "/i" }}>I</div>
-              <div id="mybtn" onClick={(e) => { window.location.href = "/Filelist" }}>MY</div>
-              <div id="mebtn" onClick={(e) => { window.location.href = "/me" }}>ME</div>
-              <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
+        <div id="barbtns">
+          <div id="ibtn" onClick={(e) => { window.location.href = "/i" }}>I</div>
+          <div id="mybtn" onClick={(e) => { window.location.href = "/Filelist" }}>MY</div>
+          <div id="mebtn" onClick={(e) => { window.location.href = "/me" }}>ME</div>
+          <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
 
-              <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
-              <div id="bookbtn" onClick={(e) => { window.location.href = "/gbmain" }}>GUEST</div>
-          </div>
+          <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
+          <div id="bookbtn" onClick={(e) => { window.location.href = "/gbmain" }}>GUEST</div>
+        </div>
       </div>
       <div id="toolbox">
         <table border="1">

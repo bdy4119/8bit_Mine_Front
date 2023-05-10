@@ -28,9 +28,10 @@ function Gbadd() {
   }
 
   function gb_add() {
+    const id = localStorage.getItem("id");
     axios.get('http://localhost:3000/gb_add', {
       params: {
-        "toid": "snaro0123@gmail.com", "toname": "준", "fromid": "gbtest@abc.com", "fromname": "테스트",
+        "toid": id, "toname": "준", "fromid": "gbtest@abc.com", "fromname": "테스트",
         "comment": comm, "isvoice": isvoice, "filename": filename
       }
     })

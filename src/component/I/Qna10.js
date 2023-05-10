@@ -15,17 +15,6 @@ function Qna10() {
         if (jwt === null) {
             movePage("/");
         }
-        else {
-            const token = jwt.split('"')[3];
-
-            axios.get("http://localhost:3000/show", { params: { "token": token } })
-                .then(function (resp) {
-                    setEmail(resp.data.email);
-                })
-                .catch(function (err) {
-                    alert(err);
-                })
-        }
     }
 
     const [ans1, setAns1] = useState('');
@@ -40,7 +29,9 @@ function Qna10() {
     const [ans10, setAns10] = useState('');
 
     const detailData = async () => {
-        const resp = await axios.get("http://localhost:3000/i_qna", { params: { "id": "snaro0123@gmail.com" } });
+        const id = localStorage.getItem("id");
+
+        const resp = await axios.get("http://localhost:3000/i_qna", { params: { "id": id } });
         setAns1(resp.data.q1);
         setAns2(resp.data.q2);
         setAns3(resp.data.q3);
@@ -54,16 +45,19 @@ function Qna10() {
     }
 
     useEffect(() => {
+        getUser();
         detailData();
     }, []);
 
     function i_add_qna() {
-        axios.get('http://localhost:3000/i_del_qna', { params: { "id": "snaro0123@gmail.com" } })
+        const id = localStorage.getItem("id");
+
+        axios.get('http://localhost:3000/i_del_qna', { params: { "id": id } })
             .then(function () {
                 axios.get('http://localhost:3000/i_add_qna',
                     {
                         params: {
-                            "id": "snaro0123@gmail.com", "q1": ans1, "q2": ans2, "q3": ans3, "q4": ans4,
+                            "id": id, "q1": ans1, "q2": ans2, "q3": ans3, "q4": ans4,
                             "q5": ans5, "q6": ans6, "q7": ans7, "q8": ans8, "q9": ans9, "q10": ans10
                         }
                     })

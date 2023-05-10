@@ -1,13 +1,15 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Table} from 'react-bootstrap';
 import axios from "axios";
-import "../main_back.css"
 import Topbar from "../main/topbar";
+import "../main_back.css"
+import "./icss.css";
 
 function I_main() {
 
   const history = useNavigate();
-  const jwt = localStorage.getItem("token");
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [job, setJob] = useState('');
@@ -17,15 +19,13 @@ function I_main() {
   const [birthdate, setBirthdate] = useState('');
 
   const getUser = async () => {
+    const jwt = localStorage.getItem("token");
     if (jwt === null) {
       history("/");
     }
     else {
-      const token = jwt.split('"')[3];
-      console.log(token);
-      axios.get("http://localhost:3000/show", { params: { "token": token } })
+      axios.get("http://localhost:3000/show", { params: { "token": jwt } })
         .then(function (resp) {
-          console.log(resp);
           setName(resp.data.name);
           setBirthdate(resp.data.birthdate);
           setJob(resp.data.job);
@@ -39,15 +39,12 @@ function I_main() {
     }
   }
 
-  console.log(email);
-
   const [classiList, setClassiList] = useState([]);
   const [wise, setWise] = useState('');
 
   const fetchData = async (email) => {
-    const resp = await axios.get('http://localhost:3000/i_classi_list', { params: { "id": "snaro0123@gmail.com" } });
-
-    console.log(resp.data);
+    const id = localStorage.getItem("id");
+    const resp = await axios.get('http://localhost:3000/i_classi_list', { params: { "id": id } });
     setClassiList(resp.data);
   }
 
@@ -61,7 +58,6 @@ function I_main() {
 
   const wiseData = async () => {
     const resp = await axios.get('https://api.qwer.pw/request/helpful_text?apikey=guest');
-    console.log(resp);
     setWise(resp.data[1].respond);
   }
 
@@ -77,9 +73,9 @@ function I_main() {
       <Topbar/>
       <div id="topbar">
           <div id="barbtns">
-              <div id="ibtn" onClick={(e) => { window.location.href = "/i" }}>I</div>
-              <div id="mybtn" onClick={(e) => { window.location.href = "/Filelist" }}>MY</div>
-              <div id="mebtn" onClick={(e) => { window.location.href = "/me" }}>ME</div>
+              <div id="ibtn" onClick={(e) => { history("/i") }}>I</div>
+              <div id="mybtn" onClick={(e) => { history("/Filelist") }}>MY</div>
+              <div id="mebtn" onClick={(e) => { history("/me") }}>ME</div>
               <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
 
               <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
@@ -90,7 +86,7 @@ function I_main() {
         <br />
         <br />
 
-        <table style={{ float: "left", marginLeft : "100px" ,marginRight: "200px", border: "1px solid" }}>
+        <Table hover variant="red" id="table1">
           <thead />
           <tbody>
             <tr>
@@ -139,7 +135,7 @@ function I_main() {
               </td>
             </tr>
           </tbody>
-        </table>
+        </Table>
         <table border="1">
           <thead />
           <tbody>

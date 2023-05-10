@@ -8,23 +8,11 @@ function I_update() {
 
     let params = useParams();
     const movePage = useNavigate();
-    const jwt = localStorage.getItem("token");
-    const [email, setEmail] = useState('');
 
     function getUser() {
+        const jwt = localStorage.getItem("token");
         if (jwt === null) {
             movePage("/");
-        }
-        else {
-            const token = jwt.split('"')[3];
-
-            axios.get("http://localhost:3000/show", { params: { "token": token } })
-                .then(function (resp) {
-                    setEmail(resp.data.email);
-                })
-                .catch(function (err) {
-                    alert(err);
-                })
         }
     }
 
@@ -47,7 +35,8 @@ function I_update() {
 
     // 데이터 불러오기
     const detailData = async () => {
-        const resp = await axios.get("http://localhost:3000/i_detail", { params: { "id": "snaro0123@gmail.com", "classify": params.classify } })
+        const id = localStorage.getItem("id");
+        const resp = await axios.get("http://localhost:3000/i_detail", { params: { "id": id, "classify": params.classify } })
 
         setClassi(resp.data[0].classify);
 
@@ -70,11 +59,12 @@ function I_update() {
     }, []);
 
     function i_upd() {
-        axios.get('http://localhost:3000/i_del', { params: { "id": email, "classify": params.classify } })
+        const id = localStorage.getItem("id");
+        axios.get('http://localhost:3000/i_del', { params: { "id": id, "classify": params.classify } })
             .then(function (resp) {
 
                 for (let i = 0; i < ans.length; i++) {
-                    axios.get('http://localhost:3000/i_add', { params: { "id": email, "classify": classi, "item": ans[i], "detail": det[i], "ref": i } })
+                    axios.get('http://localhost:3000/i_add', { params: { "id": id, "classify": classi, "item": ans[i], "detail": det[i], "ref": i } })
                         .then(function () {
                         })
                         .catch(function (err) {
@@ -82,7 +72,7 @@ function I_update() {
                         })
                 }
 
-                axios.get('http://localhost:3000/i_add_classi', { params: { "id": email, "classify": classi } })
+                axios.get('http://localhost:3000/i_add_classi', { params: { "id": id, "classify": classi } })
                     .then(function () {
                         alert(classi + " 항목이 수정되었습니다.");
                         movePage(`/i_detail/${classi}`);
@@ -98,19 +88,19 @@ function I_update() {
 
     return (
         <div id="back">
-      <Topbar/>
-      <div id="topbar">
-          <div id="barbtns">
-              <div id="ibtn" onClick={(e) => { window.location.href = "/i" }}>I</div>
-              <div id="mybtn" onClick={(e) => { window.location.href = "/Filelist" }}>MY</div>
-              <div id="mebtn" onClick={(e) => { window.location.href = "/me" }}>ME</div>
-              <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
+            <Topbar />
+            <div id="topbar">
+                <div id="barbtns">
+                    <div id="ibtn" onClick={(e) => { window.location.href = "/i" }}>I</div>
+                    <div id="mybtn" onClick={(e) => { window.location.href = "/Filelist" }}>MY</div>
+                    <div id="mebtn" onClick={(e) => { window.location.href = "/me" }}>ME</div>
+                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
 
-              <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
-              <div id="bookbtn" onClick={(e) => { window.location.href = "/gbmain" }}>GUEST</div>
-          </div>
-      </div>
-      <div id="toolbox">
+                    <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
+                    <div id="bookbtn" onClick={(e) => { window.location.href = "/gbmain" }}>GUEST</div>
+                </div>
+            </div>
+            <div id="toolbox">
                 {params.classify}
                 <table border="1">
                     <colgroup>

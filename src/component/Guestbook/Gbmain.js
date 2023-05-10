@@ -20,7 +20,8 @@ function Gbmain() {
 
     // Mine 본인 계정에 보이는 axios
     const fetchData = async () => {
-        const resp = await axios.get('http://localhost:3000/gb_list', { params: { "id": "snaro0123@gmail.com" } });
+        const id = localStorage.getItem("id");
+        const resp = await axios.get('http://localhost:3000/gb_list', { params: { "id": id } });
         console.log(resp);
         setGblist(resp.data);
     }
