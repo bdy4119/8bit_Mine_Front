@@ -1,7 +1,111 @@
-#table1 {
-    float: left;
-    margin-left : 100px;
-    margin-right: 200px;
-    width:400px;
+.card {
+    width: 300px;
+    height: 500px;
+    padding: 15px;
+    margin-left: 50px;
+    margin-top: 20px;
+    margin-right: 100px;
+    border-radius: 25px;
+    border: 10px #a7cde0;
+    display: flex;
+    justify-content: center;
+    box-shadow: 15px 10px 25px 0px #a7cde0;
+    background: #ffffff;
+    background-image: url('https://github.com/OlgaKoplik/CodePen/blob/master/leaf2.png?raw=true'), url('https://github.com/OlgaKoplik/CodePen/blob/master/leaf.png?raw=true');
+    background-repeat: no-repeat, no-repeat;
+    background-position: 120% -5%, 200% -40%;
+    background-size: 30%, 65%;
+    animation: open .3s;
     text-align: center;
+}
+
+.items {
+    width: 150px;
+    height: 150px;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    background: #ffffff;
+    background-image: url(./mine_icon.png);
+    background-repeat: no-repeat, no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    background-size: 80%;
+    animation: opens .5s;
+    text-align: center;
+}
+
+@keyframes open {
+    0% {
+        background-position: 0% 0% 0% 0%;
+    }
+
+    100% {
+        background-position: 120% -5%, 200% -40%;
+    }
+}
+
+@keyframes opens {
+    0% {
+        background-size: 0%;
+    }
+
+    100% {
+        background-size: 100%;
+    } 
+}
+
+.field {
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.img-wrap {
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 1px solid gray;
+}
+
+.imgI {
+    width: 100%;
+    height: 100%;
+}
+
+.labelI {
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #676767;
+}
+
+.inputI {
+    border-radius: 15px;
+    border: 1px solid #b7b7b7;
+    padding: 5px 5px 5px 10px;
+    margin-bottom: -5px;
+    font-size: 14px;
+    transition: 0.2s;
+    text-align: center;
+}
+
+.inputI:focus {
+    outline: none;
+    border: 1px solid #64d488;
+}
+
+.name {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #676767;
+    max-width: 220px;
+    overflow-wrap: break-word;
 }

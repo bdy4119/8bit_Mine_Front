@@ -7,12 +7,12 @@ import Topbar from "../main/topbar";
 function I_detail() {
 
   let params = useParams();
-  const movePage = useNavigate();
+  const history = useNavigate();
 
   function getUser() {
     const jwt = localStorage.getItem("token");
     if (jwt === null) {
-      movePage("/");
+      history("/");
     }
   }
 
@@ -50,7 +50,7 @@ function I_detail() {
       .then(function (resp) {
         if (resp.data === 'i_del_OK') {
           alert("'" + params.classify + "'" + " 항목이 삭제되었습니다.");
-          movePage('/i');
+          history('/i');
         }
       })
       .catch(function (err) {
@@ -63,13 +63,37 @@ function I_detail() {
       <Topbar />
       <div id="topbar">
         <div id="barbtns">
-          <div id="ibtn" onClick={(e) => { window.location.href = "/i" }}>I</div>
-          <div id="mybtn" onClick={(e) => { window.location.href = "/Filelist" }}>MY</div>
-          <div id="mebtn" onClick={(e) => { window.location.href = "/me" }}>ME</div>
-          <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
+          <div id="ibtn" onClick={(e) => { history("/i") }}>
+            <p style={{ position: "relative", marginTop: "60px", fontSize: "20px" }}>
+              I
+            </p>
+          </div>
+          <div id="mybtn" onClick={(e) => { history("/Filelist") }}>
+            <p style={{ position: "relative", marginTop: "60px", fontSize: "20px" }}>
+              MY
+            </p>
+          </div>
+          <div id="mebtn" onClick={(e) => { history("/me") }}>
+            <p style={{ position: "relative", marginTop: "60px", fontSize: "20px" }}>
+              ME
+            </p>
+          </div>
+          <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>
+            <p style={{ position: "relative", marginTop: "60px", fontSize: "20px" }}>
+              MINE
+            </p>
+          </div>
 
-          <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
-          <div id="bookbtn" onClick={(e) => { window.location.href = "/gbmain" }}>GUEST</div>
+          <div id="cardbtn" onClick={(e) => { history("/card") }}>
+            <p style={{ position: "relative", marginTop: "60px", fontSize: "20px" }}>
+              CARD
+            </p>
+          </div>
+          <div id="bookbtn" onClick={(e) => { history("/gbmain") }}>
+            <p style={{ position: "relative", marginTop: "60px", fontSize: "20px" }}>
+              GUEST
+            </p>
+          </div>
         </div>
       </div>
       <div id="toolbox">

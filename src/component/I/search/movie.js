@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Pagination from "react-js-pagination";
 import "./page.css";
 
@@ -9,6 +9,12 @@ function Movie() {
     const [movielist, setMovielist] = useState([]);
     const [page, setPage] = useState(1);
     const [total, setTotal] = useState(0);
+
+    useEffect(function () {
+        const token = localStorage.getItem("token");
+        document.getElementById("backtop").style.visibility = "hidden";
+    }, []);
+
 
     function findMovie() {
         axios.get('http://localhost:3000/tmdb', {params:{"kind":"movie", "query": encodeURIComponent(movie), "page":1}})

@@ -1,16 +1,16 @@
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Table} from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import axios from "axios";
 import Topbar from "../main/topbar";
 import "../main_back.css"
 import "./icss.css";
+import mine from "./mine_icon.png";
 
 function I_main() {
 
   const history = useNavigate();
-  const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [job, setJob] = useState('');
   const [profPic, setProfPic] = useState('');
@@ -42,17 +42,30 @@ function I_main() {
   const [classiList, setClassiList] = useState([]);
   const [wise, setWise] = useState('');
 
-  const fetchData = async (email) => {
+  const fetchData = async () => {
     const id = localStorage.getItem("id");
     const resp = await axios.get('http://localhost:3000/i_classi_list', { params: { "id": id } });
     setClassiList(resp.data);
   }
 
-  function TableRow(props) {
+  function Ilist(props) {
+    if (props.cnt % 5 == 0) {
+      return (
+        <>
+          <tr>
+          <td style={{textAlign:"center"}}><div className="items">
+                <Link to={`/i_detail/${props.obj.classify}`}>{props.obj.classify}</Link>
+                </div></td>
+          </tr>
+        </>
+      );
+    }
     return (
-      <tr>
-        <td><Link to={`/i_detail/${props.obj.classify}`}>{props.obj.classify}</Link></td>
-      </tr>
+      <>
+        <td style={{textAlign:"center"}}><div className="items">
+                <Link to={`/i_detail/${props.obj.classify}`}>{props.obj.classify}</Link>
+                </div></td>
+      </>
     );
   }
 
@@ -70,79 +83,77 @@ function I_main() {
 
   return (
     <div id="back">
-      <Topbar/>
+      <Topbar />
       <div id="topbar">
-          <div id="barbtns">
-              <div id="ibtn" onClick={(e) => { history("/i") }}>I</div>
-              <div id="mybtn" onClick={(e) => { history("/Filelist") }}>MY</div>
-              <div id="mebtn" onClick={(e) => { history("/me") }}>ME</div>
-              <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
-
-              <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
-              <div id="bookbtn" onClick={(e) => { window.location.href = "/gbmain" }}>GUEST</div>
+        <div id="barbtns">
+          <div id="ibtn" onClick={(e) => { history("/i") }}>
+            <p style={{ position: "relative", marginTop: "60px", fontSize: "20px" }}>
+              I
+            </p>
           </div>
+          <div id="mybtn" onClick={(e) => { history("/Filelist") }}>
+            <p style={{ position: "relative", marginTop: "60px", fontSize: "20px" }}>
+              MY
+            </p>
+          </div>
+          <div id="mebtn" onClick={(e) => { history("/me") }}>
+            <p style={{ position: "relative", marginTop: "60px", fontSize: "20px" }}>
+              ME
+            </p>
+          </div>
+          <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>
+            <p style={{ position: "relative", marginTop: "60px", fontSize: "20px" }}>
+              MINE
+            </p>
+          </div>
+
+          <div id="cardbtn" onClick={(e) => { history("/card") }}>
+            <p style={{ position: "relative", marginTop: "60px", fontSize: "20px" }}>
+              CARD
+            </p>
+          </div>
+          <div id="bookbtn" onClick={(e) => { history("/gbmain") }}>
+            <p style={{ position: "relative", marginTop: "60px", fontSize: "20px" }}>
+              GUEST
+            </p>
+          </div>
+        </div>
       </div>
       <div id="toolbox">
         <br />
         <br />
-
-        <Table hover variant="red" id="table1">
+        <div className="card" style={{ float: "left" }}>
+          <h1>{name}</h1>
+          <div className="img-wrap" >
+            <img className="imgI" src={`${process.env.PUBLIC_URL}/profPic/${profPic}`} />
+          </div>
+          <label className="labelI">
+            생년월일<br />
+            <input className="inputI" readOnly="readOnly" value={birthdate} />
+          </label><br />
+          <label className="labelI">
+            학교/직장<br />
+            <input className="inputI" readOnly="readOnly" value={job} />
+          </label><br />
+          <label className="labelI">
+            주소<br />
+            <input className="inputI" readOnly="readOnly" value={address} />
+          </label><br />
+          <label className="labelI">
+            상태메세지<br />
+            <input className="inputI" readOnly="readOnly" value={profMsg} />
+          </label>
+        </div>
+        <table>
           <thead />
-          <tbody>
-            <tr>
-              <td colSpan="2">
-                <img src={`${process.env.PUBLIC_URL}/profPic/${profPic}`} alt="X" width="100px" height="100px" />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                이름
-              </td>
-              <td>
-                {name}
-              </td>
-            </tr>
-            <tr>
-              <td>
-                생년월일
-              </td>
-              <td>
-                {birthdate}
-              </td>
-            </tr>
-            <tr>
-              <td>
-                학교/직장
-              </td>
-              <td>
-                {job}
-              </td>
-            </tr>
-            <tr>
-              <td>
-                주소
-              </td>
-              <td>
-                {address}
-              </td>
-            </tr>
-            <tr>
-              <td>
-                상태메세지
-              </td>
-              <td>
-                {profMsg}
-              </td>
-            </tr>
-          </tbody>
-        </Table>
-        <table border="1">
-          <thead />
+          <colgroup>
+            <col width="200px" /><col width="200px" /><col width="200px" /><col width="200px" /><col width="200px" />
+          </colgroup>
           <tbody>
             {
               classiList.map(function (object, i) {
                 return (
-                  <TableRow obj={object} key={i} cnt={i + 1} />
+                  <Ilist obj={object} key={i} cnt={i + 1} />
                   /* key를 지정 안하면, Each child in a list should have a unique "key" prop. 가 나옴 */
                 )
               })
@@ -153,7 +164,10 @@ function I_main() {
         <br />
         <Link to="/qna10">10문10답</Link>
         <br /><br />
+
+        {/* <div>
         {wise}
+        </div> */}
         <br />
         <br /><br /><br /><br /><br /><br /><br /><br />
       </div>
