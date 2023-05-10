@@ -22,8 +22,8 @@ function Topbar() {
 
     return (
         <div>
-            <div id="logo" onClick={() => {movePage('/main')}}>
-                <img src={logo} alt="no" width="190px" height="80px" />
+            <div id="logo" onClick={() => {movePage('/main')}} style={{marginLeft:"-850px", marginTop:"-30px"}}>
+                <img src={logo} alt="no" width="300px" />
             </div>
 
             <div id="topbtns">

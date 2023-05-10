@@ -11,17 +11,23 @@ import "./card.css";
 function Inform() {
 
   const[businessList, setBusinessList] = useState([]);
-  const [userEmail, setUserEmail] = useState("");
-  const jwt = localStorage.getItem("token");
+  const id = localStorage.getItem("id");
+  console.log(id);
+  
   function business() {
-
-    axios.get("http://localhost:3000/show", {params:{"token":jwt}})
-            .then(function(resp){
-                setUserEmail(resp.data.email);
-            })
-            .catch(function(err){
-                alert(err);
-            })
+    
+    // const jwt = localStorage.getItem("token");
+    // console.log(jwt);
+    const id = localStorage.getItem("id");
+    console.log(id);
+    // axios.get("http://localhost:3000/show", {params:{"token":jwt}})
+    //         .then(function(resp){
+    //         //    console.log(resp.data.email);
+    //             setUserEmail(resp.data.email);
+    //         })
+    //         .catch(function(err){
+    //             alert(err);
+    //         })
 
     axios.get("http://localhost:3000/businesscard", {params:{}})
          .then(function(resp){
@@ -42,7 +48,7 @@ function Inform() {
   const renderAverage = () => {
     if(businessList.length === 0) {
        return(
-           <Link to={`/informWrite/${userEmail}`}>
+           <Link to={`/informWrite/${id}`}>
              <button style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
                명함추가
              </button>
@@ -89,7 +95,7 @@ function Inform() {
                   </div>
                   
                   <div style={{marginLeft:"250px", marginBottom:"0px", marginTop:"350px"}}>
-                    <Link to={`/informDetail/${userEmail}`}>
+                    <Link to={`/informDetail/${id}`}>
                       <button style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
                         상세보기
                       </button>

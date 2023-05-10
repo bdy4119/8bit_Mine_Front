@@ -12,7 +12,7 @@ import Topbar from "../main/topbar";
 import "./card.css";
 
 function InformDetail() {
-
+  let history = useState();
   let param = useParams();
 
   const[businessDetail, setbusinessDetail] = useState(); //객체로 접근하기 때문에 값을 넣지 않아도 됨
@@ -22,7 +22,7 @@ function InformDetail() {
 
 
   function busiDetail() {
-    axios.get("http://localhost:3000/businessDetail", {params:{"email": param.email}})
+    axios.get("http://localhost:3000/businessDetail", {params:{"email": param.id}})
          .then(function(resp){
             console.log(resp.data);
             setbusinessDetail(resp.data);
@@ -36,9 +36,9 @@ function InformDetail() {
 
 
   useEffect(function(){
-    busiDetail(param.email);
+    busiDetail(param.id);
 
-  },[param.email]);
+  },[param.id]);
 
 
 
@@ -54,16 +54,40 @@ console.log("/Business-img/" + businessDetail.thumbnail);
             <Topbar/>
             <div id="topbar">
                 <div id="barbtns">
-                    <div id="ibtn" onClick={(e) => { window.location.href = "/i" }}>I</div>
-                    <div id="mybtn" onClick={(e) => { window.location.href = "/Filelist" }}>MY</div>
-                    <div id="mebtn" onClick={(e) => { window.location.href = "/me" }}>ME</div>
-                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
+                    <div id="ibtn" onClick={(e) => { history("/i") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        I
+                      </p>
+                    </div>
+                    <div id="mybtn" onClick={(e) => { history("/Filelist") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        MY
+                      </p>
+                    </div>
+                    <div id="mebtn" onClick={(e) => { history("/me") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        ME
+                      </p>
+                    </div>
+                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        MINE
+                      </p>
+                    </div>
 
-                    <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
-                    <div id="bookbtn" onClick={(e) => { window.location.href = "/gbmain" }}>GUEST</div>
+                    <div id="cardbtn" onClick={(e) => { history("/card") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        CARD
+                      </p>
+                    </div>
+                    <div id="bookbtn" onClick={(e) => { history("/gbmain") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        GUEST
+                      </p>  
+                    </div>
                 </div>
             </div>
-            <div id="toolbox">
+    <div /*id="toolbox"*/>
     <div className="middle">
       
       <div style={{backgroundColor:"#9CA8F0", marginTop:"70px", height:"600px", width:"900px", fontSize:"20px"}}>
@@ -104,7 +128,7 @@ console.log("/Business-img/" + businessDetail.thumbnail);
           </div>
         
           <div className="middle" style={{marginTop:"100px"}}>
-            <Link to={`/informUpdate/${param.email}`}>
+            <Link to={`/informUpdate/${param.id}`}>
               <button style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
                 명함수정
               </button>
