@@ -19,16 +19,14 @@ function Edit() {
 
     const [noprof, setNoprof] = useState(false);
 
-    const jwt = localStorage.getItem("token");
 
     function Check() {
+        const jwt = localStorage.getItem("token");
         if (jwt === null) {
             history("/");
         }
         else {
-            const token = jwt.split('"')[3];
-
-            axios.get("http://localhost:3000/authcheck", { params: { "token": token } })
+            axios.get("http://localhost:3000/authcheck", { params: { "token": jwt } })
                 .then(function (resp) {
                     if (resp.data === 0) {
                         history("/admin");
@@ -41,7 +39,7 @@ function Edit() {
                     console.log(err);
                 })
 
-            axios.get("http://localhost:3000/jwtcheck", { params: { "token": token } })
+            axios.get("http://localhost:3000/jwtcheck", { params: { "token": jwt } })
                 .then(function (resp) {
                     if (resp.data === "fail") {
                         localStorage.removeItem("token");
@@ -56,13 +54,12 @@ function Edit() {
     }
 
     function getUser() {
+        const jwt = localStorage.getItem("token");
         if (jwt === null) {
             history("/");
         }
         else {
-            const token = jwt.split('"')[3];
-
-            axios.get("http://localhost:3000/show", { params: { "token": token } })
+            axios.get("http://localhost:3000/show", { params: { "token": jwt } })
                 .then(function (resp) {
                     setUserEmail(resp.data.email);
                     setUserName(resp.data.name);
@@ -81,7 +78,7 @@ function Edit() {
     }
 
     function editAf() {
-        const token = jwt.split('"')[3];
+        const jwt = localStorage.getItem("token");
         const img = process.env.PUBLIC_URL
         let formData = new FormData();
         formData.append("name", userName);
@@ -89,7 +86,7 @@ function Edit() {
         formData.append("job", job);
         formData.append("address", address);
         formData.append("profMsg", profMsg);
-        formData.append("token", token);
+        formData.append("token", jwt);
 
         // 사진 변경 있을 때
         if (document.frm.uploadFile.files[0]) {
@@ -107,7 +104,7 @@ function Edit() {
             axios.get("http://localhost:3000/edit_n", {
                 params: {
                     "name": userName, "birthdate": birthdate,
-                    "job": job, "address": address, "profMsg": profMsg, "token": token
+                    "job": job, "address": address, "profMsg": profMsg, "token": jwt
                 }
             })
                 .then(function (resp) {
@@ -122,7 +119,7 @@ function Edit() {
             axios.get("http://localhost:3000/edit_nc", {
                 params: {
                     "name": userName, "birthdate": birthdate,
-                    "job": job, "address": address, "profMsg": profMsg, "token": token
+                    "job": job, "address": address, "profMsg": profMsg, "token": jwt
                 }
             })
                 .then(function (resp) {
@@ -151,7 +148,7 @@ function Edit() {
     }, [])
 
     return (
-        <div>
+        <div id="backwhite">
             <h1>내 정보 수정</h1>
             이메일: &nbsp;
             <input type="text" value={userEmail} readOnly="readOnly" />

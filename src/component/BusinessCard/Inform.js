@@ -15,8 +15,7 @@ function Inform() {
   const jwt = localStorage.getItem("token");
   function business() {
 
-    const token = jwt.split('"')[3];
-    axios.get("http://localhost:3000/show", {params:{"token":token}})
+    axios.get("http://localhost:3000/show", {params:{"token":jwt}})
             .then(function(resp){
                 setUserEmail(resp.data.email);
             })

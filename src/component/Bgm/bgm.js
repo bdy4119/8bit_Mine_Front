@@ -5,23 +5,11 @@ import { useNavigate } from "react-router-dom";
 function Bgm() {
 
     const movePage = useNavigate();
-    const jwt = localStorage.getItem("token");
-    const [email, setEmail] = useState('');
 
     function getUser() {
+        const jwt = localStorage.getItem("token");
         if (jwt === null) {
             movePage("/");
-        }
-        else {
-            const token = jwt.split('"')[3];
-
-            axios.get("http://localhost:3000/show", { params: { "token": token } })
-                .then(function (resp) {
-                    setEmail(resp.data.email);
-                })
-                .catch(function (err) {
-                    alert(err);
-                })
         }
     }
 
@@ -32,7 +20,8 @@ function Bgm() {
     }
 
     const fetchData = async () => {
-        const resp = await axios.get('http://localhost:3000/bgm_list', { params: { "id": "snaro0123@gmail.com" } });
+        const id = localStorage.getItem("id");
+        const resp = await axios.get('http://localhost:3000/bgm_list', { params: { "id": id } });
         setBgmlist(resp.data);
     }
 
@@ -62,14 +51,14 @@ function Bgm() {
         );
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchData();
         getUser();
-    },[]);
+    }, []);
 
 
     return (
-        <div>
+        <div id="backwhite">
             <h2>bgm 관리</h2>
             <table border="1">
                 <thead>

@@ -65,6 +65,14 @@ import UpdateFile from "./component/My/UpdateFile";
 import FileUpload from "./component/My/FileUpload";
 import WalletUpdate from './component/BCWallet/WalletUpdate';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Form } from 'react-bootstrap';
+
+import 'semantic-ui-css/semantic.min.css'
+import { Button, Icon } from 'semantic-ui-react'
+
+import './App.css';
+
 function App() {
 
   const [state, setState] = useState(false);
@@ -73,6 +81,7 @@ function App() {
   const [artist, setArtist] = useState('');
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
+  const [music, setMusic] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
 
   const jwt = localStorage.getItem("token");
@@ -82,9 +91,9 @@ function App() {
   };
 
   const fetchData = async () => {
-    const resp = await axios.get('http://localhost:3000/bgm_list', { params: { "id": "snaro0123@gmail.com" } });
+    const id = localStorage.getItem("id");
+    const resp = await axios.get('http://localhost:3000/bgm_list', { params: { "id": id } });
     setBgmlist(resp.data);
-    console.log(resp);
   }
 
   const kakaologout = "https://kauth.kakao.com/oauth/logout?client_id=746d748ae3421ccabe20af6703c55dac&logout_redirect_uri=http://localhost:9001/kakao/logout";
@@ -111,42 +120,56 @@ function App() {
 
   useEffect(() => {
     fetchData();
-
-    if (jwt === null) {
-      document.getElementById("backtop").style.visibility = "hidden";
-    } else {
-      document.getElementById("backtop").style.visibility = "visible";
-    }
   }, []);
 
   function go() {
+    if(document.getElementById("selbox").value==="0"){
+      return;
+    }
     setState(true);
+    document.getElementById("selbox").setAttribute("style", "background-color: #c3cef1; width: 350px");
   }
 
   function stop() {
     setState(false);
+    document.getElementById("selbox").setAttribute("style", "width: 350px");
   }
-
+  // style={{position: "absolute", left: "1000px", top: "50px"}}
   return (
     <div id="back">
-
       <div id="backtop">
-        <button onClick={go}>재생</button>
-        <button onClick={stop}>정지</button>
-        <select onChange={(e) => { music_change(e.target.value) }}>
-          <option value="">bgm을 선택하세요.</option>
-          {
-            bgmlist.map(function (object, i) {
-              return (
-                <Option obj={object} key={i} cnt={i + 1} />
-              )
-            })
-          }
-        </select>
-        <button onClick={() => window.open('http://localhost:9001/bgm', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>bgm 관리</button>
-        <p id="pwhite">현재 플레이중인 음악 : 🎶 {artist} - {title}</p>
-      </div>
+        <table style={{position: "relative", left: "200px"}}>
+          <thead />
+          <tbody>
+            <tr>
+              <td colSpan="3">
+                <Form.Select id="selbox" size="sm" value={music} onChange={(e) => { music_change(e.target.value); setMusic(e.target.value); stop() }}
+                  style={{ width: "350px" }} >
+                  <option value="0">bgm을 선택하세요.</option>
+                  {
+                    bgmlist.map(function (object, i) {
+                      return (
+                        <Option obj={object} key={i} cnt={i + 1} />
+                      )
+                    })
+                  }
+                </Form.Select>
 
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <Button color="blue" onClick={go}>▶️</Button>
+                <Button color="blue" onClick={stop}>❚❚</Button>
+                <Button color="blue" onClick={() => window.open('http://localhost:9001/bgm',
+                  'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>
+                  bgm 관리
+                </Button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Gate />} />
