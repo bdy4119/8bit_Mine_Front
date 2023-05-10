@@ -40,8 +40,10 @@
 
 #back {
   height: 100vh;
-  background: url(component/images/배경.png) no-repeat center;
+  background: url(component/images/BG&book.png) no-repeat center;
   background-size: cover;
+  background-position:center top;
+
 }
 
 #pwhite {

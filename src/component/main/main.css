@@ -3,10 +3,11 @@
     margin-left: 2%;
     margin-top: 2%;    
     float:left;
-    width: 30%;
-    height: 250px;
-    background-color: antiquewhite;
+    width: 550px;
+    height: 300px;
+    background-color: rgb(243, 243, 243);
     text-align: center;
+    font-size: 25px;
 }
 
 #profile {
@@ -52,10 +53,11 @@
     float:left;
     margin-left: 3%;
     margin-top: 2%;    
-    width: 30%;
-    height: 250px;
-    background-color: antiquewhite;
+    width: 550px;
+    height: 300px;
+    background-color: rgb(243, 243, 243);
     text-align: center;
+    font-size: 25px;
 }
 
 #me_area:hover{
@@ -66,11 +68,13 @@
     float:left;
     margin-left: 3%;
     margin-top: 2%;    
-    width: 30%;
-    height: 250px;
-    background-color: antiquewhite;
+    width: 550px;
+    height: 300px;
+    background-color: rgb(243, 243, 243);
     text-align: center;
+    font-size: 25px;
 }
+
 
 #card_area:hover{
     background-color: pink;
@@ -80,10 +84,11 @@
     margin-left: 2%;
     margin-top: 3%;  
     float:left;
-    width: 30%;
-    height: 250px;
-    background-color: antiquewhite;
+    width: 550px;
+    height: 300px;
+    background-color: rgb(243, 243, 243);
     text-align: center;
+    font-size: 25px;
 }
 
 #my_area:hover{
@@ -94,10 +99,11 @@
     float:left;
     margin-left: 3%;
     margin-top: 3%;  
-    width: 30%;
-    height: 250px;
-    background-color: antiquewhite;
+    width: 550px;
+    height: 300px;
+    background-color: rgb(243, 243, 243);
     text-align: center;
+    font-size: 25px;
 }
 
 #mine_area:hover{
@@ -108,12 +114,24 @@
     float:left;
     margin-left: 3%;
     margin-top: 3%;  
-    width: 30%;
-    height: 250px;
-    background-color: antiquewhite;
+    width: 550px;
+    height: 300px;
+    background-color: rgb(243, 243, 243);
     text-align: center;
+    font-size: 25px;
 }
+
 
 #book_area:hover{
     background-color: pink;
+}
+
+
+#inner {
+    margin-left: 3%;
+    margin-top: 2%;    
+    width: 518px;
+    height: 230px;
+    background-color: rgb(227, 227, 227);
+    margin-bottom: 20px;
 }
