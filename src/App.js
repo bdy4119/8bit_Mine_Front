@@ -72,7 +72,7 @@ import 'semantic-ui-css/semantic.min.css'
 import { Button, Icon } from 'semantic-ui-react'
 
 import './App.css';
-
+import './component/main_back.css'
 function App() {
 
   const [state, setState] = useState(false);
@@ -138,13 +138,13 @@ function App() {
   return (
     <div id="back">
       <div id="backtop">
-        <table style={{position: "relative", left: "200px"}}>
+        <table style={{position:"relative", float: "right", marginTop:"20px", marginRight:"20px", zIndex:"1000"}}> 
           <thead />
           <tbody>
             <tr>
               <td colSpan="3">
                 <Form.Select id="selbox" size="sm" value={music} onChange={(e) => { music_change(e.target.value); setMusic(e.target.value); stop() }}
-                  style={{ width: "350px" }} >
+                  style={{ width: "250px"}} >
                   <option value="0">bgm을 선택하세요.</option>
                   {
                     bgmlist.map(function (object, i) {
@@ -220,9 +220,9 @@ function App() {
 
           <Route path="/card" element={<Card></Card>} />
 
-          <Route path="/informDetail/:email" element={<InformDetail />} />
-          <Route path="/informUpdate/:email" element={<InformUpdate />} />
-          <Route path="/informWrite/:email" element={<InformWrite />} />
+          <Route path="/informDetail/:id" element={<InformDetail />} />
+          <Route path="/informUpdate/:id" element={<InformUpdate />} />
+          <Route path="/informWrite/:id" element={<InformWrite />} />
 
           <Route path="/back/:id" element={<Back />} />
           <Route path="/backUpdate/:seq" element={<BackUpdate />} />
