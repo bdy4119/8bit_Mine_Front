@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import "../main_back.css"
+import { Link, useNavigate } from "react-router-dom";
+import "./icss.css";
 import Topbar from "../main/topbar";
+import Barbtns from "../main/barbtns";
+import 'semantic-ui-css/semantic.min.css'
+import { Table, Button, Input } from 'semantic-ui-react'
+
+import kakao from "./image/kakao.png";
+import naver from "./image/naver.png";
+import youtube from "./image/youtube.png";
+import tmdb from "./image/tmdb.png";
+
+import purpled from "./image/purpled.png";
+import redd from "./image/redd.png";
+import greend from "./image/greend.png";
 
 function I_add() {
 
-  const movePage = useNavigate();
+  const history = useNavigate();
 
   function getUser() {
     const jwt = localStorage.getItem("token");
     if (jwt === null) {
-      movePage("/");
+      history("/");
     }
   }
 
@@ -21,6 +33,7 @@ function I_add() {
 
 
   const [classi, setClassi] = useState('');
+  const [classiList, setClassiList] = useState([]);
 
   const [ans1, setAns1] = useState('');
   const [ans2, setAns2] = useState('');
@@ -37,7 +50,18 @@ function I_add() {
   const det = [det1, det2, det3, det4, det5];
 
   function i_add() {
+
     const id = localStorage.getItem("id");
+
+    if (classi.trim() === "") {
+      alert('분류명을 입력해주세요.');
+      return;
+    }
+
+    if (ans1.trim() === "" && ans2.trim() === "" && ans3.trim() === "" && ans4.trim() === "" && ans5.trim() === "") {
+      alert('반드시 하나 이상의 항목을 입력해주세요.');
+      return;
+    }
 
     // 참고 : 특수문자는 추가가 안됨.
     for (let i = 0; i < ans.length; i++) {
@@ -57,69 +81,144 @@ function I_add() {
       });
 
     alert(classi + " 항목이 추가되었습니다.")
-    movePage('/i');
+    history('/i');
   }
+
+  const fetchData = async () => {
+    const id = localStorage.getItem("id");
+    const resp = await axios.get('http://localhost:3000/i_classi_list', { params: { "id": id } });
+    setClassiList(resp.data);
+  }
+
+  function TableRow(props) {
+    return (
+      <Table.Row>
+        <Table.Cell><Link to={`/i_detail/${props.obj.classify}`}>{props.obj.classify}</Link></Table.Cell>
+      </Table.Row>
+    );
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div id="back">
       <Topbar />
-      <div id="topbar">
-        <div id="barbtns">
-          <div id="ibtn" onClick={(e) => { window.location.href = "/i" }}>I</div>
-          <div id="mybtn" onClick={(e) => { window.location.href = "/Filelist" }}>MY</div>
-          <div id="mebtn" onClick={(e) => { window.location.href = "/me" }}>ME</div>
-          <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
+      <Barbtns />
 
-          <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
-          <div id="bookbtn" onClick={(e) => { window.location.href = "/gbmain" }}>GUEST</div>
-        </div>
+      <div className="tableAdd">
+        <Table size="small" style={{ width: "250px", textAlign: "center", fontSize: "15px" }} color={"red"}>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>
+                <img src={redd} width="40px" height="40px" style={{ marginLeft: "-20px", marginTop: "-10px" }} />&nbsp;
+                나의 분류
+              </Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {
+              classiList.map(function (object, i) {
+                return (
+                  <TableRow obj={object} key={i} cnt={i + 1} />
+                  /* key를 지정 안하면, Each child in a list should have a unique "key" prop. 가 나옴 */
+                )
+              })
+            }
+          </Table.Body>
+        </Table>
       </div>
-      <div id="toolbox">
-        <table border="1">
-          <colgroup>
-            <col width="200px" /><col width="200px" />
-          </colgroup>
-          <thead>
-            <tr>
-              <td colSpan="2"><input placeholder="분류 내용 입력" style={{ width: "400px" }} onChange={(e) => { setClassi(e.target.value) }} /></td>
-            </tr>
-          </thead>
+      <div className="tableAddC">
+        <Table style={{ width: "700px", textAlign: "center", fontSize: "20px" }} color={"purple"}>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell colSpan="2">
+                <img src={purpled} width="50px" height="50px" style={{ marginLeft: "-20px", marginTop: "-10px" }} />&nbsp;&nbsp;
+                <Input size="mini" placeholder="분류 내용 입력" style={{ width: "400px" }} onChange={(e) => { setClassi(e.target.value) }} />
+              </Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
 
-          <tbody>
-            <tr>
-              <td><input placeholder="항목1" onChange={(e) => { setAns1(e.target.value) }} /></td>
-              <td><input placeholder="상세내용" onChange={(e) => { setDet1(e.target.value) }} /></td>
-            </tr>
-            <tr>
-              <td><input placeholder="항목2" onChange={(e) => { setAns2(e.target.value) }} /></td>
-              <td><input placeholder="상세내용" onChange={(e) => { setDet2(e.target.value) }} /></td>
-            </tr>
-            <tr>
-              <td><input placeholder="항목3" onChange={(e) => { setAns3(e.target.value) }} /></td>
-              <td><input placeholder="상세내용" onChange={(e) => { setDet3(e.target.value) }} /></td>
-            </tr>
-            <tr>
-              <td><input placeholder="항목4" onChange={(e) => { setAns4(e.target.value) }} /></td>
-              <td><input placeholder="상세내용" onChange={(e) => { setDet4(e.target.value) }} /></td>
-            </tr>
-            <tr>
-              <td><input placeholder="항목5" onChange={(e) => { setAns5(e.target.value) }} /></td>
-              <td><input placeholder="상세내용" onChange={(e) => { setDet5(e.target.value) }} /></td>
-            </tr>
-          </tbody>
-        </table>
-
-        <button onClick={i_add}>추가</button>
-
-        <div>
-          <br />
-          [참고] 혹시 정확한 정보가 기억이 나지 않는다면? 아래 검색도우미를 활용해보세요!
-          <br />
-          <button onClick={() => window.open('http://localhost:9001/place', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>위치 정보 검색</button>
-          <button onClick={() => window.open('http://localhost:9001/book', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>책 정보 검색</button>
-          <button onClick={() => window.open('http://localhost:9001/movie', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>영화 정보 검색</button>
-          <button onClick={() => window.open('http://localhost:9001/drama', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>TV/드라마/OTT 정보 검색</button>
-        </div>
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell><Input size="mini" placeholder="항목1" onChange={(e) => { setAns1(e.target.value) }} /></Table.Cell>
+              <Table.Cell><Input size="mini" style={{ width: "350px" }} placeholder="상세내용" onChange={(e) => { setDet1(e.target.value) }} /></Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell><Input size="mini" placeholder="항목2" onChange={(e) => { setAns2(e.target.value) }} /></Table.Cell>
+              <Table.Cell><Input size="mini" style={{ width: "350px" }} placeholder="상세내용" onChange={(e) => { setDet2(e.target.value) }} /></Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell><Input size="mini" placeholder="항목3" onChange={(e) => { setAns3(e.target.value) }} /></Table.Cell>
+              <Table.Cell><Input size="mini" style={{ width: "350px" }} placeholder="상세내용" onChange={(e) => { setDet3(e.target.value) }} /></Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell><Input size="mini" placeholder="항목4" onChange={(e) => { setAns4(e.target.value) }} /></Table.Cell>
+              <Table.Cell><Input size="mini" style={{ width: "350px" }} placeholder="상세내용" onChange={(e) => { setDet4(e.target.value) }} /></Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell><Input size="mini" placeholder="항목5" onChange={(e) => { setAns5(e.target.value) }} /></Table.Cell>
+              <Table.Cell><Input size="mini" style={{ width: "350px" }} placeholder="상세내용" onChange={(e) => { setDet5(e.target.value) }} /></Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table>
+      </div>
+      <div className="tacButton">
+        <Button size="huge" color="purple" onClick={i_add}>분류 추가</Button>
+      </div>
+      <div className="search">
+        <Table size="small" style={{ width: "300px", textAlign: "center", fontSize: "17px" }} color={"olive"}>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell colSpan="2">
+                <img src={greend} width="40px" height="40px" style={{ marginLeft: "-20px", marginTop: "-10px" }} />&nbsp;
+                검색도우미</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            <Table.Row >
+              <Table.Cell style={{ width: "60px" }}>
+                <img src={kakao} width="50px" height="15px" />
+              </Table.Cell>
+              <Table.Cell>
+                <Link onClick={() => window.open('http://localhost:9001/place', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>위치 정보</Link>
+              </Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell style={{ width: "60px" }}>
+                <img src={naver} width="53px" height="10px" />
+              </Table.Cell>
+              <Table.Cell>
+                <Link onClick={() => window.open('http://localhost:9001/book', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>책 정보</Link>
+              </Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell>
+                <img src={youtube} width="40px" height="20px" />
+              </Table.Cell>
+              <Table.Cell>
+                <Link onClick={() => window.open('http://localhost:9001/youtube', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>Youtube 정보</Link>
+              </Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell>
+                <img src={tmdb} width="53px" height="10px" />
+              </Table.Cell>
+              <Table.Cell>
+                <Link onClick={() => window.open('http://localhost:9001/movie', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>영화 정보</Link>
+              </Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell>
+                <img src={tmdb} width="53px" height="10px" />
+              </Table.Cell>
+              <Table.Cell>
+                <Link onClick={() => window.open('http://localhost:9001/drama', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>TV/드라마/OTT 정보</Link>
+              </Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table>
       </div>
     </div>
   );
