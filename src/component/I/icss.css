@@ -1,11 +1,53 @@
+table {
+    margin-top: 100px;
+    float: left;
+}
+
+.tableAdd{
+    margin-top: 100px;
+    margin-left: -400px;
+    margin-right: 200px;
+    float: left;
+}
+
+.tableAddC {
+    margin-top: 100px;
+    margin-left: -50px;
+    float: left;
+}
+
+.tacButton {
+    margin-top: 650px;
+    margin-left: 850px;
+    z-index: auto;
+}
+
+.tacButtonD {
+    margin-top: 650px;
+    margin-left: 780px;
+    z-index: auto;
+}
+
+.search {
+    margin-top: -745px;
+    margin-left: 1430px;
+    float: left;
+}
+
+.searchD {
+    margin-top: -350px;
+    margin-left: 1430px;
+    float: left;
+}
+
 .card {
-    width: 300px;
-    height: 500px;
+    width: 400px;
+    height: 700px;
     padding: 15px;
-    margin-left: 50px;
-    margin-top: 20px;
-    margin-right: 100px;
+    margin-left: -500px;
+    margin-top: 100px;
     border-radius: 25px;
+    float: left;
     border: 10px #a7cde0;
     display: flex;
     justify-content: center;
@@ -19,22 +61,34 @@
     text-align: center;
 }
 
+.card:hover{
+    background-size: 35%, 70%;
+}
+
 .items {
-    width: 150px;
-    height: 150px;
+    width: 190px;
+    height: 190px;
     padding: 15px;
-    margin-top: 20px;
+    margin-bottom: 30px;
+    margin-right: 60px;
     border-radius: 25px;
     display: flex;
     justify-content: center;
+    box-shadow: 5px 5px 10px 0px gray;
     background: #ffffff;
-    background-image: url(./mine_icon.png);
+    background-image: url(././image/purpled.png);
     background-repeat: no-repeat, no-repeat;
     background-position-x: center;
     background-position-y: center;
     background-size: 80%;
     animation: opens .5s;
+    font-size: 20px;
     text-align: center;
+}
+
+.items:hover {
+    background-image: url(././image/redd.png);
+    background-size: 90%;
 }
 
 @keyframes open {
@@ -68,8 +122,8 @@
     margin-top: 10px;
     margin-bottom: 30px;
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     overflow: hidden;
     border-radius: 50%;
     border: 1px solid gray;
@@ -83,6 +137,7 @@
 .labelI {
     text-transform: uppercase;
     font-weight: 700;
+    font-size: 20px;
     color: #676767;
 }
 
@@ -90,8 +145,10 @@
     border-radius: 15px;
     border: 1px solid #b7b7b7;
     padding: 5px 5px 5px 10px;
-    margin-bottom: -5px;
-    font-size: 14px;
+    margin-top: 10px;
+    font-size: 18px;
+    width: 250px;
+    height: 40px;
     transition: 0.2s;
     text-align: center;
 }
@@ -108,4 +165,17 @@
     color: #676767;
     max-width: 220px;
     overflow-wrap: break-word;
+}
+
+.buttons {
+    margin-top: 750px;
+    margin-left: 1500px;
+    z-index: auto;
+}
+
+.wise {
+    position: absolute;
+    margin-top: 1000px;
+    margin-left: 500px;
+    z-index: auto;
 }

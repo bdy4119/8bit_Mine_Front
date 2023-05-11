@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import "../main_back.css"
 import Topbar from "../main/topbar";
+import Barbtns from "../main/barbtns";
 
 function I_update() {
 
@@ -88,79 +89,43 @@ function I_update() {
 
     return (
         <div id="back">
-            <Topbar/>
-            <div id="topbar">
-                <div id="barbtns">
-                    <div id="ibtn" onClick={(e) => { history("/i") }}>
-                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
-                        I
-                      </p>
-                    </div>
-                    <div id="mybtn" onClick={(e) => { history("/Filelist") }}>
-                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
-                        MY
-                      </p>
-                    </div>
-                    <div id="mebtn" onClick={(e) => { history("/me") }}>
-                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
-                        ME
-                      </p>
-                    </div>
-                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>
-                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
-                        MINE
-                      </p>
-                    </div>
-
-                    <div id="cardbtn" onClick={(e) => { history("/card") }}>
-                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
-                        CARD
-                      </p>
-                    </div>
-                    <div id="bookbtn" onClick={(e) => { history("/gbmain") }}>
-                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
-                        GUEST
-                      </p>  
-                    </div>
-                </div>
-            </div>
-            <div id="toolbox">
-                {params.classify}
-                <table border="1">
-                    <colgroup>
-                        <col width="200px" /><col width="200px" />
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <td colSpan="2"><input placeholder="분류 내용 입력" style={{ width: "400px" }} defaultValue={classi} onChange={(e) => { setClassi(e.target.value) }} /></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input placeholder="항목1" defaultValue={ans1} onChange={(e) => { setAns1(e.target.value) }} /></td>
-                            <td><input placeholder="상세내용" defaultValue={det1} onChange={(e) => { setDet1(e.target.value) }} /></td>
-                        </tr>
-                        <tr>
-                            <td><input placeholder="항목2" defaultValue={ans2} onChange={(e) => { setAns2(e.target.value) }} /></td>
-                            <td><input placeholder="상세내용" defaultValue={det2} onChange={(e) => { setDet2(e.target.value) }} /></td>
-                        </tr>
-                        <tr>
-                            <td><input placeholder="항목3" defaultValue={ans3} onChange={(e) => { setAns3(e.target.value) }} /></td>
-                            <td><input placeholder="상세내용" defaultValue={det3} onChange={(e) => { setDet3(e.target.value) }} /></td>
-                        </tr>
-                        <tr>
-                            <td><input placeholder="항목4" defaultValue={ans4} onChange={(e) => { setAns4(e.target.value) }} /></td>
-                            <td><input placeholder="상세내용" defaultValue={det4} onChange={(e) => { setDet4(e.target.value) }} /></td>
-                        </tr>
-                        <tr>
-                            <td><input placeholder="항목5" defaultValue={ans5} onChange={(e) => { setAns5(e.target.value) }} /></td>
-                            <td><input placeholder="상세내용" defaultValue={det5} onChange={(e) => { setDet5(e.target.value) }} /></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button onClick={i_upd}>수정하기</button>
-                <button>돌아가기</button>
-            </div>
+            <Topbar />
+            <Barbtns />
+            {params.classify}
+            <table border="1">
+                <colgroup>
+                    <col width="200px" /><col width="200px" />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <td colSpan="2"><input placeholder="분류 내용 입력" style={{ width: "400px" }} defaultValue={classi} onChange={(e) => { setClassi(e.target.value) }} /></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input placeholder="항목1" defaultValue={ans1} onChange={(e) => { setAns1(e.target.value) }} /></td>
+                        <td><input placeholder="상세내용" defaultValue={det1} onChange={(e) => { setDet1(e.target.value) }} /></td>
+                    </tr>
+                    <tr>
+                        <td><input placeholder="항목2" defaultValue={ans2} onChange={(e) => { setAns2(e.target.value) }} /></td>
+                        <td><input placeholder="상세내용" defaultValue={det2} onChange={(e) => { setDet2(e.target.value) }} /></td>
+                    </tr>
+                    <tr>
+                        <td><input placeholder="항목3" defaultValue={ans3} onChange={(e) => { setAns3(e.target.value) }} /></td>
+                        <td><input placeholder="상세내용" defaultValue={det3} onChange={(e) => { setDet3(e.target.value) }} /></td>
+                    </tr>
+                    <tr>
+                        <td><input placeholder="항목4" defaultValue={ans4} onChange={(e) => { setAns4(e.target.value) }} /></td>
+                        <td><input placeholder="상세내용" defaultValue={det4} onChange={(e) => { setDet4(e.target.value) }} /></td>
+                    </tr>
+                    <tr>
+                        <td><input placeholder="항목5" defaultValue={ans5} onChange={(e) => { setAns5(e.target.value) }} /></td>
+                        <td><input placeholder="상세내용" defaultValue={det5} onChange={(e) => { setDet5(e.target.value) }} /></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button onClick={i_upd}>수정하기</button>
+            <button>돌아가기</button>
         </div>
     );
 }
