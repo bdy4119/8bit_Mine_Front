@@ -1,9 +1,15 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Pagination from "react-js-pagination";
 import "./page.css";
 
 function Book() {
+
+    useEffect(function () {
+        const token = localStorage.getItem("token");
+        document.getElementById("backtop").style.visibility = "hidden";
+    }, []);
+
 
     const [book, setBook] = useState('');
     const [booklist, setBooklist] = useState([]);
@@ -15,7 +21,7 @@ function Book() {
             {
                 params: {
                     "search": encodeURIComponent(book),
-                    "page" : 0
+                    "page": 0
                 }
             })
             .then(function (resp) {
@@ -32,27 +38,27 @@ function Book() {
     function pageChange(page) {
         setPage(page);
         axios.get('http://localhost:3000/naverBook',
-        {
-            params: {
-                "search": encodeURIComponent(book),
-                "page" : page-1
-            }
-        })
-        .then(function (resp) {
-            console.log(resp);
-            setBooklist(resp.data.items);
-        })
-        .catch(function (err) {
-            alert(err);
-        })
+            {
+                params: {
+                    "search": encodeURIComponent(book),
+                    "page": page - 1
+                }
+            })
+            .then(function (resp) {
+                console.log(resp);
+                setBooklist(resp.data.items);
+            })
+            .catch(function (err) {
+                alert(err);
+            })
     }
 
     function TableRow(props) {
-   
+
         return (
             <tr>
                 <td>{props.cnt}</td>
-                <td><img src={props.obj.image} width={"100px"} height={"100px"}/></td>
+                <td><img src={props.obj.image} width={"100px"} height={"100px"} /></td>
                 <td>{props.obj.title}</td>
                 <td>{props.obj.author}</td>
                 <td>{props.obj.pubdate}</td>
@@ -63,7 +69,7 @@ function Book() {
 
 
     return (
-        <div>
+        <div id="backwhite">
             <input placeholder="책 정보를 입력하세요." onChange={(e) => { setBook(e.target.value) }} />
             <button onClick={findBook}>검색</button>
             <br />

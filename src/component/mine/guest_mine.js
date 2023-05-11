@@ -2,7 +2,7 @@ import React, {useState, useLayoutEffect} from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-import "../mine_back.css"
+import "../guest_back.css"
 import "./mine.css";
 import bgm from './images/bgm.mp3';
 import blop from './images/blop.mp3';
@@ -24,7 +24,7 @@ function Mine_main(){
 
     let params = useParams();
 
-    let mineid = params.id;
+    let mineid = params.mineid;
 
     const id = localStorage.getItem("id");
 
@@ -225,13 +225,10 @@ function Mine_main(){
 
             <div id="topbar">
                 <div id="barbtns">
-                    <div id="ibtn">I</div>
-                    <div id="mybtn">MY</div>
-                    <div id="mebtn">ME</div>
-                    <div id="mine_btn">MINE</div>
-
-                    <div id="cardbtn">CARD</div>
-                    <div id="bookbtn">GUEST</div>
+                    <div id="guestminebtn" onClick={(e) => { window.location.href = "/guest_mine/" + mineid }}>MINE</div>
+                    <div id="guestcardbtn">CARD</div>
+                    <div id="guestbookbtn" onClick={(e) => { window.location.href = "/guest_gbmain/" + mineid }}>GUEST</div>
+                    <div id="gohomebtn" onClick={(e) => { window.location.href = "/gbmain" }}>HOME</div>
                 </div>
             </div>
             <div id="toolbox">
@@ -254,8 +251,8 @@ function Mine_main(){
 
                     <div className="container">
                         <div className="start" onClick={gostart}></div>
-                        <div>
-                            { !a[10] && (<img src={stage1} alt="" width="577px" height="347px" />)}
+                        <div id="stage">
+                            { !a[10] && (<img src={stage1} alt="" width="574px" height="347px" />)}
                             { a[10] && (b[10].imgtext === '1' ) && (<img src={stage1} alt="" width="577px" height="347px" />)}
                             { a[10] && (b[10].imgtext === '2' ) && (<img src={stage2} alt="" width="577px" height="347px" />)}
                             { a[10] && (b[10].imgtext === '3' ) && (<img src={stage3} alt="" width="577px" height="347px" />)}

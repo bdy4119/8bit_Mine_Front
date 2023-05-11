@@ -2,28 +2,18 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import "../main_back.css"
+import Topbar from "../main/topbar";
+import Barbtns from "../main/barbtns";
 
 function I_update() {
 
     let params = useParams();
-    const movePage = useNavigate();
-    const jwt = localStorage.getItem("token");
-    const [email, setEmail] = useState('');
+    const history = useNavigate();
 
     function getUser() {
+        const jwt = localStorage.getItem("token");
         if (jwt === null) {
-            movePage("/");
-        }
-        else {
-            const token = jwt.split('"')[3];
-
-            axios.get("http://localhost:3000/show", { params: { "token": token } })
-                .then(function (resp) {
-                    setEmail(resp.data.email);
-                })
-                .catch(function (err) {
-                    alert(err);
-                })
+            history("/");
         }
     }
 
@@ -46,7 +36,8 @@ function I_update() {
 
     // 데이터 불러오기
     const detailData = async () => {
-        const resp = await axios.get("http://localhost:3000/i_detail", { params: { "id": "snaro0123@gmail.com", "classify": params.classify } })
+        const id = localStorage.getItem("id");
+        const resp = await axios.get("http://localhost:3000/i_detail", { params: { "id": id, "classify": params.classify } })
 
         setClassi(resp.data[0].classify);
 
@@ -69,11 +60,12 @@ function I_update() {
     }, []);
 
     function i_upd() {
-        axios.get('http://localhost:3000/i_del', { params: { "id": email, "classify": params.classify } })
+        const id = localStorage.getItem("id");
+        axios.get('http://localhost:3000/i_del', { params: { "id": id, "classify": params.classify } })
             .then(function (resp) {
 
                 for (let i = 0; i < ans.length; i++) {
-                    axios.get('http://localhost:3000/i_add', { params: { "id": email, "classify": classi, "item": ans[i], "detail": det[i], "ref": i } })
+                    axios.get('http://localhost:3000/i_add', { params: { "id": id, "classify": classi, "item": ans[i], "detail": det[i], "ref": i } })
                         .then(function () {
                         })
                         .catch(function (err) {
@@ -81,10 +73,10 @@ function I_update() {
                         })
                 }
 
-                axios.get('http://localhost:3000/i_add_classi', { params: { "id": email, "classify": classi } })
+                axios.get('http://localhost:3000/i_add_classi', { params: { "id": id, "classify": classi } })
                     .then(function () {
                         alert(classi + " 항목이 수정되었습니다.");
-                        movePage(`/i_detail/${classi}`);
+                        history(`/i_detail/${classi}`);
                     })
                     .catch(function (err) {
                         alert(err);
@@ -96,7 +88,9 @@ function I_update() {
     }
 
     return (
-        <div id="backwhite">
+        <div id="back">
+            <Topbar />
+            <Barbtns />
             {params.classify}
             <table border="1">
                 <colgroup>

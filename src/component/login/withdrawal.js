@@ -6,8 +6,7 @@ import axios from "axios";
 function Withdrawal(){
     const history = useNavigate();
 
-    const jwt = localStorage.getItem("token");
-    const token = jwt.split('"')[3];
+    const token = localStorage.getItem("token");
 
     function sendEmail(){
         axios.post("http://localhost:3000/withdrawal", null, {params:{"token":token}})
@@ -15,13 +14,14 @@ function Withdrawal(){
             alert(resp);
             
             localStorage.removeItem("token");
+            localStorage.removeItem("id");
             
             history("/");
         })
         .catch(function(err){
             alert(err);
 
-            history("/");
+            history("/edit");
         })
     }
 

@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Pagination from "react-js-pagination";
 import "./page.css";
 
@@ -9,6 +9,12 @@ function Drama() {
     const [tvlist, setTvlist] = useState([]);
     const [page, setPage] = useState(1);
     const [total, setTotal] = useState(0);
+
+    useEffect(function () {
+        const token = localStorage.getItem("token");
+        document.getElementById("backtop").style.visibility = "hidden";
+    }, []);
+
 
     function findTv() {
         axios.get('http://localhost:3000/tmdb', {params:{"kind":"tv", "query": encodeURIComponent(tv), "page":1}})
@@ -50,7 +56,7 @@ function Drama() {
 
 
     return (
-        <div>
+        <div id="backwhite">
             <input placeholder="영화 정보를 입력하세요." onChange={(e) => { setTv(e.target.value); }} />
             <button onClick={findTv}>검색</button>
             <br />

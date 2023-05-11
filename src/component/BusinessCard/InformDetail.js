@@ -5,12 +5,14 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import "../mine_back.css"
+import Topbar from "../main/topbar";
 
 
 import "./card.css";
 
 function InformDetail() {
-
+  let history = useState();
   let param = useParams();
 
   const[businessDetail, setbusinessDetail] = useState(); //객체로 접근하기 때문에 값을 넣지 않아도 됨
@@ -20,7 +22,7 @@ function InformDetail() {
 
 
   function busiDetail() {
-    axios.get("http://localhost:3000/businessDetail", {params:{"email": param.email}})
+    axios.get("http://localhost:3000/businessDetail", {params:{"email": param.id}})
          .then(function(resp){
             console.log(resp.data);
             setbusinessDetail(resp.data);
@@ -34,9 +36,9 @@ function InformDetail() {
 
 
   useEffect(function(){
-    busiDetail(param.email);
+    busiDetail(param.id);
 
-  },[param.email]);
+  },[param.id]);
 
 
 
@@ -48,22 +50,60 @@ function InformDetail() {
 console.log("/Business-img/" + businessDetail.thumbnail);
 
   return(
+    <div id="back">
+            <Topbar/>
+            <div id="topbar">
+                <div id="barbtns">
+                    <div id="ibtn" onClick={(e) => { history("/i") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        I
+                      </p>
+                    </div>
+                    <div id="mybtn" onClick={(e) => { history("/Filelist") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        MY
+                      </p>
+                    </div>
+                    <div id="mebtn" onClick={(e) => { history("/me") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        ME
+                      </p>
+                    </div>
+                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        MINE
+                      </p>
+                    </div>
+
+                    <div id="cardbtn" onClick={(e) => { history("/card") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        CARD
+                      </p>
+                    </div>
+                    <div id="bookbtn" onClick={(e) => { history("/gbmain") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        GUEST
+                      </p>  
+                    </div>
+                </div>
+            </div>
+    <div /*id="toolbox"*/>
     <div className="middle">
       
-      <div style={{backgroundColor:"#9CA8F0", marginTop:"70px", height:"600px", width:"900px", fontSize:"20px"}}>
+      <div style={{backgroundColor:"#9CA8F0", marginLeft:"-600px",marginTop:"150px", height:"600px", width:"900px", fontSize:"20px"}}>
                
           <div style={{float:"left", position:"relative", marginLeft:"70px", marginTop:"70px"}}>
               <div>
                 <form name="frm" encType="multipart/form-data">
                         
-                  <img src={`/Business-img/${businessDetail.thumbnail}`} alt="프로필 이미지" style={{width:"200px"}} />    
+                  <img src={`${process.env.PUBLIC_URL}/Business-img/${businessDetail.thumbnail}`} alt="프로필 이미지" id="circle" />    
                   <br/>
                 </form>
               </div>
           </div>
 
           <div style={{ marginLeft:"400px", marginTop:"70px"}}>
-            <div style={{backgroundColor:"white", textAlign:"center", padding:"5px", width:"450px"}}>
+            <div id="talk">
               <h3>소개글</h3>
               <div>{businessDetail.introduce}</div>
             </div>
@@ -88,7 +128,7 @@ console.log("/Business-img/" + businessDetail.thumbnail);
           </div>
         
           <div className="middle" style={{marginTop:"100px"}}>
-            <Link to={`/informUpdate/${param.email}`}>
+            <Link to={`/informUpdate/${param.id}/${businessDetail.seq}`}>
               <button style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
                 명함수정
               </button>
@@ -101,6 +141,8 @@ console.log("/Business-img/" + businessDetail.thumbnail);
             </Link>
           </div>
         </div>
+      </div>
+      </div>
       </div>
   )
 }

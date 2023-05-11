@@ -8,22 +8,20 @@ function Ban(){
 
     const kakaologout = "https://kauth.kakao.com/oauth/logout?client_id=746d748ae3421ccabe20af6703c55dac&logout_redirect_uri=http://localhost:9001/kakao/logout";
 
-    const jwt = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     function Check(){
-        if(jwt === null){
+        if(token === null){
             history("/");
         }
         else{
-            const token = jwt.split('"')[3];
-
             axios.get("http://localhost:3000/authcheck", {params:{"token":token}})
             .then(function(resp){
                 if(resp.data === 0){
                     history("/admin");
                 }
                 else if(resp.data === 1){
-                    history("/mainpage");
+                    history("/main");
                 }
             })
             .catch(function(err){

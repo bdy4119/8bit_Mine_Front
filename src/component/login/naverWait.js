@@ -27,9 +27,10 @@ function NaverWait(){
                 
                 axios.get("http://localhost:3000/callback/naver", {params:{"email":email}})
                 .then(function(resp){
-                    localStorage.setItem("token", JSON.stringify(resp));
+                    localStorage.setItem("token", JSON.stringify(resp.data.token).replace(/\"/gi, ""));
+					localStorage.setItem("id", JSON.stringify(resp.data.email).replace(/\"/gi, ""));
                     
-                    history("/mainpage");
+                    history("/main");
                 })
                 .catch(function(err){
                     alert(err);

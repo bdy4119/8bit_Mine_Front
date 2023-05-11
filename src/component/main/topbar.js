@@ -22,13 +22,12 @@ function Topbar() {
 
     return (
         <div>
-            <div id="logo" onClick={() => {movePage('/main')}}>
-                <img src={logo} alt="no" height="80px" />
+            <div id="logo" onClick={() => {movePage('/main')}} style={{marginLeft:"-850px", marginTop:"-30px"}}>
+                <img src={logo} alt="no" width="300px" />
             </div>
 
             <div id="topbtns">
                 <button onClick={(e) => { window.location.href = "/edit" }}>내 정보 수정</button>
-                <button onClick={(e) => { window.location.href = "/kakao/withdrawal" }}>회원탈퇴</button>
                 <button><a href={kakaologout}>로그아웃</a></button>
                 <button onClick={showModal}>상담챗봇</button>
                 {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}

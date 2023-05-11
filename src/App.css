@@ -32,6 +32,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -39,10 +40,12 @@
 
 #back {
   height: 100vh;
-  background: url(component/images/배경.png) no-repeat center;
+  background: url(component/images/BG&book.png) no-repeat center;
   background-size: cover;
+  background-position:center top;
+
 }
 
-#pwhite{
+#pwhite {
   color: aliceblue;
 }

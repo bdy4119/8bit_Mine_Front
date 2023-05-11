@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 import { ReactMediaRecorder } from "react-media-recorder";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import "../main_back.css"
 
@@ -14,6 +14,12 @@ function Gbadd() {
   const [fromid, setFromid] = useState('');
   const [toid, setToid] = useState('');
   const [filename, SetFilename] = useState('');
+
+  let params = useParams();
+
+  let mineid = params.mineid;
+
+  const id = localStorage.getItem("id");
 
   const movePage = useNavigate();
 
@@ -29,14 +35,14 @@ function Gbadd() {
   function gb_add() {
     axios.get('http://localhost:3000/gb_add', {
       params: {
-        "toid": "snaro0123@gmail.com", "toname":"준", "fromid": "gbtest@abc.com", "fromname" : "테스트",
+        "toid": mineid, "toname": "준", "fromid": id, "fromname": "테스트",
         "comment": comm, "isvoice": isvoice, "filename": filename
       }
     })
       .then(function (resp) {
         if (resp.data === 'gb_add_OK') {
           alert('방명록이 작성되었습니다.');
-          movePage('/gbmain');
+          movePage('/guest_gbmain/' + mineid);
         }
       })
       .catch(function (err) {
@@ -47,7 +53,7 @@ function Gbadd() {
   function VoiceComm() {
     if (checkVal === true) {
       return (
-        <div style={{ marginLeft: "20px", backgroundColor:"white"}}>
+        <div style={{ marginLeft: "20px", backgroundColor: "white" }}>
 
           <br />
           <ReactMediaRecorder
@@ -104,13 +110,24 @@ function Gbadd() {
 
 
   return (
-    <div id="backwhite">
-      <h2>방명록 작성</h2>
-      <textarea value={comm} onChange={(e) => setComm(e.target.value)}></textarea><br />
-      <input type="checkbox" onChange={changeVal} value={checkVal} /> 음성방명록 여부<br />
-      <button onClick={gb_add}>방명록 작성</button>
-      {/* <button onClick={gb_add}>방명록 작성</button> */}
-      <VoiceComm />
+    <div id="back">
+             <div id="topbar">
+                <div id="barbtns">
+                    <div id="guestminebtn" onClick={(e) => { window.location.href = "/guest_mine/" + mineid }}>MINE</div>
+                    <div id="guestcardbtn">CARD</div>
+                    <div id="guestbookbtn" onClick={(e) => { window.location.href = "/guest_gbmain/" + mineid }}>GUEST</div>
+                    <div id="gohomebtn" onClick={(e) => { window.location.href = "/gbmain" }}>HOME</div>
+                </div>
+            </div>
+            <div id="toolbox">
+
+        <h2>방명록 작성</h2>
+        <textarea value={comm} onChange={(e) => setComm(e.target.value)}></textarea><br />
+        <input type="checkbox" onChange={changeVal} value={checkVal} /> 음성방명록 여부<br />
+        <button onClick={gb_add}>방명록 작성</button>
+        {/* <button onClick={gb_add}>방명록 작성</button> */}
+        <VoiceComm />
+      </div>
     </div>
   );
 }

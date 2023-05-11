@@ -1,28 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import chatgpt from "./ChatGPTlogo.png";
 
 function Bgmadd() {
 
     const movePage = useNavigate();
-    const jwt = localStorage.getItem("token");
-    const [email, setEmail] = useState('');
 
     function getUser() {
+        const jwt = localStorage.getItem("token");
         if (jwt === null) {
             movePage("/");
         }
-        else {
-            const token = jwt.split('"')[3];
-
-            axios.get("http://localhost:3000/show", { params: { "token": token } })
-                .then(function (resp) {
-                    setEmail(resp.data.email);
-                })
-                .catch(function (err) {
-                    alert(err);
-                })
-        }
+        
     }
 
     useEffect(()=>{
@@ -36,7 +26,8 @@ function Bgmadd() {
     const [list, setList] = useState([]);
 
     function bgm_add() {
-        axios.get('http://localhost:3000/bgm_add', { params: { "id": "snaro0123@gmail.com", "artist": artist, "title": title, "url": url } })
+        const id = localStorage.getItem("id");
+        axios.get('http://localhost:3000/bgm_add', { params: { "id": id, "artist": artist, "title": title, "url": url } })
             .then(function (resp) {
                 if (resp.data === "bgm_add_OK") {
                     alert('배경음악이 추가되었습니다.');
@@ -90,13 +81,13 @@ function Bgmadd() {
     }
 
     return (
-        <div>
-            <h2>bgm 추가</h2><h6>(Powered By ChatGPT)</h6>
+        <div id="backwhite">
+            <h2>bgm 추가</h2><h6>(Powered By ChatGPT)&nbsp;<img src={chatgpt} width={"20px"} height={"20px"}/></h6>
             <input placeholder="아티스트명" value={artist || ''} onChange={(e) => setArtist(e.target.value)} /> &nbsp;
             <input placeholder="노래 제목" value={title || ''} onChange={(e) => setTitle(e.target.value)} /> &nbsp;
             <input placeholder="Youtube URL" value={url || ''} onChange={(e) => setUrl(e.target.value)} />
             <br />
-            <button onClick={bgm_add}>완료</button>
+            <button onClick={bgm_add}>완료</button><br />
             [참고] 새로운 배경음악을 추가한 뒤에는, 반드시 메인화면을 새로고침해주세요 !!
             <br /><br />
             <hr />

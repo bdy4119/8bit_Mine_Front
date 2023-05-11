@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Topbar from "../main/topbar";
+import "../mine_back.css";
 
 function BackOrder() {
   let param = useParams();
@@ -72,32 +74,61 @@ function BackOrder() {
   
 
   return(
-    <div className="middle">
-      <div style={{backgroundColor:"#9CA8F0", marginTop:"70px", height:"600px", width:"900px"}}>
-        <div style={{marginLeft:"320px", marginTop:"100px"}}>
-          <div>
+    <div id="back">
+           <Topbar/>
+            <div id="topbar">
+                <div id="barbtns">
+                    <div id="ibtn" onClick={(e) => { history("/i") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        I
+                      </p>
+                    </div>
+                    <div id="mybtn" onClick={(e) => { history("/Filelist") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        MY
+                      </p>
+                    </div>
+                    <div id="mebtn" onClick={(e) => { history("/me") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        ME
+                      </p>
+                    </div>
+                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        MINE
+                      </p>
+                    </div>
+
+                    <div id="cardbtn" onClick={(e) => { history("/card") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        CARD
+                      </p>
+                    </div>
+                    <div id="bookbtn" onClick={(e) => { history("/gbmain") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        GUEST
+                      </p>  
+                    </div>
+                </div>
+            </div>
+      <div style={{backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px", marginLeft:"600px"}}>
+        <div style={{paddingTop:"50px"}}></div>
+        <div style={{marginLeft:"320px"}}>
             <h3>
                 날짜 : <input defaultValue={historyDate} onChange={(e)=>setHistoryDate(e.target.value)}/>
             </h3>
-          </div>
           <br/>
-          <div>
             <h3>
               제목: <input defaultValue={historyTitle} onChange={(e)=>setHistoryTitle(e.target.value)}/>
             </h3>
-          </div>
           <br/>
-          <div>
             <h3>
               내용: <input defaultValue={historyContent} onChange={(e)=>setHistoryContent(e.target.value)}/>
             </h3>
-          </div>
           <br/>
-          <div>
             <h3>
               URL: <input defaultValue={historyUrl} onChange={(e)=>setHistoryUrl(e.target.value)}/>
             </h3>
-          </div>
         </div>
 
         <div style={{marginLeft:"350px", marginBottom:"-500px", marginTop:"100px"}}>

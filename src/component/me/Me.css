@@ -3,3 +3,12 @@
   justify-content: center;
   align-items: center;
 }
+
+#todo {
+  position: relative;
+  width: 400px;
+  background: url(../images/todo.png);
+  background-size: cover;
+  padding: 40px;
+  font-family: 'Nanum Pen Script', cursive;
+}

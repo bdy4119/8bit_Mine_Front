@@ -17,7 +17,7 @@ function Main(){
     const [profPic, setProfPic] = useState('');
     const history = useNavigate();
 
-    const jwt = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
     const showModal = () => {
         setModalOpen(true);
@@ -32,12 +32,10 @@ function Main(){
     }
 
     function getUser() {
-        if (jwt === null) {
+        if (token === null) {
             history("/");
         }
         else {
-            const token = jwt.split('"')[3];
-
             axios.get("http://localhost:3000/show", { params: { "token": token } })
                 .then(function (resp) {
                     setProfMsg(resp.data.profMsg);
@@ -50,12 +48,10 @@ function Main(){
     }
 
     function Check() {
-        if (jwt === null) {
+        if (token === null) {
             window.location.href = "/";
         }
         else {
-            const token = jwt.split('"')[3];
-
             axios.get("http://localhost:3000/authcheck", { params: { "token": token } })
                 .then(function (resp) {
                     if (resp.data === 0) {
@@ -93,38 +89,45 @@ function Main(){
             <Topbar/>
             <div id="topbar">
                 <div id="barbtns">
-                    <div id="mainbtn" onClick={(e) => { window.location.href = "/main" }}>MAIN</div>
+                    <div id="mainbtn" onClick={(e) => { window.location.href = "/main" }}>
+                       <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>MAIN</p>
+                    </div>
                 </div>
             </div>
-            <div id="toolbox">
+            <div /*id="toolbox"*/ style={{marginTop:"100px"}}>
                 <div>
                     <div id="i_area" onMouseOver={hover_over} onMouseOut={hover_out} onClick={()=>{movePage('/i')}}>
-                        <div>I</div>
-                        <div id="profile"><img src={`${process.env.PUBLIC_URL}/profPic/${profPic}`} alt="no"></img></div>
-                        <div id="protext">{profMsg}</div>
-
-                        <div id="hover_i">
-                            “I” 를 채우며 “나” 에 대해 찾아가봐요
-                            <br />
-                            프로필 작성, N문 N답
+                        <div id="inner">
+                            <div id="profile"><img src={`${process.env.PUBLIC_URL}/profPic/${profPic}`} alt="no"></img></div>
+                            <div id="protext">{profMsg}</div>
+                            <div id="hover_i">
+                                “I” 를 채우며 “나” 에 대해 찾아가봐요
+                                <br />
+                                프로필 작성, N문 N답
+                            </div>
                         </div>
+                        <div>I</div>
                     </div>
                     <div id="me_area" onClick={() => { movePage('/me') }}>
+                        <div id="inner"/>
                         ME
                     </div>
                     <div id="card_area" onClick={() => { movePage('/card') }}>
+                        <div id="inner"/>
                         ONLINE CRAD
                     </div>
                     <div id="my_area" onClick={() => { movePage('/Filelist') }}>
+                    <div id="inner"/>
                         MY
                     </div>
                     <div id="mine_area" onClick={(e) => {window.location.href = "/mine"}}>
-                        <div>MINE</div>
-                        <div>
+                        <div id="inner">
                             <img src={mine_icon} alt="no" width="200px"></img>
                         </div>
+                        <div>MINE</div>
                     </div>
                     <div id="book_area" onClick={() => { movePage('/gbmain') }}>
+                        <div id="inner"/>
                         GUEST BOOK
                     </div>
                 </div>

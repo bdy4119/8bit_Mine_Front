@@ -2,6 +2,9 @@ import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import "../mine_back.css"
+import Topbar from "../main/topbar";
+
 
 
 import "./card.css";
@@ -17,7 +20,7 @@ function InformWrite() {
   const[introduce, setIntroduce] = useState('');
   const[name, setName] = useState('');
   const[phoneNum, setPhoneNum] = useState('');
-  const[email, setEmail] = useState(param.email);
+  const[email, setEmail] = useState(param.id);
   const[url, setUrl] = useState('');
   const[thumbnail, setThumbnail] = useState('');
 
@@ -50,7 +53,7 @@ function InformWrite() {
      formData.append("phoneNum", document.frm.phoneNum.value);
      formData.append("email", document.frm.email.value);
      formData.append("url", document.frm.url.value);
-     formData.append("id", param.email);
+     formData.append("id", param.id);
    } else {
     formData.append("uploadFile", thumbnail);
     formData.append("thumbnail", thumbnail);
@@ -59,7 +62,7 @@ function InformWrite() {
     formData.append("phoneNum", document.frm.phoneNum.value);
     formData.append("email", document.frm.email.value);
     formData.append("url", document.frm.url.value);
-    formData.append("id", param.email);
+    formData.append("id", param.id);
    }
 
   // console.log(document.frm.uploadFile.files[0].name);
@@ -94,21 +97,58 @@ function InformWrite() {
 
 
   return(
+    <div id="back">
+            <Topbar/>
+            <div id="topbar">
+                <div id="barbtns">
+                    <div id="ibtn" onClick={(e) => { history("/i") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        I
+                      </p>
+                    </div>
+                    <div id="mybtn" onClick={(e) => { history("/Filelist") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        MY
+                      </p>
+                    </div>
+                    <div id="mebtn" onClick={(e) => { history("/me") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        ME
+                      </p>
+                    </div>
+                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        MINE
+                      </p>
+                    </div>
+
+                    <div id="cardbtn" onClick={(e) => { history("/card") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        CARD
+                      </p>
+                    </div>
+                    <div id="bookbtn" onClick={(e) => { history("/gbmain") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        GUEST
+                      </p>  
+                    </div>
+                </div>
+            </div>
+    <div /*id="toolbox"*/>
     <div className="middle">
 
-        <div style={{backgroundColor:"#9CA8F0", marginTop:"70px", height:"600px", width:"900px", fontSize:"20px"}}>
-
+        <div style={{backgroundColor:"#9CA8F0", marginLeft:"-500px", marginTop:"150px", height:"600px", width:"900px", fontSize:"20px"}}>
           <form name="frm" onSubmit={onSubmit} encType="multipart/form-data">
             <div style={{float:"left", position:"relative", marginLeft:"70px", marginTop:"50px"}}>
               <div>
-                  <img src={`${imgFile}`} alt="프로필" style={{width:"200px"}} />
+                  <img src={`${imgFile}`} alt="프로필" id="circle" />
                   <br/>
                   <input type="file" name='uploadFile' onChange={imageLoad} ref={imgRef} />
                   <br/>
               </div>
             </div>
 
-              <div style={{ float:"left", marginLeft:"400px", marginTop:"-250px"}}>
+              <div style={{ float:"left", marginLeft:"400px", marginTop:"-200px"}}>
                 <div style={{backgroundColor:"white", textAlign:"center", padding:"5px", width:"450px"}}>
                   <h3>소개글</h3>
                   <input name="introduce" defaultValue={introduce} onChange={(e)=>setIntroduce(e.target.value)}/>
@@ -143,6 +183,8 @@ function InformWrite() {
           
           </form>
         </div>
+    </div>
+    </div>
     </div>
   );
 }

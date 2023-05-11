@@ -8,13 +8,56 @@
   align-items: center;
 }
 
-.circle {
+#circle {
+  width:250px;
   border-radius: 50%;
-  background-color: rgb(255, 227, 71);
+  padding: 5px;
+  background-color: blueviolet;
 }
 
 
-.sCircle {
-  border-radius: 50%;
-  background-color: rgb(255, 227, 71);
+#shadow {
+  box-shadow: 10px 7px 9px 1px rgba(108, 39, 108, 0.366);
+}
+
+
+#talk {
+  position: relative;
+  width: 500px;
+  text-align: center;
+  background: url(../images/말풍선.png);
+  background-size: cover;
+  padding: 60px;
+  margin-left: -65px;
+}
+
+
+/* 명함 수정부분 말풍선 */
+#talk-edit {
+  position: relative;
+  width: 500px;
+  text-align: center;
+  background: url(../images/말풍선.png);
+  background-size: cover;
+  padding: 50px;
+  margin-left: -65px;
+}
+
+
+
+#inform {
+  position: relative;
+  width: 450px;
+  text-align: center;
+  background: url(../images/말풍선2.png);
+  background-size: cover;
+  padding: 40px;
+  margin-left: 0px;
+  /* position: relative;
+  width: 500px;
+  font-variant-position: var();
+  background: url(../images/명함정보.png);
+  background-size: cover;
+  padding: 60px;
+  margin-left: 20px; */
 }
