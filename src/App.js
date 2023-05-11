@@ -5,18 +5,12 @@ import "./App.css";
 import ModalBasic from './component/chatbot/chatbot';
 import logo from './component/mine/images/logo.png';
 import Gate from './component/login/gate';
-import GoogleLogin from './component/login/googleLogin';
-import MicrosoftLogin from './component/login/microsoftLogin';
-import NaverLogin from './component/login/naverLogin';
 import NaverWait from './component/login/naverWait';
-import KakaoLogin from './component/login/kakaoLogin';
 import KakaoWait from './component/login/kakaoWait';
 import LogoutAfter from './component/login/logoutAfter';
 import Withdrawal from './component/login/withdrawal';
 import Edit from './component/login/edit';
 import Admin from './component/login/admin';
-import UserList from './component/login/userList';
-import ReportList from './component/login/reportList';
 import Ban from './component/login/ban';
 
 import Main from "./component/main/main";
@@ -177,18 +171,12 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Gate />} />
-          <Route path='/google' element={<GoogleLogin />} />
-          <Route path='/microsoft' element={<MicrosoftLogin />} />
-          <Route path='/kakao' element={<KakaoLogin />} />
           <Route path='/callback/kakao/*' element={<KakaoWait />} />
-          <Route path='/naver' element={<NaverLogin />} />
           <Route path='/callback/naver/*' element={<NaverWait />} />
           <Route path='/kakao/logout' element={<LogoutAfter />} />
           <Route path='/kakao/withdrawal' element={<Withdrawal />} />
           <Route path='/edit' element={<Edit />} />
           <Route path='/admin' element={<Admin />} />
-          <Route path="/userlist" element={<UserList />} />
-          <Route path="/reportlist" element={<ReportList />} />
           <Route path='/ban' element={<Ban />} />
 
           <Route path="/i" element={<Imain />} />
