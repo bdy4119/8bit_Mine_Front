@@ -23,7 +23,7 @@ function Mine_full(){
 
     let params = useParams();
 
-    let mineid = params.id;
+    let mineid = params.mineid;
 
     const id = localStorage.getItem("id");
 
