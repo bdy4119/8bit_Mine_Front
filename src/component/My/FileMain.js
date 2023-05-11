@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import Pagination from "react-js-pagination"
 import "./page.css"
+import "./FileMain.css"
 const FileList = () => {
     // 체크박스를 위한 state 변수
     const [isChecked, setIsChecked] = useState(false);

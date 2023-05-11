@@ -26,7 +26,7 @@ import Fullmine from "./component/mine/mine_full";
 import MineEdi from "./component/mine/mine_edi";
 import Chatbot from "./component/chatbot/chatbot";
 
-import Me from "./component/Me/Me";
+import Me from "./component/Me/me";
 import DiaryWrite from "./component/Me/DiaryWrite";
 import TodoWrite from './component/Me/TodoWrite';
 import DiaryUpdate from './component/Me/DiaryUpdate';
