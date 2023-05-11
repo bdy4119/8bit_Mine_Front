@@ -143,44 +143,32 @@ function DiaryWrite() {
                     </div>
                 </div>
             </div>
-            <div>
-              <h1>일지 추가</h1>
+            <div id="diaryWrite" className="middle" style={{marginTop:"80px", marginLeft:"500px"}}>
               <form name="frm" onSubmit={handleSubmit} encType="multipart/form-data">
-                <table border='1px' id="backwhite">
-                  <colgroup>
-                    <col width="100px"/>
-                    <col width="500px"/>
-                  </colgroup>
-                  <tbody>
-                    <tr>
-                      <th>약속날짜</th>
-                      <td>
-                        <input name="rdate" value={rdateStr} onChange={(e)=>setRdate(e.target.value)}/>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th>제목</th>
-                      <td>
-                        <input name="title" value={title} onChange={(e)=>setTitle(e.target.value)}/>
-                      </td>
-                    </tr>
-                    <tr>
-                        <img src={`${imgFile}`} alt="" style={{width:"200px"}} />
-                        <br/>
-                        <input type="file" name='uploadFile' onChange={imageLoad} ref={imgRef} />
-                        <br/>
-                    </tr>
-                    <tr>
-                      <th>내용</th>
-                      <td>
-                        <input name="content" value={content} onChange={(e)=>setContent(e.target.value)}/>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <span style={{fontSize:"40px"}}>
+                  약속날짜 : <input name="rdate" style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} class="form-control-plaintext" id="staticEmail" value={rdateStr} onChange={(e)=>setRdate(e.target.value)}/>
+                </span>
+                <br/>
+                <br/>
+                <span style={{fontSize:"40px"}}>
+                  제목: <input name="title" style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} class="form-control-plaintext" id="staticEmail" value={title} onChange={(e)=>setTitle(e.target.value)}/>
+                </span>
+                <br/>
+                <br/>
+                
+                <img src={`${imgFile}`} alt="" style={{width:"200px"}} />
+                <br/>
+                <input type="file" name='uploadFile' onChange={imageLoad} ref={imgRef} />
+                <br/>
+                <br/>
 
-              <br/>
-              <button type="submit">작성완료</button>
+                <span style={{fontSize:"40px"}}>
+                  내용 : <input name="content" style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} class="form-control-plaintext" id="staticEmail" value={content} onChange={(e)=>setContent(e.target.value)}/>
+                </span>
+              
+
+                <br/>
+                <button type="submit">작성완료</button>
               </form>
       
             </div>

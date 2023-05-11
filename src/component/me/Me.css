@@ -5,10 +5,83 @@
 }
 
 #todo {
+  /* position: absolute; */
   position: relative;
   width: 400px;
   background: url(../images/todo.png);
   background-size: cover;
   padding: 40px;
+  font-family: 'Nanum Pen Script', cursive;
+}
+
+#delbtn{
+  position: relative;
+  width: 20px;
+  background: url(../images/삭제.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+#addbtn{
+  position: relative;
+  width: 20px;
+  background: url(../images/추가.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+#editbtn {
+  position: relative;
+  width: 20px;
+  background: url(../images/수정.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+#check {
+  position: relative;
+  width: 20px;
+  background: url(../images/체크해제.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+
+#unCheck {
+  position: relative;
+  width: 20px;
+  background: url(../images/체크해제.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+
+
+
+
+/* ********* 다이어리 *********** */
+#diary {
+  position: absolute;
+  position: relative;
+  width: 400px;
+  background: url(../images/다이어리.png);
+  background-size: cover;
+  padding: 60px;
+  font-family: 'Nanum Pen Script', cursive;
+}
+
+
+#diaryWrite {
+  position: relative;
+  width: 600px;
+  height: 200px;
+  background: url(../images/다이어리.png);
+  background-size: cover;
+  padding: 400px;
   font-family: 'Nanum Pen Script', cursive;
 }

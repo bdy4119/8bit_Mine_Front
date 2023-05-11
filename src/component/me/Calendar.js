@@ -55,7 +55,7 @@ export const RenderDays = () => {
 
     for(let i=0; i<7; i++) {
         week.push(
-            <div key={i} style={{ display:"inline-block", border:"1px solid black", height:"30px", width:"100px", textAlign:"center"}} >
+            <div key={i} style={{ display:"inline-block", border:"1px solid black", height:"30px", width:"120px", textAlign:"center"}} >
                 {days[i]}
             </div>
         );
@@ -215,7 +215,7 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
         for(let i = 0; i < 7; i++) {
             formatedDate = format(day, 'd');
             days.push(
-                <div key={day} style={{ float:"left", display:"inline-block", border:"1px solid black", height:"100px", width:"100px", verticalAlign:"top"}}>
+                <div key={day} style={{ float:"left", display:"inline-block", border:"1px solid black", height:"120px", width:"120px", verticalAlign:"top"}}>
                     <span>
                         <Link to={`/me/${format(day,'yyyy-MM-dd')}`} style={{textDecoration: "none"}}>
                             {formatedDate}
