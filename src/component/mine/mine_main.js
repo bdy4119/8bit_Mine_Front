@@ -1,5 +1,6 @@
-import React, {useState, useEffect, useLayoutEffect} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import "../mine_back.css"
 import Topbar from "../main/topbar";
@@ -23,12 +24,14 @@ function Mine_main(){
     const [answer2, setanswer2] = useState('');
     const [answer3, setanswer3] = useState('');
     const [guestid, setguestid] = useState('');
+
+    const history = useNavigate();
     
 
     useEffect(() => {
         const mineList = async () => {
             const response = await axios.post("http://localhost:3000/minelist", null, {
-              params: { "id": "snaro0123@gmail.com" },
+              params: { "id": id },
             });
         
             const c = {};
@@ -48,7 +51,7 @@ function Mine_main(){
               const res = await axios.post(
                 "http://localhost:3000/checkmine",
                 null,
-                { params: { "id": "snaro0123@gmail.com", "position": i } }
+                { params: { "id": id, "position": i } }
               );
               if (res.data === "YES") {
                 yn[i] = true;
@@ -71,7 +74,6 @@ function Mine_main(){
         document.getElementsByClassName("child")[0].style.left = "20px";
         document.getElementsByClassName("child")[0].style.top = "200px";
 
-        document.getElementsByClassName("start")[0].style.visibility = "hidden";
         document.getElementsByClassName("victory")[0].style.visibility = "hidden";
         document.getElementById("question").style.visibility = "hidden";
 
@@ -207,16 +209,40 @@ function Mine_main(){
             <Topbar/>
             <div id="topbar">
                 <div id="barbtns">
-                    <div id="ibtn" onClick={(e) => { window.location.href = "/i" }}>I</div>
-                    <div id="mybtn" onClick={(e) => { window.location.href = "/Filelist" }}>MY</div>
-                    <div id="mebtn" onClick={(e) => { window.location.href = "/me" }}>ME</div>
-                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
+                    <div id="ibtn" onClick={(e) => { history("/i") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        I
+                      </p>
+                    </div>
+                    <div id="mybtn" onClick={(e) => { history("/Filelist") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        MY
+                      </p>
+                    </div>
+                    <div id="mebtn" onClick={(e) => { history("/me") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        ME
+                      </p>
+                    </div>
+                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        MINE
+                      </p>
+                    </div>
 
-                    <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
-                    <div id="bookbtn" onClick={(e) => { window.location.href = "/gbmain" }}>GUEST</div>
+                    <div id="cardbtn" onClick={(e) => { history("/card") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        CARD
+                      </p>
+                    </div>
+                    <div id="bookbtn" onClick={(e) => { history("/gbmain") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        GUEST
+                      </p>  
+                    </div>
                 </div>
             </div>
-            <div id="toolbox">
+            <div id="minebox">
                 <div id="modechange">
                     <audio id="audio" src={bgm} />
                     <audio id="blop" src={blop} />
@@ -230,23 +256,22 @@ function Mine_main(){
                 </div>
 
                 <div id="game">
+                    <div className="start" onClick={gostart}></div>
                     <div className="left" onClick={goleft}></div>
                     <div className="up" onClick={goup}></div>
                     <div className="down" onClick={godown}></div>
                     <div className="right" onClick={goright}></div>
-                    <div className="refresh" onClick={gostart}></div>
                     <div className="keybutton" onClick={gokey}></div>
                     <div className="play" onClick={play}></div>
                     <div className="pause" onClick={pause}></div>
                     <div className="showfull" onClick={(e) => {window.location.href = "/mine_full"}}></div>
 
-                    <div className="container">
-                        <div className="start" onClick={gostart}></div>
-                        <div>
-                            { !a[10] && (<img src={stage1} alt="" width="577px" height="347px" />)}
-                            { a[10] && (b[10].imgtext === '1' ) && (<img src={stage1} alt="" width="577px" height="347px" />)}
-                            { a[10] && (b[10].imgtext === '2' ) && (<img src={stage2} alt="" width="577px" height="347px" />)}
-                            { a[10] && (b[10].imgtext === '3' ) && (<img src={stage3} alt="" width="577px" height="347px" />)}
+                    <div id="minecontainer">
+                        <div id="stage">
+                            { !a[10] && (<img src={stage1} alt="" width="690px" height="410px"/>)}
+                            { a[10] && (b[10].imgtext === '1' ) && (<img src={stage1} alt="" width="690px" height="410px" />)}
+                            { a[10] && (b[10].imgtext === '2' ) && (<img src={stage2} alt="" width="690px" height="410px" />)}
+                            { a[10] && (b[10].imgtext === '3' ) && (<img src={stage3} alt="" width="690px" height="410px" />)}
                         </div>
 
                         <div className="child">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
 import "./mine_edi.css";
 import stage1 from './images/stage1.png';
@@ -25,7 +25,7 @@ function Mine_edi(){
     const imgRef = useRef('');
     
     const id = localStorage.getItem("id");
-
+    const history = useNavigate();
 
     function imageLoad(){
         const file = imgRef.current.files[0];
@@ -273,32 +273,55 @@ function Mine_edi(){
             <Topbar/>
             <div id="topbar">
                 <div id="barbtns">
-                    <div id="ibtn" onClick={(e) => { window.location.href = "/i" }}>I</div>
-                    <div id="mybtn" onClick={(e) => { window.location.href = "/Filelist" }}>MY</div>
-                    <div id="mebtn" onClick={(e) => { window.location.href = "/me" }}>ME</div>
-                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
+                    <div id="ibtn" onClick={(e) => { history("/i") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        I
+                      </p>
+                    </div>
+                    <div id="mybtn" onClick={(e) => { history("/Filelist") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        MY
+                      </p>
+                    </div>
+                    <div id="mebtn" onClick={(e) => { history("/me") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        ME
+                      </p>
+                    </div>
+                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        MINE
+                      </p>
+                    </div>
 
-                    <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
-                    <div id="bookbtn" onClick={(e) => { window.location.href = "/gbmain" }}>GUEST</div>
+                    <div id="cardbtn" onClick={(e) => { history("/card") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        CARD
+                      </p>
+                    </div>
+                    <div id="bookbtn" onClick={(e) => { history("/gbmain") }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                        GUEST
+                      </p>  
+                    </div>
                 </div>
             </div>
-            <div id="toolbox">
+            <div>
                 <div>
-                    <div>
+                    <div id="modechange">
                         <button onClick={(e) => {window.location.href = "/mine"}}>사용자 모드</button>
                         <button onClick={(e) => {window.location.href = "/mine_edi/1"}}>에디터 모드</button>
                         <button onClick={(e) => {window.location.href = "/mine_guestbook"}}>방명록</button>
                     </div>
-                    <div><button onClick={(e) => {window.location.href = "/guest_mine/qwe46200@naver.com"}}>테스트</button></div>
                 </div>
 
                 <div id="gamebox">
-                    <div className="container">
-                        <div>
-                            { !a[10] && (<img src={stage1} alt="" width="577px" height="347px" />)}
-                            { a[10] && (b[10].imgtext === '1' ) && (<img src={stage1} alt="" width="577px" height="347px" />)}
-                            { a[10] && (b[10].imgtext === '2' ) && (<img src={stage2} alt="" width="577px" height="347px" />)}
-                            { a[10] && (b[10].imgtext === '3' ) && (<img src={stage3} alt="" width="577px" height="347px" />)}
+                    <div id="mineedibox">
+                        <div id="stage">
+                            { !a[10] && (<img src={stage1} alt="" width="690px" height="410px" />)}
+                            { a[10] && (b[10].imgtext === '1' ) && (<img src={stage1} alt="" width="690px" height="410px" />)}
+                            { a[10] && (b[10].imgtext === '2' ) && (<img src={stage2} alt="" width="690px" height="410px" />)}
+                            { a[10] && (b[10].imgtext === '3' ) && (<img src={stage3} alt="" width="690px" height="410px" />)}
                         </div>
                         <div className="portal"></div>
                         <div>
@@ -344,65 +367,70 @@ function Mine_edi(){
                         </div>
                     </div>
 
-                    <div className="textbox">자유롭게 편집하여 MINE을 채워주세요</div>
+                    <div id="editextbox">자유롭게 편집하여 MINE을 채워주세요</div>
                 </div>
+                <div id="editorbox">
+                    <div id="editor">
+                        <div id="posbtns">
+                            <Link to={`/mine_edi/${1}`}><button>1</button></Link>
+                            <Link to={`/mine_edi/${2}`}><button>2</button></Link>
+                            <Link to={`/mine_edi/${3}`}><button>3</button></Link>
+                            <Link to={`/mine_edi/${4}`}><button>4</button></Link>
+                            <Link to={`/mine_edi/${5}`}><button>5</button></Link>
+                            <Link to={`/mine_edi/${6}`}><button>6</button></Link>
+                            <Link to={`/mine_edi/${7}`}><button>7</button></Link>
+                            <Link to={`/mine_edi/${8}`}><button>8</button></Link>
+                            <Link to={`/mine_edi/${9}`}><button>캐릭터</button></Link>
+                            <Link to={`/mine_edi/${10}`}><button>배경</button></Link>
+                            <Link to={`/mine_edi/${11}`}><button>질문</button></Link>
+                        </div>
+                        <div id="posimg">
+                            {(params.pos === '11') && (
+                                <div>
+                                    <p>방문자들이 답변해주었으면 하는 질문을 작성해주세요.</p>
 
-                <div id="editor">
-                    <div>
-                        <button><Link to={`/mine_edi/${1}`}>1</Link></button>
-                        <button><Link to={`/mine_edi/${2}`}>2</Link></button>
-                        <button><Link to={`/mine_edi/${3}`}>3</Link></button>
-                        <button><Link to={`/mine_edi/${4}`}>4</Link></button>
-                        <button><Link to={`/mine_edi/${5}`}>5</Link></button>
-                        <button><Link to={`/mine_edi/${6}`}>6</Link></button>
-                        <button><Link to={`/mine_edi/${7}`}>7</Link></button>
-                        <button><Link to={`/mine_edi/${8}`}>8</Link></button>
-                        <button><Link to={`/mine_edi/${9}`}>캐릭터</Link></button>
-                        <button><Link to={`/mine_edi/${10}`}>배경</Link></button>
-                        <button><Link to={`/mine_edi/${11}`}>질문</Link></button>
-                    </div>
-                    <div>
-                        {(params.pos === '11') && (
-                            <div>
-                                <p>방문자들이 답변해주었으면 하는 질문을 작성해주세요.</p>
-
-                                
-                                1. <input value={question1} onChange={(e)=>setquestion1(e.target.value)}></input><br/>
-                                2. <input value={question2} onChange={(e)=>setquestion2(e.target.value)}></input><br/>
-                                3. <input value={question3} onChange={(e)=>setquestion3(e.target.value)}></input><br/>
-                                <button type="button" onClick={updateQuestion}>작성완료</button>
-                            </div>
-                        )}
-                        {(params.pos === '10') && (
-                            <div>
-                                <img src={backimg} alt="back" width="300px" height="200px"/>
+                                    
+                                    1. <input value={question1} onChange={(e)=>setquestion1(e.target.value)}></input><br/>
+                                    2. <input value={question2} onChange={(e)=>setquestion2(e.target.value)}></input><br/>
+                                    3. <input value={question3} onChange={(e)=>setquestion3(e.target.value)}></input><br/>
+                                    <button type="button" onClick={updateQuestion}>작성완료</button>
+                                </div>
+                            )}
+                            {(params.pos === '10') && (
+                                <div>
+                                    <img src={backimg} alt="back" width="420px" height="280px"/>
+                                    <br/><hr/>
+                                    <button type="button" onClick={() => backselect(1)}>배경1</button>
+                                    <button type="button" onClick={() => backselect(2)}>배경2</button>
+                                    <button type="button" onClick={() => backselect(3)}>배경3</button>
+                                    <br/>
+                                    <button type="button" onClick={select}>배경설정</button>
+                                </div>
+                            )}
+                            {!check && (params.pos !== '10') && (params.pos !== '11') && (
+                            <form name="frm" onSubmit={onInsert} encType="multipart/form-data">
+                                <div id="preimg">
+                                    <img src={imgFile} alt="" height="250px"/>
+                                </div>
+                                <input type="file" name="uploadFile" accept="*" onChange={imageLoad} ref={imgRef}/><br/><hr/>
+                                <textarea value={text} onChange={(e)=>setText(e.target.value)} placeholder='텍스트를 입력하세요'/>
                                 <br/>
-                                <button type="button" onClick={() => backselect(1)}>배경1</button>
-                                <button type="button" onClick={() => backselect(2)}>배경2</button>
-                                <button type="button" onClick={() => backselect(3)}>배경3</button>
+                                <input type="submit" value="추가" />
+                            </form>
+                            )}
+                            {check && (params.pos !== '10') && (params.pos !== '11') && (
+                            <form name="frm" onSubmit={onUpdate} encType="multipart/form-data">
+                                <div id="preimg">
+                                    <img src={imgFile} alt="" height="250px"/>
+                                </div>
+                                <input type="file" name="uploadFile" accept="*" onChange={imageLoad} ref={imgRef}/><br/><hr/>
+                                <textarea value={text} onChange={(e)=>setText(e.target.value)} placeholder='텍스트를 입력하세요'/>
                                 <br/>
-                                <button type="button" onClick={select}>배경설정</button>
-                            </div>
-                        )}
-                        {!check && (params.pos !== '10') && (params.pos !== '11') && (
-                        <form name="frm" onSubmit={onInsert} encType="multipart/form-data">
-                            <img src={imgFile} alt="" width="300px"/>
-                            <input type="file" name="uploadFile" accept="*" onChange={imageLoad} ref={imgRef}/>
-                            <input value={text} onChange={(e)=>setText(e.target.value)} placeholder='텍스트를 입력하세요'/>
-                            <br/>
-                            <input type="submit" value="추가" />
-                        </form>
-                        )}
-                        {check && (params.pos !== '10') && (params.pos !== '11') && (
-                        <form name="frm" onSubmit={onUpdate} encType="multipart/form-data">
-                            <img src={imgFile} alt="" width="300px"/>
-                            <input type="file" name="uploadFile" accept="*" onChange={imageLoad} ref={imgRef}/>
-                            <input value={text} onChange={(e)=>setText(e.target.value)} placeholder='텍스트를 입력하세요'/>
-                            <br/>
-                            <input type="submit" value="수정" />
-                            <button type="button" onClick={deletemine}>삭제</button>
-                        </form>
-                        )}
+                                <input type="submit" value="수정" />
+                                <button type="button" onClick={deletemine}>삭제</button>
+                            </form>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

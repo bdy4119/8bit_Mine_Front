@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 
 import { ReactMediaRecorder } from "react-media-recorder";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import "../main_back.css"
-import Topbar from "../main/topbar";
 
 function Gbadd() {
 
@@ -15,6 +14,12 @@ function Gbadd() {
   const [fromid, setFromid] = useState('');
   const [toid, setToid] = useState('');
   const [filename, SetFilename] = useState('');
+
+  let params = useParams();
+
+  let mineid = params.mineid;
+
+  const id = localStorage.getItem("id");
 
   const movePage = useNavigate();
 
@@ -28,17 +33,16 @@ function Gbadd() {
   }
 
   function gb_add() {
-    const id = localStorage.getItem("id");
     axios.get('http://localhost:3000/gb_add', {
       params: {
-        "toid": id, "toname": "준", "fromid": "gbtest@abc.com", "fromname": "테스트",
+        "toid": mineid, "toname": "준", "fromid": id, "fromname": "테스트",
         "comment": comm, "isvoice": isvoice, "filename": filename
       }
     })
       .then(function (resp) {
         if (resp.data === 'gb_add_OK') {
           alert('방명록이 작성되었습니다.');
-          movePage('/gbmain');
+          movePage('/guest_gbmain/' + mineid);
         }
       })
       .catch(function (err) {
@@ -107,16 +111,12 @@ function Gbadd() {
 
   return (
     <div id="back">
-            <Topbar/>
-            <div id="topbar">
+             <div id="topbar">
                 <div id="barbtns">
-                    <div id="ibtn" onClick={(e) => { window.location.href = "/i" }}>I</div>
-                    <div id="mybtn" onClick={(e) => { window.location.href = "/Filelist" }}>MY</div>
-                    <div id="mebtn" onClick={(e) => { window.location.href = "/me" }}>ME</div>
-                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
-
-                    <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
-                    <div id="bookbtn" onClick={(e) => { window.location.href = "/gbmain" }}>GUEST</div>
+                    <div id="guestminebtn" onClick={(e) => { window.location.href = "/guest_mine/" + mineid }}>MINE</div>
+                    <div id="guestcardbtn">CARD</div>
+                    <div id="guestbookbtn" onClick={(e) => { window.location.href = "/guest_gbmain/" + mineid }}>GUEST</div>
+                    <div id="gohomebtn" onClick={(e) => { window.location.href = "/gbmain" }}>HOME</div>
                 </div>
             </div>
             <div id="toolbox">

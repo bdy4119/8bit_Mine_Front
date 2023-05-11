@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../main_back.css"
+import "./Gbmain.css"
 import Topbar from "../main/topbar";
 
 
@@ -9,6 +10,7 @@ function Gbmain() {
 
     const [gblist, setGblist] = useState([]);
     const [vilist, setVilist] = useState([]);
+    const [frielist, setFrielist] = useState([]);
 
     const movePage = useNavigate();
 
@@ -16,7 +18,9 @@ function Gbmain() {
         movePage('/gbadd')
     }
 
-    // 변수 설정으로 유무 확인
+    const id = localStorage.getItem("id");
+
+   // 변수 설정으로 유무 확인
 
     // Mine 본인 계정에 보이는 axios
     const fetchData = async () => {
@@ -25,6 +29,14 @@ function Gbmain() {
         console.log(resp);
         setGblist(resp.data);
     }
+
+    const friendlist = async () => {
+        const id = localStorage.getItem("id");
+        const response = await axios.post("http://localhost:3000/friendlist", null, {params: { "id": id }});
+
+        setFrielist(response.data);
+    };
+
 
     // 삭제
     function gb_del(seq) {
@@ -77,9 +89,38 @@ function Gbmain() {
         );
     }
 
+    function deletefriend(seq){
+
+        axios.post("http://localhost:3000/deletefriend", null, { params:{ "seq":seq } })
+                .then(res => {
+                if(res.data === "YES"){
+                    alert("성공적으로 삭제되었습니다");
+                    window.location.reload();
+                }else{
+                    alert("등록되지 않았습니다");
+                }
+                })
+                .catch(function(err){
+                alert(err);
+                })   
+    }
+
+    function gomine(mineid){
+        window.location.href = "/guest_mine/" + mineid;
+    }
+
+    const handleCopyClipBoard = async (text) => {
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch (error) {
+          alert('복사 실패!');
+        }
+    };
+
     useEffect(() => {
         fetchData();
         fetData();
+        friendlist();
     }, []);
 
     return (
@@ -97,8 +138,8 @@ function Gbmain() {
                 </div>
             </div>
             <div id="toolbox">
+                <div id="guestbooklist">
                 <h3>방명록 main</h3>
-                <p>[1] Mine 주인한테 보이는 방명록들(타인이 나에게 쓴)</p>
                 <table border="1">
                     <thead>
                         <tr>
@@ -122,32 +163,37 @@ function Gbmain() {
                 </table>
                 <br /><br />
 
-                <p>[2] 방문한 사람한테 보이는 방명록 (내가 해당 Mine 주인에게 쓴)</p>
-                <table border="1">
-                    <thead>
-                        <tr>
-                            <th>번호</th>
-                            <th>내용</th>
-                            <th>음성</th>
-                            <th colSpan="2">관리</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            vilist.map(function (object, i) {
-                                return (
-                                    <TableRow2 obj={object} key={i} cnt={i + 1} />
-                                    /* key를 지정 안하면, Each child in a list should have a unique "key" prop. 가 나옴 */
-                                )
-                            })
-                        }
-                        <tr>
-                            <td colSpan="4"><button onClick={go_gbadd}>방명록 쓰기</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-
-
+                </div>
+                <div id="friendlist">
+                    <div>
+                        <h4>내 초대링크</h4>
+                        <button onClick={() => handleCopyClipBoard('http://localhost:9001/friendcard/' + id )}>복사</button>
+                    </div>
+                    <div>
+                        <table border="1">
+                            <thead>
+                                <tr>
+                                    <th>이름</th>
+                                    <th>Mine 방문</th>
+                                    <th>친구삭제</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    frielist.map(function (object, i) {
+                                        return (
+                                            <tr>
+                                                <td>{object.friendid}</td>
+                                                <td><button type="button" onClick={() => gomine(object.friendid)}>Mine</button></td>
+                                                <td><button type="button" onClick={() => deletefriend(object.seq)}>삭제</button></td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     );
