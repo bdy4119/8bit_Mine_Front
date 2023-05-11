@@ -1,7 +1,3 @@
-*, *::after, *::before {
-    box-sizing: border-box;
-}
-
 #fulltoolbox {
     z-index: 999;
     background: rgba( 255, 255, 255, 0.25 );

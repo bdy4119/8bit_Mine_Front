@@ -1,65 +1,108 @@
-*, *::after, *::before {
-    box-sizing: border-box;
+#modechange {
+    position: absolute;
+    top: 220px;
+    left: 50px;
+    float: left;
 }
 
-.title {
-    width: 600px;
-    text-align: center;
-    font-weight: bold;
-    left: 400px;
-    top: 50px;
-    position: relative;
-    font-size: 25px;
-}
 
 #gamebox {
-    width: 600px;
-    height: 500px;
+    width: 800px;
+    height: 600px;
     padding: 10px;
-    position: relative;
-    left: 10%;
-    top: 40px;
-    border: 2px solid #000;
-    background-color: gray;
+    position: absolute;
+    left: 250px;
+    top: 250px;
     float: left;
 }
 
-#editor {
-    width: 330px;
-    height: 500px;
-    padding: 10px;
-    position: relative;
-    left: 180px;
-    top: 40px;
-    border: 2px solid #000;
-    background-color: #aaa;
-    float: left;
-}
 
-.container {
-    border: 1px solid #000;
+#mineedibox {
+    border: 5px solid #3867a3;
+    border-bottom: 0px;
     z-index: 0;
-    width: 580px;
-    height: 350px;
+    width: 700px;
+    height: 420px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    top: 40px;
+    left: 70px;
     position: relative;
 }
 
 #stage {
     position: absolute;
+    border-radius: 8px;
     left: 0px;
 }
 
-.textbox {
-    border: 1px solid #000;
-    background-color: #aaa;
-    margin-top: 3px;
-    padding: 5px;
-    width: 577px;
-    height: 77px;
+#editextbox {
+    border: 5px solid #3867a3;
+    border-top: 0px;
+    background-color: black;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    color: white;
+    padding: 10px;
+    font-family: 'Galmuri9';
+    font-size: 1.3em;
+    top: 35px;
+    left: 70px;
+    width: 700px;
+    height: 95px;
     position: relative;
     background-position: 0px 0px;
 }
 
+#editorbox {
+    width: 600px;
+    height: 600px;
+    padding: 10px;
+    position: absolute;
+    left: 1100px;
+    top: 250px;
+    float: left;
+}
+
+#editor {
+    border: 5px solid #3867a3;
+    z-index: 0;
+    width: 450px;
+    height: 550px;
+    border-radius: 8px;
+    top: 20px;
+    left: 0px;
+    background-color: #ccc;
+    position: relative;
+}
+
+#posbtns {
+    height: 85px;
+    margin-bottom: 15px;
+}
+
+#posbtns button{
+    width: 55px;
+    height: 40px;
+}
+
+#posimg {
+    text-align: center;
+    height: 280px;
+}
+
+#preimg {
+    height: 250px;
+}
+
+#posimg textarea {
+    resize: none;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    width: 400px;
+    height: 6em;
+}
 
 .portal {
     background-color: #fff;
