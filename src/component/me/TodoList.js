@@ -108,54 +108,43 @@ function TodoList() {
 
   return(
     <div>
-      <div style={{border:"1px solid black", textAlign:"center"}}>
-      <table border="1" id="backwhite">
-        <colgroup>
-          <col width='70'/><col width='150'/><col width='450'/><col width='50'/><col width='50'/>
-          </colgroup>
-          <thead>
-            <tr>
-              <th colSpan="5">TodoList</th>
-            </tr>
-            <tr>
-              <th colSpan="5">
-              {param.rdate || format(new Date(),'yyyy-MM-dd')}
-              </th>
-            </tr>
-            <tr>
-              <th colSpan="2">제목</th><th colSpan="3">내용</th>
-            </tr>
-          </thead>
-          <tbody>
+      
+      <div id="todo" style={{marginBottom:"-200px"}}>
+          <Link to={`/todoWrite/${param.rdate || format(new Date(),'yyyy-MM-dd')}`}>
+              <button type='submit' style={{float:"right"}}> + </button>
+          </Link>
+          <br/>
+          <br/>
              {
                 todolist.map(function(todo, idx){
                   var rdateStr = todo.rdate.toString();
-          
                   //1. 달력 날짜를 클릭한 값이 있을때
                   if(param.rdate === rdateStr || param.rdate === rdateStr.substr(0,10)
-                      || param.rdate === (todo.rdate.slice(0,8) + '0' + todo.rdate.slice(8, 10))){
-                    return (
-                        <tr key={idx}>
-                            <td colSpan="2" align='left'>
-                            <input type='checkbox' onChange={(e) => {checkUpdate(e.target.checked,`${todo.seq}`)}}
-                                   defaultChecked={todo.del === 1 ? true : false}/>
-                              {todo.title}
-                            </td>
-                            <td>{todo.content}</td>
-                            <td>
-                              <Link to={`/todoUpdate/${todo.seq}/${todo.title}/${todo.content}/${todo.rdate}`}>
-                                <button type='submit'>수정</button>
-                              </Link>
-                            </td>
-                            <td>
-                              <button type="submit" value={todo.seq} 
-                                onClick={(e)=>{TodoDelete(todo.seq, e)}} /*함수(param, e) -> 파라미터값 같이 보내는 방법*/>
-                                  삭제
-                              </button>
-                            </td>
-                        </tr>
-                    )
+                        || param.rdate === (todo.rdate.slice(0,8) + '0' + todo.rdate.slice(8, 10))){
+                      return (
+                            <div key={idx} style={{marginBottom:"10px", marginLeft:"50px"}}>
+                              <input type='checkbox' onChange={(e) => {checkUpdate(e.target.checked,`${todo.seq}`)}} defaultChecked={todo.del === 1 ? true : false}/>
+                              &nbsp;&nbsp;
+                              <span style={{fontSize:"25px"}}>
+                                {todo.title} &nbsp;&nbsp;&nbsp;
+                               </span>
 
+                                <Link to={`/todoUpdate/${todo.seq}/${todo.title}/${todo.content}/${todo.rdate}`}>
+                                  <button style={{float:"right", marginRight:"20px"}} type='submit'>수정</button>
+                                </Link>
+                                
+                                <button style={{float:"right", marginRight:"20px"}} type="submit" value={todo.seq} onClick={(e)=>{TodoDelete(todo.seq, e)}} /*함수(param, e) -> 파라미터값 같이 보내는 방법*/>
+                                    -
+                                </button>
+                                
+                                <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                <span style={{fontSize:"25px"}}>
+                                  : {todo.content}
+                                </span>
+                              
+                            </div>
+                      )
                     //2. 달력날짜를 클릭한 값이 없을때, 오늘 날짜만 불러와라
                   } else if(param.rdate === undefined
                             && (format(new Date(),'yyyy-MM-dd') === rdateStr
@@ -188,9 +177,9 @@ function TodoList() {
                 })
                   
                 }
+                
 
-              <tr>
-                <td colSpan="5">
+            
                   <Pagination
                     activePage={page} 
                     itemsCountPerPage={10}
@@ -199,14 +188,8 @@ function TodoList() {
                     prevPageText={"이전"}
                     nextPageText={"다음"}
                     onChange={pageChange} />
-
-                    <Link to={`/todoWrite/${param.rdate || format(new Date(),'yyyy-MM-dd')}`}>
-                      <button type='submit'> +할일 추가 </button>
-                    </Link>
-                </td>
-              </tr>
-            </tbody>
-        </table>
+                    
+              
       </div>
     </div>
   )

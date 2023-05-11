@@ -90,20 +90,20 @@ console.log("/Business-img/" + businessDetail.thumbnail);
     <div /*id="toolbox"*/>
     <div className="middle">
       
-      <div style={{backgroundColor:"#9CA8F0", marginTop:"70px", height:"600px", width:"900px", fontSize:"20px"}}>
+      <div style={{backgroundColor:"#9CA8F0", marginLeft:"-600px",marginTop:"150px", height:"600px", width:"900px", fontSize:"20px"}}>
                
           <div style={{float:"left", position:"relative", marginLeft:"70px", marginTop:"70px"}}>
               <div>
                 <form name="frm" encType="multipart/form-data">
                         
-                  <img src={`${process.env.PUBLIC_URL}/Business-img/${businessDetail.thumbnail}`} alt="프로필 이미지" style={{width:"200px"}} />    
+                  <img src={`${process.env.PUBLIC_URL}/Business-img/${businessDetail.thumbnail}`} alt="프로필 이미지" id="circle" />    
                   <br/>
                 </form>
               </div>
           </div>
 
           <div style={{ marginLeft:"400px", marginTop:"70px"}}>
-            <div style={{backgroundColor:"white", textAlign:"center", padding:"5px", width:"450px"}}>
+            <div id="talk">
               <h3>소개글</h3>
               <div>{businessDetail.introduce}</div>
             </div>
@@ -128,7 +128,7 @@ console.log("/Business-img/" + businessDetail.thumbnail);
           </div>
         
           <div className="middle" style={{marginTop:"100px"}}>
-            <Link to={`/informUpdate/${param.id}`}>
+            <Link to={`/informUpdate/${param.id}/${businessDetail.seq}`}>
               <button style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
                 명함수정
               </button>

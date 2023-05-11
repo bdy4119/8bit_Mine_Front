@@ -111,31 +111,24 @@ function BackOrder() {
                     </div>
                 </div>
             </div>
-      <div style={{backgroundColor:"#9CA8F0", marginTop:"70px", height:"600px", width:"900px"}}>
-        <div style={{marginLeft:"320px", marginTop:"100px"}}>
-          <div>
+      <div style={{backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px", marginLeft:"600px"}}>
+        <div style={{paddingTop:"50px"}}></div>
+        <div style={{marginLeft:"320px"}}>
             <h3>
                 날짜 : <input defaultValue={historyDate} onChange={(e)=>setHistoryDate(e.target.value)}/>
             </h3>
-          </div>
           <br/>
-          <div>
             <h3>
               제목: <input defaultValue={historyTitle} onChange={(e)=>setHistoryTitle(e.target.value)}/>
             </h3>
-          </div>
           <br/>
-          <div>
             <h3>
               내용: <input defaultValue={historyContent} onChange={(e)=>setHistoryContent(e.target.value)}/>
             </h3>
-          </div>
           <br/>
-          <div>
             <h3>
               URL: <input defaultValue={historyUrl} onChange={(e)=>setHistoryUrl(e.target.value)}/>
             </h3>
-          </div>
         </div>
 
         <div style={{marginLeft:"350px", marginBottom:"-500px", marginTop:"100px"}}>

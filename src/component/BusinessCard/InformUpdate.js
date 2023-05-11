@@ -15,7 +15,7 @@ function CustomUpdate() {
   //데이터를 모두 읽을 때까지 rendering을 조절하는 변수
   const [loading, setLoading] = useState(false);
 
-  const[seq, setSeq] = useState('');
+  const[seq, setSeq] = useState(param.seq);
   const[introduce, setIntroduce] = useState('');
   const[name, setName] = useState('');
   const[phoneNum, setPhoneNum] = useState('');
@@ -43,7 +43,7 @@ function CustomUpdate() {
 
   //시퀀스,id로 불러올 수 있는 함수 넣기
   function busiDetail(id) {
-    axios.get("http://localhost:3000/businessDetail", {params:{"email": param.email}})
+    axios.get("http://localhost:3000/businessDetail", {params:{"email": param.id}})
     .then(function(resp){    
      // console.log(resp.data.)
       setSeq(resp.data.seq);
@@ -75,7 +75,7 @@ function CustomUpdate() {
      formData.append("phoneNum", document.frm.phoneNum.value);
      formData.append("email", document.frm.email.value);
      formData.append("url", document.frm.url.value);
-     formData.append("seq", seq);
+     formData.append("seq", param.seq);
      formData.append("id", param.email);
    } else {
     formData.append("uploadFile", thumbnail);
@@ -85,7 +85,7 @@ function CustomUpdate() {
     formData.append("phoneNum", document.frm.phoneNum.value);
     formData.append("email", document.frm.email.value);
     formData.append("url", document.frm.url.value);
-    formData.append("seq", seq);
+    formData.append("seq", param.seq);
     formData.append("id", param.email);
    }
 
@@ -105,12 +105,12 @@ function CustomUpdate() {
 
   //수정 */
   axios.post("http://localhost:3000/businessUpdate", null,
-                {params:{"seq":seq, "id":param.id, "thumbnail": thumbnail, "name":name, "email":param.email,
+                {params:{"seq":seq, "id":param.id, "thumbnail": thumbnail, "name":name, "email":param.id,
                           "url":url, "phoneNum":phoneNum, "introduce":introduce}})
          .then(function(resp){
             if(resp.data === "YES") {
               alert('정보가 수정되었습니다.');
-              history(`/informDetail/${param.email}`);
+              history(`/informDetail/${param.id}`);
             } else {
               alert('정보를 수정하지 못했습니다.');
               history('/card');
@@ -174,12 +174,12 @@ function CustomUpdate() {
             <div /*id="toolbox"*/>
     <div className="middle">
 
-        <div style={{backgroundColor:"#9CA8F0", marginTop:"70px", height:"600px", width:"900px", fontSize:"20px"}}>
+        <div style={{backgroundColor:"#9CA8F0", marginLeft:"-600px", marginTop:"150px", height:"600px", width:"900px", fontSize:"20px"}}>
 
           <form name="frm" onSubmit={onSubmit} encType="multipart/form-data">
             <div style={{float:"left", position:"relative", marginLeft:"70px", marginTop:"50px"}}>
               <div>
-                  <img src={`${imgFile}`} alt="프로필" style={{width:"200px"}} />
+                  <img src={`${imgFile}`} alt="프로필" id="circle" />
                   <br/>
                   <input type="file" name='uploadFile' onChange={imageLoad} ref={imgRef} />
                   <br/>
@@ -187,8 +187,8 @@ function CustomUpdate() {
               </div>
             </div>
 
-              <div style={{ float:"left", marginLeft:"400px", marginTop:"-250px"}}>
-                <div style={{backgroundColor:"white", textAlign:"center", padding:"5px", width:"450px"}}>
+              <div style={{ float:"left", marginLeft:"400px", marginTop:"-300px"}}>
+                <div id="talk-edit">
                   <h3>소개글</h3>
                   <input name="introduce" defaultValue={introduce} onChange={(e)=>setIntroduce(e.target.value)}/>
                 </div>
