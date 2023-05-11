@@ -118,7 +118,7 @@ export const Calendar = () => {
 
     return(
         <div>
-            <div id="backwhite">
+            <div id="">
                 <RenderHeader currentYear={currentYear} currentMonth={currentMonth} preMonth={preMonth} nextMonth={nextMonth} preYear={preYear} nextYear={nextYear} />
                 <br/>
 
@@ -215,7 +215,7 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
         for(let i = 0; i < 7; i++) {
             formatedDate = format(day, 'd');
             days.push(
-                <div key={day} style={{ display:"inline-block", border:"1px solid black", height:"100px", width:"100px", verticalAlign:"top"}}>
+                <div key={day} style={{ float:"left", display:"inline-block", border:"1px solid black", height:"100px", width:"100px", verticalAlign:"top"}}>
                     <span>
                         <Link to={`/me/${format(day,'yyyy-MM-dd')}`} style={{textDecoration: "none"}}>
                             {formatedDate}
