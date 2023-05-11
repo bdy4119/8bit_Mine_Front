@@ -21,7 +21,7 @@ function Ban(){
                     history("/admin");
                 }
                 else if(resp.data === 1){
-                    history("/mainpage");
+                    history("/main");
                 }
             })
             .catch(function(err){
