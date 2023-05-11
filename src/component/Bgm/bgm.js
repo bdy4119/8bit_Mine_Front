@@ -52,6 +52,8 @@ function Bgm() {
     }
 
     useEffect(() => {
+        const token = localStorage.getItem("token");
+        document.getElementById("backtop").style.visibility = "hidden";
         fetchData();
         getUser();
     }, []);

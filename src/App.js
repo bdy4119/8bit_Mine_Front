@@ -76,6 +76,7 @@ import { Button, Icon } from 'semantic-ui-react'
 
 import './App.css';
 import './component/main_back.css'
+import Youtube from './component/I/search/youtube';
 function App() {
 
   const [state, setState] = useState(false);
@@ -162,7 +163,7 @@ function App() {
             </tr>
             <tr>
               <td>
-                <Button color="blue" onClick={go}>▶️</Button>
+                <Button color="blue" onClick={go}>▶</Button>
                 <Button color="blue" onClick={stop}>❚❚</Button>
                 <Button color="blue" onClick={() => window.open('http://localhost:9001/bgm',
                   'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>
@@ -196,6 +197,7 @@ function App() {
           <Route path="/i_update/:classify" exact element={<Iupdate />} />
           <Route path="/place" element={<Place />} />
           <Route path="/book" element={<Book />} />
+          <Route path="/youtube" element={<Youtube />} />
           <Route path="/movie" element={<Movie />} />
           <Route path="/drama" element={<Drama />} />
 
