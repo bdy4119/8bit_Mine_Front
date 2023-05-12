@@ -20,28 +20,26 @@ import * as getDiaryList from './Diary.js';
 import { Link, useNavigate } from 'react-router-dom';
 
 
-
-
-
-
 //현재 연월표시& 연월이동 함수
 export const RenderHeader = ({currentMonth, currentYear, preMonth, nextMonth, preYear, nextYear}) => {
     return(
         <div className='middle'>
-            <Icon icon="bi:arrow-left-circle-fill" onClick={preYear}/> &nbsp;
-            <Icon icon="bi:arrow-left-circle-fill" onClick={preMonth}/> &nbsp;&nbsp;&nbsp;
+            <button id="preYear" onClick={preYear}/> &nbsp;
+            <button id="preMonth" onClick={preMonth}/> &nbsp;&nbsp;&nbsp;
             <span>
                 
                 {/*
                     format(변수, "날짜형태")
                     : 원하는 형태의 날짜형태로 문자열로 받을 수 있음
                 */}
-                {format(currentYear, 'yyyy')}년
+                <p style={{fontFamily:"Nanum Pen Script", fontSize:"30px"}}>
+                {format(currentYear, 'yyyy')}년 &nbsp;&nbsp;
                 {format(currentMonth, 'M')}월
+                </p>
             </span>
             &nbsp;&nbsp;&nbsp;
-            <Icon icon="bi:arrow-right-circle-fill" onClick={nextMonth}/> &nbsp;
-            <Icon icon="bi:arrow-right-circle-fill" onClick={nextYear}/>  
+            <button id="nextMonth" onClick={nextMonth}/> &nbsp;
+            <button id="nextYear" onClick={nextYear}/>  
         </div>
     );
 }
@@ -55,7 +53,7 @@ export const RenderDays = () => {
 
     for(let i=0; i<7; i++) {
         week.push(
-            <div key={i} style={{ display:"inline-block", border:"1px solid black", height:"30px", width:"120px", textAlign:"center"}} >
+            <div key={i} style={{ display:"inline-block", backgroundColor:"#8D98FF", height:"40px", width:"130px", textAlign:"center", fontFamily:"Nanum Pen Script", fontSize:"30px", paddingTop:"10px", marginTop:"10px"}} >
                 {days[i]}
             </div>
         );
@@ -118,22 +116,13 @@ export const Calendar = () => {
 
     return(
         <div>
-            <div id="">
+            <div style={{backgroundColor:"#A7BEFC", paddingTop:"10px", borderRadius:"15px"}}>
                 <RenderHeader currentYear={currentYear} currentMonth={currentMonth} preMonth={preMonth} nextMonth={nextMonth} preYear={preYear} nextYear={nextYear} />
-                <br/>
-
-                 <RenderDays //요일
-                 />
-
+                <RenderDays /*요일*/ />
+            </div>
+            <div style={{marginLeft:"7px"}}>
                 <RenderCells currentYear={currentYear}  currentMonth={currentMonth} selectedDate={selectedDate} currentWeek={format(currentWeek, 'd')} />
             </div>
-        
-            {/* 
-                <div>
-                    <Icon icon="bi:arrow-left-circle-fill" onClick={preWeek}/>
-                    <Icon icon="bi:arrow-right-circle-fill" onClick={nextWeek}/>
-                </div>
-            */}
         </div>
     );
 };
@@ -152,6 +141,7 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
 
 
     const[diarylist, setDiarylist] = useState([]);
+    const [diaryOne, setDiaryOne] = useState([]);
     const[todolist, setTodolist] = useState([]);
 
 
@@ -165,8 +155,13 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
     function getCalList() {
         axios.get("http://localhost:3000/diaryCalList", {params:{}})
          .then(function(resp){
-          //  console.log(resp.data)
-          setDiarylist(resp.data.list);
+            console.log(resp.data.list[0].title)
+            setDiarylist(resp.data.list);
+            console.log(diarylist[0].title)
+            for(let i=0; i<diarylist.length; i++){
+                setDiaryOne(resp.data.list[i].title);
+                console.log(diaryOne);
+            }
          })
          .catch(function(err){
             alert(err);
@@ -189,7 +184,7 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
     function getHoliday() {
         axios.get("http://localhost:3000/CalendarApi", {params:{"year":format(currentYear, 'yyyy')}})
                  .then(function(resp){
-                 //      console.log(JSON.stringify(resp.data.response.body.items.item));
+               //  console.log(JSON.stringify(resp.data.response.body.items));
                  setLoading(true);   //렌더링 시작해주기
                     for(let i=0; i<JSON.stringify(resp.data.response.body.items.item.length); i++) {
                         locdate[i] = JSON.stringify(resp.data.response.body.items.item[i].locdate);
@@ -209,46 +204,55 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
     let days = [];  // 1주
     let day = startDate; //이번달 시작날짜, 시작요일 넣어놓기
     let formatedDate = ''; //설정날짜 초기화
- //  console.log(diarylist);
+
 
     while(day <= endDate) { //day가 endDate보다 커지면 종료
+        /*
+            for(let j=0; j<diarylist.length; j++) {
+                if(diarylist[j].rdate === format(day,'yyyy-MM-dd') || diarylist[j].rdate === format(day,'yyyy-MM-d')){
+                    setDiaryOne(diarylist[j].title);
+                }
+              }
+        */
         for(let i = 0; i < 7; i++) {
             formatedDate = format(day, 'd');
+
             days.push(
-                <div key={day} style={{ float:"left", display:"inline-block", border:"1px solid black", height:"120px", width:"120px", verticalAlign:"top"}}>
+                <div key={day} style={{float:"left", display:"inline-block", backgroundColor:"rgb(0, 0, 0, 0.05)", margin:"4px", height:"100px", width:"120px", verticalAlign:"top", borderRadius:"10px"}}>
                     <span>
-                        <Link to={`/me/${format(day,'yyyy-MM-dd')}`} style={{textDecoration: "none"}}>
+                        <Link to={`/me/${format(day,'yyyy-MM-dd')}`} style={{textDecoration: "none", fontFamily:"Do Hyeon", fontSize:"20px"}}>
                             {formatedDate}
                         </Link>
+                        <br/>
                         {
                             dateName.map(function(dn, idx){
-                              //  console.log(format(day,'MMdd'));
-                              //  console.log(locdate[idx].substring(4,9));
                                 if( locdate[idx].substring(4,9) === format(day,'MMdd')) {
                                     return(
-                                        <span key={idx}>
-                                            {dn}
+                                        <span key={idx} style={{fontFamily:"Do Hyeon", fontSize:"15px", padding:"5px"}}>
+                                            {dn.replace(/\"/gi, "")}
                                         </span>
                                     );
                                 }
                             })
                         }
-                        {
+                        {  
                             diarylist.map(function(diary, idx){
                                 if(diary.rdate === format(day,'yyyy-MM-dd') || diary.rdate === format(day,'yyyy-MM-d')){
-                                    return (
-                                        <span key={idx} style={{color:'green'}}>
-                                            <div> -{diary.title} </div>
-                                        </span>
-                                    );
+                                        return (
+                                            <span key={idx} style={{color:'green', fontFamily:"Nanum Pen Script", fontSize:"22px"}}>
+                                                <div> -{diary.title} </div>
+                                            </span>
+                                        );
+                                    
                                 }
                             })
+                            
                         }
                         {
                             todolist.map(function(todo, idx){
                                 if(todo.rdate === format(day,'yyyy-MM-dd') || todo.rdate === format(day,'yyyy-MM-d')){
                                     return (
-                                        <span key={idx} style={{color:'orange'}}>
+                                        <span key={idx} style={{color:'orange', fontFamily:"Nanum Pen Script", fontSize:"22px"}}>
                                             <div> -{todo.title} </div>
                                         </span>
                                     );
@@ -262,12 +266,21 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
 
             day = addDays(day,1); // 시작날짜, 시작 요일 계속해서 늘어남
         }
-        rows.push(
-            <div key={day} >
-                {days}
-            </div>
-            
-        );
+
+        let Sunday = days[0].key[0] + days[0].key[1] + days[0].key[2];
+        if(Sunday === "Sun"){
+            rows.push(
+                <div key={day} style={{font:"red"}}>
+                    {days}
+                </div>          
+            );
+        } else {
+            rows.push(
+                <div key={day}>
+                    {days}
+                </div>          
+            );
+        }
         days=[];
     }
 
@@ -281,7 +294,6 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
     if(loading === false) {
         return <div>Loading...</div>
     }
-
   return (
        <span>
             {rows}

@@ -6,6 +6,7 @@
 
 #todo {
   /* position: absolute; */
+  position: fixed;
   position: relative;
   width: 400px;
   background: url(../images/todo.png);
@@ -66,7 +67,7 @@
 
 /* ********* 다이어리 *********** */
 #diary {
-  position: absolute;
+  position: fixed;
   position: relative;
   width: 400px;
   background: url(../images/다이어리.png);
@@ -84,4 +85,55 @@
   background-size: cover;
   padding: 400px;
   font-family: 'Nanum Pen Script', cursive;
+}
+
+
+
+#preYear {
+  position: relative;
+  width: 20px;
+  background: url(../images/왼쪽2.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+#preMonth {
+  position: relative;
+  width: 20px;
+  background: url(../images/왼쪽-화살표.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+#nextYear {
+  position: relative;
+  width: 20px;
+  background: url(../images/오른쪽.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+#nextMonth {
+  position: relative;
+  width: 20px;
+  background: url(../images/오른쪽-화살표.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+#calendar{
+  width: 920px;
+  height: 650px;
+  margin-top: 140px;
+  margin-left: -8px;
+  background: url(../images/달력.png);
+  background-size: cover;
+}
+
+#date{
+  background-color: white;
 }

@@ -51,14 +51,14 @@ function Me() {
           </div>
       </div>
 
-      <div className="middle" >
-        <span style={{marginLeft:"-600px", marginTop:"120px"}}>
+      <div className="middle">
+        <span id="shadow" style={{marginLeft:"-600px", backgroundColor:"white", marginTop:"70px", borderRadius:"20px", paddingBottom:"5px"}}>
           <Calendar/>
         </span>
-        <span style={{ marginLeft:"60px", marginTop:"200px"}}>
+        <span style={{ marginLeft:"60px", marginTop:"130px"}}>
           <Diary />
         </span>
-        <span style={{ marginLeft:"40px", marginTop:"80px"}}>
+        <span style={{ marginLeft:"0px", marginTop:"10px"}}>
           <TodoList/>
         </span>
           
