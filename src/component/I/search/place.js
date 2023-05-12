@@ -1,26 +1,24 @@
+import { useState } from "react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+
 import Pagination from "react-js-pagination";
+import { Button, Table, Input } from 'semantic-ui-react'
 import "./page.css";
 import "./search.css";
+
 import yellowd from "../image/yellowd.png";
 import kakaoy from "../image/kakaoy.png";
-
-import { Button, Table, Input } from 'semantic-ui-react'
+import { useEffect } from "react";
 
 function Place() {
 
+    // 변수 선언
     const [place, setPlace] = useState('');
     const [placelist, setPlacelist] = useState([]);
     const [page, setPage] = useState(1);
     const [total, setTotal] = useState(0);
 
-    useEffect(function () {
-        const token = localStorage.getItem("token");
-        document.getElementById("backtop").style.visibility = "hidden";
-    }, []);
-
-
+    // 장소 검색
     function findPlace() {
         axios.get('http://localhost:3000/kakaoLocal', { params: { "query": encodeURIComponent(place), "page": 1 } })
             .then(function (resp) {
@@ -29,22 +27,26 @@ function Place() {
                 setPage(1);
                 console.log(resp);
             })
+
             .catch(function (err) {
                 alert(err);
             })
     }
 
+    // 페이지 변경
     function pageChange(page) {
         setPage(page);
         axios.get('http://localhost:3000/kakaoLocal', { params: { "query": encodeURIComponent(place), "page": page } })
             .then(function (resp) {
                 setPlacelist(resp.data.documents);
             })
+
             .catch(function (err) {
                 alert(err);
             })
     }
 
+    // 장소 데이터 정리
     function TableRow(props) {
         return (
             <Table.Row>
@@ -55,9 +57,13 @@ function Place() {
         );
     }
 
+    useEffect(() => {
+        document.getElementById("backtop").style.visibility = "hidden";
+    }, []);
 
     return (
         <div id="back">
+
             <img src={yellowd} width="70px" height="70px" style={{ position: "absolute", marginLeft: "20px", marginTop: "35px" }} />
             <div className="bgmtitle">
                 <h2 style={{ fontSize: "45px" }}>장소 검색</h2>
@@ -86,6 +92,7 @@ function Place() {
                             <Table.HeaderCell>주소</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
+
                     <Table.Body>
                         {
                             placelist.map(function (object, i) {
@@ -96,6 +103,7 @@ function Place() {
                         }
                     </Table.Body>
                 </Table>
+
                 <Pagination
                     activePage={page}
                     itemsCountPerPage={10}
@@ -106,6 +114,7 @@ function Place() {
                     onChange={pageChange}
                 />
             </div>
+            
         </div>
     );
 }

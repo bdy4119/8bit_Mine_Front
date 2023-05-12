@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import "../main_back.css"
-import "./icss.css";
+
 import Topbar from "../main/topbar";
 import Barbtns from "../main/barbtns";
+import SearchHelp from "./searchHelp";
+
 import { Table, Input, Button } from "semantic-ui-react";
+import "../main_back.css"
+import "./icss.css";
 
 import purpled from "./image/purpled.png";
-import greend from "./image/greend.png";
-
-import kakao from "./image/kakao.png";
-import naver from "./image/naver.png";
-import youtube from "./image/youtube.png";
-import tmdb from "./image/tmdb.png";
 
 function Qna10() {
 
+    // 변수 선언
     const history = useNavigate();
 
     const [name, setName] = useState('');
@@ -26,12 +24,24 @@ function Qna10() {
     const [address, setAddress] = useState('');
     const [birthdate, setBirthdate] = useState('');
 
+    const [ans1, setAns1] = useState('');
+    const [ans2, setAns2] = useState('');
+    const [ans3, setAns3] = useState('');
+    const [ans4, setAns4] = useState('');
+    const [ans5, setAns5] = useState('');
+    const [ans6, setAns6] = useState('');
+    const [ans7, setAns7] = useState('');
+
+    // 접속 권한 체크
     const getUser = async () => {
         const jwt = localStorage.getItem("token");
+
         if (jwt === null) {
             history("/");
         }
         else {
+
+            // 프로필 조회
             axios.get("http://localhost:3000/show", { params: { "token": jwt } })
                 .then(function (resp) {
                     setName(resp.data.name);
@@ -47,18 +57,11 @@ function Qna10() {
         }
     }
 
-    const [ans1, setAns1] = useState('');
-    const [ans2, setAns2] = useState('');
-    const [ans3, setAns3] = useState('');
-    const [ans4, setAns4] = useState('');
-    const [ans5, setAns5] = useState('');
-    const [ans6, setAns6] = useState('');
-    const [ans7, setAns7] = useState('');
-
+    // 작성한 QnA 답변 불러오기
     const detailData = async () => {
         const id = localStorage.getItem("id");
-
         const resp = await axios.get("http://localhost:3000/i_qna", { params: { "id": id } });
+
         setAns1(resp.data.q1);
         setAns2(resp.data.q2);
         setAns3(resp.data.q3);
@@ -73,16 +76,20 @@ function Qna10() {
         detailData();
     }, []);
 
+    // QnA 답변 저장
     function i_add_qna() {
         const id = localStorage.getItem("id");
 
+        // 기존 답변 삭제
         axios.get('http://localhost:3000/i_del_qna', { params: { "id": id } })
             .then(function () {
+
+                // 답변 추가
                 axios.get('http://localhost:3000/i_add_qna',
                     {
                         params: {
-                            "id": id, "q1": ans1, "q2": ans2, "q3": ans3, "q4": ans4,
-                            "q5": ans5, "q6": ans6, "q7": ans7
+                            "id": id, "q1": ans1, "q2": ans2, "q3": ans3,
+                            "q4": ans4, "q5": ans5, "q6": ans6, "q7": ans7
                         }
                     })
                     .then(function (resp) {
@@ -95,19 +102,23 @@ function Qna10() {
                         alert(err);
                     });
             })
+
             .catch(function (err) {
                 alert(err);
             })
     }
 
+    // 모든 답변 초기화
     function i_qna_reset() {
         setAns1(''); setAns2(''); setAns3(''); setAns4(''); setAns5(''); setAns6(''); setAns7('');
     }
 
     return (
         <div id="back">
+
             <Topbar />
             <Barbtns />
+
             <div className="card">
                 <h1 style={{ marginTop: "20px", fontSize: "40px" }}>{name}</h1>
                 <div className="img-wrap" >
@@ -130,6 +141,7 @@ function Qna10() {
                     <input className="inputI" readOnly="readOnly" value={profMsg} />
                 </label>
             </div>
+
             <div className="qna">
                 <Table border="1" style={{ width: "700px", float: "left" }} color={"purple"}>
                     <Table.Header>
@@ -140,13 +152,15 @@ function Qna10() {
                             </Table.HeaderCell >
                         </Table.Row>
                     </Table.Header>
+
                     <Table.Body>
                         <Table.Row>
                             <Table.HeaderCell>1.&nbsp;&nbsp;가장 행복한 순간은 언제였나요?</Table.HeaderCell>
                         </Table.Row>
                         <Table.Row>
                             <Table.Cell colSpan="2">
-                                <Input size={"mini"} placeholder="답변을 입력해주세요." defaultValue={ans1} onChange={(e) => { setAns1(e.target.value); }} style={{ width: "600px", fontSize:"13px" }} />
+                                <Input size={"mini"} placeholder="답변을 입력해주세요." defaultValue={ans1}
+                                    onChange={(e) => { setAns1(e.target.value); }} style={{ width: "600px", fontSize: "13px" }} />
                             </Table.Cell>
                         </Table.Row>
                         <Table.Row>
@@ -154,7 +168,8 @@ function Qna10() {
                         </Table.Row>
                         <Table.Row>
                             <Table.Cell colSpan="2">
-                                <Input size={"mini"} placeholder="답변을 입력해주세요." defaultValue={ans2} onChange={(e) => { setAns2(e.target.value); }} style={{ width: "600px", fontSize:"13px" }} />
+                                <Input size={"mini"} placeholder="답변을 입력해주세요." defaultValue={ans2}
+                                    onChange={(e) => { setAns2(e.target.value); }} style={{ width: "600px", fontSize: "13px" }} />
                             </Table.Cell>
                         </Table.Row>
                         <Table.Row>
@@ -162,7 +177,8 @@ function Qna10() {
                         </Table.Row>
                         <Table.Row>
                             <Table.Cell colSpan="2">
-                                <Input size={"mini"} placeholder="답변을 입력해주세요." defaultValue={ans3} onChange={(e) => { setAns3(e.target.value); }} style={{ width: "600px", fontSize:"13px" }} />
+                                <Input size={"mini"} placeholder="답변을 입력해주세요." defaultValue={ans3}
+                                    onChange={(e) => { setAns3(e.target.value); }} style={{ width: "600px", fontSize: "13px" }} />
                             </Table.Cell>
                         </Table.Row>
                         <Table.Row>
@@ -170,7 +186,8 @@ function Qna10() {
                         </Table.Row>
                         <Table.Row>
                             <Table.Cell colSpan="2">
-                                <Input size={"mini"} placeholder="답변을 입력해주세요." defaultValue={ans4} onChange={(e) => { setAns4(e.target.value); }} style={{ width: "600px", fontSize:"13px" }} />
+                                <Input size={"mini"} placeholder="답변을 입력해주세요." defaultValue={ans4}
+                                    onChange={(e) => { setAns4(e.target.value); }} style={{ width: "600px", fontSize: "13px" }} />
                             </Table.Cell>
                         </Table.Row>
                         <Table.Row>
@@ -178,7 +195,8 @@ function Qna10() {
                         </Table.Row>
                         <Table.Row>
                             <Table.Cell colSpan="2">
-                                <Input size={"mini"} placeholder="답변을 입력해주세요." defaultValue={ans5} onChange={(e) => { setAns5(e.target.value); }} style={{ width: "600px", fontSize:"13px" }} />
+                                <Input size={"mini"} placeholder="답변을 입력해주세요." defaultValue={ans5}
+                                    onChange={(e) => { setAns5(e.target.value); }} style={{ width: "600px", fontSize: "13px" }} />
                             </Table.Cell>
                         </Table.Row>
                         <Table.Row>
@@ -186,7 +204,8 @@ function Qna10() {
                         </Table.Row>
                         <Table.Row>
                             <Table.Cell colSpan="2">
-                                <Input size={"mini"} placeholder="답변을 입력해주세요." defaultValue={ans6} onChange={(e) => { setAns6(e.target.value); }} style={{ width: "600px", fontSize:"13px" }} />
+                                <Input size={"mini"} placeholder="답변을 입력해주세요." defaultValue={ans6}
+                                    onChange={(e) => { setAns6(e.target.value); }} style={{ width: "600px", fontSize: "13px" }} />
                             </Table.Cell>
                         </Table.Row>
                         <Table.Row>
@@ -194,72 +213,21 @@ function Qna10() {
                         </Table.Row>
                         <Table.Row>
                             <Table.Cell colSpan="2">
-                                <Input size={"mini"} placeholder="답변을 입력해주세요." defaultValue={ans7} onChange={(e) => { setAns7(e.target.value); }} style={{ width: "600px", fontSize:"13px" }} />
+                                <Input size={"mini"} placeholder="답변을 입력해주세요." defaultValue={ans7}
+                                    onChange={(e) => { setAns7(e.target.value); }} style={{ width: "600px", fontSize: "13px" }} />
                             </Table.Cell>
                         </Table.Row>
                     </Table.Body>
                 </Table>
             </div>
 
-            <div className="search">
-                <Table size="small" style={{ width: "300px", textAlign: "center", fontSize: "17px" }} color={"olive"}>
-                    <Table.Header>
-                        <Table.Row>
-                            <Table.HeaderCell colSpan="2">
-                                <img src={greend} width="40px" height="40px" style={{ marginLeft: "-20px", marginTop: "-10px" }} />&nbsp;
-                                검색도우미
-                            </Table.HeaderCell>
-                        </Table.Row>
-                    </Table.Header>
-                    <Table.Body>
-                        <Table.Row >
-                            <Table.Cell style={{ width: "60px" }}>
-                                <img src={kakao} width="50px" height="15px" />
-                            </Table.Cell>
-                            <Table.Cell>
-                                <Link onClick={() => window.open('http://localhost:9001/place', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>위치 정보</Link>
-                            </Table.Cell>
-                        </Table.Row>
-                        <Table.Row>
-                            <Table.Cell style={{ width: "60px" }}>
-                                <img src={naver} width="53px" height="10px" />
-                            </Table.Cell>
-                            <Table.Cell>
-                                <Link onClick={() => window.open('http://localhost:9001/book', 'window_name', 'width=800,height=1000,location=no,status=no,scrollbars=yes')}>책 정보</Link>
-                            </Table.Cell>
-                        </Table.Row>
-                        <Table.Row>
-                            <Table.Cell>
-                                <img src={youtube} width="40px" height="20px" />
-                            </Table.Cell>
-                            <Table.Cell>
-                                <Link onClick={() => window.open('http://localhost:9001/youtube', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>Youtube 정보</Link>
-                            </Table.Cell>
-                        </Table.Row>
-                        <Table.Row>
-                            <Table.Cell>
-                                <img src={tmdb} width="53px" height="10px" />
-                            </Table.Cell>
-                            <Table.Cell>
-                                <Link onClick={() => window.open('http://localhost:9001/movie', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>영화 정보</Link>
-                            </Table.Cell>
-                        </Table.Row>
-                        <Table.Row>
-                            <Table.Cell>
-                                <img src={tmdb} width="53px" height="10px" />
-                            </Table.Cell>
-                            <Table.Cell>
-                                <Link onClick={() => window.open('http://localhost:9001/drama', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>TV/드라마/OTT 정보</Link>
-                            </Table.Cell>
-                        </Table.Row>
-                    </Table.Body>
-                </Table>
-            </div>
+            <SearchHelp />
 
             <div className="qnabut">
-                <Button size={"massive"} onClick={i_add_qna} color={"blue"}>답변 저장</Button><br/><br/>
+                <Button size={"massive"} onClick={i_add_qna} color={"blue"}>답변 저장</Button><br /><br />
                 <Button size={"massive"} onClick={i_qna_reset} color={"red"}>전체 삭제</Button>
             </div>
+
         </div>
     );
 }

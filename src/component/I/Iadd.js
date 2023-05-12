@@ -1,36 +1,22 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./icss.css";
+import axios from "axios";
+
 import Topbar from "../main/topbar";
 import Barbtns from "../main/barbtns";
-import 'semantic-ui-css/semantic.min.css'
-import { Table, Button, Input } from 'semantic-ui-react'
+import SearchHelp from "./searchHelp";
 
-import kakao from "./image/kakao.png";
-import naver from "./image/naver.png";
-import youtube from "./image/youtube.png";
-import tmdb from "./image/tmdb.png";
+import { Table, Button, Input } from 'semantic-ui-react'
+import "./icss.css";
 
 import purpled from "./image/purpled.png";
 import redd from "./image/redd.png";
-import greend from "./image/greend.png";
+
 
 function I_add() {
 
+  // 변수 선언
   const history = useNavigate();
-
-  function getUser() {
-    const jwt = localStorage.getItem("token");
-    if (jwt === null) {
-      history("/");
-    }
-  }
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
 
   const [classi, setClassi] = useState('');
   const [classiList, setClassiList] = useState([]);
@@ -49,6 +35,28 @@ function I_add() {
   const [det5, setDet5] = useState('');
   const det = [det1, det2, det3, det4, det5];
 
+  // 접속 권한 체크
+  function getUser() {
+    const jwt = localStorage.getItem("token");
+
+    if (jwt === null) {
+      history("/");
+    }
+  }
+
+  // 분류 목록 불러오기
+  const fetchData = async () => {
+    const id = localStorage.getItem("id");
+    const resp = await axios.get('http://localhost:3000/i_classi_list', { params: { "id": id } });
+    setClassiList(resp.data);
+  }
+
+  useEffect(() => {
+    getUser();
+    fetchData();
+  }, []);
+  
+  // 분류 추가
   function i_add() {
 
     const id = localStorage.getItem("id");
@@ -63,7 +71,7 @@ function I_add() {
       return;
     }
 
-    // 참고 : 특수문자는 추가가 안됨.
+    // 세부내용 추가
     for (let i = 0; i < ans.length; i++) {
       axios.get('http://localhost:3000/i_add', { params: { "id": id, "classify": classi, "item": ans[i], "detail": det[i], "ref": i } })
         .then(function () {
@@ -73,6 +81,7 @@ function I_add() {
         })
     }
 
+    // 분류 추가
     axios.get('http://localhost:3000/i_add_classi', { params: { "id": id, "classify": classi } })
       .then(function () {
       })
@@ -84,12 +93,7 @@ function I_add() {
     history('/i');
   }
 
-  const fetchData = async () => {
-    const id = localStorage.getItem("id");
-    const resp = await axios.get('http://localhost:3000/i_classi_list', { params: { "id": id } });
-    setClassiList(resp.data);
-  }
-
+  // 분류 List 불러오기
   function TableRow(props) {
     return (
       <Table.Row>
@@ -98,12 +102,9 @@ function I_add() {
     );
   }
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
     <div id="back">
+
       <Topbar />
       <Barbtns />
 
@@ -129,6 +130,7 @@ function I_add() {
           </Table.Body>
         </Table>
       </div>
+
       <div className="tableAddC">
         <Table style={{ width: "700px", textAlign: "center", fontSize: "20px" }} color={"purple"}>
           <Table.Header>
@@ -164,62 +166,13 @@ function I_add() {
           </Table.Body>
         </Table>
       </div>
+
       <div className="tacButton">
         <Button size="huge" color="purple" onClick={i_add}>분류 추가</Button>
       </div>
-      <div className="search">
-        <Table size="small" style={{ width: "300px", textAlign: "center", fontSize: "17px" }} color={"olive"}>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell colSpan="2">
-                <img src={greend} width="40px" height="40px" style={{ marginLeft: "-20px", marginTop: "-10px" }} />&nbsp;
-                검색도우미</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            <Table.Row >
-              <Table.Cell style={{ width: "60px" }}>
-                <img src={kakao} width="50px" height="15px" />
-              </Table.Cell>
-              <Table.Cell>
-                <Link onClick={() => window.open('http://localhost:9001/place', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>위치 정보</Link>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell style={{ width: "60px" }}>
-                <img src={naver} width="53px" height="10px" />
-              </Table.Cell>
-              <Table.Cell>
-                <Link onClick={() => window.open('http://localhost:9001/book', 'window_name', 'width=800,height=1000,location=no,status=no,scrollbars=yes')}>책 정보</Link>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
-                <img src={youtube} width="40px" height="20px" />
-              </Table.Cell>
-              <Table.Cell>
-                <Link onClick={() => window.open('http://localhost:9001/youtube', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>Youtube 정보</Link>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
-                <img src={tmdb} width="53px" height="10px" />
-              </Table.Cell>
-              <Table.Cell>
-                <Link onClick={() => window.open('http://localhost:9001/movie', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>영화 정보</Link>
-              </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-              <Table.Cell>
-                <img src={tmdb} width="53px" height="10px" />
-              </Table.Cell>
-              <Table.Cell>
-                <Link onClick={() => window.open('http://localhost:9001/drama', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>TV/드라마/OTT 정보</Link>
-              </Table.Cell>
-            </Table.Row>
-          </Table.Body>
-        </Table>
-      </div>
+
+      <SearchHelp />
+
     </div>
   );
 }
