@@ -2,7 +2,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-  
+import "./FileUpload.css" 
 function FileUpload() {
        
   const [mfCategory , setMfCategory] = useState('')
@@ -36,7 +36,7 @@ function FileUpload() {
   return(
     <>
       <form name="frm" encType="multipart/form-data" onSubmit={onSubmit}>
-        <div align="center">
+        <div className='rwd-table' align="center">
           <table align="center" border="1">
             <thead/>
             <tbody>
@@ -73,7 +73,7 @@ function FileUpload() {
                 <input type="file" name="uploadFile"></input>
               </tr>
             </tbody>
-          </table>
+          </table >
           <input type="submit" value="file upload"/>
         </div>
       </form>

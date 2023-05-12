@@ -144,7 +144,7 @@ const FileList = () => {
             <br/><br/>
             {fileList !== null
                 ?
-                <div align="center">
+                <div align="center" className='rwd-table'>
                     <table border="1">
                         <thead>
                             <tr>
@@ -168,17 +168,20 @@ const FileList = () => {
                                         <td>{file.mfRegdate}</td>
                                         <td>{file.mfMemo}</td>
                                         <td>
-                                            {<Link to={`/updateFile/${file.mfSeq}`}><button>수정</button></Link>}
-                                            <button onClick={() => deleteFile(`${file.mfSeq}`)}>삭제</button>
+                                            {<Link to={`/updateFile/${file.mfSeq}`}><button className='updatebtns'>수정</button></Link>}
+                                            
+                                            <button className='delbtns' onClick={() => deleteFile(`${file.mfSeq}`)}>삭제</button>
+                                            
+                                        
                                         </td>
-                                        <td><button onClick={()=>{download(file.mfNFilename)}}>다운로드</button></td>
+                                        <td><button className='downbtns' onClick={()=>{download(file.mfNFilename)}}>다운로드</button></td>
                                     </tr>
                                 );
                             })}
                         </tbody>
                     </table>
                     <br />
-                    <button style={{marginLeft:"470px"}}><Link to='/FileUpload'>업로드</Link></button>
+                    <button className='uploadbtns' style={{marginLeft:"470px"}}><Link to='/FileUpload'>업로드</Link></button>
                     <br /><br />
                     <Pagination
                         activePage={page}
