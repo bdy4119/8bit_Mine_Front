@@ -231,7 +231,7 @@ function I_update() {
                                 <img src={naver} width="53px" height="10px" />
                             </Table.Cell>
                             <Table.Cell>
-                                <Link onClick={() => window.open('http://localhost:9001/book', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>책 정보</Link>
+                                <Link onClick={() => window.open('http://localhost:9001/book', 'window_name', 'width=800,height=1000,location=no,status=no,scrollbars=yes')}>책 정보</Link>
                             </Table.Cell>
                         </Table.Row>
                         <Table.Row>
