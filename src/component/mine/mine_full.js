@@ -66,10 +66,9 @@ function Mine_full(){
 
     function gostart(e){
 
-        document.getElementsByClassName("fullchild")[0].style.left = "30px";
-        document.getElementsByClassName("fullchild")[0].style.top = "300px";
+        document.getElementsByClassName("fullchild")[0].style.left = "40px";
+        document.getElementsByClassName("fullchild")[0].style.top = "340px";
 
-        document.getElementsByClassName("fullstart")[0].style.visibility = "hidden";
         document.getElementsByClassName("fullvictory")[0].style.visibility = "hidden";
         document.getElementById("fullquestion").style.visibility = "hidden";
 
@@ -80,6 +79,7 @@ function Mine_full(){
         }
 
         var audio = document.getElementById("audio");
+        audio.currentTime = 0;
         audio.play();
     }
 
@@ -90,39 +90,39 @@ function Mine_full(){
         let totop = parseInt(toppx);
         var blop = document.getElementById("blop");
 
-        if (a[1] && toleft === 80 && totop === 100){
+        if (a[1] && toleft === 100 && totop === 100){
             document.getElementsByClassName("fulltextbox")[0].innerHTML = b[1].imgtext;
             blop.play();
         }
-        if (a[2] && toleft === 180 && totop === 400){
+        if (a[2] && toleft === 220 && totop === 400){
             document.getElementsByClassName("fulltextbox")[0].innerHTML = b[2].imgtext;
             blop.play();
         }
-        if (a[3] && toleft === 280 && totop === 50){
+        if (a[3] && toleft === 340 && totop ===220){
             document.getElementsByClassName("fulltextbox")[0].innerHTML = b[3].imgtext;
             blop.play();
         }
-        if (a[4] && toleft === 380 && totop === 550){
+        if (a[4] && toleft === 400 && totop === 520){
             document.getElementsByClassName("fulltextbox")[0].innerHTML = b[4].imgtext;
             blop.play();
         }
-        if (a[5] && toleft === 480 && totop === 150){
+        if (a[5] && toleft === 520 && totop === 160){
             document.getElementsByClassName("fulltextbox")[0].innerHTML = b[5].imgtext;
             blop.play();
         }
-        if (a[6] && toleft === 580 && totop === 50){
+        if (a[6] && toleft === 640 && totop === 460){
             document.getElementsByClassName("fulltextbox")[0].innerHTML = b[6].imgtext;
             blop.play();
         }
-        if (a[7] && toleft === 680 && totop === 200){
+        if (a[7] && toleft === 760 && totop === 40){
             document.getElementsByClassName("fulltextbox")[0].innerHTML = b[7].imgtext;
             blop.play();
         }
-        if (a[8] && toleft === 780 && totop === 450){
+        if (a[8] && toleft === 880 && totop === 580){
             document.getElementsByClassName("fulltextbox")[0].innerHTML = b[8].imgtext;
             blop.play();
         }
-        if (toleft >= 820 && totop === 300){
+        if (toleft === 940 && totop === 340){
             var clear = document.getElementById("clear");
             clear.play();
             document.getElementsByClassName("fullvictory")[0].style.visibility = "visible";
@@ -137,7 +137,7 @@ function Mine_full(){
 
     function goleft(e){
         let leftpx = document.getElementsByClassName("fullchild")[0].style.left;
-        let toleft = parseInt(leftpx) - 50;
+        let toleft = parseInt(leftpx) - 60;
         if (toleft >= 10){
             document.getElementsByClassName("fullchild")[0].style.left = toleft + "px";
         }
@@ -146,8 +146,8 @@ function Mine_full(){
 
     function goright(e){
         let leftpx = document.getElementsByClassName("fullchild")[0].style.left;
-        let toright = parseInt(leftpx) + 50;
-        if (toright <= 870){
+        let toright = parseInt(leftpx) + 60;
+        if (toright <= 960){
             document.getElementsByClassName("fullchild")[0].style.left = toright + "px";
         }
         finish();
@@ -155,7 +155,7 @@ function Mine_full(){
 
     function goup(e){
         let toppx = document.getElementsByClassName("fullchild")[0].style.top;
-        let totop = parseInt(toppx) - 50;
+        let totop = parseInt(toppx) - 60;
         if (totop >= 10){
             document.getElementsByClassName("fullchild")[0].style.top = totop + "px";
         }
@@ -164,8 +164,8 @@ function Mine_full(){
 
     function godown(e){
         let toppx = document.getElementsByClassName("fullchild")[0].style.top;
-        let todown = parseInt(toppx) + 50;
-        if (todown <= 550){
+        let todown = parseInt(toppx) + 60;
+        if (todown <= 600){
             document.getElementsByClassName("fullchild")[0].style.top = todown + "px";
         }
         finish();
@@ -204,11 +204,11 @@ function Mine_full(){
         <div id="fulltoolbox">
             <button id="close" onClick={close}>X</button>
             <div id="fullgame">
+                <div className="fullstart" onClick={gostart}></div>
                 <div className="fullleft" onClick={goleft}></div>
                 <div className="fullup" onClick={goup}></div>
                 <div className="fulldown" onClick={godown}></div>
                 <div className="fullright" onClick={goright}></div>
-                <div className="fullrefresh" onClick={gostart}></div>
                 <div className="fullkeybutton" onClick={gokey}></div>
                 <div className="fullplay" onClick={play}></div>
                 <div className="fullpause" onClick={pause}></div>
@@ -218,44 +218,43 @@ function Mine_full(){
                 <audio id="clear" src={clear} />
 
                 <div className="fullcontainer">
-                    <div className="fullstart" onClick={gostart}></div>
                     <div>
-                        { !a[10] && (<img src={stage1} alt="" width="897px" height="597px" />)}
-                        { a[10] && (b[10].imgtext === '1' ) && (<img src={stage1} alt="" width="897px" height="597px" />)}
-                        { a[10] && (b[10].imgtext === '2' ) && (<img src={stage2} alt="" width="897px" height="597px" />)}
-                        { a[10] && (b[10].imgtext === '3' ) && (<img src={stage3} alt="" width="897px" height="597px" />)}
+                        { !a[10] && (<img src={stage1} alt="" width="990px" height="640px" />)}
+                        { a[10] && (b[10].imgtext === '1' ) && (<img src={stage1} alt="" width="990px" height="640px" />)}
+                        { a[10] && (b[10].imgtext === '2' ) && (<img src={stage2} alt="" width="990px" height="640px" />)}
+                        { a[10] && (b[10].imgtext === '3' ) && (<img src={stage3} alt="" width="990px" height="640px" />)}
                     </div>
 
                     <div className="fullchild">
-                        { a[9] && (<img src={process.env.PUBLIC_URL + "/img/" + b[9].newfilename} alt="child" width="50px"/>)}
-                        { !a[9] && (<img src={cat} alt="cat" width="50px"/>)}
+                        { a[9] && (<img src={process.env.PUBLIC_URL + "/img/" + b[9].newfilename} alt="child" width="70px"/>)}
+                        { !a[9] && (<img src={cat} alt="cat" width="70px"/>)}
                     </div>
                     <div className="fullportal"></div>
                     <div className="fullvictory"><img src={logo} alt="vic"/></div>
                     <div>
                         {a[1] && (
-                        <div className="fullpoint" id="fullfirst"><img src={process.env.PUBLIC_URL + "/img/" + b[1].newfilename} alt="point1" width="40px"/></div>
+                        <div className="fullpoint" id="fullfirst"><img src={process.env.PUBLIC_URL + "/img/" + b[1].newfilename} alt="point1" width="70px"/></div>
                         )}
                         {a[2] && (
-                        <div className="fullpoint" id="fullsecond"><img src={process.env.PUBLIC_URL + "/img/" + b[2].newfilename} alt="point2" width="40px"/></div>                        
+                        <div className="fullpoint" id="fullsecond"><img src={process.env.PUBLIC_URL + "/img/" + b[2].newfilename} alt="point2" width="70px"/></div>                        
                         )}
                         {a[3] && (
-                        <div className="fullpoint" id="fullthird"><img src={process.env.PUBLIC_URL + "/img/" + b[3].newfilename} alt="point2" width="40px"/></div>                        
+                        <div className="fullpoint" id="fullthird"><img src={process.env.PUBLIC_URL + "/img/" + b[3].newfilename} alt="point2" width="70px"/></div>                        
                         )}
                         {a[4] && (
-                        <div className="fullpoint" id="fullfourth"><img src={process.env.PUBLIC_URL + "/img/" + b[4].newfilename} alt="point2" width="40px"/></div>                        
+                        <div className="fullpoint" id="fullfourth"><img src={process.env.PUBLIC_URL + "/img/" + b[4].newfilename} alt="point2" width="70px"/></div>                        
                         )}
                         {a[5] && (
-                        <div className="fullpoint" id="fullfifth"><img src={process.env.PUBLIC_URL + "/img/" + b[5].newfilename} alt="point2" width="40px"/></div>                        
+                        <div className="fullpoint" id="fullfifth"><img src={process.env.PUBLIC_URL + "/img/" + b[5].newfilename} alt="point2" width="70px"/></div>                        
                         )}
                         {a[6] && (
-                        <div className="fullpoint" id="fullsixth"><img src={process.env.PUBLIC_URL + "/img/" + b[6].newfilename} alt="point2" width="40px"/></div>                        
+                        <div className="fullpoint" id="fullsixth"><img src={process.env.PUBLIC_URL + "/img/" + b[6].newfilename} alt="point2" width="70px"/></div>                        
                         )}
                         {a[7] && (
-                        <div className="fullpoint" id="fullseventh"><img src={process.env.PUBLIC_URL + "/img/" + b[7].newfilename} alt="point2" width="40px"/></div>                        
+                        <div className="fullpoint" id="fullseventh"><img src={process.env.PUBLIC_URL + "/img/" + b[7].newfilename} alt="point2" width="70px"/></div>                        
                         )}
                         {a[8] && (
-                        <div className="fullpoint" id="fulleight"><img src={process.env.PUBLIC_URL + "/img/" + b[8].newfilename} alt="point2" width="40px"/></div>                        
+                        <div className="fullpoint" id="fulleight"><img src={process.env.PUBLIC_URL + "/img/" + b[8].newfilename} alt="point2" width="70px"/></div>                        
                         )}                     
                     </div>
 
@@ -263,7 +262,6 @@ function Mine_full(){
                             {a[11] && (
                                 <div>
                                     <div id="fulltextquestion">
-                                        방문자 : <input value={guestid} onChange={(e)=>setguestid(e.target.value)}></input><br/><br/>
                                         1. {b[11].filename}
                                         <br/><input value={answer1} onChange={(e)=>setanswer1(e.target.value)}></input><br/><br/>
                                         2. {b[11].newfilename}
@@ -271,7 +269,10 @@ function Mine_full(){
                                         3. {b[11].imgtext}
                                         <br/><input value={answer3} onChange={(e)=>setanswer3(e.target.value)}></input><br/><br/>
                                     </div>
-                                    <button>제출</button>
+                                    <div id="fullsubquestion">
+                                        방문자 : <input value={guestid} onChange={(e)=>setguestid(e.target.value)}></input>
+                                        <button>제출</button>
+                                    </div>
                                 </div>
                             )}
                     </div>
