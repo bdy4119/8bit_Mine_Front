@@ -8,6 +8,7 @@ import stage2 from './images/stage2.png';
 import stage3 from './images/stage3.png';
 import "../mine_back.css"
 import Topbar from "../main/topbar";
+import cat from './images/cat.png';
 
 function Mine_edi(){
 
@@ -311,7 +312,6 @@ function Mine_edi(){
                     <div id="modechange">
                         <button onClick={(e) => {window.location.href = "/mine"}}>사용자 모드</button>
                         <button onClick={(e) => {window.location.href = "/mine_edi/1"}}>에디터 모드</button>
-                        <button onClick={(e) => {window.location.href = "/mine_guestbook"}}>방명록</button>
                     </div>
                 </div>
 
@@ -323,45 +323,49 @@ function Mine_edi(){
                             { a[10] && (b[10].imgtext === '2' ) && (<img src={stage2} alt="" width="690px" height="410px" />)}
                             { a[10] && (b[10].imgtext === '3' ) && (<img src={stage3} alt="" width="690px" height="410px" />)}
                         </div>
+                        <div className="child">
+                            { a[9] && (<img src={process.env.PUBLIC_URL + "/img/" + b[9].newfilename} alt="child" width="40px"/>)}
+                            {!a[9] && (<img src={cat} alt="cat" width="60px"/>)}
+                        </div>
                         <div className="portal"></div>
                         <div>
                             {a[1] && (
-                            <div className="point" id="first"><img src={process.env.PUBLIC_URL + "/img/" + b[1].newfilename} alt="point1" width="30px"/></div>
+                            <div className="point" id="first"><img src={process.env.PUBLIC_URL + "/img/" + b[1].newfilename} alt="point1" width="50px"/></div>
                             )}
                             {!a[1] && ( <div className="point" id="first"><strong>1</strong></div> )}
 
                             {a[2] && (
-                            <div className="point" id="second"><img src={process.env.PUBLIC_URL + "/img/" + b[2].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="second"><img src={process.env.PUBLIC_URL + "/img/" + b[2].newfilename} alt="point2" width="50px"/></div>                        
                             )}
                             {!a[2] && ( <div className="point" id="second"><strong>2</strong></div> )}
 
                             {a[3] && (
-                            <div className="point" id="third"><img src={process.env.PUBLIC_URL + "/img/" + b[3].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="third"><img src={process.env.PUBLIC_URL + "/img/" + b[3].newfilename} alt="point2" width="50px"/></div>                        
                             )}
                             {!a[3] && ( <div className="point" id="third"><strong>3</strong></div> )}
 
                             {a[4] && (
-                            <div className="point" id="fourth"><img src={process.env.PUBLIC_URL + "/img/" + b[4].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="fourth"><img src={process.env.PUBLIC_URL + "/img/" + b[4].newfilename} alt="point2" width="50px"/></div>                        
                             )}
                             {!a[4] && ( <div className="point" id="fourth"><strong>4</strong></div> )}
 
                             {a[5] && (
-                            <div className="point" id="fifth"><img src={process.env.PUBLIC_URL + "/img/" + b[5].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="fifth"><img src={process.env.PUBLIC_URL + "/img/" + b[5].newfilename} alt="point2" width="50px"/></div>                        
                             )}
                             {!a[5] && ( <div className="point" id="fifth"><strong>5</strong></div> )}
 
                             {a[6] && (
-                            <div className="point" id="sixth"><img src={process.env.PUBLIC_URL + "/img/" + b[6].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="sixth"><img src={process.env.PUBLIC_URL + "/img/" + b[6].newfilename} alt="point2" width="50px"/></div>                        
                             )}
                             {!a[6] && ( <div className="point" id="sixth"><strong>6</strong></div> )}
                             
                             {a[7] && (
-                            <div className="point" id="seventh"><img src={process.env.PUBLIC_URL + "/img/" + b[7].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="seventh"><img src={process.env.PUBLIC_URL + "/img/" + b[7].newfilename} alt="point2" width="50px"/></div>                        
                             )}
                             {!a[7] && ( <div className="point" id="seventh"><strong>7</strong></div> )}
 
                             {a[8] && (
-                            <div className="point" id="eight"><img src={process.env.PUBLIC_URL + "/img/" + b[8].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="eight"><img src={process.env.PUBLIC_URL + "/img/" + b[8].newfilename} alt="point2" width="50px"/></div>                        
                             )} 
                             {!a[8] && ( <div className="point" id="eight"><strong>8</strong></div> )}
                         </div>
@@ -386,13 +390,14 @@ function Mine_edi(){
                         </div>
                         <div id="posimg">
                             {(params.pos === '11') && (
-                                <div>
+                                <div id="elevenbox">
                                     <p>방문자들이 답변해주었으면 하는 질문을 작성해주세요.</p>
 
                                     
-                                    1. <input value={question1} onChange={(e)=>setquestion1(e.target.value)}></input><br/>
-                                    2. <input value={question2} onChange={(e)=>setquestion2(e.target.value)}></input><br/>
-                                    3. <input value={question3} onChange={(e)=>setquestion3(e.target.value)}></input><br/>
+                                    <div className="labelnumber">1</div><input value={question1} onChange={(e)=>setquestion1(e.target.value)}></input><br/>
+                                    <div className="labelnumber">2</div><input value={question2} onChange={(e)=>setquestion2(e.target.value)}></input><br/>
+                                    <div className="labelnumber">3</div><input value={question3} onChange={(e)=>setquestion3(e.target.value)}></input><br/>
+                                    <hr/>
                                     <button type="button" onClick={updateQuestion}>작성완료</button>
                                 </div>
                             )}

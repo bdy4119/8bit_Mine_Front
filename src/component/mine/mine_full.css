@@ -4,8 +4,8 @@
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 4px );
     -webkit-backdrop-filter: blur( 4px );
-    width: 1400px;
-    height: 700px;
+    width: 1850px;
+    height: 850px;
     position: absolute;
     top: 3%;
     left: 2%;
@@ -15,37 +15,23 @@
     position: absolute;
     top: 3%;
     left: 2%;
-}
-
-#mine_btn {
-    float:left;
-    margin-right: 30px;
-    width: 50px;
-    height: 100px;
-    text-align: center;
-    border-radius: 20%;
-    background-color: white;
-}
-
-.title {
-    width: 60%;
-    text-align: center;
-    font-weight: bold;
-    font-size: 25px;
-    z-index: 10;
+    width: 25px;
+    height: 25px;
 }
 
 #fullgame {
-    width: 1200px;
-    height: 650px;
+    width: 1700px;
+    height: 800px;
     padding: 10px;
+    border-radius: 350px;
     position: relative;
     top: 20px;
     left: 50%;
-    margin-left:-600px;
-    border: 2px solid #000;
-    background-color: gray;
+    margin-left:-850px;
+    background-color: #7cabde;
+    border: 2px solid #3867a3;
     float: left;
+    box-shadow: 2px 20px #154682;
 }
 
 .fullkeybutton {
@@ -56,7 +42,7 @@
     width: 40px;
     height: 40px;
     position: absolute;
-    right: 30px;
+    right: 430px;
     bottom: 50px;
 }
 
@@ -66,11 +52,13 @@
     background-size: contain;
     border: 2px solid #000;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     position: absolute;
-    right: 190px;
-    bottom: 200px;
+    right: 395px;
+    bottom: 275px;
+    border: 2px solid #810d05;
+    box-shadow: 2px 3px #810d05;
 }
 .fullup {
     display: inline-block;
@@ -78,11 +66,13 @@
     background-size: contain;
     border: 2px solid #000;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     position: absolute;
-    right: 120px;
-    bottom: 250px;
+    right: 310px;
+    bottom: 350px;
+    border: 2px solid #810d05;
+    box-shadow: 2px 3px #810d05;
 }
 .fulldown {
     display: inline-block;
@@ -90,11 +80,13 @@
     background-size: contain;
     border: 2px solid #000;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     position: absolute;
-    right: 120px;
-    bottom: 150px;
+    right: 310px;
+    bottom: 200px;
+    border: 2px solid #810d05;
+    box-shadow: 2px 3px #810d05;
 }
 .fullright {
     display: inline-block;
@@ -102,12 +94,14 @@
     background-size: contain;
     border: 2px solid #000;
     border-radius: 50%;
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     margin-top: 5px;
     position: absolute;
-    right: 50px;
-    bottom: 200px;
+    right: 225px;
+    bottom: 275px;
+    border: 2px solid #810d05;
+    box-shadow: 2px 3px #810d05;
 }
 
 .fullplay {
@@ -118,8 +112,8 @@
     width: 30px;
     height: 30px;
     position: absolute;
-    right: 130px;
-    bottom: 55px;
+    left: 130px;
+    bottom: 500px;
 }
 
 .fullpause {
@@ -131,42 +125,38 @@
     height: 40px;
     margin-top: 5px;
     position: absolute;
-    right: 230px;
-    bottom: 50px;
+    left: 130px;
+    bottom: 550px;
 }
 
-
-.fullrefresh {
-    border: 1px solid #000;
-    width: 30px;
-    top: 20px;
-    height: 30px;
-    position:absolute;
-    border-radius: 5px;
-    z-index: 10;
-    background-image: url(./images/direction.png);
-    background-size: contain;
-}
 
 .fullcontainer {
     z-index: 0;
-    border: 1px solid #000;
-    top: 10px;
-    width: 900px;
-    height: 600px;
+    border: 5px solid #3867a3;
+    top: 60px;
+    left: 170px;
+    width: 1000px;
+    height: 650px;
     position: relative;
-    background-position: 0px 0px;
-    transition: background-position 10000s linear;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
     float: left;
 }
 
+@import url('https://unpkg.com/galmuri@latest/dist/galmuri.css');
+
 .fulltextbox {
-    border: 1px solid #000;
-    background-color: #aaa;
-    margin-left: 5px;
-    top: 10px;
-    padding: 5px;
-    width: 270px;
+    border: 5px solid #ddd;
+    background-color: black;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    font-family: 'Galmuri9';
+    font-size: 1.3em;
+    color: white;
+    top: 60px;
+    left: 170px;
+    padding: 10px;
+    width: 340px;
     height: 270px;
     position: relative;
     background-position: 0px 0px;
@@ -174,11 +164,12 @@
     float: left;
 }
 
+
 .fullchild {
     z-index: 1;
     position:absolute;
-    top: 300px;
-    left: 30px;
+    top: 340px;
+    left: 40px;
     background-size: contain;
     background-position: center;
     transform: translate(-50%,-50%);
@@ -186,12 +177,12 @@
 .fullstart {
     background-color: #fff;
     z-index: 2;
-    width: 260px;
-    height: 100px;
+    width: 130px;
+    height: 50px;
     position:absolute;
     border-radius: 7%;
-    top: 300px;
-    left: 450px;
+    top: 700px;
+    left: 1400px;
     background-image: url(./images/start.png);
     background-size: contain;
     background-position: center;
@@ -199,12 +190,12 @@
 }
 .fullportal {
     background-color: #fff;
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     position:absolute;
     border-radius: 50%;
-    top: 300px;
-    left: 850px;
+    top: 350px;
+    left: 940px;
     background-image: url(./images/portal.png);
     background-size: contain;
     background-position: center;
@@ -221,66 +212,92 @@
 .fullvictory {
     visibility: hidden;
     position:absolute;
-    top: 220px;
-    left: 320px;
+    top: 200px;
+    left: 300px;
 }
 
 .fullpoint#fullfirst {
     position:absolute;
-    top: 90px;
-    left: 60px;
+    top: 65px;
+    left: 65px;
 }
 
 .fullpoint#fullsecond {
     position:absolute;
-    top: 390px;
-    left: 160px;
+    top: 365px;
+    left: 185px;
 }
 
 .fullpoint#fullthird {
     position:absolute;
-    top: 40px;
-    left: 260px;
+    top: 185px;
+    left: 305px;
 }
 
 .fullpoint#fullfourth {
     position:absolute;
-    top: 540px;
-    left: 360px;
+    top: 485px;
+    left: 365px;
 }
 
 .fullpoint#fullfifth {
     position:absolute;
-    top: 140px;
-    left: 460px;
+    top: 125px;
+    left: 485px;
 }
 
 .fullpoint#fullsixth {
     position:absolute;
-    top: 40px;
-    left: 560px;
+    top: 425px;
+    left: 605px;
 }
 
 .fullpoint#fullseventh {
     position:absolute;
-    top: 190px;
-    left: 660px;
+    top: 5px;
+    left: 725px;
 }
 
 .fullpoint#fulleight {
     position:absolute;
-    top: 440px;
-    left: 760px;
+    top: 545px;
+    left: 845px;
 }
 
 #fullquestion {
+    font-size: 20px;
     visibility: hidden;
-    width: 897px;
-    height: 597px;
+    width: 990px;
+    height: 640px;
     position: absolute;
     padding: 30px;
     top: 0px;
     left: 0px;
     background-color: antiquewhite;
     z-index: 999;
+}
+
+#fulltextquestion input {
+    resize: none;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 10px;
+    width: 700px;
+    height: 60px;
+    margin-top: 5px;
+}
+
+#fullsubquestion {
+    margin-top: 30px;
+}
+
+#fullsubquestion input {
+    resize: none;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    width: 400px;
+    height: 60px;
+    margin-top: 5px;
 }
