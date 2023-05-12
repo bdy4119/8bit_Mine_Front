@@ -4,82 +4,124 @@
     margin-left:-95px;
     top: 3%;
     z-index: 999;
-}
-
-#topbtns{
+  }
+  
+  #topbtns{
     position: absolute;
     right: 5%;
-    top: 10%;
+    top: 75px;
     z-index: 999;
-}
-
-#backwhite {
-    background-color: white;
-}
-
-#topbar {
+  }
+  
+  #topbar {
     position: relative;
     left: 5%;
     height: 10%;
     width: 90%;
     text-align: center;
     margin: 0;
-}
-
-#barbtns {
+  }
+  
+  #barbtns {
     float:left;
     position: relative;
     top: 30%;
     left: 1%;
     width: 33.3%;
     text-align: left;
-}
-
-#guestminebtn {
-    float:left;
-    margin-right: 10px;
-    width: 50px;
-    height: 70px;
-    text-align: center;
-    border-radius: 20%;
-    background-color: mediumpurple;
   }
   
-#guestcardbtn {
-float:left;
-margin-right: 10px;
-width: 50px;
-height: 70px;
-text-align: center;
-border-radius: 20%;
-background-color: mediumpurple;
-}
-
-#guestbookbtn {
-float:left;
-margin-right: 10px;
-width: 50px;
-height: 70px;
-text-align: center;
-border-radius: 20%;
-background-color: mediumpurple;
-}
-
-#gohomebtn {
-float:left;
-margin-right: 30px;
-width: 50px;
-height: 70px;
-text-align: center;
-border-radius: 20%;
-background-color: mediumpurple;
-}
-
-
-#toolbox {
+  
+  
+  #ibtn {
+    color:white;
+    width: 100px;
+    height: 100px;
+    float:right;
+    position: relative;
+    margin-right: -215px;
+    margin-top: 33px;
+    text-align: center;
+    background: url(./images/책갈피1.png);
+    background-size: cover;
+    background-position:center top;
+  }
+  
+  #mybtn {
+    color:white;
+    width: 100px;
+    height: 100px;
+    float:right;
+    position: relative;
+    margin-right: -320px;
+    margin-top: 33px;
+    text-align: center;
+    background: url(./images/책갈피2.png);
+    background-size: cover;
+    background-position:center top;
+  }
+  
+  #mebtn {
+    color:white;
+    width: 100px;
+    height: 100px;
+    float:right;
+    position: relative;
+    margin-right: -425px;
+    margin-top: 33px;
+    text-align: center;
+    background: url(./images/책갈피3.png);
+    background-size: cover;
+    background-position:center top;
+  }
+  
+  #minebtn {
+    color:white;
+    width: 100px;
+    height: 100px;
+    float:right;
+    position: relative;
+    margin-right: -533px;
+    margin-top: 33px;
+    text-align: center;
+    background: url(./images/책갈피4.png);
+    background-size: cover;
+    background-position:center top;
+  }
+  
+  #cardbtn {
+    color:white;
+    width: 100px;
+    height: 100px;
+    float:right;
+    position: relative;
+    margin-right: -715px;
+    margin-top: 33px;
+    text-align: center;
+    background: url(./images/책갈피5.png);
+    background-size: cover;
+    background-position:center top;
+  }
+  
+  #bookbtn {
+    color:white;
+    width: 100px;
+    height: 100px;
+    float:right;
+    position: relative;
+    margin-right: -820px;
+    margin-top: 33px;
+    text-align: center;
+    background: url(./images/책갈피6.png);
+    background-size: cover;
+    background-position:center top;
+  }
+  
+  
+  /* #toolbox {
     position: absolute;
     left: 5%;
     width: 90%;
     height: 80%;
     background-color: white;
-}
+  } */
