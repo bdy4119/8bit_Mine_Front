@@ -2,6 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import "./bgmcss.css";
+import redd from "../I/image/redd.png";
+
+import { Table, Button } from 'semantic-ui-react'
+
 function Bgm() {
 
     const movePage = useNavigate();
@@ -14,8 +19,14 @@ function Bgm() {
     }
 
     const [bgmlist, setBgmlist] = useState([]);
+    const [dcount, setDcount] = useState(0);
 
     function go_bgmadd() {
+        if(dcount > 7) {
+            alert('BGM은 최대 7개까지 설정할 수 있습니다.');
+            return;
+        }
+        
         movePage('/bgmadd')
     }
 
@@ -23,6 +34,7 @@ function Bgm() {
         const id = localStorage.getItem("id");
         const resp = await axios.get('http://localhost:3000/bgm_list', { params: { "id": id } });
         setBgmlist(resp.data);
+        setDcount(resp.data.length);
     }
 
     function bgm_del(seq) {
@@ -41,13 +53,12 @@ function Bgm() {
 
     function TableRow(props) {
         return (
-            <tr>
-                <td>{props.cnt}</td>
-                <td>{props.obj.artist}</td>
-                <td>{props.obj.title}</td>
-                <td>{props.obj.url}</td>
-                <td><button onClick={() => bgm_del(`${props.obj.seq}`)}>삭제</button></td>
-            </tr>
+            <Table.Row>
+                <Table.Cell>{props.cnt}</Table.Cell>
+                <Table.Cell>{props.obj.artist}</Table.Cell>
+                <Table.Cell>{props.obj.title}</Table.Cell>
+                <Table.Cell><Button color="red" size="tiny" onClick={() => bgm_del(`${props.obj.seq}`)}>삭제</Button></Table.Cell>
+            </Table.Row>
         );
     }
 
@@ -60,30 +71,35 @@ function Bgm() {
 
 
     return (
-        <div id="backwhite">
-            <h2>bgm 관리</h2>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>번호</th>
-                        <th>아티스트</th>
-                        <th>제목</th>
-                        <th>URL</th>
-                        <th>관리</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        bgmlist.map(function (object, i) {
-                            return (
-                                <TableRow obj={object} key={i} cnt={i + 1} />
-                                /* key를 지정 안하면, Each child in a list should have a unique "key" prop. 가 나옴 */
-                            )
-                        })
-                    }
-                </tbody>
-            </table>
-            <button onClick={go_bgmadd}>bgm 추가</button>
+        <div id="back">
+            <img src={redd} width="70px" height="70px" style={{ position: "absolute", marginLeft: "20px", marginTop: "35px" }} />
+            <div className="bgmtitle">
+                <h2 style={{ fontSize: "45px" }}>BGM 관리</h2>
+            </div>
+
+            <div className="bgmlist">
+                <Table border="1" style={{textAlign:"center"}} color="purple">
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell style={{width:"50px"}}>번호</Table.HeaderCell>
+                            <Table.HeaderCell style={{width:"200px"}}>아티스트</Table.HeaderCell>
+                            <Table.HeaderCell style={{width:"400px"}}>제목</Table.HeaderCell>
+                            <Table.HeaderCell style={{width:"100px"}}>관리</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                        {
+                            bgmlist.map(function (object, i) {
+                                return (
+                                    <TableRow obj={object} key={i} cnt={i + 1} />
+                                    /* key를 지정 안하면, Each child in a list should have a unique "key" prop. 가 나옴 */
+                                )
+                            })
+                        }
+                    </Table.Body>
+                </Table>
+                <Button color="purple" size="large" onClick={go_bgmadd}>bgm 추가</Button>
+            </div>
         </div>
     );
 

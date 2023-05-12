@@ -42,7 +42,7 @@ import Imain from "./component/I/Imain";
 import Iadd from "./component/I/Iadd";
 import Idetail from "./component/I/Idetail";
 import Iupdate from "./component/I/Iupdate";
-import Qna10 from "./component/I/Qna10";
+import Qna7 from "./component/I/Qna7";
 import Place from "./component/I/search/place";
 import Book from "./component/I/search/book";
 import Movie from "./component/I/search/movie";
@@ -66,7 +66,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form } from 'react-bootstrap';
 
 import 'semantic-ui-css/semantic.min.css'
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Select } from 'semantic-ui-react'
 
 import './App.css';
 import './component/main_back.css'
@@ -121,7 +121,7 @@ function App() {
   }, []);
 
   function go() {
-    if(document.getElementById("selbox").value==="0"){
+    if (document.getElementById("selbox").value === "0") {
       return;
     }
     setState(true);
@@ -136,37 +136,28 @@ function App() {
   return (
     <div id="back">
       <div id="backtop">
-        <table style={{position:"relative", float: "right", marginTop:"20px", marginRight:"20px", zIndex:"1000"}}> 
-          <thead />
-          <tbody>
-            <tr>
-              <td colSpan="3">
-                <Form.Select id="selbox" size="sm" value={music} onChange={(e) => { music_change(e.target.value); setMusic(e.target.value); stop() }}
-                  style={{ width: "250px"}} >
-                  <option value="0">bgm을 선택하세요.</option>
-                  {
-                    bgmlist.map(function (object, i) {
-                      return (
-                        <Option obj={object} key={i} cnt={i + 1} />
-                      )
-                    })
-                  }
-                </Form.Select>
+        <div className='playlist'>
+          <Form.Select id="selbox" size="sm" value={music} onChange={(e) => { music_change(e.target.value); setMusic(e.target.value); stop() }}
+            style={{ width: "350px", float: "right" }} >
+            <option value="0">bgm을 선택하세요.</option>
+            {
+              bgmlist.map(function (object, i) {
+                return (
+                  <Option obj={object} key={i} cnt={i + 1} />
+                )
+              })
+            }
+          </Form.Select>
+        </div>
+        <div className="playbutton">
+          <Button color="blue" size="mini" onClick={go}>▶</Button>
+          <Button color="blue" size="mini" onClick={stop}>❚❚</Button>
+          <Button color="blue" size="mini" onClick={() => window.open('http://localhost:9001/bgm',
+            'window_name', 'width=800,height=800,location=no, status=no,scrollbars=yes')}>
+            🛠️
+          </Button>
 
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Button color="blue" onClick={go}>▶</Button>
-                <Button color="blue" onClick={stop}>❚❚</Button>
-                <Button color="blue" onClick={() => window.open('http://localhost:9001/bgm',
-                  'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>
-                  bgm 관리
-                </Button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        </div>
       </div>
       <BrowserRouter>
         <Routes>
@@ -189,7 +180,7 @@ function App() {
           <Route path="/movie" element={<Movie />} />
           <Route path="/drama" element={<Drama />} />
 
-          <Route path="/qna10" exact element={<Qna10 />} />
+          <Route path="/qna7" exact element={<Qna7 />} />
 
           <Route path="/bgm" element={<Bgm />} />
           <Route path="/bgmadd" element={<Bgmadd />} />
@@ -252,7 +243,7 @@ function App() {
         url={url}
         width="0%"
         height="0%"
-        muted={false} //chrome정책으로 인해 자동 재생을 위해 mute 옵션을 true로 해주었다.
+        muted={false}
         playing={state}
         loop={true} />
     </div>
