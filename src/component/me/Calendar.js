@@ -164,7 +164,7 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
             }
          })
          .catch(function(err){
-            alert(err);
+
          })
     }
 
@@ -176,7 +176,7 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
               setTodolist(resp.data.list);
             })
             .catch(function(err){
-                alert(err);
+
             })
       }
 
@@ -193,7 +193,7 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
                     }
                 })
                 .catch(function(err){
-                    alert(err);
+
                 })
     }
 
@@ -207,20 +207,13 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
 
 
     while(day <= endDate) { //day가 endDate보다 커지면 종료
-        /*
-            for(let j=0; j<diarylist.length; j++) {
-                if(diarylist[j].rdate === format(day,'yyyy-MM-dd') || diarylist[j].rdate === format(day,'yyyy-MM-d')){
-                    setDiaryOne(diarylist[j].title);
-                }
-              }
-        */
         for(let i = 0; i < 7; i++) {
             formatedDate = format(day, 'd');
 
             days.push(
-                <div key={day} style={{float:"left", display:"inline-block", backgroundColor:"rgb(0, 0, 0, 0.05)", margin:"4px", height:"100px", width:"120px", verticalAlign:"top", borderRadius:"10px"}}>
+                <div key={day} style={{float:"left", display:"inline-block", backgroundColor:"rgb(0, 0, 0, 0.05)", margin:"4px", height:"90px", width:"120px", verticalAlign:"top", borderRadius:"10px"}}>
                     <span>
-                        <Link to={`/me/${format(day,'yyyy-MM-dd')}`} style={{textDecoration: "none", fontFamily:"Do Hyeon", fontSize:"20px"}}>
+                        <Link to={`/me/${format(day,'yyyy-MM-dd')}`} style={{textDecoration: "none", fontFamily:"Do Hyeon", fontSize:"20px", padding:"7px"}}>
                             {formatedDate}
                         </Link>
                         <br/>
@@ -238,12 +231,11 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
                         {  
                             diarylist.map(function(diary, idx){
                                 if(diary.rdate === format(day,'yyyy-MM-dd') || diary.rdate === format(day,'yyyy-MM-d')){
-                                        return (
-                                            <span key={idx} style={{color:'green', fontFamily:"Nanum Pen Script", fontSize:"22px"}}>
-                                                <div> -{diary.title} </div>
-                                            </span>
-                                        );
-                                    
+                                    return (
+                                        <span key={idx} style={{color:'green',fontFamily:"Nanum Pen Script", fontSize:"22px"}}>
+                                            <div> -{diary.title} </div>
+                                        </span>
+                                    );
                                 }
                             })
                             
@@ -298,9 +290,6 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
        <span>
             {rows}
         </span>
-    //   <tr>
-    //       {days}
-    //   </tr>
     );    
 }
 

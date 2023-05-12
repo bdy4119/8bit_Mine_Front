@@ -52,7 +52,7 @@ function Me() {
       </div>
 
       <div className="middle">
-        <span id="shadow" style={{marginLeft:"-600px", backgroundColor:"white", marginTop:"70px", borderRadius:"20px", paddingBottom:"5px"}}>
+        <span id="shadow" style={{marginLeft:"-600px", backgroundColor:"white", marginTop:"110px", borderRadius:"20px", paddingBottom:"5px"}}>
           <Calendar/>
         </span>
         <span style={{ marginLeft:"60px", marginTop:"130px"}}>
