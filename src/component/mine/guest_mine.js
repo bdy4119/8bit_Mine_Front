@@ -1,6 +1,6 @@
 import React, {useState, useLayoutEffect} from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import "../guest_back.css"
 import "./mine.css";
@@ -12,6 +12,7 @@ import stage2 from './images/stage2.png';
 import stage3 from './images/stage3.png';
 import logo from './images/logo.png';
 import cat from './images/cat.png';
+import portal from './images/portal.png';
 
 function Mine_main(){
 
@@ -23,6 +24,7 @@ function Mine_main(){
     const [guestid, setguestid] = useState('');
 
     let params = useParams();
+    const movePage = useNavigate();
 
     let mineid = params.mineid;
 
@@ -83,9 +85,8 @@ function Mine_main(){
 
     function gostart(e){
         document.getElementsByClassName("child")[0].style.left = "20px";
-        document.getElementsByClassName("child")[0].style.top = "200px";
+        document.getElementsByClassName("child")[0].style.top = "220px";
 
-        document.getElementsByClassName("start")[0].style.visibility = "hidden";
         document.getElementsByClassName("victory")[0].style.visibility = "hidden";
         document.getElementById("question").style.visibility = "hidden";
 
@@ -96,6 +97,7 @@ function Mine_main(){
         }
 
         var audio = document.getElementById("audio");
+        audio.currentTime = 0;
         audio.play();
     }
 
@@ -106,39 +108,39 @@ function Mine_main(){
         let totop = parseInt(toppx);
         var blop = document.getElementById("blop");
 
-        if (a[1] && toleft === 80 && totop === 110){
+        if (a[1] && toleft === 60 && totop === 60){
             document.getElementsByClassName("textbox")[0].innerHTML = b[1].imgtext;
             blop.play();
         }
-        if (a[2] && toleft === 140 && totop === 290){
+        if (a[2] && toleft === 140 && totop === 260){
             document.getElementsByClassName("textbox")[0].innerHTML = b[2].imgtext;
             blop.play();
         }
-        if (a[3] && toleft === 200 && totop === 80){
+        if (a[3] && toleft === 220 && totop === 140){
             document.getElementsByClassName("textbox")[0].innerHTML = b[3].imgtext;
             blop.play();
         }
-        if (a[4] && toleft === 260 && totop === 320){
+        if (a[4] && toleft === 300 && totop === 340){
             document.getElementsByClassName("textbox")[0].innerHTML = b[4].imgtext;
             blop.play();
         }
-        if (a[5] && toleft === 320 && totop === 140){
+        if (a[5] && toleft === 380 && totop === 100){
             document.getElementsByClassName("textbox")[0].innerHTML = b[5].imgtext;
             blop.play();
         }
-        if (a[6] && toleft === 380 && totop === 50){
+        if (a[6] && toleft === 460 && totop === 300){
             document.getElementsByClassName("textbox")[0].innerHTML = b[6].imgtext;
             blop.play();
         }
-        if (a[7] && toleft === 440 && totop === 110){
+        if (a[7] && toleft === 540 && totop === 60){
             document.getElementsByClassName("textbox")[0].innerHTML = b[7].imgtext;
             blop.play();
         }
-        if (a[8] && toleft === 500 && totop === 260){
+        if (a[8] && toleft === 620 && totop === 380){
             document.getElementsByClassName("textbox")[0].innerHTML = b[8].imgtext;
             blop.play();
         }
-        if (toleft >= 520 && totop === 200){
+        if (toleft === 660 && totop === 220){
             var clear = document.getElementById("clear");
             clear.play();
             document.getElementsByClassName("victory")[0].style.visibility = "visible";
@@ -153,7 +155,7 @@ function Mine_main(){
 
     function goleft(e){
         let leftpx = document.getElementsByClassName("child")[0].style.left;
-        let toleft = parseInt(leftpx) - 30;
+        let toleft = parseInt(leftpx) - 40;
         if (toleft >= 10){
             document.getElementsByClassName("child")[0].style.left = toleft + "px";
         }
@@ -162,8 +164,8 @@ function Mine_main(){
 
     function goright(e){
         let leftpx = document.getElementsByClassName("child")[0].style.left;
-        let toright = parseInt(leftpx) + 30;
-        if (toright <= 560){
+        let toright = parseInt(leftpx) + 40;
+        if (toright <= 670){
             document.getElementsByClassName("child")[0].style.left = toright + "px";
         }
         finish();
@@ -171,7 +173,7 @@ function Mine_main(){
 
     function goup(e){
         let toppx = document.getElementsByClassName("child")[0].style.top;
-        let totop = parseInt(toppx) - 30;
+        let totop = parseInt(toppx) - 40;
         if (totop >= 10){
             document.getElementsByClassName("child")[0].style.top = totop + "px";
         }
@@ -180,8 +182,8 @@ function Mine_main(){
 
     function godown(e){
         let toppx = document.getElementsByClassName("child")[0].style.top;
-        let todown = parseInt(toppx) + 30;
-        if (todown <= 330){
+        let todown = parseInt(toppx) + 40;
+        if (todown <= 400){
             document.getElementsByClassName("child")[0].style.top = todown + "px";
         }
         finish();
@@ -217,21 +219,41 @@ function Mine_main(){
     }
 
     function gofull(e){
-        window.location.href = '/guest_mine_full/' + 'qwe46200@naver.com';
+        window.location.href = '/guest_mine_full/' + mineid;
     }
     
     return (
         <div id="back">
-
-            <div id="topbar">
-                <div id="barbtns">
-                    <div id="guestminebtn" onClick={(e) => { window.location.href = "/guest_mine/" + mineid }}>MINE</div>
-                    <div id="guestcardbtn">CARD</div>
-                    <div id="guestbookbtn" onClick={(e) => { window.location.href = "/guest_gbmain/" + mineid }}>GUEST</div>
-                    <div id="gohomebtn" onClick={(e) => { window.location.href = "/gbmain" }}>HOME</div>
+            <div>
+                <div id="logo" onClick={() => {movePage('/main')}} style={{marginLeft:"-850px", marginTop:"-30px"}}>
+                    <img src={logo} alt="no" width="300px" />
                 </div>
             </div>
-            <div id="toolbox">
+            <div id="topbar">
+                <div id="barbtns">
+                    <div id="ibtn" onClick={(e) => { window.location.href = "/guest_mine/" + mineid }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                      MINE
+                      </p>
+                    </div>
+                    <div id="mybtn">
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                      CARD
+                      </p>
+                    </div>
+                    <div id="mebtn" onClick={(e) => { window.location.href = "/guest_gbmain/" + mineid }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                      GUEST
+                      </p>
+                    </div>
+                    <div id="minebtn" onClick={(e) => { window.location.href = "/gbmain" }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                      HOME
+                      </p>
+                    </div>
+                </div>
+            </div>
+            <div id="minebox">
                 <div id="modechange">
                     <audio id="audio" src={bgm} />
                     <audio id="blop" src={blop} />
@@ -239,6 +261,7 @@ function Mine_main(){
                 </div>
 
                 <div id="game">
+                    <div className="start" onClick={gostart}></div>
                     <div className="left" onClick={goleft}></div>
                     <div className="up" onClick={goup}></div>
                     <div className="down" onClick={godown}></div>
@@ -249,45 +272,44 @@ function Mine_main(){
                     <div className="pause" onClick={pause}></div>
                     <div className="showfull" onClick={gofull}></div>
 
-                    <div className="container">
-                        <div className="start" onClick={gostart}></div>
+                    <div id="minecontainer">
                         <div id="stage">
-                            { !a[10] && (<img src={stage1} alt="" width="574px" height="347px" />)}
-                            { a[10] && (b[10].imgtext === '1' ) && (<img src={stage1} alt="" width="577px" height="347px" />)}
-                            { a[10] && (b[10].imgtext === '2' ) && (<img src={stage2} alt="" width="577px" height="347px" />)}
-                            { a[10] && (b[10].imgtext === '3' ) && (<img src={stage3} alt="" width="577px" height="347px" />)}
+                            { !a[10] && (<img src={stage1} alt="" width="690px" height="410px" />)}
+                            { a[10] && (b[10].imgtext === '1' ) && (<img src={stage1} alt="" width="690px" height="410px" />)}
+                            { a[10] && (b[10].imgtext === '2' ) && (<img src={stage2} alt="" width="690px" height="410px" />)}
+                            { a[10] && (b[10].imgtext === '3' ) && (<img src={stage3} alt="" width="690px" height="410px" />)}
                         </div>
 
                         <div className="child">
                             { a[9] && (<img src={process.env.PUBLIC_URL + "/img/" + b[9].newfilename} alt="child" width="40px"/>)}
                             { !a[9] && (<img src={cat} alt="cat" width="40px"/>)}
                         </div>
-                        <div className="portal"></div>
+                        <div className="portal"><img src={portal} alt="portal" width="50px" height="50px"/></div>
                         <div className="victory"><img src={logo} alt="vic"/></div>
                         <div>
                             {a[1] && (
-                            <div className="point" id="first"><img src={process.env.PUBLIC_URL + "/img/" + b[1].newfilename} alt="point1" width="30px"/></div>
+                            <div className="point" id="first"><img src={process.env.PUBLIC_URL + "/img/" + b[1].newfilename} alt="point1" width="50px"/></div>
                             )}
                             {a[2] && (
-                            <div className="point" id="second"><img src={process.env.PUBLIC_URL + "/img/" + b[2].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="second"><img src={process.env.PUBLIC_URL + "/img/" + b[2].newfilename} alt="point2" width="50px"/></div>                        
                             )}
                             {a[3] && (
-                            <div className="point" id="third"><img src={process.env.PUBLIC_URL + "/img/" + b[3].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="third"><img src={process.env.PUBLIC_URL + "/img/" + b[3].newfilename} alt="point2" width="50px"/></div>                        
                             )}
                             {a[4] && (
-                            <div className="point" id="fourth"><img src={process.env.PUBLIC_URL + "/img/" + b[4].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="fourth"><img src={process.env.PUBLIC_URL + "/img/" + b[4].newfilename} alt="point2" width="50px"/></div>                        
                             )}
                             {a[5] && (
-                            <div className="point" id="fifth"><img src={process.env.PUBLIC_URL + "/img/" + b[5].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="fifth"><img src={process.env.PUBLIC_URL + "/img/" + b[5].newfilename} alt="point2" width="50px"/></div>                        
                             )}
                             {a[6] && (
-                            <div className="point" id="sixth"><img src={process.env.PUBLIC_URL + "/img/" + b[6].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="sixth"><img src={process.env.PUBLIC_URL + "/img/" + b[6].newfilename} alt="point2" width="50px"/></div>                        
                             )}
                             {a[7] && (
-                            <div className="point" id="seventh"><img src={process.env.PUBLIC_URL + "/img/" + b[7].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="seventh"><img src={process.env.PUBLIC_URL + "/img/" + b[7].newfilename} alt="point2" width="50px"/></div>                        
                             )}
                             {a[8] && (
-                            <div className="point" id="eight"><img src={process.env.PUBLIC_URL + "/img/" + b[8].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="eight"><img src={process.env.PUBLIC_URL + "/img/" + b[8].newfilename} alt="point2" width="50px"/></div>                        
                             )}                     
                         </div>
 
@@ -295,7 +317,6 @@ function Mine_main(){
                             {a[11] && (
                                 <div>
                                     <div id="textquestion">
-                                        방문자 : <input value={guestid} onChange={(e)=>setguestid(e.target.value)}></input><br/><br/>
                                         1. {b[11].filename}
                                         <br/><input value={answer1} onChange={(e)=>setanswer1(e.target.value)}></input><br/><br/>
                                         2. {b[11].newfilename}
@@ -303,7 +324,10 @@ function Mine_main(){
                                         3. {b[11].imgtext}
                                         <br/><input value={answer3} onChange={(e)=>setanswer3(e.target.value)}></input><br/><br/>
                                     </div>
-                                    <button onClick={updateanswer}>제출</button>
+                                    <div id="subquestion">
+                                        방문자 : <input value={guestid} onChange={(e)=>setguestid(e.target.value)}></input>
+                                        <button onClick={updateanswer}>제출</button>
+                                    </div>
                                 </div>
                             )}
                         </div>

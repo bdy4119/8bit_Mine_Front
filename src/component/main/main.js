@@ -15,13 +15,22 @@ function Main(){
     const movePage = useNavigate();
     const [profMsg, setProfMsg] = useState('');
     const [profPic, setProfPic] = useState('');
+    const [minenumber, setMinenumber] = useState('');
     const history = useNavigate();
 
     const token = localStorage.getItem("token");
+    const id = localStorage.getItem("id");
 
     const showModal = () => {
         setModalOpen(true);
     };
+
+    const noticemine = async() => {
+        const response = await axios.post('http://localhost:3000/noticemine', null, { params:{"id":id} });
+        setMinenumber(response.data);
+        console.log(response.data);
+    }
+
 
     function hover_over(e) {
         document.getElementById("hover_i").style.visibility = "visible";
@@ -82,6 +91,7 @@ function Main(){
     useEffect(() => {
         getUser();
         Check();
+        noticemine();
     }, []);
 
     return (
@@ -122,7 +132,7 @@ function Main(){
                     </div>
                     <div id="mine_area" onClick={(e) => {window.location.href = "/mine"}}>
                         <div id="inner">
-                            <img src={mine_icon} alt="no" width="200px"></img>
+                            {minenumber}
                         </div>
                         <div>MINE</div>
                     </div>
