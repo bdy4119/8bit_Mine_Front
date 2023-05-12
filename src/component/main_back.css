@@ -49,6 +49,19 @@
 
 }
 
+.playlist {
+    position: absolute;
+    margin-left:1350px;
+    margin-top: 32px;
+    z-index: 1000;
+}
+
+.playbutton {
+    position: absolute;
+    margin-left: 1720px;
+    margin-top: 31px;
+    z-index: 1000;
+}
 
 /* #toolbox {
     background: url(./images/book.png);
