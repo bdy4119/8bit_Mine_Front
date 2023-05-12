@@ -9,7 +9,6 @@ import 'semantic-ui-css/semantic.min.css'
 import { Button } from 'semantic-ui-react'
 import Barbtns from "../main/barbtns";
 
-
 function I_main() {
 
   const history = useNavigate();
@@ -43,7 +42,6 @@ function I_main() {
   }
 
   const [classiList, setClassiList] = useState([]);
-  const [wise, setWise] = useState('');
 
   const fetchData = async () => {
     const id = localStorage.getItem("id");
@@ -96,11 +94,6 @@ function I_main() {
     );
   }
 
-  const wiseData = async () => {
-    const resp = await axios.get('https://api.qwer.pw/request/helpful_text?apikey=guest');
-    setWise(resp.data[1].respond);
-  }
-
   function go_add(){
     if(dcount>=15){
       alert('항목은 최대 15개까지 추가할 수 있습니다.');
@@ -113,7 +106,6 @@ function I_main() {
   useEffect(() => {
     getUser();
     fetchData();
-    wiseData();
   }, []);
 
 
@@ -143,7 +135,7 @@ function I_main() {
           <input className="inputI" readOnly="readOnly" value={profMsg} />
         </label>
       </div>
-      <table>
+      <table className="tableItem">
         <thead />
         <colgroup>
           <col width="200px" /><col width="200px" /><col width="200px" /><col width="200px" /><col width="200px" />
@@ -180,7 +172,7 @@ function I_main() {
       </table>
       <div className="buttons">
         <Button size="big" color="purple" onClick={go_add}>분류 추가</Button>
-        <Button size="big" color="purple" onClick={() => history("/qna10")}>10문 10답</Button>
+        <Button size="big" color="purple" onClick={() => history("/qna7")}>7문 7답</Button>
       </div>
     </div>
   );
