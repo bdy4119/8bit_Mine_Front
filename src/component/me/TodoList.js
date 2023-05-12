@@ -110,38 +110,47 @@ function TodoList() {
     <div>
       
       <div id="todo" style={{marginBottom:"-200px"}}>
-          <Link to={`/todoWrite/${param.rdate || format(new Date(),'yyyy-MM-dd')}`}>
-              <button type='submit' style={{float:"right"}}> + </button>
-          </Link>
+          <p style={{textAlign:"center", fontSize:"40px", marginTop:"30px", marginLeft:"70px"}}>
+            [Todo리스트] 
+            <Link to={`/todoWrite/${param.rdate || format(new Date(),'yyyy-MM-dd')}`}>
+                <button id="addbtn" type='submit' style={{float:"right", marginRight:"50px", marginTop:"15px"}} />
+            </Link>
+          </p>
           <br/>
           <br/>
+              <p style={{textAlign:"center", fontSize:"30px", marginTop:"-90px"}}>
+                  { //요거 없으면 ||이 뒤에 있는 값 넣으라는 뜻
+                      param.rdate || format(new Date(),'yyyy-MM-dd')
+                    //   ( param.year + "-" + param.month + "-" + param.rdate.slice(7, 10))
+                      }
+              </p>
+            <div>
              {
                 todolist.map(function(todo, idx){
                   var rdateStr = todo.rdate.toString();
+                  
                   //1. 달력 날짜를 클릭한 값이 있을때
                   if(param.rdate === rdateStr || param.rdate === rdateStr.substr(0,10)
                         || param.rdate === (todo.rdate.slice(0,8) + '0' + todo.rdate.slice(8, 10))){
                       return (
                             <div key={idx} style={{marginBottom:"10px", marginLeft:"50px"}}>
-                              <input type='checkbox' onChange={(e) => {checkUpdate(e.target.checked,`${todo.seq}`)}} defaultChecked={todo.del === 1 ? true : false}/>
+                              <input type="checkbox" onChange={(e) => {checkUpdate(e.target.checked,`${todo.seq}`)}} defaultChecked={todo.del === 1 ? true : false}>
+                              </input>
                               &nbsp;&nbsp;
                               <span style={{fontSize:"25px"}}>
                                 {todo.title} &nbsp;&nbsp;&nbsp;
-                               </span>
+                              </span>
 
-                                <Link to={`/todoUpdate/${todo.seq}/${todo.title}/${todo.content}/${todo.rdate}`}>
-                                  <button style={{float:"right", marginRight:"20px"}} type='submit'>수정</button>
-                                </Link>
-                                
-                                <button style={{float:"right", marginRight:"20px"}} type="submit" value={todo.seq} onClick={(e)=>{TodoDelete(todo.seq, e)}} /*함수(param, e) -> 파라미터값 같이 보내는 방법*/>
-                                    -
-                                </button>
-                                
-                                <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                                <span style={{fontSize:"25px"}}>
-                                  : {todo.content}
-                                </span>
+                              <Link to={`/todoUpdate/${todo.seq}/${todo.title}/${todo.content}/${todo.rdate}`}>
+                                <button id="editbtn" style={{float:"right", marginRight:"11px"}} type='submit'/>
+                              </Link>
+                              
+                              <button id="delbtn" style={{float:"right", marginRight:"10px"}} type="submit" value={todo.seq} onClick={(e)=>{TodoDelete(todo.seq, e)}} /*함수(param, e) -> 파라미터값 같이 보내는 방법*/ />
+                              
+                              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <span style={{fontSize:"25px"}}>
+                                : {todo.content}
+                              </span>
                               
                             </div>
                       )
@@ -152,42 +161,41 @@ function TodoList() {
                                 || format(new Date(),'yyyy-MM-dd') === (todo.rdate.slice(0,8) + '0' + todo.rdate.slice(8, 10)))) {
 
                           return (
-                            <tr key={idx}>
-                                <td colSpan="2" align='left'>
-                                   <input type='checkbox'
-                                      onChange={(e) => {checkUpdate(e.target.checked,`${todo.seq}`)}}
-                                     defaultChecked={todo.del === 1 ? true : false}/>
-                                  {todo.title}
-                                </td>
-                                <td>{todo.content}</td>
-                                <td>
-                                  <Link to={`/todoUpdate/${todo.seq}/${todo.title}/${todo.content}/${todo.rdate}`}>
-                                    <button type='submit'>수정</button>
-                                  </Link>
-                                </td>
-                                <td>
-                                  <button type="submit" value={todo.seq} 
-                                    onClick={(e)=>{TodoDelete(todo.seq, e)}} /*함수(param, e) -> 파라미터값 같이 보내는 방법*/>
-                                      삭제
-                                  </button>
-                                </td>
-                            </tr>
+                            <div key={idx} style={{marginBottom:"10px", marginLeft:"50px"}}>
+                              <input type='checkbox' onChange={(e) => {checkUpdate(e.target.checked,`${todo.seq}`)}} defaultChecked={todo.del === 1 ? true : false}/>
+                              &nbsp;&nbsp;
+                              <span style={{fontSize:"25px"}}>
+                                {todo.title} &nbsp;&nbsp;&nbsp;
+                              </span>
+
+                              <Link to={`/todoUpdate/${todo.seq}/${todo.title}/${todo.content}/${todo.rdate}`}>
+                                <button id="editbtn" style={{float:"right", marginRight:"11px"}} type='submit'/>
+                              </Link>
+                              
+                              <button id="delbtn" style={{float:"right", marginRight:"10px"}} type="submit" value={todo.seq} onClick={(e)=>{TodoDelete(todo.seq, e)}} /*함수(param, e) -> 파라미터값 같이 보내는 방법*/ />
+                              
+                              <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <span style={{fontSize:"25px"}}>
+                                : {todo.content}
+                              </span>
+                              
+                            </div>
                           )
                      }
                 })
                   
                 }
-                
+            </div>    
 
             
-                  <Pagination
-                    activePage={page} 
-                    itemsCountPerPage={10}
-                    totalItemsCount={totalCnt}
-                    pageRangeDisplayed={5}
-                    prevPageText={"이전"}
-                    nextPageText={"다음"}
-                    onChange={pageChange} />
+       <Pagination
+         activePage={page} 
+         itemsCountPerPage={10}
+         totalItemsCount={totalCnt}
+         pageRangeDisplayed={5}
+         prevPageText={"이전"}
+         nextPageText={"다음"}
+         onChange={pageChange} />
                     
               
       </div>

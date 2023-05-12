@@ -50,14 +50,18 @@ function Me() {
               </div>
           </div>
       </div>
-      <div className="middle" >
-        <Calendar/>
-        <span style={{paddingLeft:"50px"}}>
-          <Diary />
-          <span style={{paddingLeft:"50px"}}>
-            <TodoList/>
-          </span>
+
+      <div className="middle">
+        <span id="shadow" style={{marginLeft:"-600px", backgroundColor:"white", marginTop:"110px", borderRadius:"20px", paddingBottom:"5px"}}>
+          <Calendar/>
         </span>
+        <span style={{ marginLeft:"60px", marginTop:"130px"}}>
+          <Diary />
+        </span>
+        <span style={{ marginLeft:"0px", marginTop:"10px"}}>
+          <TodoList/>
+        </span>
+          
       </div>
     </div>
   );
