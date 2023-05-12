@@ -85,59 +85,42 @@ function Diary() {
 
   return(
     <div>
-      <div style={{border:"1px solid black", textAlign:"center"}}>
-      <table border="1" id="backwhite">
-        <colgroup>
-          <col width='70'/><col width='150'/><col width='450'/><col width='50'/><col width='50'/>
-          </colgroup>
-          <thead>
-            <tr>
-              <th colSpan="5">오늘의 일지</th>
-            </tr>
-            <tr>
-              <th colSpan="5">
-                { //요거 없으면 ||이 뒤에 있는 값 넣으라는 뜻
-                 param.rdate || format(new Date(),'yyyy-MM-dd')
-               //   ( param.year + "-" + param.month + "-" + param.rdate.slice(7, 10))
-                }
-              </th>
-            </tr>
-            <tr>
-              {/* <th>번호</th> */}
-              <th colSpan="2">제목</th><th colSpan="3">내용</th>
-            </tr>
-          </thead>
-          <tbody>
+      <div id="diary" style={{textAlign:"center"}}>
+          <p style={{textAlign:"center", fontSize:"40px", marginTop:"30px", marginLeft:"70px"}}>
+            [다이어리] 
+            <Link to={`/diaryWrite/${param.rdate || format(new Date(),'yyyy-MM-dd')}`}>
+              <button id="addbtn" type='submit' onClick={DiaryWrite} style={{float:"right", marginRight:"50px", marginTop:"15px"}} />
+            </Link>
+          </p>
+          <br/>
+          <br/>
+           <p style={{textAlign:"center", fontSize:"30px", marginTop:"-90px"}}>
+               { //요거 없으면 ||이 뒤에 있는 값 넣으라는 뜻
+                param.rdate || format(new Date(),'yyyy-MM-dd')}
+           </p>
              {
                 diarylist.map(function(diary, idx){
                   
                   var rdateStr = diary.rdate.toString();
-                  // console.log(diary.rdate);
-                  // console.log(param.rdate);
 
                    //1. 클릭한 값이 있을때
                     if(param.rdate === diary.rdate
                           || param.rdate === (diary.rdate.slice(0,8) + '0' + diary.rdate.slice(8, 10))) {
                       return (
-                          <tr key={idx}>
-                            {/* <td>{idx+1}</td> */}
-                            <td colSpan="2">{diary.title}</td>
-                            <td>
-                              <img src={`/Me-img/${diary.thumbnail}`} alt="" style={{width:"200px"}} />
-                              {diary.content}
-                            </td>
-                            <td>
-                            <Link to={`/diaryUpdate/${diary.seq}/${diary.title}/${diary.content}/${diary.rdate}`}>
-                              <button type='submit'>수정</button>
-                            </Link>
-                            </td>
-                            <td>
-                              <button type="submit" value={diary.seq} 
-                                onClick={(e)=>{diaryDelete(diary.seq, e)}} /*함수(param, e) -> 파라미터값 같이 보내는 방법*/>
-                                  삭제
-                              </button>
-                            </td>
-                          </tr>
+                          <div key={idx} style={{marginBottom:"10px", marginLeft:"50px"}}>
+                              <img src={`/Me-img/${diary.thumbnail}`} alt="" style={{width:"100px", height:"100px"}} />
+                              <span style={{fontSize:"25px"}}>
+                                {diary.title}
+                              </span>
+                              <span style={{fontSize:"25px"}}>
+                                {diary.content}
+                              </span>
+
+                              <Link to={`/diaryUpdate/${diary.seq}/${diary.title}/${diary.content}/${diary.rdate}`}>
+                                <button id="editbtn" style={{float:"right", marginRight:"11px"}} type='submit'/>
+                              </Link>
+                              <button id="delbtn" style={{float:"right", marginRight:"10px"}} type="submit" value={diary.seq} onClick={(e)=>{diaryDelete(diary.seq, e)}} /*함수(param, e) -> 파라미터값 같이 보내는 방법*/ />
+                          </div>
                       )
                       }  //2. 클릭한 값이 없을때, 오늘 날짜만 불러와라
                         else if(param.rdate === undefined
@@ -146,50 +129,34 @@ function Diary() {
                                       || format(new Date(),'yyyy-MM-dd') === (diary.rdate.slice(0,8) + '0' + diary.rdate.slice(8, 10)))) {
                             
                             return (
-                              <tr key={idx}>
-                                {/* <td>{idx+1}</td> */}
-                                <td colSpan="2">{diary.title}</td>
-                                <td>
-                                <img src={`/Me-img/${diary.thumbnail}`} alt="" style={{width:"100px"}} />
-                                  {diary.content}
-                                </td>
-                                <td>
-                                <Link to={`/diaryUpdate/${diary.seq}/${diary.title}/${diary.content}/${diary.rdate}`}>
-                                  <button type='submit'>수정</button>
-                                </Link>
-                                </td>
-                                <td>
-                                  <button type="submit" value={diary.seq} 
-                                    onClick={(e)=>{diaryDelete(diary.seq, e)}} /*함수(param, e) -> 파라미터값 같이 보내는 방법*/>
-                                      삭제
-                                  </button>
-                                </td>
-                              </tr>
+                              <div key={idx} style={{marginBottom:"10px", marginLeft:"50px"}}>
+                                  <img src={`/Me-img/${diary.thumbnail}`} alt="" style={{width:"100px", height:"100px"}} />
+                                  <span style={{fontSize:"25px"}}>
+                                    {diary.title}
+                                  </span>
+                                  <span style={{fontSize:"25px"}}>
+                                    {diary.content}
+                                  </span>
+
+                                  <Link to={`/diaryUpdate/${diary.seq}/${diary.title}/${diary.content}/${diary.rdate}`}>
+                                    <button id="editbtn" style={{float:"right", marginRight:"11px"}} type='submit'/>
+                                  </Link>
+                                  <button id="delbtn" style={{float:"right", marginRight:"10px"}} type="submit" value={diary.seq} onClick={(e)=>{diaryDelete(diary.seq, e)}} /*함수(param, e) -> 파라미터값 같이 보내는 방법*/ />
+                              </div>
                           )
                         }
                     } 
                   )
               }
-             
-              <tr>
-                <td colSpan="5">
                   <Pagination
                     activePage={page} //현재 페이지
-                    itemsCountPerPage={10} //한 페이지당 보여줄 리스트 개수
+                    itemsCountPerPage={1} //한 페이지당 보여줄 리스트 개수
                     totalItemsCount={totalCnt} //총 아이템 수
                     pageRangeDisplayed={10}   //paginator에서 보여줄 페이지 범위
                     prevPageText={"이전"}
                     nextPageText={"다음"}
                     onChange={pageChange} //페이지 핸들링
                      />
-
-                    <Link to={`/diaryWrite/${param.rdate || format(new Date(),'yyyy-MM-dd')}`}>
-                      <button type='submit' onClick={DiaryWrite}>+일지추가</button>
-                    </Link>
-                </td>
-              </tr>
-            </tbody>
-        </table>
       </div>
     </div>
   );
