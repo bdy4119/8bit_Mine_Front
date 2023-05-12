@@ -48,7 +48,6 @@ function I_detail() {
 
   function classiChange(classi) {
     setClassi(classi);
-
     const id = localStorage.getItem("id");
     axios.get("http://localhost:3000/i_detail", { params: { "id": id, "classify": classi } })
       .then(function (resp) {
@@ -153,8 +152,8 @@ function I_detail() {
       </div>
 
       <div className="tacButtonD">
-        <Button size="huge" color="purple" onClick={() => { history(`/i_update/${params.classify}`) }}>분류 수정</Button>
-        <Button size="huge" color="purple" onClick={i_del}>분류 삭제</Button>
+        <Button size="huge" color="purple" onClick={() => { history(`/i_update/${classi}`) }}>분류 수정</Button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <Button size="huge" color="red" onClick={i_del}>분류 삭제</Button>
       </div>
 
       <div className="search">
@@ -181,7 +180,7 @@ function I_detail() {
                 <img src={naver} width="53px" height="10px" />
               </Table.Cell>
               <Table.Cell>
-                <Link onClick={() => window.open('http://localhost:9001/book', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>책 정보</Link>
+                <Link onClick={() => window.open('http://localhost:9001/book', 'window_name', 'width=800,height=1000,location=no,status=no,scrollbars=yes')}>책 정보</Link>
               </Table.Cell>
             </Table.Row>
             <Table.Row>
