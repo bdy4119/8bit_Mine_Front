@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from '../mine/images/logo.png';
+import Topbar from "../main/topbar";
 
 function Edit() {
     const history = useNavigate();
@@ -148,49 +149,64 @@ function Edit() {
     }, [])
 
     return (
-        <div id="backwhite">
-            <h1>내 정보 수정</h1>
-            이메일: &nbsp;
-            <input type="text" value={userEmail} readOnly="readOnly" />
+        <div>
+            <Topbar />
+            <div id="topbar">
+                <div id="barbtns">
+                    <div id="mainbtn" onClick={(e) => { window.location.href = "/main" }}>
+                       <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>MAIN</p>
+                    </div>
+                </div>
+            </div>
             <br />
-
-            가입 날짜: &nbsp;
-            <input type="text" value={userDate} readOnly="readOnly" />
-            <br />
-            최초 가입: &nbsp;
-            <input type="text" value={userSocial} readOnly="readOnly" />
-            <br /><br />
-            <hr />
-            <br />
-            이름: &nbsp;
-            <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
-            <br />
-            생년월일: &nbsp;
-            <input type="date" value={birthdate} onChange={(e) => setBirthdate(e.target.value)} />
-            <br />
-            학교/직장: &nbsp;
-            <input type="text" value={job} onChange={(e) => setJob(e.target.value)} />
-            <br />
-            주소: &nbsp;
-            <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
-            <br />
-            상태메세지: &nbsp;
-            <input type="text" value={profMsg} onChange={(e) => setProfMsg(e.target.value)} />
-            <br />
-            프로필사진: &nbsp;
-            <img id="prof" src={`${process.env.PUBLIC_URL}/profPic/${profPic}`} alt="X" width="200px" height="200px" />
-            <form name="frm" encType="multipart/form-data">
-                <input type="file" onClick={() => { setNoprof(false) }} name="uploadFile" accept="*" />
-            </form>
-            <button onClick={delProf}>사진 삭제</button>
-            <br /><br />
-            <hr />
-            <br />
-            <button type="button" onClick={editAf}>수정</button>
-            <br />
-            <button onClick={(e) => { window.location.href = "/kakao/withdrawal" }}>회원탈퇴</button>
-            <br />
-            <button type="button" onClick={goback}>돌아가기</button>
+            <div style={{marginTop:"175px"}}>
+                <h1>내 정보 수정</h1>
+                <hr />
+                <h3>내 정보</h3>
+                이메일: &nbsp;
+                <input type="text" value={userEmail} readOnly="readOnly" />
+                <br />
+                가입 날짜: &nbsp;
+                <input type="text" value={userDate} readOnly="readOnly" />
+                <br />
+                최초 가입: &nbsp;
+                <input type="text" value={userSocial} readOnly="readOnly" />
+                <br />
+                <br />
+                <hr />
+                <h3>정보 수정</h3>
+                이름: &nbsp;
+                <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} />
+                <br />
+                생년월일: &nbsp;
+                <input type="date" value={birthdate} onChange={(e) => setBirthdate(e.target.value)} />
+                <br />
+                학교/직장: &nbsp;
+                <input type="text" value={job} onChange={(e) => setJob(e.target.value)} />
+                <br />
+                주소: &nbsp;
+                <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
+                <br />
+                상태메세지: &nbsp;
+                <input type="text" value={profMsg} onChange={(e) => setProfMsg(e.target.value)} />
+                <br />
+                프로필사진: &nbsp;
+                <img id="prof" src={`${process.env.PUBLIC_URL}/profPic/${profPic}`} alt="X" width="200px" height="200px" />
+                <form name="frm" encType="multipart/form-data">
+                    <input type="file" onClick={() => { setNoprof(false) }} name="uploadFile" accept="*" />
+                </form>
+                <button onClick={delProf}>사진 삭제</button>
+                <br />
+                <br />
+                <button type="button" onClick={editAf}>수정</button>
+                <br />
+                <br />
+                <hr />
+                <h3>서비스 탈퇴</h3>
+                <button onClick={(e) => {window.location.href = "/kakao/withdrawal"}}>탈퇴하기</button>
+                <hr />
+                <button type="button" onClick={goback}>돌아가기</button>
+            </div>
         </div>
     );
 }

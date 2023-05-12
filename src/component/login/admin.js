@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from '../mine/images/logo.png';
 
 function Admin(){
     const history = useNavigate();
@@ -90,17 +91,31 @@ function Admin(){
 
     return(
         <>
+        <div id="topbar">
+            <div id="barbtns">
+                <div id="mainbtn" onClick={(e) => { window.location.href = "/admin" }}>
+                    <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>Admin</p>
+                </div>
+            </div>
+        </div>
+        <div id="logo" onClick={() => {history('/admin')}} style={{marginLeft:"-850px", marginTop:"-30px"}}>
+            <img src={logo} alt="no" width="300px" />
+        </div>
+        <div id="topbtns">
+            <button><a href={kakaologout}>로그아웃</a></button>
+        </div>
+        <br /><br /><br />
+        <div>
             <h1>사용자 목록</h1>
-            <a href={kakaologout}>로그아웃</a>
 
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <hr />
 
             <input type="text" placeholder="이메일로 사용자 검색" value={search} onChange={(e) => setSearch(e.target.value)} />
             &nbsp;
             <button type="button" onClick={searchUser}>검색</button>
-
-            <br /><br />&nbsp;
-
+        
+            <br /><br />
+            
             <input type="text" placeholder="설정할 사용자의 이메일" value={email} onChange={(e) => setEmail(e.target.value)} />
             &nbsp;
             <select value={auth} onChange={(e) => setAuth(e.target.value)}>
@@ -113,6 +128,8 @@ function Admin(){
             <input type="text" placeholder="비고" value={cause} onChange={(e) => setCause(e.target.value)} />
             &nbsp;
             <button type="button" onClick={updateState}>설정</button>
+            
+            <br />
 
             <table border="">
                 <thead>
@@ -140,6 +157,7 @@ function Admin(){
                 })}
                 </tbody>
             </table>
+        </div>
         </>
     );
 }
