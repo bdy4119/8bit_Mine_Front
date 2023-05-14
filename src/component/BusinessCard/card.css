@@ -31,19 +31,21 @@ input {
 
 #talk {
   position: relative;
-  width: 500px;
+  width: 400px;
   text-align: center;
   background: url(../images/말풍선.png);
   background-size: cover;
-  padding: 60px;
+  padding: 30px;
   margin-left: -65px;
+  font-family: 'Do Hyeon';
+  font-size: 25px;
 }
 
 
 /* 명함 수정부분 말풍선 */
 #talk-edit {
   position: relative;
-  width: 500px;
+  width: 400px;
   text-align: center;
   background: url(../images/말풍선.png);
   background-size: cover;
@@ -61,13 +63,6 @@ input {
   background-size: cover;
   padding: 40px;
   margin-left: 0px;
-  /* position: relative;
-  width: 500px;
-  font-variant-position: var();
-  background: url(../images/명함정보.png);
-  background-size: cover;
-  padding: 60px;
-  margin-left: 20px; */
 }
 
 
@@ -126,7 +121,7 @@ input {
 }
 
 
-/* 글 처음 추가할때 */
+/* 글 처음 작성하는 화면*/
 #addOnlineCard {
   position: absolute;
   width: 1050px;

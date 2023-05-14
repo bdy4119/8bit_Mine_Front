@@ -49,7 +49,7 @@ function Card() {
                     </div>
                 </div>
             </div>
-            <div className="middle" id="onlineCard">
+            <div className="middle">
                 <Inform/>
             </div>
     </div>

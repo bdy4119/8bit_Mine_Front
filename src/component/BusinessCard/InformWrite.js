@@ -139,7 +139,7 @@ function InformWrite() {
 
         <div id="addOnlineCard">
           <form name="frm" onSubmit={onSubmit} encType="multipart/form-data">
-            <div style={{marginLeft:"-500px", marginTop:"100px"}}>
+            <div style={{marginLeft:"-500px", marginTop:"70px"}}>
               <img src={`${imgFile}`} alt="프로필" id="circle"/>
               <br/>
               <br/>
@@ -147,14 +147,14 @@ function InformWrite() {
               <br/>
             </div>
 
-              <div style={{ float:"left", marginLeft:"450px", marginTop:"-350px", textAlign:"left"}}>
-                <div id="talk" style={{width:"550px"}}>
+              <div style={{ float:"left", marginLeft:"500px", marginTop:"-350px", textAlign:"left"}}>
+                <div id="talk" style={{marginTop:"50px", width:"500px", padding:"50px"}}>
                   <h3 style={{fontFamily:"Do Hyeon", fontSize:"20px"}}>소개글</h3>
                   <input name="introduce" defaultValue={introduce} onChange={(e)=>setIntroduce(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px"}}/>
                 </div>
                 <br/>
 
-                <div style={{marginLeft:"30px"}}>
+                <div style={{marginLeft:"0px", marginTop:"20px"}}>
                     <div style={{fontFamily:"Do Hyeon", fontSize:"20px"}}> 
                       이름 : <input  name="name" defaultValue={name} onChange={(e)=>setName(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px"}}/>
                     </div>
@@ -175,8 +175,8 @@ function InformWrite() {
 
           
 
-            <div className="middle" style={{clear:"left", paddingTop:"80px"}}>
-              <button id="onlineBtn" type="submit" style={{fontSize:"20px", width:"210px"}}>
+            <div className="middle" style={{clear:"left", paddingTop:"50px"}}>
+              <button id="onlineBtn" type="submit" style={{fontSize:"30px", width:"250px"}}>
                 추가완료
               </button>
             </div>
