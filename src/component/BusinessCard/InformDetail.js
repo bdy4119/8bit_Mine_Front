@@ -4,7 +4,7 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "../mine_back.css"
 import Topbar from "../main/topbar";
 
@@ -12,7 +12,7 @@ import Topbar from "../main/topbar";
 import "./card.css";
 
 function InformDetail() {
-  let history = useState();
+  let history = useNavigate();
   let param = useParams();
 
   const[businessDetail, setbusinessDetail] = useState(); //객체로 접근하기 때문에 값을 넣지 않아도 됨
@@ -46,8 +46,6 @@ function InformDetail() {
   if(loading === false) {
     return <div>Loading...</div>
   }
-  
-console.log("/Business-img/" + businessDetail.thumbnail);
 
   return(
     <div id="back">
@@ -87,7 +85,6 @@ console.log("/Business-img/" + businessDetail.thumbnail);
                     </div>
                 </div>
             </div>
-    <div /*id="toolbox"*/>
     <div className="middle">
       
       <div style={{backgroundColor:"#9CA8F0", marginLeft:"-600px",marginTop:"150px", height:"600px", width:"900px", fontSize:"20px"}}>
@@ -96,7 +93,8 @@ console.log("/Business-img/" + businessDetail.thumbnail);
               <div>
                 <form name="frm" encType="multipart/form-data">
                         
-                  <img src={`${process.env.PUBLIC_URL}/Business-img/${businessDetail.thumbnail}`} alt="프로필 이미지" id="circle" />    
+                  <img src={businessDetail.thumbnail ? `${process.env.PUBLIC_URL}/Business-img/${businessDetail.thumbnail}`:'/Business-img/나에대해 알아보기.png'}
+                        alt="프로필 이미지" id="circle" />    
                   <br/>
                 </form>
               </div>
@@ -142,8 +140,7 @@ console.log("/Business-img/" + businessDetail.thumbnail);
           </div>
         </div>
       </div>
-      </div>
-      </div>
+    </div>
   )
 }
 export default InformDetail;

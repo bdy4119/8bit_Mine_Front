@@ -49,10 +49,8 @@ function Card() {
                     </div>
                 </div>
             </div>
-            <div /*id="toolbox"*/>
-            <div className="middle">
+            <div className="middle" id="onlineCard">
                 <Inform/>
-            </div>
             </div>
     </div>
   );

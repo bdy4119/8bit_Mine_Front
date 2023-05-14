@@ -49,9 +49,9 @@ function Inform() {
     if(businessList.length === 0) {
        return(
            <Link to={`/informWrite/${id}`}>
-             <button style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
+             <div id="addOnlineBtn">
                명함추가
-             </button>
+             </div>
            </Link>
        );
     }
@@ -59,7 +59,7 @@ function Inform() {
  
   return(
     <div className="middle">
-      <div id="shadow" style={{position: "relative", backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px", marginLeft:"-600px", borderRadius: "1.5%"}} /*명함틀*/ />
+      {/* <div id="shadow" style={{position: "relative", backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px", marginLeft:"-600px", borderRadius: "1.5%"}} /> */}
       <div style={{position: "relative", marginLeft:"-550px", marginBottom:"0px", marginTop:"200px"}}>
         {renderAverage()}
       </div>
@@ -67,10 +67,11 @@ function Inform() {
           businessList.map(function(business, idx){
             return(
               <div className="middle" key={{idx}}>
-                <div style={{float:"left", position:"relative", marginLeft:"-600px", marginTop:"-80px"}}>
+                <div style={{float:"left", position:"relative", marginLeft:"-600px", marginTop:"-120px"}}>
                  
                     <form name="frm" encType="multipart/form-data">
-                      <img src={`/Business-img/${business.thumbnail}`} alt="프로필 이미지" id="circle" style={{marginLeft:"300px"}} />    
+                      <img src={business.thumbnail ? `${process.env.PUBLIC_URL}/Business-img/${business.thumbnail}`:'/Business-img/나에대해 알아보기.png'}
+                           alt="프로필 이미지" id="circle" />    
                       <br/>
                     </form>
                 </div>

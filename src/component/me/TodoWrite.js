@@ -92,37 +92,27 @@ function TodoWrite() {
                     </div>
                 </div>
             </div>
-      <h1>todo 추가</h1>
 
-      <table border='1px'>
-        <colgroup>
-          <col width="100px"/>
-          <col width="500px"/>
-        </colgroup>
-        <tbody>
-          <tr>
-            <th>날짜</th>
-            <td>
-              <input value={param.rdate} onChange={(e)=>setRdate(e.target.value)}/>
-            </td>
-           </tr>
-          <tr>
-            <th>제목</th>
-            <td>
-              <input value={title} onChange={(e)=>setTitle(e.target.value)}/>
-            </td>
-          </tr>
-          <tr>
-            <th>내용</th>
-            <td>
-              <input value={content} onChange={(e)=>setContent(e.target.value)}/>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div id="todoWrite">
+        <div>
+          <div>
+          <span>
+          날짜 : <input style={{backgroundColor:"rgb(0, 0, 0, 0.05)", fontFamily:"Nanum Pen Script, cursive", width:"150px"}} defaultValue={param.rdate} onChange={(e)=>setRdate(e.target.value)}/>
+            </span>
+          </div>
+          <div>
+              제목
+              <input style={{backgroundColor:"rgb(0, 0, 0, 0.05)", fontFamily:"Nanum Pen Script, cursive"}} value={title} onChange={(e)=>setTitle(e.target.value)}/>
+          </div>
+          <div>
+              내용
+              <input style={{backgroundColor:"rgb(0, 0, 0, 0.05)", fontFamily:"Nanum Pen Script, cursive"}} value={content} onChange={(e)=>setContent(e.target.value)}/>
+          </div>
+        </div>
+        </div>
 
       <br/>
-      <button onClick={handleSubmit}>작성완료</button>
+      <button class="btn btn-success" style={{marginTop:"-20px", marginLeft:"870px", width:"170px", height:"60px"}} onClick={handleSubmit}>작성완료</button>
     </div>
   )
 }

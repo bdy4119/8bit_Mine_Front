@@ -1,13 +1,14 @@
 import axios from "axios";
 import { format } from "date-fns";
 import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import "../main_back.css"
 import Topbar from "../main/topbar";
 
 function DiaryWrite() {
   let history = useNavigate();  // 변수에 useNavigate 할당
+  let param = useParams();
 
   const [rdate, setRdate] = useState(format(new Date(),'yyyy-MM-dd'));
   console.log(rdate);
@@ -146,7 +147,7 @@ function DiaryWrite() {
             <div id="diaryWrite" className="middle" style={{marginTop:"80px", marginLeft:"500px"}}>
               <form name="frm" onSubmit={handleSubmit} encType="multipart/form-data">
                 <span style={{fontSize:"40px"}}>
-                  약속날짜 : <input name="rdate" style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} class="form-control-plaintext" id="staticEmail" value={rdateStr} onChange={(e)=>setRdate(e.target.value)}/>
+                  약속날짜 : <input name="rdate" style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} class="form-control-plaintext" id="staticEmail" defaultValue={param.rdate} onChange={(e)=>setRdate(e.target.value)}/>
                 </span>
                 <br/>
                 <br/>
