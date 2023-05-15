@@ -36,6 +36,14 @@ function Mine_main(){
         setAlramOpen(true);
     };
 
+    const getUser = async () => {
+        const jwt = localStorage.getItem("token");
+
+        if (jwt === null) {
+            history("/");
+        }
+    }
+
 
     const history = useNavigate();
     
@@ -78,7 +86,8 @@ function Mine_main(){
           setA(yn);
           console.log(a);
         };
-    
+        
+        getUser();
         mineList();
         checkList();
       }, []);

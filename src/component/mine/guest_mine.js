@@ -24,11 +24,19 @@ function Mine_main(){
     const [guestid, setguestid] = useState('');
 
     let params = useParams();
-    const movePage = useNavigate();
+    const history = useNavigate();
 
     let mineid = params.mineid;
 
     const id = localStorage.getItem("id");
+
+    const getUser = async () => {
+        const jwt = localStorage.getItem("token");
+
+        if (jwt === null) {
+            history("/");
+        }
+    }
 
     const mineList = async() => {
         const response = await axios.post('http://localhost:3000/minelist', null, { params:{"id":mineid} });
@@ -61,6 +69,7 @@ function Mine_main(){
     }
 
     useLayoutEffect(()=>{
+        getUser();
         mineList();
         checkList();
     }, []);
@@ -225,7 +234,7 @@ function Mine_main(){
     return (
         <div id="back">
             <div>
-                <div id="logo" onClick={() => {movePage('/main')}} style={{marginLeft:"-850px", marginTop:"-30px"}}>
+                <div id="logo" onClick={() => {history('/main')}} style={{marginLeft:"-850px", marginTop:"-30px"}}>
                     <img src={logo} alt="no" width="300px" />
                 </div>
             </div>
@@ -241,12 +250,12 @@ function Mine_main(){
                       CARD
                       </p>
                     </div>
-                    <div id="mebtn" onClick={(e) => { window.location.href = "/guest_gbmain/" + mineid }}>
+                    <div id="mebtn" onClick={(e) => { history("/guest_gbmain/" + mineid) }}>
                       <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
                       GUEST
                       </p>
                     </div>
-                    <div id="minebtn" onClick={(e) => { window.location.href = "/gbmain" }}>
+                    <div id="minebtn" onClick={(e) => { history("/gbmain") }}>
                       <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
                       HOME
                       </p>

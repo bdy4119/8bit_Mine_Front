@@ -30,6 +30,14 @@ function Mine_edi(){
     const id = localStorage.getItem("id");
     const history = useNavigate();
 
+    const getUser = async () => {
+        const jwt = localStorage.getItem("token");
+
+        if (jwt === null) {
+            history("/");
+        }
+    }
+
     function imageLoad(){
         const file = imgRef.current.files[0];
         const reader = new FileReader();
@@ -89,6 +97,7 @@ function Mine_edi(){
     }
 
     useLayoutEffect(()=>{
+        getUser();
         mineList();
         checkList();
     }, []);
