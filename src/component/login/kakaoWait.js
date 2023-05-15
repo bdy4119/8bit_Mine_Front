@@ -24,6 +24,7 @@ function Kakaowait(){
     }
 
     useEffect(function(){
+        document.getElementById("backtop").style.visibility = "hidden";
         sendcode();
     }, []);
 

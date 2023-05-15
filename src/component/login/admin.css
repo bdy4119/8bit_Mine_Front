@@ -1,0 +1,93 @@
+
+.adminWord {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 50px;
+}
+
+/* 입력창 */
+.adminText {
+    width: 250px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-right: 15px;
+    margin-left: 15px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.adminSelect {
+    width: 80px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.adminText::placeholder {
+    color: #a1a1a1;
+}
+
+.admin1Btn {
+    background-color: #ae00ff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 740px;
+}
+
+.admin2Btn {
+    background-color: #ae00ff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.admin1Btn:hover {
+    background-color: #6a2f7c;
+}
+
+.admin2Btn:hover {
+    background-color: #6a2f7c;
+}
+
+/* 테이블 */
+.adminTable {
+    border-collapse: collapse;
+    width: 95%;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
+.adminTh {
+    text-align: center;
+    padding: 15px;
+    background-color: #6a49df;
+    color: #fff;
+}
+
+.adminTd {
+    text-align: center;
+    padding: 15px;
+    background-color: #fff;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+}
+
+.adminTd:first-child {
+    font-weight: bold;
+}
+
+.adminTr:hover td {
+    background-color: #5f1d1d;
+    color: #fff;
+}

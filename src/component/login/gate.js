@@ -1,6 +1,11 @@
 
 import kakaoLogo from "../images/kakao.png";
 import logo from '../mine/images/logo.png';
+import Glogo from '../images/googleLogo.png';
+import Mlogo from '../images/microsoftLogo.png';
+import Nlogo from '../images/naverLogo.png';
+import Klogo from '../images/kakaoLogo.png';
+import gateImage from '../images/mineGate.jpg';
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +13,7 @@ import axios from "axios";
 import {GoogleLogin} from "react-google-login";
 import {gapi} from "gapi-script";
 import MicrosoftLogin from "react-microsoft-login";
+
 import "./gate.css";
 
 function Gate() {
@@ -51,7 +57,7 @@ function Gate() {
         .then(function(resp){
             localStorage.setItem("token", JSON.stringify(resp.data.token).replace(/\"/gi, ""));
 			localStorage.setItem("id", JSON.stringify(resp.data.email).replace(/\"/gi, ""));
-
+            
             history("/main");
         })
         .catch(function(err){
@@ -92,7 +98,7 @@ function Gate() {
     }, [showSocialIndex]);
 
     return (
-        <div>
+        <div id="back">
             <div id="topbar">
                 <div id="barbtns">
                     <div id="mainbtn" onClick={(e) => { window.location.href = "/" }}>
@@ -104,22 +110,34 @@ function Gate() {
                 <img src={logo} alt="no" width="300px" />
             </div>
 
-            <br /><br /><br /><br /><br />
-
             <div className="loginArea">
-                <h1>Mine에 오신것을 환영합니다</h1>
+                <h1 className="gateWord">
+                    Mine에 오신것을 환영합니다!
+                    <br /><br />
+                    다음 서비스들의 아이디가 있으신가요?
+                    <br />
+                    해당 서비스들의 아이디를 통해 간편하게 Mine에 접속해보세요
+                </h1>
 
-                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-                <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+                <br />
+
+                <span>
+                <img src={Glogo} alt="" className="socialLogo" />
+                <img src={Mlogo} alt="" className="socialLogo" />
+                <img src={Nlogo} alt="" className="socialLogo" />
+                <img src={Klogo} alt="" className="socialLogo" />
+                </span>
+
+                <br /><br />
+                <img src={gateImage} alt="" />
 
                 <div>
-                    <button onClick={prevBtn}>{'<<<'}</button>
-                    {showSocialIndex === 0 && <GoogleLogin clientId={GoogleClientId} onSuccess={onSuccess} onFailure={onFailure} />}
-                    {showSocialIndex === 1 && <MicrosoftLogin clientId={MicrosoftClientId} authCallback={callback} />}
-                    {showSocialIndex === 2 && <span id="naverIdLogin" />}
-                    {showSocialIndex === 3 && <a href={KAKAO_AUTH_URI}><img src={kakaoLogo} alt=""/></a>}
-                    <button onClick={nextBtn}>{'>>>'}</button>
+                    <button onClick={prevBtn} className="prevBtn">{'<<<'}</button>
+                    <span className="Glogo">{showSocialIndex === 0 && <button><GoogleLogin clientId={GoogleClientId} onSuccess={onSuccess} onFailure={onFailure} /></button>}</span>
+                    <span className="Mlogo">{showSocialIndex === 1 && <MicrosoftLogin clientId={MicrosoftClientId} authCallback={callback} />}</span>
+                    <span className="Nlogo">{showSocialIndex === 2 && <span id="naverIdLogin" />}</span>
+                    <span className="Klogo">{showSocialIndex === 3 && <a href={KAKAO_AUTH_URI}><img src={kakaoLogo} alt=""/></a>}</span>
+                    <button onClick={nextBtn} className="nextBtn">{'>>>'}</button>
                 </div>
             </div>
 
