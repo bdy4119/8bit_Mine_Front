@@ -161,8 +161,8 @@ function Main(){
       
 
     useEffect(() => {
-        getUser();
         Check();
+        getUser();
         noticemine();
         noticebook();
         getTodolist();

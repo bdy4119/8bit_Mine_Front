@@ -3,6 +3,9 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from '../mine/images/logo.png';
+import ban from '../images/ban.png';
+
+import './ban.css'
 
 function Ban(){
     const history = useNavigate();
@@ -44,11 +47,12 @@ function Ban(){
     }
 
     useEffect(function(){
+        document.getElementById("backtop").style.visibility = "hidden";
         Check();
     }, [])
 
     return(
-        <div>
+        <div id="back">
             <div id="topbar">
                 <div id="barbtns">
                     <div id="mainbtn" onClick={(e) => { window.location.href = "/ban" }}>
@@ -62,10 +66,14 @@ function Ban(){
             <div id="topbtns">
                 <button><a href={kakaologout}>로그아웃</a></button>
             </div>
-            <br /><br /><br /><br /><br /><br /><br /><br />
+            <br /><br /><br /><br />
             <div>
-                <h1>정지된 계정입니다</h1>
+                <h1 className="banWord1">해당 계정은 운영원칙 위반사항으로인해 정지된 계정입니다</h1>
             </div>
+            <div className="banImg" >
+                <img src={ban} alt="" />
+            </div>
+            <h2 className="banWord2">자세한 내용은 Mine으로 문의해주세요</h2>
         </div>
     )
 }

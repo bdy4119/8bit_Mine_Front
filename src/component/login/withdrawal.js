@@ -9,8 +9,11 @@ function Withdrawal(){
     const token = localStorage.getItem("token");
 
     function sendEmail(){
-        axios.post("http://localhost:3000/withdrawal", null, {params:{"token":token}})
-        .then(function(resp){
+        let result = window.confirm("회원탈퇴를 진행합니다");
+
+        if(result){
+            axios.post("http://localhost:3000/withdrawal", null, {params:{"token":token}})
+            .then(function(resp){
             alert(resp);
             
             localStorage.removeItem("token");
@@ -23,9 +26,14 @@ function Withdrawal(){
 
             history("/edit");
         })
+        }
+        else{
+            history("/edit");
+        }
     }
 
     useEffect(function(){
+        document.getElementById("backtop").style.visibility = "hidden";
         sendEmail();
     }, []);
 

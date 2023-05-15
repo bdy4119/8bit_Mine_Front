@@ -20,6 +20,7 @@ import alram from './images/alram.png';
 
 function Mine_main(){
 
+
     const id = localStorage.getItem("id");
 
     const [b, setB] = useState({});
@@ -49,6 +50,7 @@ function Mine_main(){
             for (let i = 0; i < response.data.length; i++) {
               const d = response.data[i];
               c[d.position] = d;
+              
             }
             setB(c);
             console.log(b);

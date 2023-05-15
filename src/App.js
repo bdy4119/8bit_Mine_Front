@@ -24,7 +24,7 @@ import Chatbot from "./component/chatbot/chatbot";
 
 import Friendcard from "./component/friend/friendcard";
 
-import Me from "./component/Me/Me";
+import Me from "./component/Me/me";
 import DiaryWrite from "./component/Me/DiaryWrite";
 import TodoWrite from './component/Me/TodoWrite';
 import DiaryUpdate from './component/Me/DiaryUpdate';
@@ -42,7 +42,11 @@ import Imain from "./component/I/Imain";
 import Iadd from "./component/I/Iadd";
 import Idetail from "./component/I/Idetail";
 import Iupdate from "./component/I/Iupdate";
+<<<<<<< HEAD
+import Qna7 from "./component/I/Qna10";
+=======
 import Qna7 from "./component/I/Qna7";
+>>>>>>> db9fc32ed67a198bcaed31f4c17d1a1d09c9a299
 import Place from "./component/I/search/place";
 import Book from "./component/I/search/book";
 import Movie from "./component/I/search/movie";

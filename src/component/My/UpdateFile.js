@@ -30,22 +30,31 @@ export default function UpdateFile() {
   },[params.seq])
   
   return (
-    <>
+    <div className="rwd-table2" style={{marginLeft:"350px"}}>
   <form name="frm" onSubmit={submitBtn}>
     <table align="center" border="1">
       <thead/>
       <tbody>
-        <tr>
-        <th>카테고리</th>
-          <td>{json.mfCategory}</td>
-          </tr>
-          <tr>
+   
+      <tr>
+                <th>카테고리</th>
+                  <td>
+                    <select value={json.mfCategory} onChange={(e) => setJson(e.target.value)}>
+                      <option value="">==선택==</option>
+                      <option value="project">project</option>
+                      <option value="certificate">certificate</option>
+                      <option value="portfolio">portfolio</option>
+                      <option value="picture">picture</option>
+                    </select>
+                  </td>
+              </tr>
+              <tr>
           <th>작성자</th>
-          <td>{json.mfUserId}</td>
+          <td>{json.mfFileId}</td>
           </tr>
           <tr>
           <th>파일이름</th>
-          <td>{json.mfFileId}</td>
+          <td>{json.mfFilename}</td>
           </tr>
           <tr>
           <th>등록일</th>
@@ -56,16 +65,18 @@ export default function UpdateFile() {
           <td><input defaultValue={json.mfMemo}/></td>
           </tr>
           <tr>
-            <input type="file"></input>
+            <input type="file" ></input>
            <tr>
           </tr>
         </tr>
       </tbody>
     </table>
-    <button align="right" type="submit">수정완료</button>
+    <tr/><tr/>
+    <tr/><tr/>
+    <button  style={{marginLeft:"1040px",backgroundColor:"#E81C88",color:"white",width: "110px", height:"60px"}} align="right" type="submit">수정완료</button>
     
    </form>
-    </>
+    </div>
     
   )
 }
