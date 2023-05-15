@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import ModalBCW from '../BCWallet/WalletMain';
 import ModalBasic from '../chatbot/chatbot';
 import logo from '../mine/images/logo.png';
 import { useNavigate } from 'react-router-dom';
@@ -7,22 +6,17 @@ import { useNavigate } from 'react-router-dom';
 function Topbar() {
 
     const [modalOpen, setModalOpen] = useState(false);
-    const [bcwOpen, setBcwOpen] = useState(false);
     const movePage = useNavigate();
 
     const showModal = () => {
         setModalOpen(true);
     };
 
-    const showBcwModal = () => {
-        setBcwOpen(true);
-    };
-
     const kakaologout = "https://kauth.kakao.com/oauth/logout?client_id=746d748ae3421ccabe20af6703c55dac&logout_redirect_uri=http://localhost:9001/kakao/logout";
 
     return (
         <div>
-            <div id="logo" onClick={() => {movePage('/main')}} style={{marginLeft:"-850px", marginTop:"-30px"}}>
+            <div id="logo" onClick={() => { movePage('/main') }} style={{ marginLeft: "-850px", marginTop: "-30px" }}>
                 <img src={logo} alt="no" width="300px" />
             </div>
 
@@ -31,8 +25,6 @@ function Topbar() {
                 <button><a href={kakaologout}>로그아웃</a></button>
                 <button onClick={showModal}>상담챗봇</button>
                 {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
-                <button onClick={showBcwModal}>명함지갑</button>
-                {bcwOpen && <ModalBCW setModalOpen={setBcwOpen} />}
             </div>
         </div>
     );
