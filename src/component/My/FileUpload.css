@@ -1,0 +1,220 @@
+.rwd-table2 {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 300px;
+  }
+
+  .rwd-table2 table {
+    width: 60%;
+    height: 400px;
+  }
+  
+  /* .rwd-table2 tr:first-child {
+    background: #E81C88;
+    color: #fff;
+  } */
+  
+  .rwd-table2 tr {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background-color: white;
+  }
+  
+  /*.rwd-table2 tr:nth-child(odd):not(:first-child) {*/
+  /*    background-color: #ebf3f9;*/
+  /*}*/
+  
+  .rwd-table2 th {
+    display: none;
+  }
+  
+  .rwd-table2 td {
+    display: block;
+  }
+  
+  .rwd-table2 td:first-child {
+    margin-top: .5em;
+  }
+  
+  .rwd-table2 td:last-child {
+    margin-bottom: .5em;
+  }
+  
+  .rwd-table2 td:before {
+    /*content: attr(data-th) ": ";*/
+    font-weight: bold;
+    width: 120px;
+    display: inline-block;
+    color: #000;
+  }
+  
+  .rwd-table2 th,
+  .rwd-table2 td {
+    text-align: left;
+  }
+  
+  .rwd-table2 {
+    color: #333;
+    border-radius: .4em;
+    overflow: hidden;
+  }
+  
+  .rwd-table2 tr {
+    border-top: #E81C88;
+  }
+  
+  .rwd-table2 th,
+  .rwd-table2 td {
+    padding: .5em 1em;
+  }
+  @media screen and (max-width: 601px) {
+    .rwd-table2 tr:nth-child(2) {
+        border-top: none;
+    }
+    .rwd-table2 th:first-child,
+    .rwd-table2 td:first-child {
+        font-weight : bold;
+        color: black;
+    }
+    .rwd-table2 td a {
+        text-decoration: none;
+        color: black;
+    }
+  }
+ 
+    .rwd-table2 td:before {
+        display: none;
+    }
+    .rwd-table2 td a {
+        text-decoration: none;
+        color: black;
+    }
+    .rwd-table2 th,
+    .rwd-table2 td {
+        display: table-cell;
+        padding: .25em .5em;
+    }
+    .rwd-table2 th:first-child,
+    .rwd-table2 td:first-child {
+        font-weight : bold;
+        padding-left: 0;
+    }
+    .rwd-table2 th:last-child,
+    .rwd-table2 td:last-child {
+        padding-right: 0;
+    }
+    .rwd-table2 th,
+    .rwd-table2 td {
+        padding: 1em !important;
+    }
+  
+  
+  
+    
+    .rwd-table2 {
+ 
+        border-collapse: collapse;
+        
+        
+      }
+      
+      .rwd-table2 tr:first-child {
+        
+        border-top: 3px solid #E81C88;
+        color: black;
+        
+      }
+      
+      .rwd-table2 tr {
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        background-color: white;
+      }
+      
+      /*.rwd-table2 tr:nth-child(odd):not(:first-child) {*/
+      /*    background-color: #ebf3f9;*/
+      /*}*/
+      
+      .rwd-table2 th {
+        display: none;
+      }
+      
+      .rwd-table2 td {
+        display: block;
+      }
+      
+      .rwd-table2 td:first-child {
+        margin-top: .5em;
+      }
+      
+      .rwd-table2 td:last-child {
+        margin-bottom: .5em;
+      }
+      
+      .rwd-table2 td:before {
+        /*content: attr(data-th) ": ";*/
+        font-weight: bold;
+        width: 120px;
+        display: inline-block;
+        color: #E81C88;
+      }
+      
+      .rwd-table2 th,
+      .rwd-table2 td {
+        text-align: left;
+      }
+      
+      .rwd-table2 tr {
+        border-color: #E81C88;
+      }
+      @media screen and (max-width: 601px) {
+        .rwd-table2 tr:nth-child(2) {
+            border-top: none;
+        }
+       
+      }
+      @media screen and (min-width: 600px) {
+        .rwd-table2 tr:hover:not(:first-child) {
+            background-color: rgba(228, 36, 235, 0.3);
+            /*background-color: #83F4B4;과 동일 opacity*/
+     
+        }
+        .rwd-table2 th,
+        .rwd-table2 td {
+            display: table-cell;
+            padding: .25em .5em;
+        }
+        .rwd-table2 th:first-child,
+        .rwd-table2 td:first-child {
+            font-weight : bold;
+            padding-left: 0;
+        }
+        .rwd-table2 th:last-child,
+        .rwd-table2 td:last-child {
+            padding-right: 0;
+        }
+        .rwd-table2 th,
+        .rwd-table2 td {
+            padding: 1em !important;
+        }
+       
+     
+      .fileselect{
+        background-color: #E81C88;
+        border-color: #E81C88;
+        color: #ddd;
+        }
+        
+        .uploadbtns{
+        padding-bottom: 1000;
+        font-size:10px; padding:10px 10px;
+        background-color: #E81C88;
+        border-color: #E81C88;
+        color: #ddd;
+        margin-left: -800px;
+        
+          }
+          
+      
+      
+      }

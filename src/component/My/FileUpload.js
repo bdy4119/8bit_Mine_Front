@@ -2,13 +2,13 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-  
+import "./FileUpload.css" 
 function FileUpload() {
        
   const [mfCategory , setMfCategory] = useState('')
   const [mfTitle , setMfTitle] = useState('')
   const [mfMemo , setMfMemo] = useState('')
-  const [mfFileId, setMfFileId] = useState('')
+  const [mfFileId, setMfFileId] = useState(localStorage.getItem("id"));
   const history = useNavigate();
   const date = new Date();
 
@@ -35,8 +35,8 @@ function FileUpload() {
   }
   return(
     <>
+      <div className="rwd-table2" align="center">
       <form name="frm" encType="multipart/form-data" onSubmit={onSubmit}>
-        <div align="center">
           <table align="center" border="1">
             <thead/>
             <tbody>
@@ -55,7 +55,7 @@ function FileUpload() {
               <tr>
                 <th>작성자</th>
                 {/* TO-DO 작성자 ID 담기 */}
-                <td><input type="text" value={mfFileId} onChange={(e)=>{setMfFileId(e.target.value)}}/></td>
+                <td>{mfFileId}</td>
               </tr>
               <tr>
                 <th>파일이름</th>
@@ -70,13 +70,15 @@ function FileUpload() {
                 <td><input type="text" value={mfMemo} onChange={(e)=>{setMfMemo(e.target.value)}} /></td>
               </tr>
               <tr>
-                <input type="file" name="uploadFile"></input>
+                <td colSpan={2}><input type="file" name="uploadFile"></input></td>
               </tr>
             </tbody>
-          </table>
-          <input type="submit" value="file upload"/>
-        </div>
+            <tr>
+              <td colSpan={2} style={{textAlign:"right"}}><input type="submit" value="업로드" className='uploadbtns' /></td>
+            </tr>
+          </table >
       </form>
+        </div>
     </>
   );
 }
