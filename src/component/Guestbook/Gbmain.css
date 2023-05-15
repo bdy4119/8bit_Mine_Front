@@ -6,6 +6,14 @@
     float: left;
 }
 
+#guestverlist {
+    position: absolute;
+    margin-left: 470px;
+    margin-top: 140px;
+    width: 50%;
+    float: left;
+}
+
 #friendlist {
     position: absolute;
     margin-left: 1300px;

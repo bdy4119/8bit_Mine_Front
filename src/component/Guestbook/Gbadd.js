@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { ReactMediaRecorder } from "react-media-recorder";
 import axios from "axios";
 
@@ -19,6 +19,7 @@ function Gbadd() {
 
   let params = useParams();
   const history = useNavigate();
+  const fileInput = useRef();
 
   const [checkVal, setCheckVal] = useState(false);
   const [comm, setComm] = useState('');
@@ -27,7 +28,6 @@ function Gbadd() {
   const [fromname, setFromname] = useState('');
   const [filename, setFilename] = useState('');
   const [profPic, setProfPic] = useState('');
-  const [voiceStat, setVoiceStat] = useState(true);
 
   // 접속 권한 체크
   const getUser = async () => {
@@ -52,6 +52,7 @@ function Gbadd() {
 
     if (tid === fid) {
       alert('나의 방명록에는 글을 남길 수 없습니다.');
+      history('/main');
     }
   }
 
@@ -83,7 +84,7 @@ function Gbadd() {
 
     axios.get('http://localhost:3000/gb_add', {
       params: {
-        "toid": tid, "toname": toname, "fromid": fid, "fromname": fromname, "profpic":profPic,
+        "toid": tid, "toname": toname, "fromid": fid, "fromname": fromname, "profpic": profPic,
         "comment": comm, "isvoice": isvoice, "filename": filename
       }
     })
@@ -118,59 +119,6 @@ function Gbadd() {
       });
   }
 
-  // 음성 녹음 및 등록, 업로드
-  function VoiceComm() {
-    return (
-      <div className="vocom" style={{ width: "600px" }}>
-        <img src={greend} width="70px" height="70px" style={{ position: "absolute", marginLeft: "-20px", marginTop: "20px" }} />&nbsp;
-        <h2 style={{ fontSize: "40px", marginLeft: "60px" }}>음성 녹음 및 등록</h2>
-        <br />
-
-        <div style={{ marginLeft: "60px" }}>
-          <ReactMediaRecorder
-            audio
-            render={({ status, startRecording, stopRecording, mediaBlobUrl }) => (
-
-              <div>
-                {/* 녹음된 내용 재생bar */}
-                <audio src={mediaBlobUrl} controls ></audio><br />
-
-                {/* 녹음상태 */}
-                <div className="aud">{status === 'recording' ?
-                  <p style={{ color: "red", fontWeight: "bold" }}><img src={redd} width="40px" height="40px" style={{ position: "absolute", marginTop: "-10px", marginLeft: "-30px" }} />
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;녹음 중</p>
-                  : <p style={{ color: "blue", fontWeight: "bold" }}><img src={blued} width="40px" height="40px" style={{ position: "absolute", marginTop: "-10px", marginLeft: "-30px" }} />
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;녹음 대기</p>}</div><br />
-
-                <div style={{ position: "absolute", marginLeft: "60px" }}>
-                  {/* 녹음시작 */}
-                  <Button size="large" color="red" onClick={startRecording}>녹음 시작</Button>
-
-                  {/* 녹음종료 */}
-                  <Button size="large" color="green" onClick={() => { stopRecording(); setVoiceStat(false) }}>녹음 완료</Button><br /><br />
-                </div>
-
-                {/* 녹음파일 Chrome에서 다운로드 */}
-                <Link><a style={{ position: "absolute", marginLeft: "320px", marginTop:"10px" }} href={mediaBlobUrl} download="mysound.wav">다운로드</a></Link>
-              </div>
-
-            )}
-          /></div>
-        <br /><br /><br /><br /><hr /><br />
-
-        <img src={greend} width="70px" height="70px" style={{ position: "absolute", marginLeft: "-20px", marginTop: "px" }} />&nbsp;
-        <h2 style={{ fontSize: "40px", marginLeft: "60px", marginTop: "-5px" }}>음성파일 업로드</h2>
-        <br />
-        <form name="frm" onSubmit={fileUpload} encType="multipart/form-data">
-          <input type="file" name="uploadFile" accept="*" />
-          <Button color="green" size="large" type="submit">업로드</Button>
-          <Button color="red" size="large" onClick={voice_del} style={{ position: "absolute", marginLeft: "10px" }} >삭제</Button>
-        </form>
-
-      </div>
-    );
-  }
-
   return (
     <div id="back">
 
@@ -196,7 +144,53 @@ function Gbadd() {
         <Button color="purple" size="large" style={{ marginTop: "15px", marginLeft: "565px" }} onClick={gb_add}>방명록 작성</Button>
       </div>
 
-      <VoiceComm />
+      <div className="vocom" style={{ width: "600px" }}>
+        <img src={greend} width="70px" height="70px" style={{ position: "absolute", marginLeft: "-20px", marginTop: "20px" }} />&nbsp;
+        <h2 style={{ fontSize: "40px", marginLeft: "60px" }}>음성 녹음 및 등록</h2>
+        <br />
+
+        <div style={{ marginLeft: "60px" }}>
+          <ReactMediaRecorder
+            audio
+            render={({ status, startRecording, stopRecording, mediaBlobUrl }) => (
+
+              <div>
+                {/* 녹음된 내용 재생bar */}
+                <audio src={mediaBlobUrl} controls ></audio><br />
+
+                {/* 녹음상태 */}
+                <div className="aud">{status === 'recording' ?
+                  <p style={{ color: "red", fontWeight: "bold" }}><img src={redd} width="40px" height="40px" style={{ position: "absolute", marginTop: "-10px", marginLeft: "-30px" }} />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;녹음 중</p>
+                  : <p style={{ color: "blue", fontWeight: "bold" }}><img src={blued} width="40px" height="40px" style={{ position: "absolute", marginTop: "-10px", marginLeft: "-30px" }} />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;녹음 대기</p>}</div><br />
+
+                <div style={{ position: "absolute", marginLeft: "40px" }}>
+                  {/* 녹음시작 */}
+                  <Button size="large" color="red" onClick={startRecording}>녹음 시작</Button>
+
+                  {/* 녹음종료 */}
+                  <Button size="large" color="green" onClick={stopRecording}>녹음 완료</Button><br /><br />
+                </div>
+
+                {/* 녹음파일 Chrome에서 다운로드 */}
+                <a style={{ position: "absolute", marginLeft: "290px", marginTop: "10px" }} href={mediaBlobUrl} download="mysound.wav">다운로드</a>
+              </div>
+
+            )}
+          /></div>
+        <br /><br /><br /><br /><hr /><br />
+
+        <img src={greend} width="70px" height="70px" style={{ position: "absolute", marginLeft: "-20px", marginTop: "px" }} />&nbsp;
+        <h2 style={{ fontSize: "40px", marginLeft: "60px", marginTop: "-5px" }}>음성파일 업로드</h2>
+        <br />
+        <form name="frm" onSubmit={fileUpload} encType="multipart/form-data">
+          <input type="file" name="uploadFile" accept="*" />
+          <Button color="green" size="large" type="submit">업로드</Button>
+        </form>
+        <Button color="red" size="large" onClick={voice_del} style={{ position: "absolute", marginLeft: "460px", marginTop: "-42px" }} >삭제</Button>
+
+      </div>
 
     </div>
   );

@@ -5,6 +5,34 @@
     float: left;
 }
 
+@font-face {
+    font-family: 'MBC1961GulimM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/MBC1961GulimM.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+}
+
+
+#usermode2 {
+    width: 120px;
+    height: 40px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    font-family: MBC1961GulimM;
+    font-size: 15px;
+    background-color: #3867a3;
+    color: white;
+}
+
+#editmode2 {
+    width: 120px;
+    height: 40px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-family: MBC1961GulimM;
+    font-size: 15px;
+}
+
 #game {
     width: 1300px;
     height: 600px;
