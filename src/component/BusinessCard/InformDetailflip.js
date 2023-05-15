@@ -4,10 +4,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "../mine_back.css"
-import Topbar from "../main/topbar";
 
 import "./card.css";
-import BackOrder from "./BackOrder";
 
 
 export const InformDetailFilp = () => {
@@ -19,6 +17,7 @@ export const InformDetailFilp = () => {
   //데이터를 모두 읽을 때까지 rendering을 조절하는 변수
   const [loading, setLoading] = useState(false);
 
+  const id = localStorage.getItem("id"); //로그인한 아이디
 
   function busiDetail() {
     axios.get("http://localhost:3000/businessDetail", {params:{"email": param.id}})
@@ -31,7 +30,6 @@ export const InformDetailFilp = () => {
             alert("정보를 불러오지 못했습니다.");
          })
   }
-//console.log(businessDetail.thumbnail);
 
 
   useEffect(function(){
@@ -39,7 +37,19 @@ export const InformDetailFilp = () => {
 
   },[param.id]);
 
+  console.log(id)
 
+  function editBtn() {
+    if(param.id === id) {
+      return(
+        <Link to={`/informUpdate/${param.id}/${businessDetail.seq}`}>
+          <button id="onlineBtn" style={{width:"250px"}}>
+            명함수정
+          </button>
+        </Link>
+      )
+    }
+  }
 
   //딜레이 한번 주기
   if(loading === false) {
@@ -90,11 +100,7 @@ export const InformDetailFilp = () => {
             </div>
           
             <div className="middle" style={{marginTop:"60px", paddingBottom:"30px"}}>
-              <Link to={`/informUpdate/${param.id}/${businessDetail.seq}`}>
-                <button id="onlineBtn" style={{width:"250px"}}>
-                  명함수정
-                </button>
-              </Link>
+              {editBtn()}
               &nbsp;&nbsp;&nbsp;&nbsp;
               <Link to={`/back/${businessDetail.id}`}>
                 <button id="onlineBtn" style={{width:"250px"}} type="submit" >

@@ -12,8 +12,7 @@ function Inform() {
 
   const[businessList, setBusinessList] = useState([]);
   const id = localStorage.getItem("id");
-  console.log(id);
-  
+    
   function business() {
     const id = localStorage.getItem("id");
     console.log(id);
@@ -80,7 +79,7 @@ function Inform() {
                 </div>
 
                 <div style={{float:"none", marginLeft:"-300px", marginTop:"100px"}}>
-                  <Link to={`/informDetail/${id}`}>
+                  <Link to={`/informDetail/${business.id}/${business.seq}`}>
                     <button id="onlineBtn" style={{width:"250px"}}>
                       상세보기
                     </button>

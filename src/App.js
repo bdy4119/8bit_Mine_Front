@@ -209,11 +209,12 @@ function App() {
           <Route path="/card" element={<Card></Card>} />
 
           <Route path="/informDetail/:id" element={<InformDetail />} />
+          <Route path="/informDetail/:id/:seq" element={<InformDetail />} />
           <Route path="/informUpdate/:id/:seq" element={<InformUpdate />} />
           <Route path="/informWrite/:id" element={<InformWrite />} />
 
           <Route path="/back/:id" element={<Back />} />
-          <Route path="/backUpdate/:seq" element={<BackUpdate />} />
+          <Route path="/backUpdate/:seq/:id" element={<BackUpdate />} />
           <Route path="/backWrite/:id" element={<BackWrite />} />
 
           <Route path="/main" element={<Main />} />

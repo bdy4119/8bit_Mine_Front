@@ -8,12 +8,16 @@ function BackOrder() {
 
   const[businessbackList, setBusinessbackList] = useState([]);
   const[id, setId] = useState(param.id);
+  const login = localStorage.getItem("id"); //로그인한 아이디
+
+  const [writeId, setWriteId] = useState();
 
   function businessback() {
     axios.get("http://localhost:3000/businesscardBack", {params:{"id":param.id}})
          .then(function(resp){
           console.log(resp.data.list);
           setBusinessbackList(resp.data.list);
+          setWriteId(resp.data.list[0].id);
         //  setId(param.id);
          })
          .catch(function(err){
@@ -30,7 +34,7 @@ function BackOrder() {
   //삭제
   //같이 보낸 파라미터값 매개변수 하나 더 추가해서 받아주기
   const historyDel = async(seq, e) => {
-    await axios.post("http://localhost:3000/backDel", null,{params:{"seq":seq}})
+    await axios.post("http://localhost:3000/backDel", null,{params:{"seq":seq, "id": param.id}})
           .then(function(resp){
             alert("게시물이 삭제되었습니다.");
             window.location.reload(); //삭제하고 리로딩
@@ -41,7 +45,27 @@ function BackOrder() {
             alert("삭제에 실패했습니다");
           })
   }
-  
+
+
+
+
+  function addBtn() {
+    if(login === writeId) {
+      return(
+        <Link to={`/backWrite/${id}`}>
+          <button type="submit" id="onlineBtn" style={{width:"250px"}}>
+            추가
+          </button>
+        </Link>
+      ) 
+    } else {
+      <></>
+    }
+  }
+
+
+
+
 
   return(
     <div style={{ filter: "drop-shadow(10px 10px 10px #b3b2b2)"}}>
@@ -61,11 +85,11 @@ function BackOrder() {
                         <br/>
                         <Link to={back.historyUrl}>{back.historyUrl}</Link>
                       </p>
-    
+
                       <span>
                         <button id="delbtn" onClick={(e)=>{historyDel(back.seq, e)}} style={{marginRight:"5px"}} />
                         
-                        <Link to={`/backUpdate/${back.seq}`}>
+                        <Link to={`/backUpdate/${back.seq}/${login}`}>
                           <button id="editbtn" />
                         </Link>
                       </span>
@@ -91,7 +115,7 @@ function BackOrder() {
         
                         <span>
                           <button id="delbtn" onClick={(e)=>{historyDel(back.seq, e)}} style={{marginRight:"5px"}} />
-                          <Link to={`/backUpdate/${back.seq}`}>
+                          <Link to={`/backUpdate/${back.seq}/${login}`}>
                             <button id="editbtn" />
                           </Link>
                         </span>
@@ -111,11 +135,7 @@ function BackOrder() {
               앞면보기
             </button>
           </Link>
-          <Link to={`/backWrite/${id}`}>
-            <button type="submit" id="onlineBtn" style={{width:"250px"}}>
-              추가
-            </button>
-          </Link>
+          {addBtn()}
       </div>
   </div>
   );

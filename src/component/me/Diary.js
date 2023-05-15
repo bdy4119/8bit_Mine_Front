@@ -22,6 +22,7 @@ function Diary() {
   const [page, setPage] = useState(1);
   const [totalCnt, setTotalCnt] = useState(0);
 
+  const [writeId, setWriteId] = useState();
 
   const id = localStorage.getItem("id");
   console.log(id);
@@ -30,6 +31,7 @@ function Diary() {
     axios.get("http://localhost:3000/diaryList", {params:{"pageNumber":page, "id":id}})
          .then(function(resp){
           setDiarylist(resp.data.list);
+          setWriteId(resp.data.list[0].id);
           let nottoday = []; //오늘이랑 다른 날짜
           for(let i=0; i<resp.data.list.length; i++){
             if(resp.data.list[i].rdate !== todayStr
@@ -40,7 +42,7 @@ function Diary() {
           setTotalCnt(resp.data.cnt - nottoday.length);
          })
          .catch(function(err){
-            alert("로그인한 id값이 다르므로 diarylist를 불러올 수 없습니다.");
+            alert("id값이 다르므로 diarylist를 불러올 수 없습니다.");
          })
   }
 
@@ -69,6 +71,27 @@ function Diary() {
   }
 
 
+  function addBtn() {
+    if(writeId === id) {
+      return(
+        <p style={{textAlign:"center", fontSize:"40px", marginTop:"20px", marginLeft:"100px"}}>
+          [다이어리] 
+          <Link to={`/diaryWrite/${param.rdate || format(new Date(),'yyyy-MM-dd')}/${id}`}>
+            <button id="addbtn" type='submit' style={{float:"right", marginRight:"30px", marginTop:"15px"}} />
+          </Link>
+        </p>
+      )
+    } else {
+      return(
+        <p style={{textAlign:"center", fontSize:"40px", marginTop:"20px", marginLeft:"40px"}}>
+          [다이어리]
+        </p>
+      )
+    }
+  }
+
+
+
   useEffect(function(){
     getDiarylist();
   }, []);
@@ -77,12 +100,7 @@ function Diary() {
   return(
     <div>
       <div id="diary" style={{textAlign:"center"}}>
-          <p style={{textAlign:"center", fontSize:"40px", marginTop:"20px", marginLeft:"100px"}}>
-            [다이어리] 
-            <Link to={`/diaryWrite/${param.rdate || format(new Date(),'yyyy-MM-dd')}/${id}`}>
-              <button id="addbtn" type='submit' style={{float:"right", marginRight:"30px", marginTop:"15px"}} />
-            </Link>
-          </p>
+          {addBtn()}
           <br/>
           <br/>
            <p style={{textAlign:"center", fontSize:"30px", marginTop:"-90px", marginLeft:"40px"}}>
