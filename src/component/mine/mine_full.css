@@ -1,14 +1,9 @@
 #fulltoolbox {
     z-index: 999;
-    background: rgba( 255, 255, 255, 0.25 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 4px );
-    -webkit-backdrop-filter: blur( 4px );
-    width: 1850px;
-    height: 850px;
+    background: black;
+    width: 2000px;
+    height: 929px;
     position: absolute;
-    top: 3%;
-    left: 2%;
 }
 
 #close {
@@ -25,7 +20,7 @@
     padding: 10px;
     border-radius: 350px;
     position: relative;
-    top: 20px;
+    top: 80px;
     left: 50%;
     margin-left:-850px;
     background-color: #7cabde;
@@ -35,15 +30,16 @@
 }
 
 .fullkeybutton {
-    display: inline-block;
     background-image: url(./images/keyboard.png);
     background-size: contain;
-    border: 2px solid #000;
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    right: 430px;
-    bottom: 50px;
+    width: 75px;
+    height: 65px;
+    position:absolute;
+    border-radius: 10px;
+    border: 2px solid #548235;
+    box-shadow: 2px 3px #548235;
+    top: 650px;
+    right: 250px;
 }
 
 .fullleft {
@@ -109,11 +105,13 @@
     background-image: url(./images/play.png);
     background-size: contain;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 60px;
+    height: 60px;
     position: absolute;
-    left: 130px;
-    bottom: 500px;
+    border: 2px solid #535353;
+    box-shadow: 2px 3px #535353;
+    left: 60px;
+    top: 300px;
 }
 
 .fullpause {
@@ -121,12 +119,14 @@
     background-image: url(./images/pause.png);
     background-size: contain;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     margin-top: 5px;
     position: absolute;
-    left: 130px;
-    bottom: 550px;
+    border: 2px solid #535353;
+    box-shadow: 2px 3px #535353;
+    left: 60px;
+    top: 400px;
 }
 
 
@@ -176,17 +176,16 @@
 }
 .fullstart {
     background-color: #fff;
-    z-index: 2;
-    width: 130px;
-    height: 50px;
+    width: 75px;
+    height: 65px;
     position:absolute;
-    border-radius: 7%;
-    top: 700px;
-    left: 1400px;
+    border-radius: 10px;
+    top: 650px;
+    right: 370px;
+    border: 2px solid #BF9000;
+    box-shadow: 2px 3px #BF9000;
     background-image: url(./images/start.png);
     background-size: contain;
-    background-position: center;
-    transform: translate(-50%,-50%);
 }
 .fullportal {
     background-color: #fff;

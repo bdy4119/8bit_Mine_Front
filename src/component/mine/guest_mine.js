@@ -67,7 +67,7 @@ function Mine_main(){
 
     const updateanswer = () => {
         axios.post("http://localhost:3000/updateanswer", null, 
-                    { params:{ "userid":guestid, "mineid":mineid, "answer1": answer1, "answer2": answer2, "answer3": answer3 }})
+                    { params:{ "userid":guestid, "mineid":mineid, "question1": b[11].filename, "question2": b[11].newfilename, "question3": b[11].imgtext, "answer1": answer1, "answer2": answer2, "answer3": answer3 }})
              .then(res => {
                 console.log(res.data);
                 if(res.data === "YES"){
