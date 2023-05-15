@@ -1,9 +1,20 @@
-.rwd-table {
+.rwd-table2 {
  
-  border-collapse: collapse;
-  
-  
+  width: 120%;
+  margin-right: 250px;
+ 
+
 }
+.select{
+
+margin-top: 200px;
+
+}
+
+
+
+
+
 
 .rwd-table tr:first-child {
   
@@ -111,22 +122,31 @@
       padding: 1em !important;
   }
  
+
+
+
+
+
+
 .updatebtns{
   background-color: #E81C88;
   border-color: #E81C88;
   color: #ddd;
+  font-size: 20px;
 }
 .delbtns{
   background-color: #E81C88;
   border-color: #E81C88;
   color: #ddd;
+  font-size: 20px;
   }
-  .uploadbtns{
-  background-color: #E81C88;
-  border-color: #E81C88;
-  color: #ddd;
-  
-    }
+  .upbtns{
+    background-color: #E81C88;
+    border-color: #E81C88;
+    color: #ddd;
+  font-size: 30px;
+    } 
+
     .downbtns{
       background-color: #E81C88;
       border-color: #E81C88;
@@ -136,6 +156,7 @@
       border-top-right-radius: 10px; 
       border-bottom-left-radius: 10px; 
       border-bottom-right-radius: 10px; 
+      font-size: 17px;
       }
 
 

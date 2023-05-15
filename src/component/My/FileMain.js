@@ -11,6 +11,10 @@ const FileList = () => {
     // 세션에 담긴 아이디값 가져오기
     // const id = session.get("USER_ID");
     // console.log(id);
+    
+    //이메일 id
+    const id = localStorage.getItem("id");
+    console.log(id);
 
     // 페이지이동을 하기위해 필요한 hook
     let navigate = useNavigate();
@@ -132,7 +136,8 @@ const FileList = () => {
 
 
     return (
-        <div align="center">
+        <>
+        <div className='select' align="center">
             <select value={choice} onChange={(e) => setChoice(e.target.value)}>
                 <option value="">검색</option>
                 <option value="title">제목</option>
@@ -142,10 +147,17 @@ const FileList = () => {
             <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="검색어를 입력해주세요" />
             <button onClick={searchBtn}>검색</button>
             <br/><br/>
+        </div>
+            
+
+
+          
+          
             {fileList !== null
                 ?
-                <div align="center" className='rwd-table'>
-                    <table border="1">
+                // <div className='rwd-table2' align="center">
+                <div className='rwd-table2' style={{marginTop:"10px"}} align="center">
+                    <table border="1" >
                         <thead>
                             <tr>
                                 <th>번호</th>
@@ -181,7 +193,7 @@ const FileList = () => {
                         </tbody>
                     </table>
                     <br />
-                    <button className='uploadbtns' style={{marginLeft:"470px"}}><Link to='/FileUpload'>업로드</Link></button>
+                    <button className='upbtns'  style={{marginLeft:"1050px",color:'white'}}><Link to='/FileUpload'>업로드</Link></button>
                     <br /><br />
                     <Pagination
                         activePage={page}
@@ -197,7 +209,7 @@ const FileList = () => {
                 :
                 <p>표시할 데이터가 없습니다.</p>
             }
-        </div>
+        </>
     )
 }
 export default FileList

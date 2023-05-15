@@ -1,13 +1,17 @@
 .rwd-table2 {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 300px;
+ 
   }
 
   .rwd-table2 table {
-    width: 60%;
-    height: 400px;
+    width: 100%;
+    height: 40%;
+    margin-top: 100px;
+    margin-left: 1000px;
   }
+
+  
   
   /* .rwd-table2 tr:first-child {
     background: #E81C88;
