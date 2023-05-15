@@ -132,6 +132,8 @@ export default Calendar;
 
 //날짜 함수
 export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateClick, currentWeek}) => {
+    
+    const id = localStorage.getItem("id");
 
     const monthStart = startOfMonth(currentMonth); // 이번달의 시작일, 시작요일
     const startDate = startOfWeek(monthStart);     // 이번주의 시작일, 시작요일
@@ -152,7 +154,7 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
 
     //다이어리 리스트
     function getCalList() {
-        axios.get("http://localhost:3000/diaryCalList", {params:{}})
+        axios.get("http://localhost:3000/diaryCalList", {params:{"id":id}})
          .then(function(resp){
             setDiarylist(resp.data.list);
          })
@@ -163,7 +165,7 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
 
     //todo리스트
     function getTodoCallist() {
-        axios.get("http://localhost:3000/getCalTodo", {params:{}})
+        axios.get("http://localhost:3000/getCalTodo", {params:{"id":id}})
             .then(function(resp){
               setTodolist(resp.data.list);
             })
@@ -271,8 +273,8 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
     useEffect(function(){
         getCalList();
         getTodoCallist();
-
-        }, [getHoliday()]);
+        getHoliday();
+        }, [format(currentYear, 'yyyy')]);
 
     //딜레이 한번 주기
     if(loading === false) {
