@@ -49,10 +49,8 @@ function Card() {
                     </div>
                 </div>
             </div>
-            <div /*id="toolbox"*/>
             <div className="middle">
                 <Inform/>
-            </div>
             </div>
     </div>
   );

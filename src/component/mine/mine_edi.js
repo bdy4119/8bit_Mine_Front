@@ -376,17 +376,17 @@ function Mine_edi(){
                 <div id="editorbox">
                     <div id="editor">
                         <div id="posbtns">
-                            <Link to={`/mine_edi/${1}`}><button>1</button></Link>
-                            <Link to={`/mine_edi/${2}`}><button>2</button></Link>
-                            <Link to={`/mine_edi/${3}`}><button>3</button></Link>
-                            <Link to={`/mine_edi/${4}`}><button>4</button></Link>
-                            <Link to={`/mine_edi/${5}`}><button>5</button></Link>
-                            <Link to={`/mine_edi/${6}`}><button>6</button></Link>
-                            <Link to={`/mine_edi/${7}`}><button>7</button></Link>
-                            <Link to={`/mine_edi/${8}`}><button>8</button></Link>
-                            <Link to={`/mine_edi/${9}`}><button>캐릭터</button></Link>
-                            <Link to={`/mine_edi/${10}`}><button>배경</button></Link>
-                            <Link to={`/mine_edi/${11}`}><button>질문</button></Link>
+                            <Link to={`/mine_edi/${1}`}><button className="myButton">1</button></Link>
+                            <Link to={`/mine_edi/${2}`}><button className="myButton">2</button></Link>
+                            <Link to={`/mine_edi/${3}`}><button className="myButton">3</button></Link>
+                            <Link to={`/mine_edi/${4}`}><button className="myButton">4</button></Link>
+                            <Link to={`/mine_edi/${5}`}><button className="myButton">5</button></Link>
+                            <Link to={`/mine_edi/${6}`}><button className="myButton">6</button></Link>
+                            <Link to={`/mine_edi/${7}`}><button className="myButton">7</button></Link>
+                            <Link to={`/mine_edi/${8}`}><button className="myButton">8</button></Link>
+                            <Link to={`/mine_edi/${9}`}><button className="myButton">캐릭터</button></Link>
+                            <Link to={`/mine_edi/${10}`}><button className="myButton">배경</button></Link>
+                            <Link to={`/mine_edi/${11}`}><button className="myButton">질문</button></Link>
                         </div>
                         <div id="posimg">
                             {(params.pos === '11') && (

@@ -60,7 +60,7 @@ function InformWrite() {
     formData.append("name", document.frm.name.value);
     formData.append("introduce", document.frm.introduce.value);
     formData.append("phoneNum", document.frm.phoneNum.value);
-    formData.append("email", document.frm.email.value);
+    formData.append("email", param.id);
     formData.append("url", document.frm.url.value);
     formData.append("id", param.id);
    }
@@ -79,12 +79,12 @@ function InformWrite() {
         })
 
   axios.post("http://localhost:3000/businessWrite", null,
-                {params:{"id":email, "thumbnail": thumbnail, "name":name, "email":email,
+                {params:{"id":param.id, "thumbnail": thumbnail, "name":name, "email":param.id,
                           "url":url, "phoneNum":phoneNum, "introduce":introduce}})
          .then(function(resp){
             if(resp.data === "YES") {
               alert('정보가 추가되었습니다.');
-              history(`/informDetail/${email}`);
+              history(`/informDetail/${param.id}`);
             } else {
               alert('정보를 추가하지 못했습니다.');
               history('/card');
@@ -135,51 +135,51 @@ function InformWrite() {
                 </div>
             </div>
     <div /*id="toolbox"*/>
-    <div className="middle">
+    <div>
 
-        <div style={{backgroundColor:"#9CA8F0", marginLeft:"-500px", marginTop:"150px", height:"600px", width:"900px", fontSize:"20px"}}>
+        <div id="addOnlineCard">
           <form name="frm" onSubmit={onSubmit} encType="multipart/form-data">
-            <div style={{float:"left", position:"relative", marginLeft:"70px", marginTop:"50px"}}>
-              <div>
-                  <img src={`${imgFile}`} alt="프로필" id="circle" />
-                  <br/>
-                  <input type="file" name='uploadFile' onChange={imageLoad} ref={imgRef} />
-                  <br/>
-              </div>
+            <div style={{marginLeft:"-500px", marginTop:"70px"}}>
+              <img src={`${imgFile}`} alt="프로필" id="circle"/>
+              <br/>
+              <br/>
+              <input type="file" name='uploadFile' onChange={imageLoad} ref={imgRef} />
+              <br/>
             </div>
 
-              <div style={{ float:"left", marginLeft:"400px", marginTop:"-200px"}}>
-                <div style={{backgroundColor:"white", textAlign:"center", padding:"5px", width:"450px"}}>
-                  <h3>소개글</h3>
-                  <input name="introduce" defaultValue={introduce} onChange={(e)=>setIntroduce(e.target.value)}/>
+              <div style={{ float:"left", marginLeft:"500px", marginTop:"-350px", textAlign:"left"}}>
+                <div id="talk" style={{marginTop:"50px", width:"500px", padding:"50px"}}>
+                  <h3 style={{fontFamily:"Do Hyeon", fontSize:"20px"}}>소개글</h3>
+                  <input name="introduce" defaultValue={introduce} onChange={(e)=>setIntroduce(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px"}}/>
                 </div>
                 <br/>
-                <div> 
-                  이름 : <input  name="name" defaultValue={name} onChange={(e)=>setName(e.target.value)}/>
+
+                <div style={{marginLeft:"0px", marginTop:"20px"}}>
+                    <div style={{fontFamily:"Do Hyeon", fontSize:"20px"}}> 
+                      이름 : <input  name="name" defaultValue={name} onChange={(e)=>setName(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px"}}/>
+                    </div>
+                    <br/>
+                    <div style={{fontFamily:"Do Hyeon", fontSize:"20px"}}>
+                      H/P: <input name="phoneNum" defaultValue={phoneNum} onChange={(e)=>setPhoneNum(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px"}}/>
+                    </div>
+                    <br/>
+                    <div style={{fontFamily:"Do Hyeon", fontSize:"20px"}}>
+                      이메일: <input name="email" defaultValue={email} onChange={(e)=>setEmail(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px", width:"250px"}}/>
+                    </div>
+                    <br/>
+                    <div  style={{fontFamily:"Do Hyeon", fontSize:"20px"}}>
+                        URL: <input name="url" defaultValue={url} onChange={(e)=>setUrl(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px", width:"250px"}}/>
+                    </div>
+                  </div>
                 </div>
-                <br/>
-                <div>
-                  H/P: <input name="phoneNum" defaultValue={phoneNum} onChange={(e)=>setPhoneNum(e.target.value)}/>
-                </div>
-                <br/>
-                <div>
-                  이메일: <input name="email" defaultValue={email} onChange={(e)=>setEmail(e.target.value)}/>
-                </div>
-                <br/>
-                <div>
-                  <span>
-                    URL: <input name="url" defaultValue={url} onChange={(e)=>setUrl(e.target.value)}/>
-                  </span>
-                </div>
-              </div>
 
           
 
-          <div className="middle" style={{clear:"left", paddingTop:"100px"}}>
-            <button type="submit" style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
-              추가완료
-            </button>
-          </div>
+            <div className="middle" style={{clear:"left", paddingTop:"50px"}}>
+              <button id="onlineBtn" type="submit" style={{fontSize:"30px", width:"250px"}}>
+                추가완료
+              </button>
+            </div>
           
           </form>
         </div>

@@ -1,5 +1,6 @@
 import axios from "axios";
-import React, { useState, useRef } from "react"; 
+import React, { useState, useRef, useEffect } from "react"; 
+import { useNavigate } from "react-router-dom";
 
 import "./chatbot.css";
 
@@ -7,9 +8,28 @@ function Chatbot({ setModalOpen}){
     const [umessage, setUmessage] = useState('');
     const scrollRef = useRef();
 
+    const [name, setName] = useState('');
+    const history = useNavigate();
+
     const closeModal = () => {
         setModalOpen(false);
     };
+
+    const getUser = async () => {
+        const jwt = localStorage.getItem("token");
+        if (jwt === null) {
+          history("/");
+        }
+        else {
+          axios.get("http://localhost:3000/show", { params: { "token": jwt } })
+            .then(function (resp) {
+              setName(resp.data.name);
+            })
+            .catch(function (err) {
+              alert(err);
+            })
+        }
+      }
 
     function sendBtnClick(){
         // 입력한 문자열을 chatbox 에 추가
@@ -95,12 +115,16 @@ function Chatbot({ setModalOpen}){
         }
       }
 
+      useEffect(() => {
+        getUser();
+      }, []);
+
 
     return (
         <div className="wrapper">
-            <button onClick={closeModal}>X</button>
+            <button id="close3" onClick={closeModal}>X</button>
             <div className="menu">
-                <h3 className="welcome">Welcome ChatBot</h3>
+                <h3 className="welcome">{name} 님, Welcome!</h3>
             </div>
 
             <div className="chatbox" id="chatbox" ref={scrollRef}>            

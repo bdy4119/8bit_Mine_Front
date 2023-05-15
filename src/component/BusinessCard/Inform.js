@@ -15,19 +15,8 @@ function Inform() {
   console.log(id);
   
   function business() {
-    
-    // const jwt = localStorage.getItem("token");
-    // console.log(jwt);
     const id = localStorage.getItem("id");
     console.log(id);
-    // axios.get("http://localhost:3000/show", {params:{"token":jwt}})
-    //         .then(function(resp){
-    //         //    console.log(resp.data.email);
-    //             setUserEmail(resp.data.email);
-    //         })
-    //         .catch(function(err){
-    //             alert(err);
-    //         })
 
     axios.get("http://localhost:3000/businesscard", {params:{}})
          .then(function(resp){
@@ -48,67 +37,61 @@ function Inform() {
   const renderAverage = () => {
     if(businessList.length === 0) {
        return(
+        <div style={{position: "relative", marginLeft:"-550px", marginBottom:"0px", marginTop:"200px"}}>
            <Link to={`/informWrite/${id}`}>
-             <button style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
+             <div id="addOnlineBtn">
                명함추가
-             </button>
+             </div>
            </Link>
+        </div>
        );
     }
 };
  
   return(
-    <div className="middle">
-      <div id="shadow" style={{position: "relative", backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px", marginLeft:"-600px", borderRadius: "1.5%"}} /*명함틀*/ />
-      <div style={{position: "relative", marginLeft:"-550px", marginBottom:"0px", marginTop:"200px"}}>
+    <div className="middle" id="onlineCard" style={{marginLeft:"-650px"}}>
         {renderAverage()}
-      </div>
       {//글정보
           businessList.map(function(business, idx){
             return(
-              <div className="middle" key={{idx}}>
-                <div style={{float:"left", position:"relative", marginLeft:"-600px", marginTop:"-80px"}}>
-                 
-                    <form name="frm" encType="multipart/form-data">
-                      <img src={`/Business-img/${business.thumbnail}`} alt="프로필 이미지" id="circle" style={{marginLeft:"300px"}} />    
-                      <br/>
-                    </form>
+              <div style={{marginBottom:"-100px", marginRight:"-400px"}} key={idx}>
+                <div style={{float:"left"}}>
+                  <img src={business.thumbnail ? `${process.env.PUBLIC_URL}/Business-img/${business.thumbnail}`:'/Business-img/나에대해 알아보기.png'}
+                        alt="프로필 이미지" id="circle" style={{marginLeft:"-500px", marginTop:"-50px"}} />    
                 </div>
-                {/* 글정보 및 버튼 */}
-                <div style={{position: "relative", marginTop:"150px", marginLeft:"-200px", fontSize:"20px"}}>
 
-                  <div style={{ float:"left", marginLeft:"300px", marginTop:"-50px"}}>
-                      <div id="talk">
-                        <h3>소개글</h3>
-                        <div>{business.introduce}</div>
-                      </div>
-                      <br/>
-                      <div id="inform">
-                        <div>
-                          <span>이름: {business.name}</span>
-                        </div>
-                        <br/>
-                        <div>
-                          <span>
-                            URL: <Link to={business.url}> {business.url} </Link>
-                          </span>
-                        </div>
-                      </div>
+                <div style={{float:"inherit", marginTop:"-50px"}}>
+                  <div id="talk">
+                    <h3 style={{fontFamily:'Do Hyeon', fontSize:"25px"}}>소개글</h3>
+                    <div>{business.introduce}</div>
                   </div>
-                  
-                  <div style={{marginLeft:"250px", marginBottom:"0px", marginTop:"350px"}}>
-                    <Link to={`/informDetail/${id}`}>
-                      <button className="btn btn-outline-warning" style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
-                        상세보기
-                      </button>
-                    </Link>
+                  <br/>
+                  <div style={{marginLeft:"-200px"}}>
+                    <div style={{fontFamily:'Do Hyeon', fontSize:"25px"}}>
+                      <span>이름: {business.name}</span>
+                    </div>
+                    <br/>
+                    <div>
+                      <span style={{fontFamily:'Do Hyeon', fontSize:"25px"}}>
+                        URL: <Link to={business.url}> {business.url} </Link>
+                      </span>
+                    </div>
                   </div>
                 </div>
+
+                <div style={{float:"none", marginLeft:"-300px", marginTop:"100px"}}>
+                  <Link to={`/informDetail/${id}`}>
+                    <button id="onlineBtn" style={{width:"250px"}}>
+                      상세보기
+                    </button>
+                  </Link>           
+                </div>
+
               </div>
             )
           })
       }
-      </div>
+    </div>
   )
 }
 export default Inform;
