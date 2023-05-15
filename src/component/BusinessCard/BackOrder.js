@@ -44,30 +44,29 @@ function BackOrder() {
   
 
   return(
-    <div>
-      <div style={{backgroundColor:"#9CA8F0", marginTop:"150px", height:"450px", width:"900px", overflow:"auto", marginRight:"600px"}}>
+    <div style={{ filter: "drop-shadow(10px 10px 10px #b3b2b2)"}}>
+      <div style={{backgroundColor:"#998FFF", marginTop:"150px", height:"450px", width:"1000px", overflow:"auto", marginRight:"600px", borderRadius:"30px 30px 0px 0px"}}>
         {
           businessbackList.map(function(back, idx) {
             //짝수 오른쪽 정렬
             if(back.historyDate.slice(5,7)%2 === 0) {
               return(
-                <div key={idx} style={{paddingRight:"430px", marginTop:"70px"}}>
+                <div key={idx} style={{paddingRight:"470px", marginTop:"70px"}}>
                   <div key={idx} style={{textAlign:"right"}}>
-                    <div className="sCircle" style={{float:"right", height:"15px", width:"15px", marginLeft:"10px"}}/>
+                    <div id="jewel" style={{float:"right", marginLeft:"10px"}}/>
                     <h3>{back.historyDate} {back.historyTitle}</h3>
                     <div style={{marginRight:"30px"}}>
-                      <p>
+                      <p style={{fontFamily:"Do Hyun"}}>
                         {back.historyContent}
                         <br/>
                         <Link to={back.historyUrl}>{back.historyUrl}</Link>
                       </p>
     
                       <span>
-                        <button onClick={(e)=>{historyDel(back.seq, e)}} style={{marginRight:"5px"}}>
-                          삭제
-                        </button>
+                        <button id="delbtn" onClick={(e)=>{historyDel(back.seq, e)}} style={{marginRight:"5px"}} />
+                        
                         <Link to={`/backUpdate/${back.seq}`}>
-                          <button>수정</button>
+                          <button id="editbtn" />
                         </Link>
                       </span>
                       
@@ -79,9 +78,9 @@ function BackOrder() {
             } else if(back.historyDate.slice(5,7)%2 === 1) {
               //홀수는 왼쪽정렬
               return(
-                <div key={idx}style={{paddingLeft:"455px", marginTop:"70px"}}>
+                <div key={idx}style={{paddingLeft:"500px", marginTop:"70px"}}>
                   <div key={idx} style={{textAlign:"left"}}>
-                      <div className="sCircle" style={{float:"left", height:"15px", width:"15px", marginRight:"10px"}}/>
+                      <div id="jewel" style={{float:"left", height:"15px", width:"15px", marginRight:"10px"}}/>
                       <h3>{back.historyDate} {back.historyTitle}</h3>
                       <div style={{marginLeft:"30px"}}>
                         <p>
@@ -91,11 +90,9 @@ function BackOrder() {
                         </p>
         
                         <span>
-                          <button onClick={(e)=>{historyDel(back.seq, e)}} style={{marginRight:"5px"}}>
-                            삭제
-                          </button>
+                          <button id="delbtn" onClick={(e)=>{historyDel(back.seq, e)}} style={{marginRight:"5px"}} />
                           <Link to={`/backUpdate/${back.seq}`}>
-                            <button>수정</button>
+                            <button id="editbtn" />
                           </Link>
                         </span>
         
@@ -108,14 +105,14 @@ function BackOrder() {
         }
         
       </div>
-        <div className="middle" style={{backgroundColor:"#9CA8F0", height:"150px", width:"900px"}}>
+        <div className="middle" style={{backgroundColor:"#998FFF", height:"150px", width:"1000px", borderRadius:"0px 0px 30px 30px"}}>
           <Link to={`/informDetail/${id}`}>
-            <button type="submit" style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px", margin:"10px"}}>
+            <button id="onlineBtn" style={{width:"250px"}}>
               앞면보기
             </button>
           </Link>
           <Link to={`/backWrite/${id}`}>
-            <button type="submit" style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px", margin:"10px"}}>
+            <button type="submit" id="onlineBtn" style={{width:"250px"}}>
               추가
             </button>
           </Link>

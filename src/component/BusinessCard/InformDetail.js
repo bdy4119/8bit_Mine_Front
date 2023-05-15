@@ -85,11 +85,9 @@ function InformDetail() {
                     </div>
                 </div>
             </div>
-    <div className="middle">
-      
-      <div style={{backgroundColor:"#9CA8F0", marginLeft:"-600px",marginTop:"150px", height:"600px", width:"900px", fontSize:"20px"}}>
-               
-          <div style={{float:"left", position:"relative", marginLeft:"70px", marginTop:"70px"}}>
+    <div className="middle" id="addOnlineCard">
+      <div>
+          <div style={{float:"left", position:"relative", marginLeft:"50px", marginTop:"70px"}}>
               <div>
                 <form name="frm" encType="multipart/form-data">
                         
@@ -101,39 +99,42 @@ function InformDetail() {
           </div>
 
           <div style={{ marginLeft:"400px", marginTop:"70px"}}>
-            <div id="talk">
-              <h3>소개글</h3>
-              <div>{businessDetail.introduce}</div>
+            <div id="talk" style={{marginTop:"50px", width:"500px", padding:"50px"}}>
+              <h3 style={{fontFamily:'Do Hyeon', fontSize:"25px"}}>소개글</h3>
+              <div style={{fontFamily:'Do Hyeon', fontSize:"25px"}}>{businessDetail.introduce}</div>
             </div>
             <br/>
-            <div>
-              <span>이름: {businessDetail.name}</span>
-            </div>
-            <br/>
-            <div>
-              <span>H/P: {businessDetail.phoneNum}</span>
-            </div>
-            <br/>
-            <div>
-              <span>이메일: {businessDetail.email}</span>
-            </div>
-            <br/>
-            <div>
-              <span>
-                URL: <Link to={businessDetail.url}> {businessDetail.url} </Link>
-              </span>
+
+            <div style={{fontFamily:'Do Hyeon', fontSize:"25px", textAlign:"left", marginTop:"30px"}}>
+              <div>
+                <span>이름: {businessDetail.name}</span>
+              </div>
+              <br/>
+              <div>
+                <span>H/P: {businessDetail.phoneNum}</span>
+              </div>
+              <br/>
+              <div>
+                <span>이메일: {businessDetail.email}</span>
+              </div>
+              <br/>
+              <div>
+                <span>
+                  URL: <Link to={businessDetail.url}> {businessDetail.url} </Link>
+                </span>
+              </div>
             </div>
           </div>
         
-          <div className="middle" style={{marginTop:"100px"}}>
+          <div className="middle" style={{marginTop:"60px", paddingBottom:"30px"}}>
             <Link to={`/informUpdate/${param.id}/${businessDetail.seq}`}>
-              <button style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
+              <button id="onlineBtn" style={{width:"250px"}}>
                 명함수정
               </button>
             </Link>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <Link to={`/back/${businessDetail.id}`}>
-              <button type="submit" style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
+              <button id="onlineBtn" style={{width:"250px"}} type="submit" >
                 뒷면보기
               </button>
             </Link>

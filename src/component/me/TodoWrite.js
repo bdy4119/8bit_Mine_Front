@@ -32,7 +32,7 @@ function TodoWrite() {
 
     //글쓰기는 초기화 시켜줄 게 없으므로 useEffect를 사용하지 않아도 됨
     //작성완료 함수에서 한번에 처리해주기
-    axios.post("http://localhost:3000/todoWrite", null, {params:{"id":id, "rdate":rdate , "title": title, "content" :content}})
+    axios.post("http://localhost:3000/todoWrite", null, {params:{"id":id, "rdate":param.rdate , "title": title, "content" :content}})
          .then(function(resp){
             if(resp.data === "YES") {
               alert('글이 등록되었습니다.');
@@ -94,25 +94,26 @@ function TodoWrite() {
             </div>
 
       <div id="todoWrite">
-        <div>
+        <div style={{marginTop:"-150px",marginLeft:"-150px"}}>
           <div>
-          <span>
-          날짜 : <input style={{backgroundColor:"rgb(0, 0, 0, 0.05)", fontFamily:"Nanum Pen Script, cursive", width:"150px"}} defaultValue={param.rdate} onChange={(e)=>setRdate(e.target.value)}/>
-            </span>
+             날짜 : <input style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive", width:"150px"}} defaultValue={param.rdate} onChange={(e)=>setRdate(e.target.value)}/>
           </div>
+          <br/>
+          <br/>
           <div>
-              제목
-              <input style={{backgroundColor:"rgb(0, 0, 0, 0.05)", fontFamily:"Nanum Pen Script, cursive"}} value={title} onChange={(e)=>setTitle(e.target.value)}/>
+              제목 : <input style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} value={title} onChange={(e)=>setTitle(e.target.value)}/>
           </div>
+          <br/>
+          <br/>
           <div>
-              내용
-              <input style={{backgroundColor:"rgb(0, 0, 0, 0.05)", fontFamily:"Nanum Pen Script, cursive"}} value={content} onChange={(e)=>setContent(e.target.value)}/>
+              내용 : <input style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} value={content} onChange={(e)=>setContent(e.target.value)}/>
           </div>
+          <br/>
+          <br/>
         </div>
-        </div>
+         <button class="btn btn-success" style={{marginTop:"20px", marginLeft:"-80px", width:"170px", height:"60px"}} onClick={handleSubmit}>작성완료</button>
+      </div>
 
-      <br/>
-      <button class="btn btn-success" style={{marginTop:"-20px", marginLeft:"870px", width:"170px", height:"60px"}} onClick={handleSubmit}>작성완료</button>
     </div>
   )
 }

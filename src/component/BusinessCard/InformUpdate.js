@@ -171,44 +171,38 @@ function CustomUpdate() {
                     </div>
                 </div>
             </div>
-            <div /*id="toolbox"*/>
-    <div className="middle">
+    <div id="addOnlineCard">
 
-        <div style={{backgroundColor:"#9CA8F0", marginLeft:"-600px", marginTop:"150px", height:"600px", width:"900px", fontSize:"20px"}}>
-
+        <div>
           <form name="frm" onSubmit={onSubmit} encType="multipart/form-data">
-            <div style={{float:"left", position:"relative", marginLeft:"70px", marginTop:"50px"}}>
-              <div>
-                  <img src={`${imgFile}`} alt="프로필" id="circle" />
+              <div style={{marginLeft:"-500px", marginTop:"70px"}}>     
+                  <img src={`${imgFile} === ''` ? '/Business-img/나에대해 알아보기.png' :`${imgFile}`} alt="프로필" id="circle" />
+                  <br/>
                   <br/>
                   <input type="file" name='uploadFile' onChange={imageLoad} ref={imgRef} />
                   <br/>
-                  {/* <input type="submit" value="file upload"/>         */}
               </div>
-            </div>
 
-              <div style={{ float:"left", marginLeft:"400px", marginTop:"-300px"}}>
-                <div id="talk-edit">
-                  <h3>소개글</h3>
-                  <input name="introduce" defaultValue={introduce} onChange={(e)=>setIntroduce(e.target.value)}/>
+              <div style={{ float:"left", marginLeft:"500px", marginTop:"-350px", textAlign:"left", fontFamily:"Do Hyeon", fontSize:"25px"}}>
+                <div id="talk" style={{marginTop:"50px", width:"500px", padding:"50px"}}>
+                  <h3 style={{fontFamily:"Do Hyeon", fontSize:"25px"}}>소개글</h3>
+                  <input name="introduce" defaultValue={introduce} onChange={(e)=>setIntroduce(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
                 </div>
                 <br/>
                 <div> 
-                  이름 : <input  name="name" defaultValue={name} onChange={(e)=>setName(e.target.value)}/>
+                  이름 : <input  name="name" defaultValue={name} onChange={(e)=>setName(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
                 </div>
                 <br/>
                 <div>
-                  H/P: <input name="phoneNum" defaultValue={phoneNum} onChange={(e)=>setPhoneNum(e.target.value)}/>
+                  H/P: <input name="phoneNum" defaultValue={phoneNum} onChange={(e)=>setPhoneNum(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
                 </div>
                 <br/>
                 <div>
-                  이메일: <input name="email" defaultValue={email} onChange={(e)=>setEmail(e.target.value)}/>
+                  이메일: <input name="email" defaultValue={email} onChange={(e)=>setEmail(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
                 </div>
                 <br/>
                 <div>
-                  <span>
-                    URL: <input name="url" defaultValue={url} onChange={(e)=>setUrl(e.target.value)}/>
-                  </span>
+                  URL: <input name="url" defaultValue={url} onChange={(e)=>setUrl(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
                 </div>
               </div>
 
@@ -222,7 +216,6 @@ function CustomUpdate() {
           
           </form>
         </div>
-    </div>
     </div>
     </div>
   );

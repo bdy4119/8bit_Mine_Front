@@ -9,6 +9,7 @@ input {
   height: 30px;
 }
 
+
 .middle {
   display: flex;
   justify-content: center;
@@ -132,4 +133,51 @@ input {
   margin-top: 100px;
   margin-left: 400px;
   filter: drop-shadow(10px 10px 10px #b3b2b2);
+}
+
+
+#jewel {
+  position: relative;
+  width: 1px;
+  text-align: center;
+  background: url(../images/보석.png);
+  background-size: cover;
+  padding: 15px;
+  filter: drop-shadow(2px 3px 5px #eaff00);
+}
+
+
+
+
+#delbtn{
+  position: relative;
+  width: 20px;
+  background: url(../images/삭제.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+
+#editbtn {
+  position: relative;
+  width: 20px;
+  background: url(../images/수정.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+
+#back-onlineBtn {
+  position: relative;
+  width: 200px;
+  text-align: center;
+  background: url(../images/뒷면버튼.png);
+  background-size: cover;
+  padding: 20px;
+  color: white;
+  font-family: 'Do Hyeon';
+  font-size: 30px;
+  border:none;
 }
