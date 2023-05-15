@@ -52,6 +52,7 @@ function Card() {
             <div className="middle">
                 <Inform/>
             </div>
+            
     </div>
   );
 }

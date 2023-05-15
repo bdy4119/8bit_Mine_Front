@@ -16,7 +16,7 @@ function DiaryWrite() {
  // let rdateArr = [rdateStr.substring(0,10)];
 
 
-  const [id, setId] = useState('');
+  const [id, setId] = useState(param.id);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [thumbnail, setThumbnail] = useState('');
@@ -38,7 +38,7 @@ function DiaryWrite() {
     }
 
 
-
+console.log(id);
   //작성완료 함수
   const handleSubmit = async(e) => {
     
