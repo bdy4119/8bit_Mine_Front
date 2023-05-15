@@ -44,7 +44,7 @@ function BackOrder() {
   //수정완료 버튼
   const handleSubmit = async(e) => {
     axios.post("http://localhost:3000/backUpdate", null,
-                {params:{"id":id, "seq":param.seq, "historyDate":historyDate, "historyTitle":historyTitle,
+                {params:{"id":param.id, "seq":param.seq, "historyDate":historyDate, "historyTitle":historyTitle,
                           "historyContent":historyContent, "historyUrl":historyUrl}})
          .then(function(resp){
             if(resp.data === "YES") {
