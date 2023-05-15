@@ -1,42 +1,63 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+import Pagination from "react-js-pagination";
+import Topbar from "../main/topbar";
+import Barbtns from "../main/barbtns.js";
+
+import { Button, Table } from 'semantic-ui-react'
 import "../main_back.css"
 import "./Gbmain.css"
-import Topbar from "../main/topbar";
+import "./page.css";
 
+import purpled from "./image/purpled.png";
 
 function Gbmain() {
 
+    // 변수 선언
+    const history = useNavigate();
+
     const [gblist, setGblist] = useState([]);
-    const [vilist, setVilist] = useState([]);
     const [frielist, setFrielist] = useState([]);
+    const [profPic, setProfPic] = useState('');
+    const [page, setPage] = useState(0);
+    const [total, setTotal] = useState(0);
 
-    const movePage = useNavigate();
-
-    function go_gbadd() {
-        movePage('/gbadd')
-    }
 
     const id = localStorage.getItem("id");
 
-   // 변수 설정으로 유무 확인
+    // 접속 권한 체크
+    const getUser = async () => {
+        const jwt = localStorage.getItem("token");
 
-    // Mine 본인 계정에 보이는 axios
-    const fetchData = async () => {
-        const id = localStorage.getItem("id");
-        const resp = await axios.get('http://localhost:3000/gb_list', { params: { "id": id } });
-        console.log(resp);
-        setGblist(resp.data);
+        if (jwt === null) {
+            history("/");
+        }
     }
 
+    // 방명록 조회 axios
+    const fetchData = async () => {
+        const id = localStorage.getItem("id");
+        const resp = await axios.get('http://localhost:3000/gb_list', { params: { "toid": id, "start": 1, "end": 3 } });
+        const respC = await axios.get('http://localhost:3000/gb_list_c', { params: { "toid": id } });
+        setGblist(resp.data);
+        setTotal(respC.data);
+    }
+
+    // 친구목록 조회
     const friendlist = async () => {
         const id = localStorage.getItem("id");
-        const response = await axios.post("http://localhost:3000/friendlist", null, {params: { "id": id }});
+        const response = await axios.post("http://localhost:3000/friendlist", null, { params: { "id": id } });
 
         setFrielist(response.data);
     };
 
+    useEffect(() => {
+        getUser();
+        fetchData();
+        friendlist();
+    }, []);
 
     // 삭제
     function gb_del(seq) {
@@ -48,152 +69,166 @@ function Gbmain() {
                     window.location.reload();
                 }
             })
+
             .catch(function (err) {
                 alert(err);
             })
     }
 
-    // 수정
-    function go_upd(seq) {
-        movePage(`/gbupdate/${seq}`)
-    }
-
+    // 방명록 Data 정리
     function TableRow(props) {
+        const id = props.obj.fromid;
+
+        axios.get('http://localhost:3000/getItems', { params: { "email": id } })
+            .then(function (resp) {
+                setProfPic(resp.data.profPic);
+            })
+            .catch(function (err) {
+                alert(err);
+            })
+
         return (
-            <tr>
-                <td>{props.cnt}</td>
-                <td>{props.obj.fromid}</td>
-                <td>{props.obj.comment}</td>
-                <td><audio src={`${process.env.PUBLIC_URL}/voice/${props.obj.filename}`} controls /></td>
-                <td><button onClick={() => gb_del(`${props.obj.seq}`)}>삭제</button></td>
-            </tr>
+            <div>
+
+                <div style={{ position: "absolute", marginLeft: "120px", marginTop: "15px", fontWeight: "bold" }}>{props.obj.rnum}</div>
+                <div style={{ position: "absolute", marginLeft: "400px", marginTop: "15px", fontWeight: "bold" }}>{props.obj.fromname} ({props.obj.fromid})</div>
+                <div style={{ position: "absolute", marginLeft: "750px", marginTop: "15px", fontWeight: "bold" }}>{props.obj.regdate}</div>
+                <div style={{ position: "absolute", marginLeft: "70px", marginTop: "70px", fontWeight: "bold" }}>
+                    <img src={`${process.env.PUBLIC_URL}/profPic/${profPic}`} width="110px" height="110px" /></div>
+
+                <Table color="purple" border="1" textAlign="center">
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell colSpan="4" style={{ height: "50px" }} />
+                        </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                        <Table.Cell style={{ height: "150px" }} />
+                        <Table.Cell colSpan="2">
+                            <div style={{ marginTop: "10px" }}><p style={{ fontSize: "17px" }}>{props.obj.comment}</p>
+                                <div>{props.obj.isvoice === 1 ? <audio src={`${process.env.PUBLIC_URL}/voice/${props.obj.filename}`} controls />
+                                    : <p style={{ color: "gray", fontStyle: "italic" }}>(음성파일이 없는 방명록)</p>}</div></div>
+                        </Table.Cell>
+                    </Table.Body>
+                </Table>
+
+                <div><Button color="red" size="large" style={{ position: "absolute", marginLeft: "780px", marginTop: "-120px" }}
+                    onClick={() => gb_del(`${props.obj.seq}`)}>삭제</Button></div>
+
+            </div>
         );
     }
 
-    // 방문자에게 보이는(방문자 본인이 남긴 방명록) axios
-    const fetData = async () => {
-        const resp = await axios.get('http://localhost:3000/gb_visit', { params: { "id": "gbtest@abc.com" } });
-        console.log(resp);
-        setVilist(resp.data);
+    // 페이지 변경
+    function pageChange(page) {
+        setPage(page);
+
+        axios.get('http://localhost:3000/gb_list', { params: { "toid": id, "start": (page - 1) * 3 + 1, "end": (page) * 3 } })
+            .then(function (resp) {
+                console.log(resp);
+                setGblist(resp.data);
+            })
+
+            .catch(function (err) {
+                alert(err);
+            })
     }
 
-    function TableRow2(props) {
-        return (
-            <tr>
-                <td>{props.cnt}</td>
-                <td>{props.obj.comment}</td>
-                <td><audio src={`${process.env.PUBLIC_URL}/voice/${props.obj.filename}`} controls /></td>
-                <td><button onClick={() => gb_del(`${props.obj.seq}`)}>삭제</button></td>
-                <td><button onClick={() => go_upd(`${props.obj.seq}`)}>수정</button></td>
-            </tr>
-        );
+     // 수정
+     function go_upd(seq) {
+        history(`/gbupdate/${seq}`)
     }
 
-    function deletefriend(seq){
+    // 친구 목록 삭제
+    function deletefriend(seq) {
 
-        axios.post("http://localhost:3000/deletefriend", null, { params:{ "seq":seq } })
-                .then(res => {
-                if(res.data === "YES"){
+        axios.post("http://localhost:3000/deletefriend", null, { params: { "seq": seq } })
+            .then(res => {
+                if (res.data === "YES") {
                     alert("성공적으로 삭제되었습니다");
                     window.location.reload();
-                }else{
+                } else {
                     alert("등록되지 않았습니다");
                 }
-                })
-                .catch(function(err){
+            })
+            .catch(function (err) {
                 alert(err);
-                })   
+            })
     }
 
-    function gomine(mineid){
+    // 친구 Mine 방문하기
+    function gomine(mineid) {
         window.location.href = "/guest_mine/" + mineid;
     }
 
+    // 초대메세지 복사
     const handleCopyClipBoard = async (text) => {
         try {
-          await navigator.clipboard.writeText(text);
+            await navigator.clipboard.writeText(text);
         } catch (error) {
-          alert('복사 실패!');
+            alert('복사 실패!');
         }
     };
 
-    useEffect(() => {
-        fetchData();
-        fetData();
-        friendlist();
-    }, []);
-
     return (
         <div id="back">
-            <Topbar/>
-            <div id="topbar">
-                <div id="barbtns">
-                    <div id="ibtn" onClick={(e) => { window.location.href = "/i" }}>I</div>
-                    <div id="mybtn" onClick={(e) => { window.location.href = "/Filelist" }}>MY</div>
-                    <div id="mebtn" onClick={(e) => { window.location.href = "/me" }}>ME</div>
-                    <div id="minebtn" onClick={(e) => { window.location.href = "/mine" }}>MINE</div>
 
-                    <div id="cardbtn" onClick={(e) => { window.location.href = "/card" }}>CARD</div>
-                    <div id="bookbtn" onClick={(e) => { window.location.href = "/gbmain" }}>GUEST</div>
+            <Topbar />
+            <Barbtns />
+
+            <img src={purpled} width="70px" height="70px" style={{ position: "absolute", marginLeft: "-750px", marginTop: "80px" }} />&nbsp;
+            <div id="guestbooklist">
+                <h3 style={{ position: "absolute", marginLeft: "100px", marginTop: "-60px", fontSize: "35px" }}>방명록</h3>
+                {
+                    gblist.map(function (object, i) {
+                        return (
+                            <TableRow obj={object} key={i} />
+                        )
+                    })
+                }
+            </div>
+
+            <div id="friendlist">
+                <div>
+                    <h4>내 초대링크</h4>
+                    <button onClick={() => handleCopyClipBoard('http://localhost:9001/friendcard/' + id)}>복사</button>
+                </div>
+                <div>
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>이름</th>
+                                <th>Mine 방문</th>
+                                <th>친구삭제</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                frielist.map(function (object, i) {
+                                    return (
+                                        <tr>
+                                            <td>{object.friendid}</td>
+                                            <td><button type="button" onClick={() => gomine(object.friendid)}>Mine</button></td>
+                                            <td><button type="button" onClick={() => deletefriend(object.seq)}>삭제</button></td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div id="toolbox">
-                <div id="guestbooklist">
-                <h3>방명록 main</h3>
-                <table border="1">
-                    <thead>
-                        <tr>
-                            <th>번호</th>
-                            <th>작성자</th>
-                            <th>내용</th>
-                            <th>음성</th>
-                            <th>관리</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            gblist.map(function (object, i) {
-                                return (
-                                    <TableRow obj={object} key={i} cnt={i + 1} />
-                                    /* key를 지정 안하면, Each child in a list should have a unique "key" prop. 가 나옴 */
-                                )
-                            })
-                        }
-                    </tbody>
-                </table>
-                <br /><br />
 
-                </div>
-                <div id="friendlist">
-                    <div>
-                        <h4>내 초대링크</h4>
-                        <button onClick={() => handleCopyClipBoard('http://localhost:9001/friendcard/' + id )}>복사</button>
-                    </div>
-                    <div>
-                        <table border="1">
-                            <thead>
-                                <tr>
-                                    <th>이름</th>
-                                    <th>Mine 방문</th>
-                                    <th>친구삭제</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    frielist.map(function (object, i) {
-                                        return (
-                                            <tr>
-                                                <td>{object.friendid}</td>
-                                                <td><button type="button" onClick={() => gomine(object.friendid)}>Mine</button></td>
-                                                <td><button type="button" onClick={() => deletefriend(object.seq)}>삭제</button></td>
-                                            </tr>
-                                        )
-                                    })
-                                }
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+            <div style={{ position: "absolute", marginLeft: "1400px", marginTop: "730px" }}>
+                <Pagination
+                    activePage={page}
+                    itemsCountPerPage={3}
+                    totalItemsCount={total}
+                    pageRangeDisplayed={5}
+                    prevPageText={"이전"}
+                    nextPageText={"다음"}
+                    onChange={pageChange}
+                />
             </div>
         </div>
     );
