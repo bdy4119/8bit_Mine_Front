@@ -98,19 +98,17 @@ function Gate() {
     }, [showSocialIndex]);
 
     return (
-        <div>
-            {/* <div id="topbar">
+        <div id="back">
+            <div id="topbar">
                 <div id="barbtns">
                     <div id="mainbtn" onClick={(e) => { window.location.href = "/" }}>
                         <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>Welcome</p>
                     </div>
                 </div>
-            </div> */}
+            </div>
             <div id="logo" onClick={() => {history('/')}} style={{marginLeft:"-850px", marginTop:"-30px"}}>
                 <img src={logo} alt="no" width="300px" />
             </div>
-
-            <br /><br /><br />
 
             <div className="loginArea">
                 <h1 className="gateWord">
