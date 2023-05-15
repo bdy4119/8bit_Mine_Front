@@ -2,6 +2,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { Button, Table, Form, Input } from 'semantic-ui-react'
 import "./FileUpload.css" 
 function FileUpload() {
        
