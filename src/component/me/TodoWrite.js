@@ -14,10 +14,11 @@ function TodoWrite() {
 
   const [rdate, setRdate] = useState(format(new Date(),'yyyy-MM-dd'));
   
-  const [id, setId] = useState('');
+  const [id, setId] = useState(param.id);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
+  console.log();
   //작성완료 함수
   const handleSubmit = async(e) => {
     
@@ -36,7 +37,7 @@ function TodoWrite() {
          .then(function(resp){
             if(resp.data === "YES") {
               alert('글이 등록되었습니다.');
-              history('/me');
+              history(`/me/${id}`);
             } else {
               alert('글을 등록하지 못했습니다.');
             }

@@ -27,6 +27,7 @@ function DiaryUpdate() {
   const [imgFile, setImgFile] = useState('/Me-img/' + param.thumbnail);
   const imgRef = useRef();  //useRef.current -> useRef는 무조건 current를 통해서 감
 
+  console.log(param.thumbnail);
 
    // 이미지 업로드 input의 onChange
    function imageLoad() {
