@@ -5,10 +5,150 @@
 }
 
 #todo {
+  /* position: absolute; */
+  position: fixed;
   position: relative;
   width: 400px;
   background: url(../images/todo.png);
   background-size: cover;
   padding: 40px;
   font-family: 'Nanum Pen Script', cursive;
+}
+
+
+#todoWrite {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  background: url(../images/todo.png);
+  background-size: cover;
+  padding: 300px;
+  font-family: 'Nanum Pen Script', cursive;
+  font-size: 35px;
+  margin-top: 100px;
+  margin-left: 650px;
+}
+
+
+#delbtn{
+  position: relative;
+  width: 20px;
+  background: url(../images/삭제.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+#addbtn{
+  position: relative;
+  width: 20px;
+  background: url(../images/추가.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+#editbtn {
+  position: relative;
+  width: 20px;
+  background: url(../images/수정.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+#check {
+  position: relative;
+  width: 20px;
+  background: url(../images/체크해제.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+
+#unCheck {
+  position: relative;
+  width: 20px;
+  background: url(../images/체크해제.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+
+
+
+
+/* ********* 다이어리 *********** */
+#diary {
+  position: fixed;
+  position: relative;
+  width: 400px;
+  background: url(../images/다이어리.png);
+  background-size: cover;
+  padding: 60px;
+  font-family: 'Nanum Pen Script', cursive;
+}
+
+
+#diaryWrite {
+  position: relative;
+  width: 600px;
+  height: 200px;
+  background: url(../images/다이어리.png);
+  background-size: cover;
+  padding: 400px;
+  font-family: 'Nanum Pen Script', cursive;
+}
+
+
+
+#preYear {
+  position: relative;
+  width: 20px;
+  background: url(../images/왼쪽2.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+#preMonth {
+  position: relative;
+  width: 20px;
+  background: url(../images/왼쪽-화살표.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+#nextYear {
+  position: relative;
+  width: 20px;
+  background: url(../images/오른쪽.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+#nextMonth {
+  position: relative;
+  width: 20px;
+  background: url(../images/오른쪽-화살표.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+#calendar{
+  width: 920px;
+  height: 650px;
+  margin-top: 140px;
+  margin-left: -8px;
+  background: url(../images/달력.png);
+  background-size: cover;
+}
+
+#date{
+  background-color: white;
 }

@@ -2,6 +2,14 @@
   background-image: image('/src/component/BusinessCard/card.css');
 }
 
+input {
+  /* display: none; */
+  background-color: rgb(0, 0, 0, 0.1);
+  border: none;
+  height: 30px;
+}
+
+
 .middle {
   display: flex;
   justify-content: center;
@@ -10,9 +18,10 @@
 
 #circle {
   width:250px;
+  height:250px;
   border-radius: 50%;
   padding: 5px;
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
 }
 
 
@@ -23,19 +32,21 @@
 
 #talk {
   position: relative;
-  width: 500px;
+  width: 400px;
   text-align: center;
   background: url(../images/말풍선.png);
   background-size: cover;
-  padding: 60px;
+  padding: 30px;
   margin-left: -65px;
+  font-family: 'Do Hyeon';
+  font-size: 25px;
 }
 
 
 /* 명함 수정부분 말풍선 */
 #talk-edit {
   position: relative;
-  width: 500px;
+  width: 400px;
   text-align: center;
   background: url(../images/말풍선.png);
   background-size: cover;
@@ -53,11 +64,120 @@
   background-size: cover;
   padding: 40px;
   margin-left: 0px;
-  /* position: relative;
-  width: 500px;
-  font-variant-position: var();
-  background: url(../images/명함정보.png);
+}
+
+
+#onlineCard {
+  position: relative;
+  width: 1050px;
+  text-align: center;
+  background: url(../images/명함bg.png);
   background-size: cover;
-  padding: 60px;
-  margin-left: 20px; */
+  padding: 220px;
+  margin-top: 100px;
+  margin-left: 400px;
+  filter: drop-shadow(10px 10px 10px #b3b2b2);
+}
+
+
+/* 기본 버튼 */
+#onlineBtn {
+  border:none;
+  position: relative;
+  width: 250px;
+  text-align: center;
+  background: url(../images/버튼.png);
+  background-size: cover;
+  padding: 100px;
+  color: white;
+  font-family: 'Do Hyeon';
+  font-size: 25px;
+}
+
+
+#addOnlineBtn {
+  position: relative;
+  width: 240px;
+  text-align: center;
+  background: url(../images/버튼.png);
+  background-size: cover;
+  padding: 25px;
+  color: white;
+  font-family: 'Do Hyeon';
+  font-size: 35px;
+  margin-left: 550px;
+  margin-top: -100px;
+}
+
+#onlineBtn {
+  position: relative;
+  width: 200px;
+  text-align: center;
+  background: url(../images/버튼.png);
+  background-size: cover;
+  padding: 20px;
+  color: white;
+  font-family: 'Do Hyeon';
+  font-size: 30px;
+}
+
+
+/* 글 처음 작성하는 화면*/
+#addOnlineCard {
+  position: absolute;
+  width: 1050px;
+  text-align: center;
+  background: url(../images/명함bg.png);
+  background-size: cover;
+  padding: 30px;
+  margin-top: 100px;
+  margin-left: 400px;
+  filter: drop-shadow(10px 10px 10px #b3b2b2);
+}
+
+
+#jewel {
+  position: relative;
+  width: 1px;
+  text-align: center;
+  background: url(../images/보석.png);
+  background-size: cover;
+  padding: 15px;
+  filter: drop-shadow(2px 3px 5px #eaff00);
+}
+
+
+
+
+#delbtn{
+  position: relative;
+  width: 20px;
+  background: url(../images/삭제.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+
+#editbtn {
+  position: relative;
+  width: 20px;
+  background: url(../images/수정.png);
+  background-size: cover;
+  padding: 15px;
+  border: none;
+}
+
+
+#back-onlineBtn {
+  position: relative;
+  width: 200px;
+  text-align: center;
+  background: url(../images/뒷면버튼.png);
+  background-size: cover;
+  padding: 20px;
+  color: white;
+  font-family: 'Do Hyeon';
+  font-size: 30px;
+  border:none;
 }

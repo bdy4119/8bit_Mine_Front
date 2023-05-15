@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+import ModalAlram from './mine_guestbook';
+
 import "../mine_back.css"
 import Topbar from "../main/topbar";
 import "./mine.css";
@@ -13,6 +15,8 @@ import stage2 from './images/stage2.png';
 import stage3 from './images/stage3.png';
 import logo from './images/logo.png';
 import cat from './images/cat.png';
+import portal from './images/portal.png';
+import alram from './images/alram.png';
 
 function Mine_main(){
 
@@ -25,6 +29,13 @@ function Mine_main(){
     const [answer2, setanswer2] = useState('');
     const [answer3, setanswer3] = useState('');
     const [guestid, setguestid] = useState('');
+
+    const [alramOpen, setAlramOpen] = useState(false);
+
+    const showAlram = () => {
+        setAlramOpen(true);
+    };
+
 
     const history = useNavigate();
     
@@ -74,7 +85,7 @@ function Mine_main(){
 
     function gostart(e){
         document.getElementsByClassName("child")[0].style.left = "20px";
-        document.getElementsByClassName("child")[0].style.top = "200px";
+        document.getElementsByClassName("child")[0].style.top = "220px";
 
         document.getElementsByClassName("victory")[0].style.visibility = "hidden";
         document.getElementById("question").style.visibility = "hidden";
@@ -86,6 +97,7 @@ function Mine_main(){
         }
 
         var audio = document.getElementById("audio");
+        audio.currentTime = 0;
         audio.play();
     }
 
@@ -96,39 +108,39 @@ function Mine_main(){
         let totop = parseInt(toppx);
         var blop = document.getElementById("blop");
 
-        if (a[1] && toleft === 80 && totop === 110){
+        if (a[1] && toleft === 60 && totop === 60){
             document.getElementsByClassName("textbox")[0].innerHTML = b[1].imgtext;
             blop.play();
         }
-        if (a[2] && toleft === 140 && totop === 290){
+        if (a[2] && toleft === 140 && totop === 260){
             document.getElementsByClassName("textbox")[0].innerHTML = b[2].imgtext;
             blop.play();
         }
-        if (a[3] && toleft === 200 && totop === 80){
+        if (a[3] && toleft === 220 && totop === 140){
             document.getElementsByClassName("textbox")[0].innerHTML = b[3].imgtext;
             blop.play();
         }
-        if (a[4] && toleft === 260 && totop === 320){
+        if (a[4] && toleft === 300 && totop === 340){
             document.getElementsByClassName("textbox")[0].innerHTML = b[4].imgtext;
             blop.play();
         }
-        if (a[5] && toleft === 320 && totop === 140){
+        if (a[5] && toleft === 380 && totop === 100){
             document.getElementsByClassName("textbox")[0].innerHTML = b[5].imgtext;
             blop.play();
         }
-        if (a[6] && toleft === 380 && totop === 50){
+        if (a[6] && toleft === 460 && totop === 300){
             document.getElementsByClassName("textbox")[0].innerHTML = b[6].imgtext;
             blop.play();
         }
-        if (a[7] && toleft === 440 && totop === 110){
+        if (a[7] && toleft === 540 && totop === 60){
             document.getElementsByClassName("textbox")[0].innerHTML = b[7].imgtext;
             blop.play();
         }
-        if (a[8] && toleft === 500 && totop === 260){
+        if (a[8] && toleft === 620 && totop === 380){
             document.getElementsByClassName("textbox")[0].innerHTML = b[8].imgtext;
             blop.play();
         }
-        if (toleft >= 520 && totop === 200){
+        if (toleft === 660 && totop === 220){
             var clear = document.getElementById("clear");
             clear.play();
             document.getElementsByClassName("victory")[0].style.visibility = "visible";
@@ -143,7 +155,7 @@ function Mine_main(){
 
     function goleft(e){
         let leftpx = document.getElementsByClassName("child")[0].style.left;
-        let toleft = parseInt(leftpx) - 30;
+        let toleft = parseInt(leftpx) - 40;
         if (toleft >= 10){
             document.getElementsByClassName("child")[0].style.left = toleft + "px";
         }
@@ -152,8 +164,8 @@ function Mine_main(){
 
     function goright(e){
         let leftpx = document.getElementsByClassName("child")[0].style.left;
-        let toright = parseInt(leftpx) + 30;
-        if (toright <= 560){
+        let toright = parseInt(leftpx) + 40;
+        if (toright <= 670){
             document.getElementsByClassName("child")[0].style.left = toright + "px";
         }
         finish();
@@ -161,7 +173,7 @@ function Mine_main(){
 
     function goup(e){
         let toppx = document.getElementsByClassName("child")[0].style.top;
-        let totop = parseInt(toppx) - 30;
+        let totop = parseInt(toppx) - 40;
         if (totop >= 10){
             document.getElementsByClassName("child")[0].style.top = totop + "px";
         }
@@ -170,8 +182,8 @@ function Mine_main(){
 
     function godown(e){
         let toppx = document.getElementsByClassName("child")[0].style.top;
-        let todown = parseInt(toppx) + 30;
-        if (todown <= 330){
+        let todown = parseInt(toppx) + 40;
+        if (todown <= 400){
             document.getElementsByClassName("child")[0].style.top = todown + "px";
         }
         finish();
@@ -253,7 +265,6 @@ function Mine_main(){
                     <div>
                         <button onClick={(e) => {window.location.href = "/mine"}}>사용자 모드</button>
                         <button onClick={(e) => {window.location.href = "/mine_edi/1"}}>에디터 모드</button>
-                        <button onClick={(e) => {window.location.href = "/mine_guestbook"}}>방명록</button>
                     </div>
                 </div>
 
@@ -278,34 +289,34 @@ function Mine_main(){
 
                         <div className="child">
                             { a[9] && (<img src={process.env.PUBLIC_URL + "/img/" + b[9].newfilename} alt="child" width="40px"/>)}
-                            {!a[9] && (<img src={cat} alt="cat" width="40px"/>)}
+                            {!a[9] && (<img src={cat} alt="cat" width="60px"/>)}
                         </div>
-                        <div className="portal"></div>
+                        <div className="portal"><img src={portal} alt="portal" width="50px" height="50px"/></div>
                         <div className="victory"><img src={logo} alt="vic"/></div>
                         <div>
                             {a[1] && (
-                            <div className="point" id="first"><img src={process.env.PUBLIC_URL + "/img/" + b[1].newfilename} alt="point1" width="30px"/></div>
+                            <div className="point" id="first"><img src={process.env.PUBLIC_URL + "/img/" + b[1].newfilename} alt="point1" width="50px"/></div>
                             )}
                             {a[2] && (
-                            <div className="point" id="second"><img src={process.env.PUBLIC_URL + "/img/" + b[2].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="second"><img src={process.env.PUBLIC_URL + "/img/" + b[2].newfilename} alt="point2" width="50px"/></div>                        
                             )}
                             {a[3] && (
-                            <div className="point" id="third"><img src={process.env.PUBLIC_URL + "/img/" + b[3].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="third"><img src={process.env.PUBLIC_URL + "/img/" + b[3].newfilename} alt="point2" width="50px"/></div>                        
                             )}
                             {a[4] && (
-                            <div className="point" id="fourth"><img src={process.env.PUBLIC_URL + "/img/" + b[4].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="fourth"><img src={process.env.PUBLIC_URL + "/img/" + b[4].newfilename} alt="point2" width="50px"/></div>                        
                             )}
                             {a[5] && (
-                            <div className="point" id="fifth"><img src={process.env.PUBLIC_URL + "/img/" + b[5].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="fifth"><img src={process.env.PUBLIC_URL + "/img/" + b[5].newfilename} alt="point2" width="50px"/></div>                        
                             )}
                             {a[6] && (
-                            <div className="point" id="sixth"><img src={process.env.PUBLIC_URL + "/img/" + b[6].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="sixth"><img src={process.env.PUBLIC_URL + "/img/" + b[6].newfilename} alt="point2" width="50px"/></div>                        
                             )}
                             {a[7] && (
-                            <div className="point" id="seventh"><img src={process.env.PUBLIC_URL + "/img/" + b[7].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="seventh"><img src={process.env.PUBLIC_URL + "/img/" + b[7].newfilename} alt="point2" width="50px"/></div>                        
                             )}
                             {a[8] && (
-                            <div className="point" id="eight"><img src={process.env.PUBLIC_URL + "/img/" + b[8].newfilename} alt="point2" width="30px"/></div>                        
+                            <div className="point" id="eight"><img src={process.env.PUBLIC_URL + "/img/" + b[8].newfilename} alt="point2" width="50px"/></div>                        
                             )}                     
                         </div>
 
@@ -313,7 +324,6 @@ function Mine_main(){
                             {a[11] && (
                                 <div>
                                     <div id="textquestion">
-                                        방문자 : <input value={guestid} onChange={(e)=>setguestid(e.target.value)}></input><br/><br/>
                                         1. {b[11].filename}
                                         <br/><input value={answer1} onChange={(e)=>setanswer1(e.target.value)}></input><br/><br/>
                                         2. {b[11].newfilename}
@@ -321,7 +331,10 @@ function Mine_main(){
                                         3. {b[11].imgtext}
                                         <br/><input value={answer3} onChange={(e)=>setanswer3(e.target.value)}></input><br/><br/>
                                     </div>
-                                    <button>제출</button>
+                                    <div id="subquestion">
+                                        방문자 : <input value={guestid} onChange={(e)=>setguestid(e.target.value)}></input>
+                                        <button>제출</button>
+                                    </div>
                                 </div>
                             )}
                         </div>
@@ -330,6 +343,11 @@ function Mine_main(){
                     <div className="textbox">START 버튼을 눌러주세요</div>
                     <div><input id="keybutton" onKeyDown={handleKeyPress} /></div>
                 </div>
+
+                <div id="alram">
+                    <img onClick={showAlram} src={alram} alt="no" width="120px"/>
+                </div>
+                {alramOpen && <ModalAlram setAlramOpen={setAlramOpen} />}
 
             </div>
         </div>

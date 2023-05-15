@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from '../mine/images/logo.png';
 
 function Ban(){
     const history = useNavigate();
@@ -48,8 +49,23 @@ function Ban(){
 
     return(
         <div>
-            <h1>정지된 계정입니다</h1>
-            <a href={kakaologout}>로그아웃</a>
+            <div id="topbar">
+                <div id="barbtns">
+                    <div id="mainbtn" onClick={(e) => { window.location.href = "/ban" }}>
+                       <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>Forbid</p>
+                    </div>
+                </div>
+            </div>
+            <div id="logo" onClick={() => {history('/ban')}} style={{marginLeft:"-850px", marginTop:"-30px"}}>
+                <img src={logo} alt="no" width="300px" />
+            </div>
+            <div id="topbtns">
+                <button><a href={kakaologout}>로그아웃</a></button>
+            </div>
+            <br /><br /><br /><br /><br /><br /><br /><br />
+            <div>
+                <h1>정지된 계정입니다</h1>
+            </div>
         </div>
     )
 }

@@ -1,50 +1,63 @@
+<<<<<<< HEAD
 /* table {
+=======
+.tableItem {
+    position: absolute;
+    margin-left: 600px;
+>>>>>>> db9fc32ed67a198bcaed31f4c17d1a1d09c9a299
     margin-top: 100px;
     float: left;
 } */
 
 .tableAdd{
+    position: absolute;
     margin-top: 100px;
-    margin-left: -400px;
+    margin-left: 200px;
     margin-right: 200px;
     float: left;
 }
 
 .tableAddC {
+    position: absolute;
     margin-top: 100px;
-    margin-left: -50px;
+    margin-left: 600px;
     float: left;
 }
 
 .tacButton {
+    position: absolute;
     margin-top: 650px;
     margin-left: 850px;
     z-index: auto;
 }
 
 .tacButtonD {
+    position: absolute;
     margin-top: 650px;
-    margin-left: 780px;
+    margin-left: 800px;
+    z-index: auto;
+}
+
+.tacButtonU {
+    position: absolute;
+    margin-top: 650px;
+    margin-left: 880px;
     z-index: auto;
 }
 
 .search {
-    margin-top: -745px;
-    margin-left: 1430px;
-    float: left;
-}
-
-.searchD {
-    margin-top: -350px;
+    position: absolute;
+    margin-top: 100px;
     margin-left: 1430px;
     float: left;
 }
 
 .card {
+    position: absolute;
     width: 400px;
-    height: 700px;
+    height: 390px;
     padding: 15px;
-    margin-left: -500px;
+    margin-left: 100px;
     margin-top: 100px;
     border-radius: 25px;
     float: left;
@@ -146,6 +159,7 @@
     border: 1px solid #b7b7b7;
     padding: 5px 5px 5px 10px;
     margin-top: 10px;
+    margin-bottom: 17px;
     font-size: 18px;
     width: 250px;
     height: 40px;
@@ -168,14 +182,20 @@
 }
 
 .buttons {
-    margin-top: 750px;
-    margin-left: 1500px;
+    position: absolute;
+    margin-top: 780px;
+    margin-left: 1540px;
     z-index: auto;
 }
 
-.wise {
+.qna {
     position: absolute;
-    margin-top: 1000px;
-    margin-left: 500px;
-    z-index: auto;
+    margin-top : 100px;
+    margin-left : 600px;
+}
+
+.qnabut{
+    position: absolute;
+    margin-top : 500px;
+    margin-left : 1500px;
 }

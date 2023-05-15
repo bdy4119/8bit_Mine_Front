@@ -42,7 +42,11 @@ import Imain from "./component/I/Imain";
 import Iadd from "./component/I/Iadd";
 import Idetail from "./component/I/Idetail";
 import Iupdate from "./component/I/Iupdate";
+<<<<<<< HEAD
 import Qna7 from "./component/I/Qna10";
+=======
+import Qna7 from "./component/I/Qna7";
+>>>>>>> db9fc32ed67a198bcaed31f4c17d1a1d09c9a299
 import Place from "./component/I/search/place";
 import Book from "./component/I/search/book";
 import Movie from "./component/I/search/movie";
@@ -193,6 +197,7 @@ function App() {
 
           {/* me ,명함 */}
           <Route path="/me" element={<Me></Me>} />
+          <Route path="/me:seq/:title/:content/:rdate/:thumbnail" element={<Me></Me>} />
 
           <Route path="/diaryWrite/:rdate" element={<DiaryWrite />} />
           <Route path="/todoWrite/:rdate" element={<TodoWrite />} />
@@ -200,6 +205,7 @@ function App() {
           <Route path="/me/:rdate" element={<Me />} />
           <Route path="/me/:year/:month" element={<Me />} />
 
+          <Route path="/diaryUpdate/:seq/:title/:content/:rdate/:thumbnail" element={<DiaryUpdate />} />
           <Route path="/diaryUpdate/:seq/:title/:content/:rdate" element={<DiaryUpdate />} />
           <Route path="/todoUpdate/:seq/:title/:content/:rdate" element={<TodoUpdate />} />
 

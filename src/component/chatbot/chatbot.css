@@ -9,6 +9,15 @@ body {
     font-family: "Lato";
 }
 
+#close3 {
+    width: 20px;
+    height: 20px;
+    left: 20px;
+    top: 15px;
+    position: relative;
+    background-color: #aaa;
+}
+
 .myform {
 /* padding: 15px 25px; */
     padding-left: 25px;
@@ -109,6 +118,7 @@ a:hover {
 .menu {
     padding: 10px 30px;
     display: flex;    
+    margin-top: 15px;
 }
 
 .menu p.welcome {
@@ -154,7 +164,7 @@ a.exit {
 
 .usermsg, .botmsg{
     display: inline-block;
-    background-color: #F39C12;
+    background-color: #AF66DA;
     color: white;
     font-size: small;
     font-weight: bold;
@@ -166,6 +176,7 @@ a.exit {
 }
 
 .usermsg{
-    background-color: #6272ff;
+    background-color: #fcef40;
+    color: black;
     text-align: right;
 }

@@ -86,6 +86,30 @@
     height: 40px;
 }
 
+.myButton {
+	box-shadow:inset 0px 1px 0px 0px #bbdaf7;
+	background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
+	background-color:#79bbff;
+	border:1px solid #84bbf3;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 2px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #528ecc;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
+	background-color:#378de5;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
 #posimg {
     text-align: center;
     height: 280px;
@@ -104,64 +128,79 @@
     height: 6em;
 }
 
-.portal {
-    background-color: #fff;
-    width: 40px;
-    height: 40px;
-    position:absolute;
-    border-radius: 50%;
-    top: 200px;
-    left: 540px;
-    background-image: url(./images/portal.png);
-    background-size: contain;
-    background-position: center;
-    transform: translate(-50%,-50%);
+#elevenbox input {
+    resize: none;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    padding: 10px;
+    width: 300px;
+    height: 55px;
 }
+
+.labelnumber {
+    width: 50px;
+    height: 55px;
+    position: relative;
+    left: 40px;
+    background-color: #aaa;
+    float: left;
+    border-radius: 8px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#elevenbox p {
+    font-size: 15px;
+}
+
 
 .point#first {
     position:absolute;
-    top: 100px;
-    left: 70px;
+    top: 35px;
+    left: 35px;
 }
 
 .point#second {
     position:absolute;
-    top: 280px;
-    left: 130px;
+    top: 235px;
+    left: 115px;
 }
 
 .point#third {
     position:absolute;
-    top: 70px;
-    left: 190px;
+    top: 115px;
+    left: 195px;
 }
 
 .point#fourth {
     position:absolute;
-    top: 310px;
-    left: 250px;
+    top: 315px;
+    left: 275px;
 }
 
 .point#fifth {
     position:absolute;
-    top: 130px;
-    left: 310px;
+    top: 75px;
+    left: 355px;
 }
 
 .point#sixth {
     position:absolute;
-    top: 40px;
-    left: 370px;
+    top: 275px;
+    left: 435px;
 }
 
 .point#seventh {
     position:absolute;
-    top: 100px;
-    left: 430px;
+    top: 35px;
+    left: 515px;
 }
 
 .point#eight {
     position:absolute;
-    top: 250px;
-    left: 490px;
+    top: 355px;
+    left: 595px;
 }

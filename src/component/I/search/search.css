@@ -1,0 +1,71 @@
+.pwKakao {
+    position: absolute;
+    margin-top: 80px;
+    margin-left: 320px; 
+    color: white;
+}
+
+.plsearch {
+    position: absolute;
+    margin-top: 150px;
+    margin-left: 150px; 
+}
+
+.pllist {
+    position: absolute;
+    margin-top: 210px;
+    margin-left: 50px; 
+}
+
+.pwNaver {
+    position: absolute;
+    margin-top: 100px;
+    margin-left: 270px; 
+    color: white;
+}
+
+.pwNavertitle {
+    position: absolute;
+    margin-top: 70px;
+    margin-left: 100px; 
+    color: white;
+}
+
+.bsearch {
+    position: absolute;
+    margin-top: 170px;
+    margin-left: 150px; 
+}
+
+.blist {
+    position: absolute;
+    margin-top: 230px;
+    margin-left: 20px; 
+}
+
+.pwTmdb {
+    position: absolute;
+    margin-top: 95px;
+    margin-left: 470px; 
+    color: white;
+}
+
+.pwTmdbM {
+    position: absolute;
+    margin-top: 100px;
+    margin-left: 310px; 
+    color: white;
+}
+
+.pwsearch {
+    position: absolute;
+    margin-top: 160px;
+    margin-left: 120px; 
+}
+
+.pwYoutube {
+    position: absolute;
+    margin-top: 100px;
+    margin-left: 320px;
+    color: white;
+}
