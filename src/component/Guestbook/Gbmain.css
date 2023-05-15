@@ -1,4 +1,7 @@
 #guestbooklist {
+    position: absolute;
+    margin-left: 200px;
+    margin-top: 140px;
     width: 50%;
     float: left;
 }
@@ -6,4 +9,30 @@
 #friendlist {
     width: 50%;
     float: left;
+}
+
+.gbaddTitle {
+    position: absolute;
+    margin-top: 120px;
+    margin-left: 210px;
+}
+
+.vc {
+    position: absolute;
+    font-size: 18px;
+    margin-top: -40px;
+    margin-left: 310px;
+}
+
+.vocom {
+    position: absolute;
+    font-size: 18px;
+    margin-top: 120px;
+    margin-left: 1130px;
+}
+
+.aud {
+    position: absolute;
+    margin-left: 350px;
+    margin-top: -40px;
 }

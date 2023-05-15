@@ -1,17 +1,19 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
+
 import Topbar from "../main/topbar";
+import Barbtns from "../main/barbtns";
+
+import { Button } from 'semantic-ui-react'
 import "../main_back.css"
 import "./icss.css";
-import 'semantic-ui-css/semantic.min.css'
-import { Button } from 'semantic-ui-react'
-import Barbtns from "../main/barbtns";
 
 function I_main() {
 
+  // 변수 선언
   const history = useNavigate();
+
   const [name, setName] = useState('');
   const [job, setJob] = useState('');
   const [profPic, setProfPic] = useState('');
@@ -20,12 +22,18 @@ function I_main() {
   const [birthdate, setBirthdate] = useState('');
   const [dcount, setDcount] = useState(0);
 
+  const [classiList, setClassiList] = useState([]);
+
+  // 접속 권한 체크
   const getUser = async () => {
     const jwt = localStorage.getItem("token");
+
     if (jwt === null) {
       history("/");
     }
     else {
+
+      // 프로필 조회 
       axios.get("http://localhost:3000/show", { params: { "token": jwt } })
         .then(function (resp) {
           setName(resp.data.name);
@@ -35,14 +43,14 @@ function I_main() {
           setProfMsg(resp.data.profMsg);
           setProfPic(resp.data.profPic);
         })
+
         .catch(function (err) {
           alert(err);
         })
     }
   }
 
-  const [classiList, setClassiList] = useState([]);
-
+  // 분류 List 조회
   const fetchData = async () => {
     const id = localStorage.getItem("id");
     const resp = await axios.get('http://localhost:3000/i_classi_list', { params: { "id": id } });
@@ -50,34 +58,43 @@ function I_main() {
     setDcount(resp.data.length);
   }
 
-  function Ilist1(props) {
+  useEffect(() => {
+    getUser();
+    fetchData();
+  }, []);
 
+  // 분류 List with Diamonds - 1번 line
+  function Ilist1(props) {
     if (props.cnt > 5) return;
 
     return (
       <>
-        <td style={{ textAlign: "center" }}><div className="items">
-          <Link to={`/i_detail/${props.obj.classify}`}>{props.obj.classify}</Link>
-        </div></td>
+        <td style={{ textAlign: "center" }}>
+          <div className="items">
+            <Link to={`/i_detail/${props.obj.classify}`}>{props.obj.classify}</Link>
+          </div>
+        </td>
       </>
     );
   }
 
+  // 분류 List with Diamonds - 2번 line
   function Ilist2(props) {
-
     if (props.cnt < 6 || props.cnt > 10) return;
 
     return (
       <>
-        <td style={{ textAlign: "center" }}><div className="items">
-          <Link to={`/i_detail/${props.obj.classify}`}>{props.obj.classify}</Link>
-        </div></td>
+        <td style={{ textAlign: "center" }}>
+          <div className="items">
+            <Link to={`/i_detail/${props.obj.classify}`}>{props.obj.classify}</Link>
+          </div>
+        </td>
       </>
     );
   }
 
+  // 분류 List with Diamonds - 3번 line
   function Ilist3(props) {
-
     if (props.cnt < 11) return;
 
     if (props.cnt > 15) {
@@ -94,8 +111,9 @@ function I_main() {
     );
   }
 
-  function go_add(){
-    if(dcount>=15){
+  // 분류 추가
+  function go_add() {
+    if (dcount >= 15) {
       alert('항목은 최대 15개까지 추가할 수 있습니다.');
       return;
     }
@@ -103,16 +121,12 @@ function I_main() {
     history("/i_add")
   }
 
-  useEffect(() => {
-    getUser();
-    fetchData();
-  }, []);
-
-
   return (
     <div id="back">
+
       <Topbar />
       <Barbtns />
+
       <div className="card">
         <h1 style={{ marginTop: "20px", fontSize: "40px" }}>{name}</h1>
         <div className="img-wrap" >
@@ -135,11 +149,13 @@ function I_main() {
           <input className="inputI" readOnly="readOnly" value={profMsg} />
         </label>
       </div>
+
       <table className="tableItem">
         <thead />
         <colgroup>
           <col width="200px" /><col width="200px" /><col width="200px" /><col width="200px" /><col width="200px" />
         </colgroup>
+
         <tbody id="tBody">
           <tr>
             {
@@ -170,10 +186,12 @@ function I_main() {
           </tr>
         </tbody>
       </table>
+
       <div className="buttons">
         <Button size="big" color="purple" onClick={go_add}>분류 추가</Button>
         <Button size="big" color="purple" onClick={() => history("/qna7")}>7문 7답</Button>
       </div>
+
     </div>
   );
 }

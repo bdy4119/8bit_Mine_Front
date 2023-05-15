@@ -1,31 +1,19 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+import { Table, Button, Input } from 'semantic-ui-react'
+import "./bgmcss.css";
+
 import cglogo from "./ChatGptLogo.png";
 import ytlogo from "./youtube_logo.png";
-
 import redd from "../I/image/redd.png";
 import greend from "../I/image/greend.png";
 
-import "./bgmcss.css";
-
-import { Table, Button, Input } from 'semantic-ui-react'
-
 function Bgmadd() {
 
+    // 변수 선언
     const movePage = useNavigate();
-
-    function getUser() {
-        const jwt = localStorage.getItem("token");
-        if (jwt === null) {
-            movePage("/");
-        }
-
-    }
-
-    useEffect(() => {
-        getUser();
-    }, []);
 
     const [artist, setArtist] = useState('');
     const [title, setTitle] = useState('');
@@ -33,20 +21,21 @@ function Bgmadd() {
     const [search, setSearch] = useState('');
     const [list, setList] = useState([]);
 
-    function bgm_add() {
-        const id = localStorage.getItem("id");
-        axios.get('http://localhost:3000/bgm_add', { params: { "id": id, "artist": artist, "title": title, "url": url } })
-            .then(function (resp) {
-                if (resp.data === "bgm_add_OK") {
-                    alert('BGM이 추가되었습니다. 메인화면을 새로고침해주세요.');
-                    movePage('/bgm');
-                }
-            })
-            .catch(function (err) {
-                alert(err);
-            })
+    // 접속 권한 체크
+    function getUser() {
+        const jwt = localStorage.getItem("token");
+
+        if (jwt === null) {
+            movePage("/");
+        }
     }
 
+    useEffect(() => {
+        document.getElementById("backtop").style.visibility = "hidden";
+        getUser();
+    }, []);
+
+    // Youtube 영상 검색
     function yt_search() {
         axios
             .get(
@@ -62,6 +51,7 @@ function Bgmadd() {
             })
     }
 
+    // Chat GPT 아티스트 - 제목 Parsing
     const chatgpt_bgm = async (title, videoId) => {
         try {
             const resp = await axios.get('http://localhost:3000/chatgpt_bgm',
@@ -76,8 +66,25 @@ function Bgmadd() {
 
     }
 
-    function TableRow(props) {
+    // BGM 추가
+    function bgm_add() {
+        const id = localStorage.getItem("id");
 
+        axios.get('http://localhost:3000/bgm_add', { params: { "id": id, "artist": artist, "title": title, "url": url } })
+            .then(function (resp) {
+                if (resp.data === "bgm_add_OK") {
+                    alert('BGM이 추가되었습니다. 메인화면을 새로고침해주세요.');
+                    movePage('/bgm');
+                }
+            })
+
+            .catch(function (err) {
+                alert(err);
+            })
+    }
+
+    // Youtube 영상 데이터 정리
+    function TableRow(props) {
         return (
             <Table.Row>
                 <Table.Cell><img src={props.obj.snippet.thumbnails.high.url} width={"100px"} height={"100px"} /></Table.Cell>
@@ -88,19 +95,22 @@ function Bgmadd() {
     }
 
     return (
-        <div id="back" style={{backgroundImage:{}}}>
+        <div id="back">
+
             <img src={redd} width="60px" height="60px" style={{ marginTop: "0px", marginLeft: "20px" }} />
             <div className="bstitle">
                 <h2 style={{ fontSize: "35px" }}>노래 검색</h2>
             </div>
+
             <div className="pwYt">
                 <h4 style={{ fontSize: "17px" }}>POWERED BY</h4>
             </div>
             <div className="ytlogo">
                 <img src={ytlogo} width="120px" height="26px" />
             </div>
+
             <div className="ytSearch">
-                <Input size="small" style={{ marginTop:"-8px", width: "380px", fontSize: "12px" }} placeholder="아티스트 / 노래 제목" onChange={(e) => { setSearch(e.target.value) }} />
+                <Input size="small" style={{ marginTop: "-8px", width: "380px", fontSize: "12px" }} placeholder="아티스트 / 노래 제목" onChange={(e) => { setSearch(e.target.value) }} />
                 &nbsp; <Button size="tiny" color="red" onClick={yt_search}>검색</Button>
             </div>
 
@@ -114,6 +124,7 @@ function Bgmadd() {
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
+
                         {
                             list.map(function (object, i) {
                                 return (
@@ -125,30 +136,32 @@ function Bgmadd() {
                     </Table.Body>
                 </Table>
             </div>
+
             <img src={greend} width="60px" height="60px" style={{ position: "absolute", marginTop: "135px", marginLeft: "-60px" }} />
             <div className="addtitle">
                 <h2 style={{ fontSize: "35px" }}>BGM 추가</h2>
             </div>
+
             <div className="pwCg">
                 <h4 style={{ fontSize: "17px" }}>POWERED BY</h4>
             </div>
             <div className="cglogo">
-                <img src={cglogo} width="180px" height="108px" />
+                <img src={cglogo} width="150px" height="60px" />
             </div>
 
             <div className="cgSearch">
                 <Input size="mini" style={{ width: "150px", fontSize: "13px" }} placeholder="아티스트명" value={artist || ''} onChange={(e) => setArtist(e.target.value)} /> &nbsp;
-                <Input size="mini" style={{ width: "220px", fontSize: "13px" }} placeholder="노래 제목" value={title || ''} onChange={(e) => setTitle(e.target.value)} /> &nbsp;
+                <Input size="mini" style={{ width: "200px", fontSize: "13px" }} placeholder="노래 제목" value={title || ''} onChange={(e) => setTitle(e.target.value)} /> &nbsp;
                 <Input size="mini" style={{ width: "300px", fontSize: "13px" }} placeholder="Youtube URL" value={url || ''} onChange={(e) => setUrl(e.target.value)} />
             </div>
+
             <div className="addbutton">
                 <Button size="small" color="green" onClick={bgm_add}>추가</Button>
             </div>
-            [참고] 새로운 배경음악을 추가한 뒤에는, 반드시 메인화면을 새로고침해주세요 !!
-            <br /><br />
 
         </div>
     );
 
 }
+
 export default Bgmadd;

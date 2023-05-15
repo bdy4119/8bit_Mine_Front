@@ -58,8 +58,8 @@
 
 .cglogo {
     position: absolute;
-    margin-left: 370px;
-    margin-top: 55px;
+    margin-left: 380px;
+    margin-top: 75px;
 }
 
 .cgSearch {
@@ -71,6 +71,6 @@
 
 .addbutton {
     position: absolute;
-    margin-left: 720px;
+    margin-left: 700px;
     margin-top: 150px;
 }
