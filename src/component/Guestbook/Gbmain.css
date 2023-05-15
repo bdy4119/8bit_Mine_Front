@@ -6,8 +6,19 @@
     float: left;
 }
 
-#friendlist {
+#guestverlist {
+    position: absolute;
+    margin-left: 470px;
+    margin-top: 140px;
     width: 50%;
+    float: left;
+}
+
+#friendlist {
+    position: absolute;
+    margin-left: 1300px;
+    margin-top: 50px;
+    width: 500px;
     float: left;
 }
 
@@ -32,6 +43,12 @@
 }
 
 .aud {
+    position: absolute;
+    margin-left: 350px;
+    margin-top: -40px;
+}
+
+.flist {
     position: absolute;
     margin-left: 350px;
     margin-top: -40px;

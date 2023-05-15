@@ -1,8 +1,68 @@
- 
+
 .loginArea {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 60px;
 }
 
+.socialLogo {
+    width: 70px;
+    height: 70px;
+    margin-right: 70px;
+    margin-left: 70px;
+}
+
+.prevBtn {
+    position: absolute;
+    left: 625px;
+    top: 900px;
+
+    background-color: #4e3b3b;
+    color: #fff;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.nextBtn {
+    position: absolute;
+    right: 625px;
+    top: 900px;
+
+    background-color: #4e3b3b;
+    color: #fff;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.Glogo {
+    position: absolute;
+    right: 840px;
+    top: 900px;
+}
+
+.Mlogo {
+    position: absolute;
+    right: 830px;
+    top: 900px;
+}
+
+.Nlogo {
+    position: absolute;
+    right: 800px;
+    top: 900px;
+}
+
+.Klogo {
+    position: absolute;
+    right: 845px;
+    top: 900px;
+}
+
+.gateWord {
+    text-align: center;
+}

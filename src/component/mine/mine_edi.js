@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import axios from "axios";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import { Button } from 'semantic-ui-react'
 
 import "./mine_edi.css";
 import stage1 from './images/stage1.png';
@@ -9,6 +10,7 @@ import stage3 from './images/stage3.png';
 import "../mine_back.css"
 import Topbar from "../main/topbar";
 import cat from './images/cat.png';
+
 
 function Mine_edi(){
 
@@ -27,6 +29,14 @@ function Mine_edi(){
     
     const id = localStorage.getItem("id");
     const history = useNavigate();
+
+    const getUser = async () => {
+        const jwt = localStorage.getItem("token");
+
+        if (jwt === null) {
+            history("/");
+        }
+    }
 
     function imageLoad(){
         const file = imgRef.current.files[0];
@@ -87,6 +97,7 @@ function Mine_edi(){
     }
 
     useLayoutEffect(()=>{
+        getUser();
         mineList();
         checkList();
     }, []);
@@ -310,8 +321,8 @@ function Mine_edi(){
             <div>
                 <div>
                     <div id="modechange">
-                        <button onClick={(e) => {window.location.href = "/mine"}}>사용자 모드</button>
-                        <button onClick={(e) => {window.location.href = "/mine_edi/1"}}>에디터 모드</button>
+                        <button id="usermode" onClick={(e) => {window.location.href = "/mine"}}>사용자 모드</button>
+                        <button id="editmode" onClick={(e) => {window.location.href = "/mine_edi/1"}}>에디터 모드</button>
                     </div>
                 </div>
 
@@ -376,17 +387,25 @@ function Mine_edi(){
                 <div id="editorbox">
                     <div id="editor">
                         <div id="posbtns">
-                            <Link to={`/mine_edi/${1}`}><button className="myButton">1</button></Link>
-                            <Link to={`/mine_edi/${2}`}><button className="myButton">2</button></Link>
-                            <Link to={`/mine_edi/${3}`}><button className="myButton">3</button></Link>
-                            <Link to={`/mine_edi/${4}`}><button className="myButton">4</button></Link>
-                            <Link to={`/mine_edi/${5}`}><button className="myButton">5</button></Link>
-                            <Link to={`/mine_edi/${6}`}><button className="myButton">6</button></Link>
-                            <Link to={`/mine_edi/${7}`}><button className="myButton">7</button></Link>
-                            <Link to={`/mine_edi/${8}`}><button className="myButton">8</button></Link>
-                            <Link to={`/mine_edi/${9}`}><button className="myButton">캐릭터</button></Link>
-                            <Link to={`/mine_edi/${10}`}><button className="myButton">배경</button></Link>
-                            <Link to={`/mine_edi/${11}`}><button className="myButton">질문</button></Link>
+                            <div>
+                                <Button.Group className="ui buttons">
+                                    <Link to={`/mine_edi/${1}`}><Button className="ui button">1</Button></Link>
+                                    <Link to={`/mine_edi/${2}`}><Button className="ui button">2</Button></Link>
+                                    <Link to={`/mine_edi/${3}`}><Button className="ui button">3</Button></Link>
+                                    <Link to={`/mine_edi/${4}`}><Button className="ui button">4</Button></Link>
+                                    <Link to={`/mine_edi/${5}`}><Button className="ui button">5</Button></Link>
+                                    <Link to={`/mine_edi/${6}`}><Button className="ui button">6</Button></Link>
+                                </Button.Group>
+                            </div><br/><br/><br/>
+                            <div>
+                                <Button.Group className="ui buttons">
+                                    <Link to={`/mine_edi/${7}`}><Button className="ui button">7</Button></Link>
+                                    <Link to={`/mine_edi/${8}`}><Button className="ui button">8</Button></Link>
+                                    <Link to={`/mine_edi/${9}`}><Button className="ui button">캐릭터</Button></Link>
+                                    <Link to={`/mine_edi/${10}`}><Button className="ui button">배경</Button></Link>
+                                    <Link to={`/mine_edi/${11}`}><Button className="ui button">질문</Button></Link>
+                                </Button.Group>
+                            </div>
                         </div>
                         <div id="posimg">
                             {(params.pos === '11') && (
@@ -398,18 +417,18 @@ function Mine_edi(){
                                     <div className="labelnumber">2</div><input value={question2} onChange={(e)=>setquestion2(e.target.value)}></input><br/>
                                     <div className="labelnumber">3</div><input value={question3} onChange={(e)=>setquestion3(e.target.value)}></input><br/>
                                     <hr/>
-                                    <button type="button" onClick={updateQuestion}>작성완료</button>
+                                    <Button className="ui blue button" type="button" onClick={updateQuestion}>작성완료</Button>
                                 </div>
                             )}
                             {(params.pos === '10') && (
                                 <div>
                                     <img src={backimg} alt="back" width="420px" height="280px"/>
-                                    <br/><hr/>
-                                    <button type="button" onClick={() => backselect(1)}>배경1</button>
-                                    <button type="button" onClick={() => backselect(2)}>배경2</button>
-                                    <button type="button" onClick={() => backselect(3)}>배경3</button>
-                                    <br/>
-                                    <button type="button" onClick={select}>배경설정</button>
+                                    <br/><hr/><br/>
+                                    <Button className="ui gray button" type="button" onClick={() => backselect(1)}>배경1</Button>
+                                    <Button className="ui gray button" type="button" onClick={() => backselect(2)}>배경2</Button>
+                                    <Button className="ui gray button" type="button" onClick={() => backselect(3)}>배경3</Button>
+                                    <br/><br/>
+                                    <Button className="ui blue button" type="button" onClick={select}>배경설정</Button>
                                 </div>
                             )}
                             {!check && (params.pos !== '10') && (params.pos !== '11') && (
@@ -420,7 +439,7 @@ function Mine_edi(){
                                 <input type="file" name="uploadFile" accept="*" onChange={imageLoad} ref={imgRef}/><br/><hr/>
                                 <textarea value={text} onChange={(e)=>setText(e.target.value)} placeholder='텍스트를 입력하세요'/>
                                 <br/>
-                                <input type="submit" value="추가" />
+                                <Button className="ui blue button" type="submit">추가</Button>
                             </form>
                             )}
                             {check && (params.pos !== '10') && (params.pos !== '11') && (
@@ -431,8 +450,8 @@ function Mine_edi(){
                                 <input type="file" name="uploadFile" accept="*" onChange={imageLoad} ref={imgRef}/><br/><hr/>
                                 <textarea value={text} onChange={(e)=>setText(e.target.value)} placeholder='텍스트를 입력하세요'/>
                                 <br/>
-                                <input type="submit" value="수정" />
-                                <button type="button" onClick={deletemine}>삭제</button>
+                                <Button className="ui positive button" type="submit">수정</Button>
+                                <Button className="ui negative button" type="button" onClick={deletemine}>삭제</Button>
                             </form>
                             )}
                         </div>

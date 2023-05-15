@@ -1,0 +1,111 @@
+
+.editArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+}
+
+.editLeft {
+    margin-left: -1200px;
+}
+
+.editCenter {
+    margin-left: -150px;
+}
+
+.editRight {
+    margin-left: 1100px;
+}
+
+.editLeft, .editCenter, .editRight {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.editInfo {
+    margin-bottom: 70px;
+}
+
+.editForm {
+    margin-bottom: 50px;
+}
+
+.editInput {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    height: 50px;
+    background-color: rgb(212, 212, 212);
+}
+
+.editButton {
+    background-color: rgb(38, 25, 223);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.editButton:hover {
+    background-color: #251485;
+}
+
+.editButton2 {
+  background-color: rgb(255, 40, 40);
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 25px;
+  margin-top: -50px;
+  margin-left: 450px;
+}
+
+.editButton2:hover {
+  background-color: rgb(165, 26, 26);
+}
+
+.profileImg {
+    margin-top: 10px;
+    margin-bottom: 70px;
+    margin-left: 0px;
+    width: 400px;
+    height: 400px;
+}
+
+.editWarn {
+    width: 60px;
+    height: 60px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.editMove {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -30px;
+}
+
+.editBorder {
+    border-left: 2px solid black;
+    height: 750px;
+    margin-left: 400px;
+    margin-top: 20px;
+}
+
+.editImg {
+    width: 400px;
+    height: 400px;
+    margin-top: 20px;
+    border-radius: 50%;
+    margin-left: 70px;
+}

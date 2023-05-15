@@ -5,13 +5,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import Pagination from "react-js-pagination"
 import "./page.css"
 import "./FileMain.css"
+import Barbtns from '../main/barbtns';
+import Topbar from '../main/topbar';
 const FileList = () => {
     // 체크박스를 위한 state 변수
     const [isChecked, setIsChecked] = useState(false);
     // 세션에 담긴 아이디값 가져오기
     // const id = session.get("USER_ID");
     // console.log(id);
-    
+
     //이메일 id
     const id = localStorage.getItem("id");
     console.log(id);
@@ -136,27 +138,31 @@ const FileList = () => {
 
 
     return (
-        <>
-        <div className='select' align="center">
-            <select value={choice} onChange={(e) => setChoice(e.target.value)}>
-                <option value="">검색</option>
-                <option value="title">제목</option>
-                <option value="memo">메모</option>
-                <option value="writer">작성자</option>
-            </select>
-            <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="검색어를 입력해주세요" />
-            <button onClick={searchBtn}>검색</button>
-            <br/><br/>
-        </div>
-            
+        <div id="back">
+
+            <Topbar />
+            <Barbtns />
+
+            <div className='select' align="center">
+                <select value={choice} onChange={(e) => setChoice(e.target.value)}>
+                    <option value="">검색</option>
+                    <option value="title">제목</option>
+                    <option value="memo">메모</option>
+                    <option value="writer">작성자</option>
+                </select>
+                <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="검색어를 입력해주세요" />
+                <button onClick={searchBtn}>검색</button>
+                <br /><br />
+            </div>
 
 
-          
-          
+
+
+
             {fileList !== null
                 ?
                 // <div className='rwd-table2' align="center">
-                <div className='rwd-table2' style={{marginTop:"10px"}} align="center">
+                <div className='rwd-table2' style={{ marginTop: "10px" }} align="center">
                     <table border="1" >
                         <thead>
                             <tr>
@@ -173,7 +179,7 @@ const FileList = () => {
                             {fileList.map(function (file, i) {
                                 return (
                                     <tr key={i}>
-                                      
+
                                         <td>{i + 1}</td>
                                         <td>{file.mfCategory}</td>
                                         <td>{file.mfTitle}</td>
@@ -181,19 +187,19 @@ const FileList = () => {
                                         <td>{file.mfMemo}</td>
                                         <td>
                                             {<Link to={`/updateFile/${file.mfSeq}`}><button className='updatebtns'>수정</button></Link>}
-                                            
+
                                             <button className='delbtns' onClick={() => deleteFile(`${file.mfSeq}`)}>삭제</button>
-                                            
-                                        
+
+
                                         </td>
-                                        <td><button className='downbtns' onClick={()=>{download(file.mfNFilename)}}>다운로드</button></td>
+                                        <td><button className='downbtns' onClick={() => { download(file.mfNFilename) }}>다운로드</button></td>
                                     </tr>
                                 );
                             })}
                         </tbody>
                     </table>
                     <br />
-                    <button className='upbtns'  style={{marginLeft:"1050px",color:'white'}}><Link to='/FileUpload'>업로드</Link></button>
+                    <button className='upbtns' style={{ marginLeft: "1050px", color: 'white' }}><Link to='/FileUpload'>업로드</Link></button>
                     <br /><br />
                     <Pagination
                         activePage={page}
@@ -204,12 +210,12 @@ const FileList = () => {
                         nextPageText={"다음"}
                         onChange={pageChange} />
                     <br />
-                    
+
                 </div>
                 :
                 <p>표시할 데이터가 없습니다.</p>
             }
-        </>
+        </div>
     )
 }
 export default FileList

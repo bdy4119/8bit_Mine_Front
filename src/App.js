@@ -42,10 +42,7 @@ import Imain from "./component/I/Imain";
 import Iadd from "./component/I/Iadd";
 import Idetail from "./component/I/Idetail";
 import Iupdate from "./component/I/Iupdate";
-import Qna7 from "./component/I/Qna10";
-
 import Qna7 from "./component/I/Qna7";
- db9fc32ed67a198bcaed31f4c17d1a1d09c9a299
 import Place from "./component/I/search/place";
 import Book from "./component/I/search/book";
 import Movie from "./component/I/search/movie";
@@ -63,17 +60,16 @@ import axios from "axios";
 import FileMain from "./component/My/FileMain";
 import UpdateFile from "./component/My/UpdateFile";
 import FileUpload from "./component/My/FileUpload";
-import WalletUpdate from './component/BCWallet/WalletUpdate';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Form } from 'react-bootstrap';
 
 import 'semantic-ui-css/semantic.min.css'
-import { Button, Select } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 
-import './App.css';
 import './component/main_back.css'
 import Youtube from './component/I/search/youtube';
+
 function App() {
 
   const [state, setState] = useState(false);
@@ -228,8 +224,6 @@ function App() {
           <Route path="/chatbot" element={<Chatbot />} />
 
           <Route path="/friendcard/:mineid" element={<Friendcard />} />
-
-          <Route path="/walletupdate/:seq" element={<WalletUpdate />} />
 
           <Route path="/Filelist" element={<FileMain />} />
           <Route path="/Filelist/:choice/:search" element={<FileMain />} />
