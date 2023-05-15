@@ -82,39 +82,30 @@ function TodoUpdate() {
                 </div>
             </div>
       <h1>Todo 수정</h1>
-      <hr/>
 
-      <table border='1px' id="backwhite">
-        <colgroup>
-          <col width="100px"/>
-          <col width="500px"/>
-        </colgroup>
-        <tbody>
-          <tr>
-            <th>Todo날짜</th>
-            <td>
-              <input defaultValue={rdateArr}
+     
+      <div id="todoWrite">
+        <div style={{marginTop:"-150px",marginLeft:"-150px"}}>
+          <div>
+             날짜 : <input style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive", width:"150px"}} defaultValue={rdateArr}
                 //리액트에서 input은 readonly가 기본값 -> defaultValue에 설정할 value값 넣으면 수정 가능하게 됨
               onChange={(e)=>setRdate(e.target.value)}/>
-            </td>
-           </tr>
-          <tr>
-            <th>제목</th>
-            <td>
-              <input defaultValue={title} onChange={(e)=>setTitle(e.target.value)}/>
-            </td>
-          </tr>
-          <tr>
-            <th>내용</th>
-            <td>
-              <input defaultValue={content} onChange={(e)=>setContent(e.target.value)}/>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <br/>
-      <button onClick={handleSubmit}>수정완료</button>
+          </div>
+          <br/>
+          <br/>
+          <div>
+              제목 : <input style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} defaultValue={title} onChange={(e)=>setTitle(e.target.value)}/>
+          </div>
+          <br/>
+          <br/>
+          <div>
+              내용 : <input style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} defaultValue={content} onChange={(e)=>setContent(e.target.value)}/>
+          </div>
+          <br/>
+          <br/>
+        </div>
+         <button class="btn btn-success" style={{marginTop:"20px", marginLeft:"-80px", width:"170px", height:"60px"}} onClick={handleSubmit}>수정완료</button>
+      </div>
     </div>
   )
 }

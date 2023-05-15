@@ -92,37 +92,37 @@ function BackWrite() {
                 </div>
             </div>
             <div /*id="toolbox"*/>
-    <div className="middle">
-    <div style={{backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px", marginLeft:"-600px"}}>
-      <div style={{marginLeft:"320px", marginTop:"100px"}}>
+    <div>
+    <div id="onlineCard" style={{paddingBottom:"100px"}}>
+      <div style={{marginTop:"-20px"}}>
         <div>
-          <h3>
-              날짜 : <input defaultValue={historyDate} onChange={(e)=>setHistoryDate(e.target.value)} placeholder="(ex)2023-04"/>
+          <h3 style={{fontFamily:"Do Hyeon", fontSize:"25px"}}>
+              날짜 : <input defaultValue={historyDate} onChange={(e)=>setHistoryDate(e.target.value)} placeholder="(ex)2023-04" style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
           </h3>
         </div>
         <br/>
         <div>
-          <h3>
-            제목: <input defaultValue={historyTitle} onChange={(e)=>setHistoryTitle(e.target.value)}/>
+          <h3 style={{fontFamily:"Do Hyeon", fontSize:"25px"}}>
+            제목: <input defaultValue={historyTitle} onChange={(e)=>setHistoryTitle(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
           </h3>
         </div>
         <br/>
         <div>
-          <h3>
-            내용: <input defaultValue={historyContent} onChange={(e)=>setHistoryContent(e.target.value)}/>
+          <h3 style={{fontFamily:"Do Hyeon", fontSize:"25px"}}>
+            내용: <input defaultValue={historyContent} onChange={(e)=>setHistoryContent(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
           </h3>
         </div>
         <br/>
         <div>
-          <h3>
-            URL: <input defaultValue={historyUrl} onChange={(e)=>setHistoryUrl(e.target.value)}/>
+          <h3 style={{fontFamily:"Do Hyeon", fontSize:"25px"}}>
+            URL: <input defaultValue={historyUrl} onChange={(e)=>setHistoryUrl(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
           </h3>
         </div>
       </div>
 
-      <div style={{marginLeft:"350px", marginBottom:"-500px", marginTop:"100px"}}>
-          <button onClick={handleSubmit} style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
-            글추가
+      <div className="middle" style={{clear:"left", paddingTop:"100px"}}>
+          <button onClick={handleSubmit} id="onlineBtn" style={{fontSize:"30px", width:"250px"}}>
+            정보 추가
           </button>
       </div>
 

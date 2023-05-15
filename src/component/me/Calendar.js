@@ -141,9 +141,7 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
 
 
     const[diarylist, setDiarylist] = useState([]);
-    const [diaryOne, setDiaryOne] = useState([]);
     const[todolist, setTodolist] = useState([]);
-
 
     const [dateName, setDateName] = useState([]);   //기념일 이름
     const [locdate, setLocdate] = useState([]);   //기념일 날짜
@@ -151,27 +149,21 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
   //데이터를 모두 읽을 때까지 rendering을 조절하는 변수
   const [loading, setLoading] = useState(false);
 
+
     //다이어리 리스트
     function getCalList() {
         axios.get("http://localhost:3000/diaryCalList", {params:{}})
          .then(function(resp){
-            console.log(resp.data.list[0].title)
             setDiarylist(resp.data.list);
-            console.log(diarylist[0].title)
-            for(let i=0; i<diarylist.length; i++){
-                setDiaryOne(resp.data.list[i].title);
-                console.log(diaryOne);
-            }
          })
          .catch(function(err){
 
          })
     }
 
-
     //todo리스트
     function getTodoCallist() {
-        axios.get("http://localhost:3000/todoList", {params:{}})
+        axios.get("http://localhost:3000/getCalTodo", {params:{}})
             .then(function(resp){
               setTodolist(resp.data.list);
             })
@@ -197,19 +189,14 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
                 })
     }
 
-
-
-
     const rows = []; // 1주 * 4 or 주
     let days = [];  // 1주
     let day = startDate; //이번달 시작날짜, 시작요일 넣어놓기
     let formatedDate = ''; //설정날짜 초기화
-
-
+    
     while(day <= endDate) { //day가 endDate보다 커지면 종료
         for(let i = 0; i < 7; i++) {
             formatedDate = format(day, 'd');
-
             days.push(
                 <div key={day} style={{float:"left", display:"inline-block", backgroundColor:"rgb(0, 0, 0, 0.05)", margin:"4px", height:"90px", width:"120px", verticalAlign:"top", borderRadius:"10px"}}>
                     <span>
@@ -232,8 +219,10 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
                             diarylist.map(function(diary, idx){
                                 if(diary.rdate === format(day,'yyyy-MM-dd') || diary.rdate === format(day,'yyyy-MM-d')){
                                     return (
-                                        <span key={idx} style={{color:'green',fontFamily:"Nanum Pen Script", fontSize:"22px"}}>
-                                            <div> -{diary.title} </div>
+                                        <span key={idx} style={{color:'orange',fontFamily:"Nanum Pen Script", fontSize:"22px"}}>
+                                            <div>
+                                                <span style={{fontSize:"15px"}}>📔</span> {diary.title}
+                                            </div>
                                         </span>
                                     );
                                 }
@@ -244,8 +233,10 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
                             todolist.map(function(todo, idx){
                                 if(todo.rdate === format(day,'yyyy-MM-dd') || todo.rdate === format(day,'yyyy-MM-d')){
                                     return (
-                                        <span key={idx} style={{color:'orange', fontFamily:"Nanum Pen Script", fontSize:"22px"}}>
-                                            <div> -{todo.title} </div>
+                                        <span key={idx} style={{color:'green', fontFamily:"Nanum Pen Script", fontSize:"22px"}}>
+                                            <div>
+                                                <span style={{fontSize:"12px"}}>✅</span> {todo.title}
+                                            </div>
                                         </span>
                                     );
                                 }
@@ -280,6 +271,7 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
     useEffect(function(){
         getCalList();
         getTodoCallist();
+
         }, [getHoliday()]);
 
     //딜레이 한번 주기

@@ -1,13 +1,14 @@
 import axios from "axios";
 import { format } from "date-fns";
 import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import "../main_back.css"
 import Topbar from "../main/topbar";
 
 function DiaryWrite() {
   let history = useNavigate();  // 변수에 useNavigate 할당
+  let param = useParams();
 
   const [rdate, setRdate] = useState(format(new Date(),'yyyy-MM-dd'));
   console.log(rdate);
@@ -83,7 +84,7 @@ function DiaryWrite() {
 
     //글쓰기는 초기화 시켜줄 게 없으므로 useEffect를 사용하지 않아도 됨
     //작성완료 함수에서 한번에 처리해주기
-    axios.post("http://localhost:3000/diaryWrite", null, {params:{"id":id, "thumbnail":thumbnail, "rdate":rdate , "title": title, "content" :content}})
+    axios.post("http://localhost:3000/diaryWrite", null, {params:{"id":id, "thumbnail":thumbnail, "rdate":param.rdate , "title": title, "content" :content}})
          .then(function(resp){
             if(resp.data === "YES") {
               alert('글이 등록되었습니다.');
@@ -143,17 +144,17 @@ function DiaryWrite() {
                     </div>
                 </div>
             </div>
+            
             <div id="diaryWrite" className="middle" style={{marginTop:"80px", marginLeft:"500px"}}>
               <form name="frm" onSubmit={handleSubmit} encType="multipart/form-data">
                 <span style={{fontSize:"40px"}}>
-                  약속날짜 : <input name="rdate" style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} class="form-control-plaintext" id="staticEmail" value={rdateStr} onChange={(e)=>setRdate(e.target.value)}/>
+                  약속날짜 : <input name="rdate" style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} class="form-control-plaintext" id="staticEmail" defaultValue={param.rdate} onChange={(e)=>setRdate(e.target.value)}/>
                 </span>
                 <br/>
                 <br/>
                 <span style={{fontSize:"40px"}}>
                   제목: <input name="title" style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} class="form-control-plaintext" id="staticEmail" value={title} onChange={(e)=>setTitle(e.target.value)}/>
                 </span>
-                <br/>
                 <br/>
                 
                 <img src={`${imgFile}`} alt="" style={{width:"200px"}} />
@@ -168,7 +169,8 @@ function DiaryWrite() {
               
 
                 <br/>
-                <button type="submit">작성완료</button>
+                <br/>
+                <button type="submit" class="btn btn-success" style={{fontSize:"30px", marginTop:"20px", marginLeft:"50px", width:"170px", height:"60px"}}>작성완료</button>
               </form>
       
             </div>
@@ -176,3 +178,6 @@ function DiaryWrite() {
   )
 }
 export default DiaryWrite;
+
+
+
