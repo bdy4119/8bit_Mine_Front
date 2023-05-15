@@ -9,7 +9,6 @@ function TodoList() {
   let history = useNavigate();
   let param = useParams();
 
-  const [writeId, setWriteId] = useState();
   const[todolist, setTodolist] = useState([]);
 
 //  const[allChecked,setAllChecked] = useState(false);
@@ -20,8 +19,6 @@ function TodoList() {
   // paging
   const [page, setPage] = useState(1);
   const [totalCnt, setTotalCnt] = useState(0);
-
-
 
   const id = localStorage.getItem("id");
   console.log(id);
@@ -59,7 +56,7 @@ function TodoList() {
     axios.get("http://localhost:3000/todoList", {params:{"pageNumber":page, "id":id}})
         .then(function(resp){
           setTodolist(resp.data.list);
-          setWriteId(resp.data.list[0].id);
+          
           let nottoday = []; //오늘이랑 다른 날짜
           for(let i=0; i<resp.data.list.length; i++){
             if(resp.data.list[i].rdate !== todayStr
@@ -71,7 +68,7 @@ function TodoList() {
           setTotalCnt(resp.data.cnt - nottoday.length);
         })
         .catch(function(err){
-            alert("id값이 다르므로 todo리스트를 불러올 수 없습니다.");
+          
         })
   }
 
@@ -82,25 +79,6 @@ function TodoList() {
     getTodolist(page-1);
   }
 
-
-  function addBtn() {
-    if(writeId === id) {
-      return(
-        <p style={{textAlign:"center", fontSize:"40px", marginTop:"30px", marginLeft:"70px"}}>
-            [Todo리스트] 
-            <Link to={`/todoWrite/${param.rdate || format(new Date(),'yyyy-MM-dd')}/${id}`}>
-              <button id="addbtn" type='submit' style={{float:"right", marginRight:"50px", marginTop:"15px"}} />
-            </Link>
-          </p>
-      )
-    } else {
-      return(
-        <p style={{textAlign:"center", fontSize:"40px", marginTop:"30px", marginLeft:"0px"}}>
-            [Todo리스트] 
-          </p>
-      )
-    }
-  }
 
 
 
@@ -132,7 +110,12 @@ function TodoList() {
     <div>
       
       <div id="todo" style={{marginBottom:"-200px"}}>
-          {addBtn()}
+          <p style={{textAlign:"center", fontSize:"40px", marginTop:"30px", marginLeft:"70px"}}>
+                [Todo리스트] 
+                <Link to={`/todoWrite/${param.rdate || format(new Date(),'yyyy-MM-dd')}/${id}`}>
+                  <button id="addbtn" type='submit' style={{float:"right", marginRight:"50px", marginTop:"15px"}} />
+                </Link>
+          </p>
           <br/>
           <br/>
               <p style={{textAlign:"center", fontSize:"30px", marginTop:"-90px"}}>
