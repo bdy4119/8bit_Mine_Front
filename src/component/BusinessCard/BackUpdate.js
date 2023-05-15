@@ -111,28 +111,36 @@ function BackOrder() {
                     </div>
                 </div>
             </div>
-      <div style={{backgroundColor:"#9CA8F0", marginTop:"150px", height:"600px", width:"900px", marginLeft:"600px"}}>
-        <div style={{paddingTop:"50px"}}></div>
-        <div style={{marginLeft:"320px"}}>
-            <h3>
-                날짜 : <input defaultValue={historyDate} onChange={(e)=>setHistoryDate(e.target.value)}/>
-            </h3>
-          <br/>
-            <h3>
-              제목: <input defaultValue={historyTitle} onChange={(e)=>setHistoryTitle(e.target.value)}/>
-            </h3>
-          <br/>
-            <h3>
-              내용: <input defaultValue={historyContent} onChange={(e)=>setHistoryContent(e.target.value)}/>
-            </h3>
-          <br/>
-            <h3>
-              URL: <input defaultValue={historyUrl} onChange={(e)=>setHistoryUrl(e.target.value)}/>
-            </h3>
+      <div id="onlineCard" style={{paddingBottom:"100px"}}>
+     
+        <div style={{marginTop:"-20px", marginLeft:"50px"}}>
+            <div>
+              <h3 style={{fontFamily:"Do Hyeon", fontSize:"25px"}}>
+                  날짜 : <input defaultValue={historyDate} onChange={(e)=>setHistoryDate(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
+              </h3>
+            </div>
+            <br/>
+            <div>
+              <h3 style={{fontFamily:"Do Hyeon", fontSize:"25px"}}>
+                제목: <input defaultValue={historyTitle} onChange={(e)=>setHistoryTitle(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
+              </h3>
+            </div>
+            <br/>
+            <div>
+              <h3 style={{fontFamily:"Do Hyeon", fontSize:"25px"}}>
+                내용: <input defaultValue={historyContent} onChange={(e)=>setHistoryContent(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
+              </h3>
+            </div>
+            <br/>
+            <div>
+              <h3 style={{fontFamily:"Do Hyeon", fontSize:"25px"}}>
+                URL: <input defaultValue={historyUrl} onChange={(e)=>setHistoryUrl(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
+              </h3>
+            </div>
         </div>
 
-        <div style={{marginLeft:"350px", marginBottom:"-500px", marginTop:"100px"}}>
-            <button onClick={handleSubmit} style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
+        <div className="middle" style={{clear:"left", paddingTop:"100px", marginLeft:"20px"}}>
+            <button onClick={handleSubmit} id="onlineBtn" style={{fontSize:"30px", width:"250px"}}>
               수정완료
             </button>
         </div>

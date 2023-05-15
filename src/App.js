@@ -193,6 +193,7 @@ function App() {
 
           {/* me ,명함 */}
           <Route path="/me" element={<Me></Me>} />
+          <Route path="/me:seq/:title/:content/:rdate/:thumbnail" element={<Me></Me>} />
 
           <Route path="/diaryWrite/:rdate" element={<DiaryWrite />} />
           <Route path="/todoWrite/:rdate" element={<TodoWrite />} />
@@ -200,6 +201,7 @@ function App() {
           <Route path="/me/:rdate" element={<Me />} />
           <Route path="/me/:year/:month" element={<Me />} />
 
+          <Route path="/diaryUpdate/:seq/:title/:content/:rdate/:thumbnail" element={<DiaryUpdate />} />
           <Route path="/diaryUpdate/:seq/:title/:content/:rdate" element={<DiaryUpdate />} />
           <Route path="/todoUpdate/:seq/:title/:content/:rdate" element={<TodoUpdate />} />
 
