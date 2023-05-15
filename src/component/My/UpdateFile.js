@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import axios from "axios";
+import { Button, Table, Form, Input } from 'semantic-ui-react'
 export default function UpdateFile() {
   let params = useParams();
   const [json, setJson] = useState('');

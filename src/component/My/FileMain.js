@@ -5,8 +5,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import Pagination from "react-js-pagination"
 import "./page.css"
 import "./FileMain.css"
+
+import { Button, Table, Form, Input } from 'semantic-ui-react'
 import Barbtns from '../main/barbtns';
 import Topbar from '../main/topbar';
+
 const FileList = () => {
     // 체크박스를 위한 state 변수
     const [isChecked, setIsChecked] = useState(false);
@@ -150,56 +153,55 @@ const FileList = () => {
                     <option value="memo">메모</option>
                     <option value="writer">작성자</option>
                 </select>
-                <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="검색어를 입력해주세요" />
-                <button onClick={searchBtn}>검색</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="검색어를 입력해주세요" />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <Button size="mini" color="pink" onClick={searchBtn}>검색</Button>
                 <br /><br />
             </div>
 
 
-
-
-
             {fileList !== null
                 ?
-                // <div className='rwd-table2' align="center">
-                <div className='rwd-table2' style={{ marginTop: "10px" }} align="center">
-                    <table border="1" >
-                        <thead>
-                            <tr>
-                                <th>번호</th>
-                                <th>카테고리</th>
-                                <th>파일명</th>
-                                <th>등록일</th>
-                                <th>메모</th>
-                                <th>관리</th>
-                                <th>다운로드</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <div className="tab" align="center">
+                    <Table color="pink" textAlign='center'>
+                        <Table.Header>
+                            <Table.Row>
+                                <Table.HeaderCell>번호</Table.HeaderCell>
+                                <Table.HeaderCell>카테고리</Table.HeaderCell>
+                                <Table.HeaderCell>파일명</Table.HeaderCell>
+                                <Table.HeaderCell>등록일</Table.HeaderCell>
+                                <Table.HeaderCell>메모</Table.HeaderCell>
+                                <Table.HeaderCell>관리</Table.HeaderCell>
+                                <Table.HeaderCell>다운로드</Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
+                        <Table.Body>
                             {fileList.map(function (file, i) {
                                 return (
-                                    <tr key={i}>
+                                    <Table.Row key={i}>
 
-                                        <td>{i + 1}</td>
-                                        <td>{file.mfCategory}</td>
-                                        <td>{file.mfTitle}</td>
-                                        <td>{file.mfRegdate}</td>
-                                        <td>{file.mfMemo}</td>
-                                        <td>
+                                        <Table.Cell>{i + 1}</Table.Cell>
+                                        <Table.Cell>{file.mfCategory}</Table.Cell>
+                                        <Table.Cell>{file.mfTitle}</Table.Cell>
+                                        <Table.Cell>{file.mfRegdate}</Table.Cell>
+                                        <Table.Cell>{file.mfMemo}</Table.Cell>
+                                        <Table.Cell>
                                             {<Link to={`/updateFile/${file.mfSeq}`}><button className='updatebtns'>수정</button></Link>}
 
                                             <button className='delbtns' onClick={() => deleteFile(`${file.mfSeq}`)}>삭제</button>
 
 
-                                        </td>
+                                        </Table.Cell>
                                         <td><button className='downbtns' onClick={() => { download(file.mfNFilename) }}>다운로드</button></td>
-                                    </tr>
+                                    </Table.Row>
                                 );
                             })}
-                        </tbody>
-                    </table>
+                        </Table.Body>
+
+                    </Table>
                     <br />
-                    <button className='upbtns' style={{ marginLeft: "1050px", color: 'white' }}><Link to='/FileUpload'>업로드</Link></button>
+                    <Button className='upbtns' size="large" color="pink" onClick={() => { navigate('/FileUpload') }} style={{ marginLeft: "1400px", color: 'white' }}>업로드</Button>
                     <br /><br />
                     <Pagination
                         activePage={page}
