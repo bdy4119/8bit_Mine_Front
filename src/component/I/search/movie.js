@@ -1,25 +1,24 @@
+import { useState } from "react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+
 import Pagination from "react-js-pagination";
+import { Button, Table, Input } from 'semantic-ui-react'
 import "./page.css";
+import "./search.css";
 
 import blued from "../image/mine_icon.png";
 import tmdb from "../image/tmdb_rmv.png";
-import { Button, Table, Input } from 'semantic-ui-react'
+import { useEffect } from "react";
 
 function Movie() {
 
+    // 변수 선언
     const [movie, setMovie] = useState('');
     const [movielist, setMovielist] = useState([]);
     const [page, setPage] = useState(1);
     const [total, setTotal] = useState(0);
 
-    useEffect(function () {
-        const token = localStorage.getItem("token");
-        document.getElementById("backtop").style.visibility = "hidden";
-    }, []);
-
-
+    // 영화 검색
     function findMovie() {
         axios.get('http://localhost:3000/tmdb', { params: { "kind": "movie", "query": encodeURIComponent(movie), "page": 1 } })
             .then(function (resp) {
@@ -27,11 +26,13 @@ function Movie() {
                 setMovielist(resp.data.results)
                 setTotal(resp.data.total_results)
             })
+
             .catch(function (err) {
                 alert(err);
             })
     }
 
+    // 페이지 변경
     function pageChange(page) {
         setPage(page);
         axios.get('http://localhost:3000/tmdb', { params: { "kind": "movie", "query": encodeURIComponent(movie), "page": page } })
@@ -39,11 +40,13 @@ function Movie() {
                 console.log(resp);
                 setMovielist(resp.data.results)
             })
+
             .catch(function (err) {
                 alert(err);
             })
     }
 
+    // 영화 데이터 정리
     function TableRow(props) {
         return (
             <Table.Row>
@@ -58,11 +61,15 @@ function Movie() {
         );
     }
 
+    useEffect(() => {
+        document.getElementById("backtop").style.visibility = "hidden";
+    }, []); 
 
     return (
         <div id="back">
-            <img src={blued} width="70px" height="70px" style={{ position: "absolute", marginLeft: "20px", marginTop: "35px" }} />
-            <div className="bgmtitle">
+
+            <img src={blued} width="70px" height="70px" style={{ position: "absolute", marginLeft: "20px", marginTop: "55px" }} />
+            <div className="pwNavertitle">
                 <h2 style={{ fontSize: "45px" }}>영화 검색</h2>
             </div>
 
@@ -71,7 +78,7 @@ function Movie() {
             </div>
 
             <div>
-                <img src={tmdb} width="160px" height="33px" style={{ position: "absolute", marginLeft: "430px", marginTop: "70px" }} />
+                <img src={tmdb} width="160px" height="33px" style={{ position: "absolute", marginLeft: "430px", marginTop: "90px" }} />
             </div>
 
             <div className="pwsearch">
@@ -90,6 +97,7 @@ function Movie() {
                             <Table.HeaderCell>개봉일</Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
+
                     <Table.Body>
                         {
                             movielist.map(function (object, i) {
@@ -112,6 +120,7 @@ function Movie() {
                     onChange={pageChange}
                 />
             </div>
+            
         </div>
     );
 }
