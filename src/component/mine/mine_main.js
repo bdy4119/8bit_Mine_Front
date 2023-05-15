@@ -263,8 +263,8 @@ function Mine_main(){
                     <audio id="clear" src={clear} />
 
                     <div>
-                        <button onClick={(e) => {window.location.href = "/mine"}}>사용자 모드</button>
-                        <button onClick={(e) => {window.location.href = "/mine_edi/1"}}>에디터 모드</button>
+                        <button id="usermode2" onClick={(e) => {window.location.href = "/mine"}}>사용자 모드</button>
+                        <button id="editmode2" onClick={(e) => {window.location.href = "/mine_edi/1"}}>에디터 모드</button>
                     </div>
                 </div>
 

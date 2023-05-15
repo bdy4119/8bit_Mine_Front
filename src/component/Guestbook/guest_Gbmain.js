@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import "../guest_back.css"
 import "./Gbmain.css"
+import logo from '../mine/images/logo.png';
+import purpled from "./image/purpled.png";
 
 
 function Gbmain() {
@@ -68,42 +70,72 @@ function Gbmain() {
 
     return (
         <div id="back">
+            <div>
+                <div id="logo" onClick={() => {movePage('/main')}} style={{marginLeft:"-850px", marginTop:"-30px"}}>
+                    <img src={logo} alt="no" width="300px" />
+                </div>
+            </div>
             <div id="topbar">
                 <div id="barbtns">
-                    <div id="guestminebtn" onClick={(e) => { window.location.href = "/guest_mine/" + mineid }}>MINE</div>
-                    <div id="guestcardbtn">CARD</div>
-                    <div id="guestbookbtn" onClick={(e) => { window.location.href = "/guest_gbmain/" + mineid }}>GUEST</div>
-                    <div id="gohomebtn" onClick={(e) => { window.location.href = "/gbmain" }}>HOME</div>
+                    <div id="ibtn" onClick={(e) => { window.location.href = "/guest_mine/" + mineid }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                      MINE
+                      </p>
+                    </div>
+                    <div id="mybtn">
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                      CARD
+                      </p>
+                    </div>
+                    <div id="mebtn" onClick={(e) => { window.location.href = "/guest_gbmain/" + mineid }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                      GUEST
+                      </p>
+                    </div>
+                    <div id="minebtn" onClick={(e) => { window.location.href = "/gbmain" }}>
+                      <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
+                      HOME
+                      </p>
+                    </div>
                 </div>
             </div>
-            <div id="toolbox">
-                <div id="guestbooklist">
-                    <table border="1">
-                        <thead>
-                            <tr>
-                                <th>번호</th>
-                                <th>내용</th>
-                                <th>음성</th>
-                                <th colSpan="2">관리</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                vilist.map(function (object, i) {
-                                    return (
-                                        <TableRow2 obj={object} key={i} cnt={i + 1} />
-                                        /* key를 지정 안하면, Each child in a list should have a unique "key" prop. 가 나옴 */
-                                    )
-                                })
-                            }
-                            <tr>
-                                <td colSpan="4"><button onClick={go_gbadd}>방명록 쓰기</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <img src={purpled} width="70px" height="70px" style={{ position: "absolute", marginLeft: "-750px", marginTop: "80px" }} />&nbsp;
+            <div id="guestbooklist">
+                <h3 style={{ position: "absolute", marginLeft: "100px", marginTop: "-60px", fontSize: "35px" }}>방명록</h3>
+                {
+                    vilist.map(function (object, i) {
+                        return (
+                            <TableRow2 obj={object} key={i} cnt={i + 1} />
+                        )
+                    })
+                }
+            </div>
+            <div id="guestbooklist">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>내용</th>
+                            <th>음성</th>
+                            <th colSpan="2">관리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            vilist.map(function (object, i) {
+                                return (
+                                    <TableRow2 obj={object} key={i} cnt={i + 1} />
+                                    /* key를 지정 안하면, Each child in a list should have a unique "key" prop. 가 나옴 */
+                                )
+                            })
+                        }
+                        <tr>
+                            <td colSpan="4"><button onClick={go_gbadd}>방명록 쓰기</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
                 
-            </div>
         </div>
     );
 }
