@@ -114,8 +114,10 @@ function Gbmain() {
                     </Table.Body>
                 </Table>
 
-                <div><Button color="red" size="large" style={{ position: "absolute", marginLeft: "780px", marginTop: "-120px" }}
-                    onClick={() => gb_del(`${props.obj.seq}`)}>삭제</Button></div>
+                <div>
+                    <Button color="red" type="button" size="large" style={{ position: "absolute", marginLeft: "780px", marginTop: "-120px" }}
+                     onClick={() => gb_del(props.obj.seq)}>삭제</Button>
+                </div>
 
             </div>
         );
@@ -163,14 +165,8 @@ function Gbmain() {
             })
     }
 
-    // 수정
-    function go_upd(seq) {
-        history(`/gbupdate/${seq}`)
-    }
-
     // 친구 목록 삭제
     function deletefriend(seq) {
-        alert(seq);
 
         axios.post("http://localhost:3000/deletefriend", null, { params: { "seq": seq } })
             .then(res => {

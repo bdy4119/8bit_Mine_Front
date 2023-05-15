@@ -1,5 +1,6 @@
 import React, {useState, useEffect, Fragment} from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import alram from "./images/alram.png";
 import "../mine_back.css";
@@ -9,9 +10,19 @@ function Mine_guestbook({ setAlramOpen}){
 
     const id = localStorage.getItem("id");
 
+    const history = useNavigate();
+
     const closeModal = () => {
       setAlramOpen(false);
   };
+
+  const getUser = async () => {
+    const jwt = localStorage.getItem("token");
+
+    if (jwt === null) {
+        history("/");
+    }
+    }
 
     const [ansList, setAnsList] = useState([]);
 
@@ -28,6 +39,7 @@ function Mine_guestbook({ setAlramOpen}){
         
         };
 
+        getUser();
         answerList();
         noticemineupdate();
 

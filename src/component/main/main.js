@@ -3,6 +3,7 @@ import axios from "axios";
 import { format } from 'date-fns';
 import "../main_back.css"
 import icon from "./images/mine_icon.png";
+import my_icon from "./images/my_icon.png";
 import guest_icon from "./images/guest_icon.png";
 import "./main.css";
 import { useNavigate } from "react-router-dom";
@@ -27,6 +28,23 @@ function Main(){
     const token = localStorage.getItem("token");
     const id = localStorage.getItem("id");
 
+
+    const[businessList, setBusinessList] = useState([]);
+
+  
+    function business() {
+        const id = localStorage.getItem("id");
+        console.log(id);
+
+        axios.get("http://localhost:3000/businesscard", {params:{}})
+            .then(function(resp){
+            //  console.log(resp.data.list);
+            setBusinessList(resp.data.list);
+            })
+            .catch(function(err){
+                alert("정보를 추가해주세요");
+            })
+    }
 
     const noticemine = async() => {
         const response = await axios.post('http://localhost:3000/noticemine', null, { params:{"id":id} });
@@ -167,6 +185,7 @@ function Main(){
         noticemine();
         noticebook();
         getTodolist();
+        business();
     }, []);
 
     return (
@@ -229,6 +248,43 @@ function Main(){
                     <div id="card_area" onMouseOver={hover_over_card} onMouseOut={hover_out_card} onClick={() => { movePage('/card') }}>
                         <div id="inner">
 
+                            <div className="middle" id="carddivbox" style={{marginLeft:"-650px"}}>
+                                {
+                                    businessList.map(function(business, idx){
+                                        return(
+                                        <div style={{marginBottom:"-100px", marginRight:"-400px"}} key={idx}>
+                                            <div style={{float:"left"}}>
+                                            <img src={business.thumbnail ? `${process.env.PUBLIC_URL}/Business-img/${business.thumbnail}`:'/Business-img/나에대해 알아보기.png'}
+                                                    alt="프로필 이미지" id="cardcircle" style={{marginLeft:"-500px", marginTop:"-50px"}} />    
+                                            </div>
+
+                                            <div>
+                                                <div id="cardtalk">
+                                                    <span style={{fontFamily:'Do Hyeon', fontSize:"15px", width:"150px", left:"40px", position:"absolute"}}>
+                                                        {business.introduce}
+                                                    </span>
+                                                </div>
+
+                                                <div style={{marginLeft:"-250px"}}>
+                                                    <div>
+                                                        <span style={{fontFamily:'Do Hyeon', fontSize:"15px"}}>
+                                                            이름: {business.name}
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span style={{fontFamily:'Do Hyeon', fontSize:"15px"}}>
+                                                            H/P: {business.phoneNum}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        )
+                                    })
+                                }
+                            </div>
+
                             <div id="hover_card">
                                 "Online card" 를 꾸며 "나" 를 공유해봐요!
                                 <br /><br/>
@@ -240,6 +296,10 @@ function Main(){
 
                     <div id="my_area" onMouseOver={hover_over_my} onMouseOut={hover_out_my} onClick={() => { movePage('/Filelist') }}>
                         <div id="inner">
+
+                            <div id="myicon">
+                                <img src={my_icon} alt="no" width="180px"></img>
+                            </div>
 
                             <div id="hover_my">
                                 "MY" 를 통해 "나" 의 문서를 정리해봐요!
