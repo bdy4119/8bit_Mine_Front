@@ -44,6 +44,7 @@ function Gbmain() {
             .then(function (resp) {
                 console.log(resp);
                 if (resp.data === 'gb_del_OK') {
+                    axios.post("http://localhost:3000/noticebookupdate", null, {params: { "id": id }});
                     alert('방명록을 삭제했습니다.');
                     window.location.reload();
                 }
@@ -118,6 +119,14 @@ function Gbmain() {
     };
 
     useEffect(() => {
+
+        const noticebookupdate = async () => {
+            await axios.post("http://localhost:3000/noticebookupdate", null, {params: { "id": id }});
+        
+        };
+
+        noticebookupdate();
+
         fetchData();
         fetData();
         friendlist();

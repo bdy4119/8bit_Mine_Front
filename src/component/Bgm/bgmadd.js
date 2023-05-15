@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import cglogo from "./ChatGptLogo.png";
+import cglogo from "./ChatGPTlogo.png";
 import ytlogo from "./youtube_logo.png";
 
 import redd from "../I/image/redd.png";

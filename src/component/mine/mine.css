@@ -22,12 +22,14 @@
     display: inline-block;
     background-image: url(./images/keyboard.png);
     background-size: contain;
-    border: 2px solid #000;
-    width: 40px;
-    height: 40px;
+    width: 75px;
+    height: 65px;
+    border-radius: 10px;
+    border: 2px solid #548235;
+    box-shadow: 2px 3px #548235;
+    left: 170px;
+    top: 265px;
     position: absolute;
-    left: 240px;
-    top: 300px;
 }
 
 .left {
@@ -89,11 +91,13 @@
     background-image: url(./images/play.png);
     background-size: contain;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     position: absolute;
-    left: 240px;
-    top: 450px;
+    border: 2px solid #535353;
+    box-shadow: 2px 3px #535353;
+    left: 60px;
+    top: 220px;
 }
 
 .pause {
@@ -101,22 +105,27 @@
     background-image: url(./images/pause.png);
     background-size: contain;
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     position: absolute;
-    left: 140px;
-    top: 450px;
+    border: 2px solid #535353;
+    box-shadow: 2px 3px #535353;
+    left: 60px;
+    top: 310px;
 }
 
 .showfull {
     display: inline-block;
     background-image: url(./images/fullshow.png);
     background-size: contain;
-    width: 40px;
-    height: 40px;
+    width: 75px;
+    height: 65px;
+    border-radius: 10px;
     position: absolute;
-    left: 150px;
-    top: 300px;
+    border: 2px solid #2F5597;
+    box-shadow: 2px 3px #2F5597;
+    left: 170px;
+    top: 380px;
 }
 
 
@@ -172,12 +181,14 @@
 .start {
     background-color: #fff;
     z-index: 2;
-    width: 200px;
-    height: 80px;
-    left: 50px;
-    top: 170px;
+    width: 75px;
+    height: 65px;
+    left: 170px;
+    top: 150px;
     position:absolute;
-    border-radius: 7px;
+    border: 2px solid #BF9000;
+    box-shadow: 2px 3px #BF9000;
+    border-radius: 10px;
     background-image: url(./images/start.png);
     background-size: contain;
     background-position: center;
@@ -306,23 +317,80 @@
     width: 160px;
 }
 
+
+
+
+
+
+@font-face {
+    font-family: 'insungitCutelivelyjisu';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/insungitCutelivelyjisu.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 #mineguestbook {
     z-index: 999;
     position: absolute;
     margin: 0 auto;
-    padding-bottom: 25px;        
-    width: 400px;
+    width: 1000px;
     height: 600px;
-    right: 60px;
-    top: 170px;
-    /* background: #976d89;     */
-    /* border: 2px solid #212121; */
-     /* border-radius: 12px; */
+    right: 50%;
+    margin-right: -600px;
+    top: 20px;
+}
 
-    background: rgba( 255, 255, 255, 0.25 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 6px );
-    -webkit-backdrop-filter: blur( 4px );
-    border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
+#close2 {
+    position: absolute;
+    top: 290px;
+    left: 30px;
+    width: 40px;
+    height: 40px;
+}
+
+#alramimg {
+    position: absolute;
+}
+
+#report {
+    position: relative;
+    font-family: insungitCutelivelyjisu;
+    font-size: 15px;
+    font-weight: 700;
+    table-layout: fixed;
+    border-collapse: collapse;
+    top: 340px;
+    left: 60px;
+}
+
+#report tbody{
+    overflow:auto;
+    display: block;
+    height:400px;
+    width: 680px;
+}
+
+#report thead{
+    display: block;
+    width: 680px;
+}
+
+.short {
+    width: 80px;
+  }
+
+.long {
+    width: 170px;
+}
+
+#report th, #report td {
+    border-bottom: 1px solid #222222;
+    padding: 10px;
+  }
+
+  #report button{
+    background-color: #810d05;
+    width: 40px;
+    height: 25px;
 }
