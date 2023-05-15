@@ -181,7 +181,6 @@ function Gbmain() {
         noticebookupdate();
 
         fetchData();
-        fetData();
         friendlist();
     }, []);
 
