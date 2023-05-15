@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, {useState, useLayoutEffect} from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import "./mine_full.css";
 import bgm from './images/bgm.mp3';
@@ -22,6 +22,15 @@ function Mine_full(){
     const [guestid, setguestid] = useState('');
 
     let params = useParams();
+    const history = useNavigate();
+
+    const getUser = async () => {
+        const jwt = localStorage.getItem("token");
+
+        if (jwt === null) {
+            history("/");
+        }
+    }
 
     let mineid = params.mineid;
 
@@ -64,6 +73,7 @@ function Mine_full(){
     }
 
     useLayoutEffect(()=>{
+        getUser();
         mineList();
         checkList();
     }, []);

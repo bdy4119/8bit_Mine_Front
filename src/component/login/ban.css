@@ -5,14 +5,14 @@
 }
 
 .banImg {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 100px;
+    margin-top: 10px;
+    margin-left: 625px;
+    width: 600px;
+    height: 600px;
 }
 
 .banWord2 {
     text-align: center;
     color: red;
-    margin-top: -10px;
+    margin-top: 0px;
 }

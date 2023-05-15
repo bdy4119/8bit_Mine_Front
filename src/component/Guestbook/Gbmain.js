@@ -12,6 +12,7 @@ import "./Gbmain.css"
 import "./page.css";
 
 import purpled from "./image/purpled.png";
+import greend from "./image/greend.png";
 
 function Gbmain() {
 
@@ -20,10 +21,10 @@ function Gbmain() {
 
     const [gblist, setGblist] = useState([]);
     const [frielist, setFrielist] = useState([]);
-    const [profPic, setProfPic] = useState('');
     const [page, setPage] = useState(0);
     const [total, setTotal] = useState(0);
-
+    const [fpage, setFpage] = useState(0);
+    const [ftotal, setFtotal] = useState(0);
 
     const id = localStorage.getItem("id");
 
@@ -48,15 +49,23 @@ function Gbmain() {
     // 친구목록 조회
     const friendlist = async () => {
         const id = localStorage.getItem("id");
-        const response = await axios.post("http://localhost:3000/friendlist", null, { params: { "id": id } });
+        const response = await axios.post("http://localhost:3000/friendlist", null, { params: { "id": id, "start": 1, "end": 4 } });
+        const responseC = await axios.post("http://localhost:3000/friendCount", null, { params: { "id": id } })
 
         setFrielist(response.data);
+        setFtotal(responseC.data);
     };
 
     useEffect(() => {
+        const noticebookupdate = async () => {
+            await axios.post("http://localhost:3000/noticebookupdate", null, { params: { "id": id } });
+
+        };
+
         getUser();
         fetchData();
         friendlist();
+        noticebookupdate();
     }, []);
 
     // 삭제
@@ -65,7 +74,7 @@ function Gbmain() {
             .then(function (resp) {
                 console.log(resp);
                 if (resp.data === 'gb_del_OK') {
-                    axios.post("http://localhost:3000/noticebookupdate", null, {params: { "id": id }});
+                    axios.post("http://localhost:3000/noticebookupdate", null, { params: { "id": id } });
                     alert('방명록을 삭제했습니다.');
                     window.location.reload();
                 }
@@ -78,24 +87,16 @@ function Gbmain() {
 
     // 방명록 Data 정리
     function TableRow(props) {
-        const id = props.obj.fromid;
-
-        axios.get('http://localhost:3000/getItems', { params: { "email": id } })
-            .then(function (resp) {
-                setProfPic(resp.data.profPic);
-            })
-            .catch(function (err) {
-                alert(err);
-            })
+        const profPic = props.obj.profpic;
 
         return (
             <div>
-
                 <div style={{ position: "absolute", marginLeft: "120px", marginTop: "15px", fontWeight: "bold" }}>{props.obj.rnum}</div>
                 <div style={{ position: "absolute", marginLeft: "400px", marginTop: "15px", fontWeight: "bold" }}>{props.obj.fromname} ({props.obj.fromid})</div>
                 <div style={{ position: "absolute", marginLeft: "750px", marginTop: "15px", fontWeight: "bold" }}>{props.obj.regdate}</div>
                 <div style={{ position: "absolute", marginLeft: "70px", marginTop: "70px", fontWeight: "bold" }}>
-                    <img src={`${process.env.PUBLIC_URL}/profPic/${profPic}`} width="110px" height="110px" /></div>
+                    <img src={`${process.env.PUBLIC_URL}/profPic/${profPic}`} width="110px" height="110px" />
+                </div>
 
                 <Table color="purple" border="1" textAlign="center">
                     <Table.Header>
@@ -113,10 +114,25 @@ function Gbmain() {
                     </Table.Body>
                 </Table>
 
-                <div><Button color="red" size="large" style={{ position: "absolute", marginLeft: "780px", marginTop: "-120px" }}
-                    onClick={() => gb_del(`${props.obj.seq}`)}>삭제</Button></div>
+                <div>
+                    <Button color="red" type="button" size="large" style={{ position: "absolute", marginLeft: "780px", marginTop: "-120px" }}
+                     onClick={() => gb_del(props.obj.seq)}>삭제</Button>
+                </div>
 
             </div>
+        );
+    }
+
+    // 친구목록 Data 정리
+    function TableRow2(props) {
+        return (
+            <>
+                <Table.Row>
+                    <Table.Cell style={{ width: "150px" }}>{props.obj.friendname}({props.obj.friendid})</Table.Cell>
+                    <Table.Cell><Button color="olive" size="small" type="button" onClick={() => gomine(props.obj.friendid)}>Mine</Button></Table.Cell>
+                    <Table.Cell><Button color="red" type="button" size="small" onClick={() => deletefriend(props.obj.seq)}>삭제</Button></Table.Cell>
+                </Table.Row>
+            </>
         );
     }
 
@@ -135,9 +151,18 @@ function Gbmain() {
             })
     }
 
-     // 수정
-     function go_upd(seq) {
-        history(`/gbupdate/${seq}`)
+    function fpageChange(page) {
+        setFpage(page);
+
+        axios.post("http://localhost:3000/friendlist", null, { params: { "id": id, "start": (page - 1) * 4 + 1, "end": (page) * 4 } })
+            .then(function (resp) {
+                setFrielist(resp.data);
+                console.log(resp);
+            })
+
+            .catch(function (err) {
+                alert(err);
+            })
     }
 
     // 친구 목록 삭제
@@ -171,26 +196,13 @@ function Gbmain() {
         }
     };
 
-    useEffect(() => {
-
-        const noticebookupdate = async () => {
-            await axios.post("http://localhost:3000/noticebookupdate", null, {params: { "id": id }});
-        
-        };
-
-        noticebookupdate();
-
-        fetchData();
-        friendlist();
-    }, []);
-
     return (
         <div id="back">
 
             <Topbar />
             <Barbtns />
 
-            <img src={purpled} width="70px" height="70px" style={{ position: "absolute", marginLeft: "-750px", marginTop: "80px" }} />&nbsp;
+            <img src={purpled} width="70px" height="70px" style={{ position: "absolute", marginLeft: "200px", marginTop: "80px" }} />&nbsp;
             <div id="guestbooklist">
                 <h3 style={{ position: "absolute", marginLeft: "100px", marginTop: "-60px", fontSize: "35px" }}>방명록</h3>
                 {
@@ -204,36 +216,50 @@ function Gbmain() {
 
             <div id="friendlist">
                 <div>
-                    <h4>내 초대링크</h4>
-                    <button onClick={() => handleCopyClipBoard('http://localhost:9001/friendcard/' + id)}>복사</button>
+                    <img src={greend} width="70px" height="70px" style={{ position: "absolute", marginLeft: "-10px", marginTop: "20px" }} />&nbsp;
+                    <h3 style={{ marginLeft: "80px", marginTop: "18px", fontSize: "30px" }}>친구목록 및 초대</h3>
                 </div>
+
                 <div>
-                    <table border="1">
-                        <thead>
-                            <tr>
-                                <th>이름</th>
-                                <th>Mine 방문</th>
-                                <th>친구삭제</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <Button color="green" style={{ position: "absolute", marginLeft: "370px", marginTop: "-35px" }}
+                        onClick={() => handleCopyClipBoard('http://localhost:9001/friendcard/' + id)}>초대 링크</Button>
+                </div>
+
+                <div>
+                    <Table color={"green"} style={{ position: "absolute", marginLeft: "-20px", marginTop: "30px" }} textAlign="center">
+                        <Table.Header>
+                            <Table.Row>
+                                <Table.HeaderCell>이름</Table.HeaderCell>
+                                <Table.HeaderCell>Mine 방문</Table.HeaderCell>
+                                <Table.HeaderCell>친구삭제</Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
+
+                        <Table.Body>
                             {
                                 frielist.map(function (object, i) {
                                     return (
-                                        <tr>
-                                            <td>{object.friendid}</td>
-                                            <td><button type="button" onClick={() => gomine(object.friendid)}>Mine</button></td>
-                                            <td><button type="button" onClick={() => deletefriend(object.seq)}>삭제</button></td>
-                                        </tr>
-                                    )
+                                        <TableRow2 obj={object} key={i} />)
                                 })
                             }
-                        </tbody>
-                    </table>
+                        </Table.Body>
+                    </Table>
                 </div>
             </div>
 
-            <div style={{ position: "absolute", marginLeft: "1400px", marginTop: "730px" }}>
+            <div style={{ position: "absolute", marginLeft: "1430px", marginTop: "450px" }}>
+                <Pagination
+                    activePage={fpage}
+                    itemsCountPerPage={4}
+                    totalItemsCount={ftotal}
+                    pageRangeDisplayed={5}
+                    prevPageText={"이전"}
+                    nextPageText={"다음"}
+                    onChange={fpageChange}
+                />
+            </div>
+
+            <div style={{ position: "absolute", marginLeft: "920px", marginTop: "70px" }}>
                 <Pagination
                     activePage={page}
                     itemsCountPerPage={3}

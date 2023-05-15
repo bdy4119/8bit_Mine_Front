@@ -113,7 +113,7 @@ function Gate() {
             <div className="loginArea">
                 <h1 className="gateWord">
                     Mine에 오신것을 환영합니다!
-                    <br /><br />
+                    <br />
                     다음 서비스들의 아이디가 있으신가요?
                     <br />
                     해당 서비스들의 아이디를 통해 간편하게 Mine에 접속해보세요

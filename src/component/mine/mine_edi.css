@@ -5,6 +5,32 @@
     float: left;
 }
 
+@font-face {
+    font-family: 'MBC1961GulimM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/MBC1961GulimM.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+}
+
+#usermode {
+    width: 120px;
+    height: 40px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    font-family: MBC1961GulimM;
+    font-size: 15px;
+}
+
+#editmode {
+    width: 120px;
+    height: 40px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-family: MBC1961GulimM;
+    font-size: 15px;
+    background-color: #3867a3;
+    color: white;
+}
 
 #gamebox {
     width: 800px;
@@ -64,16 +90,24 @@
     float: left;
 }
 
+@font-face {
+    font-family: 'IM_Hyemin-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 #editor {
     border: 5px solid #3867a3;
     z-index: 0;
     width: 450px;
-    height: 550px;
+    height: 600px;
     border-radius: 8px;
-    top: 20px;
+    top: 0px;
     left: 0px;
-    background-color: #ccc;
+    background-color: #eee;
     position: relative;
+    font-family: IM_Hyemin-Bold;
 }
 
 #posbtns {
@@ -82,42 +116,29 @@
 }
 
 #posbtns button{
-    width: 55px;
-    height: 40px;
-}
-
-.myButton {
-	box-shadow:inset 0px 1px 0px 0px #bbdaf7;
-	background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
-	background-color:#79bbff;
-	border:1px solid #84bbf3;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:6px 2px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #528ecc;
-}
-.myButton:hover {
-	background:linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
-	background-color:#378de5;
-}
-.myButton:active {
-	position:relative;
-	top:1px;
+    width: 60px;
+    height: 50px;
+    background-color: #80d4f6;
+    box-shadow: 2px 3px #47b8e0;
+    padding: 5px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 50px;
+    font-family: IM_Hyemin-Bold;
 }
 
 #posimg {
+    position: relative;
+    top: 40px;
     text-align: center;
-    height: 280px;
+    height: 340px;
+    font-family: IM_Hyemin-Bold;
 }
 
 #preimg {
     height: 250px;
 }
+
 
 #posimg textarea {
     resize: none;
@@ -126,6 +147,7 @@
     padding: 10px;
     width: 400px;
     height: 6em;
+    font-family: IM_Hyemin-Bold;
 }
 
 #elevenbox input {
@@ -136,6 +158,7 @@
     padding: 10px;
     width: 300px;
     height: 55px;
+    font-family: IM_Hyemin-Bold;
 }
 
 .labelnumber {
@@ -150,10 +173,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: IM_Hyemin-Bold;
 }
 
 #elevenbox p {
     font-size: 15px;
+    font-family: IM_Hyemin-Bold;
 }
 
 

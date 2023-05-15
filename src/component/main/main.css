@@ -189,6 +189,42 @@
     font-family: MBC1961GulimM;
 }
 
+#carddivbox {
+    position: absolute;
+    top: 250px;
+    right: 200px;
+    width: 400px;
+    height: 200px;
+    text-align: center;
+    background: url(../images/명함bg.png);
+    background-size: cover;
+    filter: drop-shadow(10px 10px 10px #b3b2b2);
+}
+
+#cardcircle {
+    position: absolute;
+    top: 90px;
+    right: 220px;
+    width:140px;
+    height:140px;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+#cardtalk {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 200px;
+    height: 90px;
+    text-align: center;
+    background: url(../images/말풍선.png);
+    background-size: cover;
+    padding: 20px;
+  }
+
+
+
 #my_area {
     margin-left: 2%;
     margin-top: 3%;  
@@ -198,6 +234,21 @@
     background-color: rgb(243, 243, 243);
     text-align: center;
     font-size: 25px;
+}
+
+#myicon {
+    float: left;
+    position: absolute;
+    left: 325px;
+    top: 630px;
+    margin-left: -90px;
+    height: 180px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 40px;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
 }
 
 #hover_my {

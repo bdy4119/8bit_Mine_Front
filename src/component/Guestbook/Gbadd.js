@@ -26,6 +26,7 @@ function Gbadd() {
   const [toname, setToname] = useState('');
   const [fromname, setFromname] = useState('');
   const [filename, setFilename] = useState('');
+  const [profPic, setProfPic] = useState('');
   const [voiceStat, setVoiceStat] = useState(true);
 
   // 접속 권한 체크
@@ -47,6 +48,7 @@ function Gbadd() {
 
     const resp2 = await axios.get('http://localhost:3000/getItems', { params: { "email": fid } });
     setFromname(resp2.data.name);
+    setProfPic(resp2.data.profPic);
 
     if (tid === fid) {
       alert('나의 방명록에는 글을 남길 수 없습니다.');
@@ -81,7 +83,7 @@ function Gbadd() {
 
     axios.get('http://localhost:3000/gb_add', {
       params: {
-        "toid": tid, "toname": toname, "fromid": fid, "fromname": fromname,
+        "toid": tid, "toname": toname, "fromid": fid, "fromname": fromname, "profpic":profPic,
         "comment": comm, "isvoice": isvoice, "filename": filename
       }
     })
