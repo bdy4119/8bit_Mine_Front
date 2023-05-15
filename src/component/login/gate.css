@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 70px;
+    margin-top: 60px;
 }
 
 .socialLogo {
@@ -15,8 +15,8 @@
 
 .prevBtn {
     position: absolute;
-    left: 700px;
-    top: 950px;
+    left: 625px;
+    top: 900px;
 
     background-color: #4e3b3b;
     color: #fff;
@@ -28,8 +28,8 @@
 
 .nextBtn {
     position: absolute;
-    right: 725px;
-    top: 950px;
+    right: 625px;
+    top: 900px;
 
     background-color: #4e3b3b;
     color: #fff;
@@ -41,26 +41,26 @@
 
 .Glogo {
     position: absolute;
-    right: 850px;
-    top: 945px;
+    right: 840px;
+    top: 900px;
 }
 
 .Mlogo {
     position: absolute;
-    right: 835px;
-    top: 945px;
+    right: 830px;
+    top: 900px;
 }
 
 .Nlogo {
     position: absolute;
-    right: 810px;
-    top: 940px;
+    right: 800px;
+    top: 900px;
 }
 
 .Klogo {
     position: absolute;
-    right: 850px;
-    top: 945px;
+    right: 845px;
+    top: 900px;
 }
 
 .gateWord {

@@ -70,8 +70,8 @@ function Ban(){
             <div>
                 <h1 className="banWord1">해당 계정은 운영원칙 위반사항으로인해 정지된 계정입니다</h1>
             </div>
-            <div className="banImg" >
-                <img src={ban} alt="" />
+            <div>
+                <img src={ban} alt="" className="banImg" />
             </div>
             <h2 className="banWord2">자세한 내용은 Mine으로 문의해주세요</h2>
         </div>

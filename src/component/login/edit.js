@@ -3,6 +3,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from '../mine/images/logo.png';
+import warn from '../images/warn.png';
+import editImg from '../images/editImg.png';
 import Topbar from "../main/topbar";
 
 import './edit.css';
@@ -141,10 +143,6 @@ function Edit() {
         setNoprof(true);
     }
 
-    function goback() {
-        history("/main");
-    }
-
     useEffect(function () {
         Check();
         getUser();
@@ -163,18 +161,22 @@ function Edit() {
             <div>
                 <span className="editArea">
                     <span className="editLeft">
-                        <h1>내 정보</h1>
-                        이메일: &nbsp;
-                        <input type="text" value={userEmail} readOnly="readOnly" className="editInput" />
-                        <br />
-                        가입 날짜: &nbsp;
-                        <input type="text" value={userDate} readOnly="readOnly" className="editInput" />
-                        <br />
-                        최초 가입: &nbsp;
-                        <input type="text" value={userSocial} readOnly="readOnly" className="editInput" />
+                        <h1 className="editInfo">정보 수정</h1>
+                        <form name="frm" encType="multipart/form-data" className="editForm">
+                            프로필사진: &nbsp;
+                            <input type="file" onClick={() => { setNoprof(false) }} name="uploadFile" accept="*" />
+                        </form>
+                        <img id="prof" src={`${process.env.PUBLIC_URL}/profPic/${profPic}`} alt="" className="profileImg" />
+                        <button type="button" className="editButton" onClick={delProf}>프로필 사진 초기화</button>
                     </span>
                     <span className="editCenter">
-                        <h1>정보 수정</h1>
+                        <br /><br />
+                        이메일: &nbsp;
+                        <input type="text" value={userEmail} readOnly="readOnly" className="editInput" />
+                        가입 날짜: &nbsp;
+                        <input type="text" value={userDate} readOnly="readOnly" className="editInput" />
+                        최초 가입: &nbsp;
+                        <input type="text" value={userSocial} readOnly="readOnly" className="editInput" />
                         이름: &nbsp;
                         <input type="text" className="editInput" value={userName} onChange={(e) => setUserName(e.target.value)} />
                         생년월일: &nbsp;
@@ -185,25 +187,35 @@ function Edit() {
                         <input type="text" className="editInput" value={address} onChange={(e) => setAddress(e.target.value)} />
                         상태메세지: &nbsp;
                         <input type="text" className="editInput" value={profMsg} onChange={(e) => setProfMsg(e.target.value)} />
-                        <form name="frm" encType="multipart/form-data">
-                            프로필사진: &nbsp;
-                            <input type="file" onClick={() => { setNoprof(false) }} name="uploadFile" accept="*" />
-                        </form>
-                        <button type="button" className="editButton" onClick={delProf}>사진 삭제</button>
-                        <img id="prof" src={`${process.env.PUBLIC_URL}/profPic/${profPic}`} alt="X" width="200px" height="200px" className="editImg" />
-                        <br /><br />
-                        <button type="button" className="editButton" onClick={editAf}>수정</button>
+                        <br />
+                        <button type="button" className="editButton" onClick={editAf}>변경 내용 수정</button>
                     </span>
+                    <span class="editBorder"></span>
                     <span className="editRight">
                         <h1>서비스 탈퇴</h1>
                         <h3>
-                            탈퇴전 확인하세요!
-                            <br /><br />
-                            서비스 탈퇴 진행 시 모든 데이터가 삭제되며 다시 복구하실 수 없습니다.
+                            <span className="editMove">
+                                <span>
+                                    <img src={warn} alt="" className="editWarn" />
+                                    탈퇴 전 확인하세요!
+                                    <img src={warn} alt="" className="editWarn" />
+                                </span>
+                            </span>
+                            <br />
+                            서비스 탈퇴 진행 시 모든 이용기록과 데이터가 삭제됩니다.
+                            <br />
+                            해당 데이터는 탈퇴 후 다시 복구하실 수 없습니다.
+                            <br />
+                            탈퇴 후 재가입 시 탈퇴한 계정과 연동되지 않습니다.
+                            <br />
+                            필요하신 데이터는 탈퇴 전 모두 백업해주세요.
                             <br />
                             탈퇴 버튼을 누르시면 해당 내용에 동의하신 것으로 간주됩니다.
+                            <br /><br /><br />
+                            <span style={{ backgroundColor: "yellow"}}>탈퇴하시겠습니까?</span>
                         </h3>
                         <button type="button" className="editButton2" onClick={(e) => {window.location.href = "/kakao/withdrawal"}}>탈퇴하기</button>
+                        <img src={editImg} alt="" className="editImg" />
                     </span>
                 </span>
             </div>

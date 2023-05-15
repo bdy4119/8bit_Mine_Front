@@ -146,7 +146,7 @@ function Main(){
                 .then(function (resp) {
                     if (resp.data === "fail") {
                         localStorage.removeItem("token");
-                        document.getElementById("backtop").style.visibility = "none";
+                        document.getElementById("backtop").style.visibility = "hidden";
                         window.location.href = "/";
                     }
                 })
@@ -179,6 +179,7 @@ function Main(){
       
 
     useEffect(() => {
+        document.getElementById("backtop").style.visibility = "visible";
         Check();
         getUser();
         noticemine();
