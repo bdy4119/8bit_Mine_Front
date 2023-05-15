@@ -1,0 +1,71 @@
+
+.editArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+}
+
+.editLeft {
+    margin-left: -1500px;
+}
+
+.editCenter {
+    margin-left: -350px;
+}
+
+.editRight {
+    margin-left: 1100px;
+}
+
+
+.editLeft, .editCenter, .editRight {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.editInput {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    height: 50px;
+    background-color: rgb(212, 212, 212);
+}
+
+.editButton {
+    background-color: rgb(187, 81, 160);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.editButton:hover {
+    background-color: #964699;
+}
+
+.editButton2 {
+  background-color: rgb(255, 40, 40);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.editButton2:hover {
+  background-color: rgb(165, 26, 26);
+}
+
+.editImg {
+    margin-top: 10px;
+    border-radius: 50%;
+    margin-left: 70px;
+}

@@ -40,6 +40,7 @@ function NaverWait(){
 	}
 
 	useEffect(() => {
+		document.getElementById("backtop").style.visibility = "hidden";
 		initializeNaverLogin();
 	}, [])
 
