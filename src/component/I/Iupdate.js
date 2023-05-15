@@ -1,37 +1,24 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import "../main_back.css"
+import axios from "axios";
+
 import Topbar from "../main/topbar";
 import Barbtns from "../main/barbtns";
+import SearchHelp from "./searchHelp";
 
-import 'semantic-ui-css/semantic.min.css'
 import { Table, Button, Input } from 'semantic-ui-react'
-
-import kakao from "./image/kakao.png";
-import naver from "./image/naver.png";
-import youtube from "./image/youtube.png";
-import tmdb from "./image/tmdb.png";
+import "../main_back.css"
 
 import purpled from "./image/purpled.png";
 import redd from "./image/redd.png";
-import greend from "./image/greend.png";
 
 function I_update() {
 
+    // 변수 선언
     let params = useParams();
     const history = useNavigate();
 
-    function getUser() {
-        const jwt = localStorage.getItem("token");
-        if (jwt === null) {
-            history("/");
-        }
-    }
-
     const [classiList, setClassiList] = useState([]);
-    const [detList, setDetList] = useState([]);
-
     const [classi, setClassi] = useState('');
 
     const [ans1, setAns1] = useState('');
@@ -39,17 +26,32 @@ function I_update() {
     const [ans3, setAns3] = useState('');
     const [ans4, setAns4] = useState('');
     const [ans5, setAns5] = useState('');
+    const ans = [ans1, ans2, ans3, ans4, ans5];
 
     const [det1, setDet1] = useState('');
     const [det2, setDet2] = useState('');
     const [det3, setDet3] = useState('');
     const [det4, setDet4] = useState('');
     const [det5, setDet5] = useState('');
-
-    const ans = [ans1, ans2, ans3, ans4, ans5];
     const det = [det1, det2, det3, det4, det5];
 
-    // 데이터 불러오기
+    // 접속 권한 체크
+    function getUser() {
+        const jwt = localStorage.getItem("token");
+
+        if (jwt === null) {
+            history("/");
+        }
+    }
+
+    // 분류 목록 불러오기
+    const fetchData = async () => {
+        const id = localStorage.getItem("id");
+        const resp = await axios.get('http://localhost:3000/i_classi_list', { params: { "id": id } });
+        setClassiList(resp.data);
+    }
+
+    // 세부 내용 불러오기
     const detailData = async () => {
         const id = localStorage.getItem("id");
         const resp = await axios.get("http://localhost:3000/i_detail", { params: { "id": id, "classify": params.classify } })
@@ -69,12 +71,13 @@ function I_update() {
         setDet5(resp.data[4].detail);
     }
 
-    const fetchData = async () => {
-        const id = localStorage.getItem("id");
-        const resp = await axios.get('http://localhost:3000/i_classi_list', { params: { "id": id } });
-        setClassiList(resp.data);
-    }
+    useEffect(() => {
+        getUser();
+        fetchData();
+        detailData();
+    }, []);
 
+    // 분류 List
     function TableRow1(props) {
         return (
             <Table.Row>
@@ -83,24 +86,7 @@ function I_update() {
         );
     }
 
-    // 데이터 테이블에 담기
-    function TableRow2(props) {
-        if (props.obj.item === "") {
-            return;
-        }
-        return (
-            <Table.Row>
-                <Table.Cell>{props.obj.item}</Table.Cell>
-                <Table.Cell>{props.obj.detail}</Table.Cell>
-            </Table.Row>
-        );
-    }
-    useEffect(() => {
-        fetchData();
-        detailData();
-        getUser();
-    }, []);
-
+    // 분류 및 세부내용 수정
     function i_upd() {
         const id = localStorage.getItem("id");
 
@@ -114,9 +100,11 @@ function I_update() {
             return;
         }
 
+        // 전체 삭제
         axios.get('http://localhost:3000/i_del', { params: { "id": id, "classify": params.classify } })
             .then(function (resp) {
 
+                // 분류 및 세부내용 추가
                 for (let i = 0; i < ans.length; i++) {
                     axios.get('http://localhost:3000/i_add', { params: { "id": id, "classify": classi, "item": ans[i], "detail": det[i], "ref": i } })
                         .then(function () {
@@ -126,6 +114,7 @@ function I_update() {
                         })
                 }
 
+                // 분류 추가
                 axios.get('http://localhost:3000/i_add_classi', { params: { "id": id, "classify": classi } })
                     .then(function () {
                         alert(classi + " 항목이 수정되었습니다.");
@@ -135,6 +124,7 @@ function I_update() {
                         alert(err);
                     });
             })
+
             .catch(function (err) {
                 alert(err);
             });
@@ -142,6 +132,7 @@ function I_update() {
 
     return (
         <div id="back">
+
             <Topbar />
             <Barbtns />
 
@@ -155,6 +146,7 @@ function I_update() {
                             </Table.HeaderCell>
                         </Table.Row>
                     </Table.Header>
+
                     <Table.Body>
                         {
                             classiList.map(function (object, i) {
@@ -167,6 +159,7 @@ function I_update() {
                     </Table.Body>
                 </Table>
             </div>
+
             <div className="tableAddC">
                 <Table style={{ width: "700px", textAlign: "center", fontSize: "20px" }} color={"purple"}>
                     <Table.Header>
@@ -181,23 +174,28 @@ function I_update() {
                     <Table.Body>
                         <Table.Row>
                             <Table.Cell><Input size="mini" placeholder="항목1" defaultValue={ans1} onChange={(e) => { setAns1(e.target.value) }} /></Table.Cell>
-                            <Table.Cell><Input size="mini" placeholder="상세내용" style={{ width: "350px" }} defaultValue={det1} onChange={(e) => { setDet1(e.target.value) }} /></Table.Cell>
+                            <Table.Cell><Input size="mini" placeholder="상세내용" style={{ width: "350px" }} defaultValue={det1}
+                                onChange={(e) => { setDet1(e.target.value) }} /></Table.Cell>
                         </Table.Row>
                         <Table.Row>
                             <Table.Cell><Input size="mini" placeholder="항목2" defaultValue={ans2} onChange={(e) => { setAns2(e.target.value) }} /></Table.Cell>
-                            <Table.Cell><Input size="mini" placeholder="상세내용" style={{ width: "350px" }} defaultValue={det2} onChange={(e) => { setDet2(e.target.value) }} /></Table.Cell>
+                            <Table.Cell><Input size="mini" placeholder="상세내용" style={{ width: "350px" }} defaultValue={det2}
+                                onChange={(e) => { setDet2(e.target.value) }} /></Table.Cell>
                         </Table.Row>
                         <Table.Row>
                             <Table.Cell><Input size="mini" placeholder="항목3" defaultValue={ans3} onChange={(e) => { setAns3(e.target.value) }} /></Table.Cell>
-                            <Table.Cell><Input size="mini" placeholder="상세내용" style={{ width: "350px" }} defaultValue={det3} onChange={(e) => { setDet3(e.target.value) }} /></Table.Cell>
+                            <Table.Cell><Input size="mini" placeholder="상세내용" style={{ width: "350px" }} defaultValue={det3}
+                                onChange={(e) => { setDet3(e.target.value) }} /></Table.Cell>
                         </Table.Row>
                         <Table.Row>
                             <Table.Cell><Input size="mini" placeholder="항목4" defaultValue={ans4} onChange={(e) => { setAns4(e.target.value) }} /></Table.Cell>
-                            <Table.Cell><Input size="mini" placeholder="상세내용" style={{ width: "350px" }} defaultValue={det4} onChange={(e) => { setDet4(e.target.value) }} /></Table.Cell>
+                            <Table.Cell><Input size="mini" placeholder="상세내용" style={{ width: "350px" }} defaultValue={det4}
+                                onChange={(e) => { setDet4(e.target.value) }} /></Table.Cell>
                         </Table.Row>
                         <Table.Row>
                             <Table.Cell><Input size="mini" placeholder="항목5" defaultValue={ans5} onChange={(e) => { setAns5(e.target.value) }} /></Table.Cell>
-                            <Table.Cell><Input size="mini" placeholder="상세내용" style={{ width: "350px" }} defaultValue={det5} onChange={(e) => { setDet5(e.target.value) }} /></Table.Cell>
+                            <Table.Cell><Input size="mini" placeholder="상세내용" style={{ width: "350px" }} defaultValue={det5}
+                                onChange={(e) => { setDet5(e.target.value) }} /></Table.Cell>
                         </Table.Row>
                     </Table.Body>
                 </Table>
@@ -207,60 +205,8 @@ function I_update() {
                 <Button size="huge" color="purple" onClick={i_upd}>수정 완료</Button>
             </div>
 
-            <div className="search">
-                <Table size="small" style={{ width: "300px", textAlign: "center", fontSize: "17px" }} color={"olive"}>
-                    <Table.Header>
-                        <Table.Row>
-                            <Table.HeaderCell colSpan="2">
-                                <img src={greend} width="40px" height="40px" style={{ marginLeft: "-20px", marginTop: "-10px" }} />&nbsp;
-                                검색도우미
-                            </Table.HeaderCell>
-                        </Table.Row>
-                    </Table.Header>
-                    <Table.Body>
-                        <Table.Row >
-                            <Table.Cell style={{ width: "60px" }}>
-                                <img src={kakao} width="50px" height="15px" />
-                            </Table.Cell>
-                            <Table.Cell>
-                                <Link onClick={() => window.open('http://localhost:9001/place', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>위치 정보</Link>
-                            </Table.Cell>
-                        </Table.Row>
-                        <Table.Row>
-                            <Table.Cell style={{ width: "60px" }}>
-                                <img src={naver} width="53px" height="10px" />
-                            </Table.Cell>
-                            <Table.Cell>
-                                <Link onClick={() => window.open('http://localhost:9001/book', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>책 정보</Link>
-                            </Table.Cell>
-                        </Table.Row>
-                        <Table.Row>
-                            <Table.Cell>
-                                <img src={youtube} width="40px" height="20px" />
-                            </Table.Cell>
-                            <Table.Cell>
-                                <Link onClick={() => window.open('http://localhost:9001/youtube', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>Youtube 정보</Link>
-                            </Table.Cell>
-                        </Table.Row>
-                        <Table.Row>
-                            <Table.Cell>
-                                <img src={tmdb} width="53px" height="10px" />
-                            </Table.Cell>
-                            <Table.Cell>
-                                <Link onClick={() => window.open('http://localhost:9001/movie', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>영화 정보</Link>
-                            </Table.Cell>
-                        </Table.Row>
-                        <Table.Row>
-                            <Table.Cell>
-                                <img src={tmdb} width="53px" height="10px" />
-                            </Table.Cell>
-                            <Table.Cell>
-                                <Link onClick={() => window.open('http://localhost:9001/drama', 'window_name', 'width=800,height=800,location=no,status=no,scrollbars=yes')}>TV/드라마/OTT 정보</Link>
-                            </Table.Cell>
-                        </Table.Row>
-                    </Table.Body>
-                </Table>
-            </div>
+            <SearchHelp />
+
         </div>
     );
 }
