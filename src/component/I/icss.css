@@ -1,13 +1,9 @@
-<<<<<<< HEAD
-/* table {
-=======
 .tableItem {
     position: absolute;
     margin-left: 600px;
->>>>>>> db9fc32ed67a198bcaed31f4c17d1a1d09c9a299
     margin-top: 100px;
     float: left;
-} */
+}
 
 .tableAdd{
     position: absolute;
