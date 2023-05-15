@@ -21,7 +21,7 @@ function BackOrder() {
         //  setId(param.id);
          })
          .catch(function(err){
-            alert("정보를 불러오지 못했습니다.");
+            // alert("정보를 불러오지 못했습니다.");
          })
   }
 

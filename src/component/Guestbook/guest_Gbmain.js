@@ -40,7 +40,7 @@ function Gbmain() {
             .then(function (resp) {
                 console.log(resp);
                 if (resp.data === 'gb_del_OK') {
-                    axios.post("http://localhost:3000/noticebookupdate", null, {params: { "id": mineid }});
+                    axios.post("http://localhost:3000/noticebookupdate", null, { params: { "id": mineid } });
                     alert('방명록을 삭제했습니다.');
                     window.location.reload();
                 }
@@ -58,9 +58,8 @@ function Gbmain() {
     // 방문자에게 보이는(방문자 본인이 남긴 방명록) axios
     const fetData = async () => {
         const id = localStorage.getItem("id");
-        const resp = await axios.get('http://localhost:3000/vi_list', { params: { "toid": mineid, "fromid":id, "start": 1, "end": 3 } });
-        const respC = await axios.get('http://localhost:3000/gb_visit_c', { params: { "toid": mineid, "fromid":id } });
-
+        const resp = await axios.get('http://localhost:3000/vi_list', { params: { "toid": mineid, "fromid": id, "start": 1, "end": 3 } });
+        const respC = await axios.get('http://localhost:3000/gb_visit_c', { params: { "toid": mineid, "fromid": id } });
         setVilist(resp.data);
         setTotal(respC.data);
     }
@@ -95,19 +94,19 @@ function Gbmain() {
 
                 <div>
                     <Button type="button" color="red" size="large" style={{ position: "absolute", marginLeft: "730px", marginTop: "-120px" }}
-                    onClick={() => gb_del(`${props.obj.seq}`)}>삭제</Button>
+                        onClick={() => gb_del(`${props.obj.seq}`)}>삭제</Button>
                     <Button type="button" color="green" size="large" style={{ position: "absolute", marginLeft: "830px", marginTop: "-120px" }}
-                    onClick={() => go_upd(`${props.obj.seq}`)}>수정</Button>
+                        onClick={() => go_upd(`${props.obj.seq}`)}>수정</Button>
                 </div>
 
             </div>
         );
     }
-    
+
     function pageChange(page) {
         setPage(page);
 
-        axios.get('http://localhost:3000/vi_list', { params: { "toid": mineid, "fromid":id, "start": (page - 1) * 3 + 1, "end": (page) * 3 } })
+        axios.get('http://localhost:3000/vi_list', { params: { "toid": mineid, "fromid": id, "start": (page - 1) * 3 + 1, "end": (page) * 3 } })
             .then(function (resp) {
                 console.log(resp);
                 setVilist(resp.data);
@@ -120,7 +119,6 @@ function Gbmain() {
 
 
     useEffect(() => {
-
         const noticebookupdate = async () => {
             await axios.post("http://localhost:3000/noticebookupdate", null, { params: { "id": id } });
 
@@ -134,63 +132,63 @@ function Gbmain() {
     return (
         <div id="back">
             <div>
-                <div id="logo" onClick={() => {history('/main')}} style={{marginLeft:"-850px", marginTop:"-30px"}}>
+                <div id="logo" onClick={() => { history('/main') }} style={{ marginLeft: "-850px", marginTop: "-30px" }}>
                     <img src={logo} alt="no" width="300px" />
                 </div>
             </div>
             <div id="topbar">
                 <div id="barbtns">
                     <div id="ibtn" onClick={(e) => { window.location.href = "/guest_mine/" + mineid }}>
-                    <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
-                    MINE
-                    </p>
+                        <p style={{ position: "relative", marginTop: "60px", fontSize: "20px" }}>
+                            MINE
+                        </p>
                     </div>
                     <div id="mybtn">
-                    <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
-                    CARD
-                    </p>
+                        <p style={{ position: "relative", marginTop: "60px", fontSize: "20px" }}>
+                            CARD
+                        </p>
                     </div>
                     <div id="mebtn" onClick={(e) => { history("/guest_gbmain/" + mineid) }}>
-                    <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
-                    GUEST
-                    </p>
+                        <p style={{ position: "relative", marginTop: "60px", fontSize: "20px" }}>
+                            GUEST
+                        </p>
                     </div>
                     <div id="minebtn" onClick={(e) => { history("/gbmain") }}>
-                    <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
-                    HOME
-                    </p>
+                        <p style={{ position: "relative", marginTop: "60px", fontSize: "20px" }}>
+                            HOME
+                        </p>
                     </div>
                 </div>
             </div>
-                <img src={purpled} width="70px" height="70px" style={{ position: "absolute", marginLeft: "-100px", marginTop: "80px" }} />&nbsp;
-                <div id="guestverlist">
-                    <h3 style={{ position: "absolute", marginLeft: "100px", marginTop: "-60px", fontSize: "35px" }}>방명록</h3>
-                    {
-                        vilist.map(function (object, i) {
-                            return (
-                                <TableRow obj={object} key={i} />
-                            )
-                        })
-                    }
-                </div>
-
-                <div>
-                    <Button color="purple" size="large" style={{ position: "absolute", marginLeft: "170px", marginTop: "80px" }}
-                    onClick={go_gbadd}>방명록 작성</Button>
-                </div>
-
-                <div style={{ position: "absolute", marginLeft: "1190px", marginTop: "70px" }}>
-                    <Pagination
-                        activePage={page}
-                        itemsCountPerPage={3}
-                        totalItemsCount={total}
-                        pageRangeDisplayed={5}
-                        prevPageText={"이전"}
-                        nextPageText={"다음"}
-                        onChange={pageChange}
-                    />
-                </div>
+            <img src={purpled} width="70px" height="70px" style={{ position: "absolute", marginLeft: "-100px", marginTop: "80px" }} />&nbsp;
+            <div id="guestverlist">
+                <h3 style={{ position: "absolute", marginLeft: "100px", marginTop: "-60px", fontSize: "35px" }}>방명록</h3>
+                {
+                    vilist.map(function (object, i) {
+                        return (
+                            <TableRow obj={object} key={i} />
+                        )
+                    })
+                }
             </div>
+
+            <div>
+                <Button color="purple" size="large" style={{ position: "absolute", marginLeft: "170px", marginTop: "80px" }}
+                    onClick={go_gbadd}>방명록 작성</Button>
+            </div>
+
+            <div style={{ position: "absolute", marginLeft: "1190px", marginTop: "70px" }}>
+                <Pagination
+                    activePage={page}
+                    itemsCountPerPage={3}
+                    totalItemsCount={total}
+                    pageRangeDisplayed={5}
+                    prevPageText={"이전"}
+                    nextPageText={"다음"}
+                    onChange={pageChange}
+                />
+            </div>
+        </div>
 
     );
 }

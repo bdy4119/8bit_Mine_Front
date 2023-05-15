@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { ReactMediaRecorder } from "react-media-recorder";
 
@@ -20,6 +20,7 @@ function Gbupdate() {
     // 변수 선언
     let params = useParams();
     const history = useNavigate();
+    const fileInput = useRef();
 
     const [toid, setToid] = useState('');
     const [fromid, setFromid] = useState('');
@@ -76,6 +77,7 @@ function Gbupdate() {
     function voice_del() {
         setFilename(null);
         setIsVoice(0);
+        fileInput.current.value = "";
     }
 
     // 방명록 수정
@@ -119,9 +121,29 @@ function Gbupdate() {
             });
     }
 
-    // 음성 녹음 및 등록, 업로드
-    function VoiceComm() {
-        return (
+    return (
+        <div id="back">
+
+            <Topbar />
+            <Barbtns />
+
+            <div className="gbaddTitle">
+
+                <img src={purpled} width="70px" height="70px" style={{ position: "absolute", marginLeft: "-10px", marginTop: "20px" }} />&nbsp;
+
+                <h2 style={{ fontSize: "40px", marginLeft: "80px" }}>방명록 수정</h2>
+                <div className="vc">
+                    <input type="checkbox" onChange={changeVal} value={checkVal} /> 음성방명록 여부<br />
+                </div>
+                <br />
+
+                <TextArea value={comm} style={{ height: "200px", width: "700px", fontSize: "20px", resize: "none", padding: "20px" }}
+                    placeholder=" 음성 파일을 업로드해보세요. 방명록이 자동으로 완성됩니다."
+                    onChange={(e) => setComm(e.target.value)} /><br />
+
+                <Button color="purple" size="large" style={{ marginTop: "15px", marginLeft: "565px" }} button onClick={gb_upd}>방명록 수정</Button>
+            </div>
+
             <div className="vocom" style={{ width: "600px" }}>
                 <img src={greend} width="70px" height="70px" style={{ position: "absolute", marginLeft: "-20px", marginTop: "20px" }} />&nbsp;
                 <h2 style={{ fontSize: "40px", marginLeft: "60px" }}>음성 녹음 및 등록</h2>
@@ -151,7 +173,7 @@ function Gbupdate() {
                                 </div>
 
                                 {/* 녹음파일 Chrome에서 다운로드 */}
-                                <Link><a style={{ position: "absolute", marginLeft: "320px", marginTop: "10px" }} href={mediaBlobUrl} download="mysound.wav">다운로드</a></Link>
+                                <a style={{ position: "absolute", marginLeft: "320px", marginTop: "10px" }} href={mediaBlobUrl} download="mysound.wav">다운로드</a>
                             </div>
 
                         )}
@@ -164,39 +186,12 @@ function Gbupdate() {
                 <br />
 
                 <form name="frm" onSubmit={fileUpload} encType="multipart/form-data">
-                    <input type="file" name="uploadFile" accept="*" />
+                    <input type="file" ref={fileInput} name="uploadFile" accept="*" />
                     <Button color="green" size="large" type="submit">업로드</Button>
-                    <Button color="red" size="large" onClick={voice_del} style={{ position: "absolute", marginLeft: "10px" }} >삭제</Button>
                 </form>
+                <Button color="red" size="large" onClick={voice_del} style={{ position: "absolute", marginLeft: "460px", marginTop:"-42px" }} >삭제</Button>
 
             </div>
-        );
-    }
-
-    return (
-        <div id="back">
-
-            <Topbar />
-            <Barbtns />
-
-            <div className="gbaddTitle">
-
-                <img src={purpled} width="70px" height="70px" style={{ position: "absolute", marginLeft: "-10px", marginTop: "20px" }} />&nbsp;
-
-                <h2 style={{ fontSize: "40px", marginLeft: "80px" }}>방명록 수정</h2>
-                <div className="vc">
-                    <input type="checkbox" onChange={changeVal} value={checkVal} /> 음성방명록 여부<br />
-                </div>
-                <br />
-
-                <TextArea value={comm} style={{ height: "200px", width: "700px", fontSize: "20px", resize: "none", padding: "20px" }}
-                    placeholder=" 음성 파일을 업로드해보세요. 방명록이 자동으로 완성됩니다."
-                    onChange={(e) => setComm(e.target.value)} /><br />
-
-                <Button color="purple" size="large" style={{ marginTop: "15px", marginLeft: "565px" }} button onClick={gb_upd}>방명록 수정</Button>
-            </div>
-
-            <VoiceComm />
 
         </div>
     );

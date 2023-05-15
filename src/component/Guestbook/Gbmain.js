@@ -42,6 +42,7 @@ function Gbmain() {
         const id = localStorage.getItem("id");
         const resp = await axios.get('http://localhost:3000/gb_list', { params: { "toid": id, "start": 1, "end": 3 } });
         const respC = await axios.get('http://localhost:3000/gb_list_c', { params: { "toid": id } });
+        console.log(resp);
         setGblist(resp.data);
         setTotal(respC.data);
     }
@@ -88,6 +89,7 @@ function Gbmain() {
     // 방명록 Data 정리
     function TableRow(props) {
         const profPic = props.obj.profpic;
+        const delSeq = props.obj.seq;
 
         return (
             <div>
@@ -116,7 +118,7 @@ function Gbmain() {
 
                 <div>
                     <Button color="red" type="button" size="large" style={{ position: "absolute", marginLeft: "780px", marginTop: "-120px" }}
-                     onClick={() => gb_del(props.obj.seq)}>삭제</Button>
+                     onClick={() => gb_del(`${props.obj.seq}`)}>삭제</Button>
                 </div>
 
             </div>
