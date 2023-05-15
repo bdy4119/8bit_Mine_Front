@@ -181,3 +181,40 @@ input {
   font-size: 30px;
   border:none;
 }
+
+
+
+
+
+
+
+/* 뒤집기 */
+.flip { 
+  perspective: 200000px;
+}
+
+.busicard {
+  width: 100%; 
+  height: 100%; 
+  position: relative;
+  transition: .4s;
+  transform-style: preserve-3d;
+}	
+
+.front, .back {
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.front {
+  background: url(./InformDetailflip.js);
+}
+
+.back { 
+  background: url(./BackOrder.js);
+  transform: rotateY(180deg);
+}
+
+.flip:hover .busicard {
+  transform: rotateY(180deg);
+}

@@ -22,7 +22,8 @@ function TodoList() {
 
 
 
-   
+  const id = localStorage.getItem("id");
+  console.log(id);
 
 
 
@@ -54,7 +55,7 @@ function TodoList() {
 
   //todo리스트 받아오기
   function getTodolist(page) {
-    axios.get("http://localhost:3000/todoList", {params:{"pageNumber":page}})
+    axios.get("http://localhost:3000/todoList", {params:{"pageNumber":page, "id":id}})
         .then(function(resp){
           setTodolist(resp.data.list);
           
@@ -69,7 +70,7 @@ function TodoList() {
           setTotalCnt(resp.data.cnt - nottoday.length);
         })
         .catch(function(err){
-            alert(err);
+            alert("id값이 다르므로 todo리스트를 불러올 수 없습니다.");
         })
   }
 
@@ -112,8 +113,8 @@ function TodoList() {
       <div id="todo" style={{marginBottom:"-200px"}}>
           <p style={{textAlign:"center", fontSize:"40px", marginTop:"30px", marginLeft:"70px"}}>
             [Todo리스트] 
-            <Link to={`/todoWrite/${param.rdate || format(new Date(),'yyyy-MM-dd')}`}>
-                <button id="addbtn" type='submit' style={{float:"right", marginRight:"50px", marginTop:"15px"}} />
+            <Link to={`/todoWrite/${param.rdate || format(new Date(),'yyyy-MM-dd')}/${id}`}>
+              <button id="addbtn" type='submit' style={{float:"right", marginRight:"50px", marginTop:"15px"}} />
             </Link>
           </p>
           <br/>
