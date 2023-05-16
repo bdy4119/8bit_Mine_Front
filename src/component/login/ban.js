@@ -64,7 +64,7 @@ function Ban(){
                 <img src={logo} alt="no" width="300px" />
             </div>
             <div id="topbtns">
-                <button><a href={kakaologout}>로그아웃</a></button>
+                <button id="topbtnsImg"><a href={kakaologout} id="topbtnsImg">로그아웃</a></button>
             </div>
             <br /><br /><br /><br />
             <div>
