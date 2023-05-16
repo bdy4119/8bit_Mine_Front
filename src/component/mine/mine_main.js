@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import ModalAlram from './mine_guestbook';
+import { Button } from 'semantic-ui-react'
 
 import "../mine_back.css"
 import Topbar from "../main/topbar";
@@ -342,7 +343,7 @@ function Mine_main(){
                                     </div>
                                     <div id="subquestion">
                                         방문자 : <input value={guestid} onChange={(e)=>setguestid(e.target.value)}></input>
-                                        <button>제출</button>
+                                        &nbsp;&nbsp;&nbsp; <Button>제출</Button>
                                     </div>
                                 </div>
                             )}

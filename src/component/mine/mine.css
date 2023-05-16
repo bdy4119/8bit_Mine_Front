@@ -238,6 +238,7 @@
 .victory {
     visibility: hidden;
     position:absolute;
+    z-index: 800;
     top: 50px;
     left: 150px;
 }
