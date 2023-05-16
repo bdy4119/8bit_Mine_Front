@@ -188,14 +188,9 @@
     background-size: contain;
 }
 .fullportal {
-    background-color: #fff;
-    width: 70px;
-    height: 70px;
     position:absolute;
-    border-radius: 50%;
     top: 350px;
     left: 940px;
-    background-image: url(./images/portal.png);
     background-size: contain;
     background-position: center;
     transform: translate(-50%,-50%);
@@ -211,6 +206,7 @@
 .fullvictory {
     visibility: hidden;
     position:absolute;
+    z-index: 900;
     top: 200px;
     left: 300px;
 }
