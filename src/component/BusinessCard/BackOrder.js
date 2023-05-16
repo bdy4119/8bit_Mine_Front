@@ -10,14 +10,13 @@ function BackOrder() {
   const[id, setId] = useState(param.id);
   const login = localStorage.getItem("id"); //로그인한 아이디
 
-  const [writeId, setWriteId] = useState();
 
+  console.log(param.id)
   function businessback() {
     axios.get("http://localhost:3000/businesscardBack", {params:{"id":param.id}})
          .then(function(resp){
           console.log(resp.data.list);
           setBusinessbackList(resp.data.list);
-          setWriteId(resp.data.list[0].id);
         //  setId(param.id);
          })
          .catch(function(err){
@@ -26,7 +25,7 @@ function BackOrder() {
   }
 
   useEffect(function(){
-    businessback(param.id);
+    businessback();
   },[param.id]);
 
 
@@ -44,23 +43,6 @@ function BackOrder() {
             console.log(seq);
             alert("삭제에 실패했습니다");
           })
-  }
-
-
-
-
-  function addBtn() {
-    if(login === writeId) {
-      return(
-        <Link to={`/backWrite/${id}`}>
-          <button type="submit" id="onlineBtn" style={{width:"250px"}}>
-            추가
-          </button>
-        </Link>
-      ) 
-    } else {
-      <></>
-    }
   }
 
 
@@ -135,7 +117,11 @@ function BackOrder() {
               앞면보기
             </button>
           </Link>
-          {addBtn()}
+          <Link to={`/backWrite/${id}`}>
+          <button type="submit" id="onlineBtn" style={{width:"250px"}}>
+            추가
+          </button>
+        </Link>
       </div>
   </div>
   );

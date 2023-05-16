@@ -10,14 +10,16 @@ function GbBackorder() {
   const[id, setId] = useState(param.id);
   const login = localStorage.getItem("id"); //로그인한 아이디
 
-  const [writeId, setWriteId] = useState();
+  let mineid = param.mineid;
+
+  console.log(mineid)
 
   function businessback() {
-    axios.get("http://localhost:3000/businesscardBack", {params:{"id":param.id}})
+    axios.get("http://localhost:3000/businesscardBack", {params:{"id":mineid}})
          .then(function(resp){
           console.log(resp.data.list);
           setBusinessbackList(resp.data.list);
-          setWriteId(resp.data.list[0].id);
+
         //  setId(param.id);
          })
          .catch(function(err){
@@ -84,16 +86,7 @@ function GbBackorder() {
                         {back.historyContent}
                         <br/>
                         <Link to={back.historyUrl}>{back.historyUrl}</Link>
-                      </p>
-
-                      <span>
-                        <button id="delbtn" onClick={(e)=>{historyDel(back.seq, e)}} style={{marginRight:"5px"}} />
-                        
-                        <Link to={`/backUpdate/${back.seq}/${login}`}>
-                          <button id="editbtn" />
-                        </Link>
-                      </span>
-                      
+                      </p>         
                     </div>
                   </div>
                 </div>
@@ -111,15 +104,7 @@ function GbBackorder() {
                           {back.historyContent}
                           <br/>
                           <Link to={back.historyUrl}>{back.historyUrl}</Link>
-                        </p>
-        
-                        <span>
-                          <button id="delbtn" onClick={(e)=>{historyDel(back.seq, e)}} style={{marginRight:"5px"}} />
-                          <Link to={`/backUpdate/${back.seq}/${login}`}>
-                            <button id="editbtn" />
-                          </Link>
-                        </span>
-        
+                        </p>        
                       </div>
                   </div>
                 </div>

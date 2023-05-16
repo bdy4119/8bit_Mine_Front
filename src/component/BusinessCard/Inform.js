@@ -14,16 +14,16 @@ function Inform() {
   const id = localStorage.getItem("id");
     
   function business() {
-    const id = localStorage.getItem("id");
     console.log(id);
 
-    axios.get("http://localhost:3000/businesscard", {params:{}})
+    axios.get("http://localhost:3000/businesscard", {params:{"email": id}})
          .then(function(resp){
           //  console.log(resp.data.list);
           setBusinessList(resp.data.list);
+
          })
          .catch(function(err){
-            alert("정보를 추가해주세요");
+          
          })
   }
 
@@ -32,19 +32,18 @@ function Inform() {
     business();
   },[]);
   
-
   const renderAverage = () => {
-    if(businessList.length === 0) {
-       return(
-        <div style={{position: "relative", marginLeft:"-550px", marginBottom:"0px", marginTop:"200px"}}>
-           <Link to={`/informWrite/${id}`}>
-             <div id="addOnlineBtn">
-               명함추가
-             </div>
-           </Link>
-        </div>
-       );
-    }
+      if(businessList.length === 0) {
+         return(
+          <div style={{position: "relative", marginLeft:"-550px", marginBottom:"0px", marginTop:"200px"}}>
+             <Link to={`/informWrite/${id}`}>
+               <div id="addOnlineBtn">
+                 명함추가
+               </div>
+             </Link>
+          </div>
+         );
+      }
 };
  
   return(

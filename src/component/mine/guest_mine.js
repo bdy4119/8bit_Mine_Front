@@ -245,7 +245,7 @@ function Mine_main(){
                       MINE
                       </p>
                     </div>
-                    <div id="mybtn">
+                    <div id="mybtn" onClick={(e) => { history("/guest_card/" + mineid) }}>
                       <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
                       CARD
                       </p>

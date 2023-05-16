@@ -18,7 +18,7 @@ export const GbInformDetailFilp = () => {
   const [loading, setLoading] = useState(false);
 
   const id = localStorage.getItem("id"); //로그인한 아이디
-let mineid = param.mineid;
+  let mineid = param.mineid;
 
 
 console.log(mineid);
