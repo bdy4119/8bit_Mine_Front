@@ -7,7 +7,6 @@ import "../mine_back.css"
 import Topbar from "../main/topbar";
 
 
-
 function TodoWrite() {
   let history = useNavigate();  // 변수에 useNavigate 할당
   let param = useParams();
@@ -95,24 +94,25 @@ function TodoWrite() {
             </div>
 
       <div id="todoWrite">
-        <div style={{marginTop:"-150px",marginLeft:"-150px"}}>
+        <div style={{marginTop:"-180px",marginLeft:"-150px"}}>
           <div>
-             날짜 : <input style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive", width:"150px"}} defaultValue={param.rdate} onChange={(e)=>setRdate(e.target.value)}/>
+             날짜 : 
+             <input style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive", width:"150px", border:"none"}} defaultValue={param.rdate} onChange={(e)=>setRdate(e.target.value)}/>
           </div>
           <br/>
           <br/>
           <div>
-              제목 : <input style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} value={title} onChange={(e)=>setTitle(e.target.value)}/>
+              제목 : <input style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive", border:"none"}} value={title} onChange={(e)=>setTitle(e.target.value)}/>
           </div>
           <br/>
           <br/>
           <div>
-              내용 : <input style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} value={content} onChange={(e)=>setContent(e.target.value)}/>
+              내용 : <textarea style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive", border:"none"}} value={content} onChange={(e)=>setContent(e.target.value)}/>
           </div>
           <br/>
           <br/>
         </div>
-         <button class="btn btn-success" style={{marginTop:"20px", marginLeft:"-80px", width:"170px", height:"60px"}} onClick={handleSubmit}>작성완료</button>
+         <button class="btn btn-success" style={{marginLeft:"-80px", width:"170px", height:"60px", border:"none", fontSize:"25px"}} onClick={handleSubmit}>작성완료</button>
       </div>
 
     </div>

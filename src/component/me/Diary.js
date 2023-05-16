@@ -93,10 +93,10 @@ function Diary() {
            </p>
            <table style={{fontSize:"20px", textAlign:"center", marginLeft:"50px"}}>
              <colgroup>
-                <col style={{width: '300px'}}/>
+                <col style={{width: '100px'}}/>
                 <col style={{width: '500px'}}/>
                 <col style={{width: '100px'}}/>
-                <col style={{width: '50px'}}/>
+                <col style={{width: '100px'}}/>
              </colgroup>
              <thead>
               <tr>
@@ -147,12 +147,10 @@ function Diary() {
                                       
                                       <img src={`/Me-img/${diary.thumbnail}`} alt="" style={{width:"80px", height:"80px"}} />
                                     </td>
-                                    <td>
+                                    <td colSpan={2}>
                                       <Link to={`/diaryUpdate/${diary.seq}/${diary.title}/${diary.content}/${diary.rdate}/${diary.thumbnail}`}>
-                                        <button id="editbtn" style={{marginLeft:"20px"}} type='submit'/>
+                                        <button id="editbtn" style={{marginRight:"-60px"}} type='submit'/>
                                       </Link>
-                                    </td>
-                                    <td>
                                       <button id="delbtn" type="submit" value={diary.seq} onClick={(e)=>{diaryDelete(diary.seq, e)}} /*함수(param, e) -> 파라미터값 같이 보내는 방법*/ />
                                     </td>
                                 </tr>                              
@@ -192,22 +190,21 @@ function Diary() {
                                 
                                 return (
                                   <tr key={idx}>
-                                      <td>
-                                        {diary.title}
-                                      </td>
-                                      <td colSpan={2}>
-                                        {diary.content}
-                                        <img src={`/Me-img/${diary.thumbnail}`} alt="" style={{width:"80px", height:"80px"}} />
-                                      </td>
-                                      <td>
-                                        <Link to={`/diaryUpdate/${diary.seq}/${diary.title}/${diary.content}/${diary.rdate}/${diary.thumbnail}`}>
-                                          <button id="editbtn" style={{marginLeft:"50px"}} type='submit'/>
-                                        </Link>
-                                      </td>
-                                      <td>
-                                        <button id="delbtn" type="submit" value={diary.seq} onClick={(e)=>{diaryDelete(diary.seq, e)}} /*함수(param, e) -> 파라미터값 같이 보내는 방법*/ />
-                                      </td>
-                                  </tr>   
+                                    <td>
+                                      {diary.title}
+                                    </td>
+                                    <td colSpan={2}>
+                                      {diary.content}
+                                      
+                                      <img src={`/Me-img/${diary.thumbnail}`} alt="" style={{width:"80px", height:"80px"}} />
+                                    </td>
+                                    <td colSpan={2}>
+                                      <Link to={`/diaryUpdate/${diary.seq}/${diary.title}/${diary.content}/${diary.rdate}/${diary.thumbnail}`}>
+                                        <button id="editbtn" style={{marginRight:"-60px"}} type='submit'/>
+                                      </Link>
+                                      <button id="delbtn" type="submit" value={diary.seq} onClick={(e)=>{diaryDelete(diary.seq, e)}} /*함수(param, e) -> 파라미터값 같이 보내는 방법*/ />
+                                    </td>
+                                </tr>        
                               )
                             }
                     } 

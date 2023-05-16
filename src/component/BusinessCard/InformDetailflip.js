@@ -39,18 +39,6 @@ export const InformDetailFilp = () => {
 
   console.log(id)
 
-  function editBtn() {
-    if(param.id === id) {
-      return(
-        <Link to={`/informUpdate/${param.id}/${businessDetail.seq}`}>
-          <button id="onlineBtn" style={{width:"250px"}}>
-            명함수정
-          </button>
-        </Link>
-      )
-    }
-  }
-
   //딜레이 한번 주기
   if(loading === false) {
     return <div>Loading...</div>
@@ -100,7 +88,6 @@ export const InformDetailFilp = () => {
             </div>
           
             <div className="middle" style={{marginTop:"60px", paddingBottom:"30px"}}>
-              {editBtn()}
               &nbsp;&nbsp;&nbsp;&nbsp;
               <Link to={`/back/${businessDetail.id}`}>
                 <button id="onlineBtn" style={{width:"250px"}} type="submit" >

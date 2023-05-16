@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-function BackOrder() {
+function BackOrderflip() {
   let param = useParams();
   let history = useNavigate();
 
@@ -135,11 +135,6 @@ function BackOrder() {
               명함수정
             </button>
           </Link>
-          <Link to={`/informDetail/${id}`}>
-            <button id="onlineBtn" style={{width:"250px"}}>
-              앞면보기
-            </button>
-          </Link>
           <Link to={`/backWrite/${id}`}>
           <button type="submit" id="onlineBtn" style={{width:"250px"}}>
             추가
@@ -150,4 +145,4 @@ function BackOrder() {
   );
 }
 
-export default BackOrder;
+export default BackOrderflip;

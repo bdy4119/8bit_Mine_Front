@@ -9,7 +9,7 @@ import "../mine_back.css"
 import Topbar from "../main/topbar";
 
 import "./card.css";
-import BackOrder from "./BackOrder";
+import BackOrderflip from "./BackOrderflip";
 import { InformDetailFilp } from "./InformDetailflip";
 
 function InformDetail() {
@@ -61,7 +61,7 @@ function InformDetail() {
                   <InformDetailFilp/>
                 </div>
                 <div class="back">
-                  <BackOrder/>
+                  <BackOrderflip/>
                 </div>
               </div>
             </div>

@@ -116,25 +116,25 @@ function BackOrder() {
         <div style={{marginTop:"-20px", marginLeft:"50px"}}>
             <div>
               <h3 style={{fontFamily:"Do Hyeon", fontSize:"25px"}}>
-                  날짜 : <input defaultValue={historyDate} onChange={(e)=>setHistoryDate(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
+                  날짜 : <input className="input2" defaultValue={historyDate} onChange={(e)=>setHistoryDate(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
               </h3>
             </div>
             <br/>
             <div>
               <h3 style={{fontFamily:"Do Hyeon", fontSize:"25px"}}>
-                제목: <input defaultValue={historyTitle} onChange={(e)=>setHistoryTitle(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
+                제목: <input className="input2" defaultValue={historyTitle} onChange={(e)=>setHistoryTitle(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
               </h3>
             </div>
             <br/>
             <div>
               <h3 style={{fontFamily:"Do Hyeon", fontSize:"25px"}}>
-                내용: <input defaultValue={historyContent} onChange={(e)=>setHistoryContent(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
+                내용: <input className="input2" defaultValue={historyContent} onChange={(e)=>setHistoryContent(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
               </h3>
             </div>
             <br/>
             <div>
               <h3 style={{fontFamily:"Do Hyeon", fontSize:"25px"}}>
-                URL: <input defaultValue={historyUrl} onChange={(e)=>setHistoryUrl(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
+                URL: <input className="input2" defaultValue={historyUrl} onChange={(e)=>setHistoryUrl(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
               </h3>
             </div>
         </div>
