@@ -186,30 +186,30 @@ function CustomUpdate() {
               <div style={{ float:"left", marginLeft:"500px", marginTop:"-350px", textAlign:"left", fontFamily:"Do Hyeon", fontSize:"25px"}}>
                 <div id="talk" style={{marginTop:"50px", width:"500px", padding:"50px"}}>
                   <h3 style={{fontFamily:"Do Hyeon", fontSize:"25px"}}>소개글</h3>
-                  <input name="introduce" defaultValue={introduce} onChange={(e)=>setIntroduce(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
+                  <input name="introduce" className="input2" defaultValue={introduce} onChange={(e)=>setIntroduce(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
                 </div>
                 <br/>
                 <div> 
-                  이름 : <input  name="name" defaultValue={name} onChange={(e)=>setName(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
+                  이름 : <input  name="name" className="input2" defaultValue={name} onChange={(e)=>setName(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
                 </div>
                 <br/>
                 <div>
-                  H/P: <input name="phoneNum" defaultValue={phoneNum} onChange={(e)=>setPhoneNum(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
+                  H/P: <input name="phoneNum" className="input2" defaultValue={phoneNum} onChange={(e)=>setPhoneNum(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
                 </div>
                 <br/>
                 <div>
-                  이메일: <input name="email" defaultValue={email} onChange={(e)=>setEmail(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
+                  이메일: <input name="email" className="input2" defaultValue={email} onChange={(e)=>setEmail(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
                 </div>
                 <br/>
                 <div>
-                  URL: <input name="url" defaultValue={url} onChange={(e)=>setUrl(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
+                  URL: <input name="url" className="input2" defaultValue={url} onChange={(e)=>setUrl(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"25px"}}/>
                 </div>
               </div>
 
           
 
-          <div className="middle" style={{clear:"left", paddingTop:"100px"}}>
-            <button type="submit" style={{backgroundColor:"rgb(255, 227, 71)", fontSize:"20px", padding:"10px", width:"200px"}}>
+          <div className="middle" style={{clear:"left", paddingTop:"60px", paddingBottom:"40px"}}>
+            <button type="submit" id="onlineBtn" style={{fontSize:"30px", width:"250px"}}>
               수정완료
             </button>
           </div>

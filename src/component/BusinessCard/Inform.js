@@ -14,16 +14,16 @@ function Inform() {
   const id = localStorage.getItem("id");
     
   function business() {
-    const id = localStorage.getItem("id");
     console.log(id);
 
-    axios.get("http://localhost:3000/businesscard", {params:{}})
+    axios.get("http://localhost:3000/businesscard", {params:{"email": id}})
          .then(function(resp){
           //  console.log(resp.data.list);
           setBusinessList(resp.data.list);
+
          })
          .catch(function(err){
-            alert("정보를 추가해주세요");
+          
          })
   }
 
@@ -32,19 +32,18 @@ function Inform() {
     business();
   },[]);
   
-
   const renderAverage = () => {
-    if(businessList.length === 0) {
-       return(
-        <div style={{position: "relative", marginLeft:"-550px", marginBottom:"0px", marginTop:"200px"}}>
-           <Link to={`/informWrite/${id}`}>
-             <div id="addOnlineBtn">
-               명함추가
-             </div>
-           </Link>
-        </div>
-       );
-    }
+      if(businessList.length === 0) {
+         return(
+          <div style={{position: "relative", marginLeft:"-550px", marginBottom:"0px", marginTop:"200px"}}>
+             <Link to={`/informWrite/${id}`}>
+               <div id="addOnlineBtn">
+                 명함추가
+               </div>
+             </Link>
+          </div>
+         );
+      }
 };
  
   return(
@@ -71,8 +70,8 @@ function Inform() {
                     </div>
                     <br/>
                     <div>
-                      <span style={{fontFamily:'Do Hyeon', fontSize:"25px"}}>
-                        URL: <Link to={business.url}> {business.url} </Link>
+                      <span style={{fontFamily:'Do Hyeon', fontSize:"25px", marginLeft:"210px"}}>
+                        url: <Link to={business.url}> <input className="input2" style={{width:"280px"}} value={business.url} readOnly/></Link>
                       </span>
                     </div>
                   </div>

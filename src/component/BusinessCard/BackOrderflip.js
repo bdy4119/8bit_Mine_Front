@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
-function BackOrder() {
+function BackOrderflip() {
   let param = useParams();
   let history = useNavigate();
 
@@ -54,7 +54,7 @@ function BackOrder() {
   //삭제
   //같이 보낸 파라미터값 매개변수 하나 더 추가해서 받아주기
   const historyDel = async(seq, e) => {
-    await axios.post("http://localhost:3000/backDel", null,{params:{"seq":seq}})
+    await axios.post("http://localhost:3000/backDel", null,{params:{"seq":seq, "id": param.id}})
           .then(function(resp){
             alert("게시물이 삭제되었습니다.");
             window.location.reload(); //삭제하고 리로딩
@@ -135,11 +135,6 @@ function BackOrder() {
               명함수정
             </button>
           </Link>
-          <Link to={`/informDetail/${id}`}>
-            <button id="onlineBtn" style={{width:"250px"}}>
-              앞면보기
-            </button>
-          </Link>
           <Link to={`/backWrite/${id}`}>
           <button type="submit" id="onlineBtn" style={{width:"250px"}}>
             추가
@@ -150,4 +145,4 @@ function BackOrder() {
   );
 }
 
-export default BackOrder;
+export default BackOrderflip;

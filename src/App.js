@@ -69,6 +69,7 @@ import { Button } from 'semantic-ui-react'
 
 import './component/main_back.css'
 import Youtube from './component/I/search/youtube';
+import GuestGbcard from './component/Guestbook/GuestGbcard';
 
 function App() {
 
@@ -188,6 +189,7 @@ function App() {
           <Route path="/guest_gbmain/:mineid" element={<GuestGbmain />} />
           <Route path="/gbadd/:mineid" element={<Gbadd />} />
           <Route path="/gbupdate/:seq" element={<Gbupdate />} />
+          <Route path="/guest_card/:mineid" element={<GuestGbcard />} />
 
 
           {/* me ,명함 */}

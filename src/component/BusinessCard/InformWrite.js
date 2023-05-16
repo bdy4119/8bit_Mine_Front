@@ -150,25 +150,25 @@ function InformWrite() {
               <div style={{ float:"left", marginLeft:"500px", marginTop:"-350px", textAlign:"left"}}>
                 <div id="talk" style={{marginTop:"50px", width:"500px", padding:"50px"}}>
                   <h3 style={{fontFamily:"Do Hyeon", fontSize:"20px"}}>소개글</h3>
-                  <input name="introduce" defaultValue={introduce} onChange={(e)=>setIntroduce(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px"}}/>
+                  <input className="input2" name="introduce" defaultValue={introduce} onChange={(e)=>setIntroduce(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px"}}/>
                 </div>
                 <br/>
 
                 <div style={{marginLeft:"0px", marginTop:"20px"}}>
                     <div style={{fontFamily:"Do Hyeon", fontSize:"20px"}}> 
-                      이름 : <input  name="name" defaultValue={name} onChange={(e)=>setName(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px"}}/>
+                      이름 : <input className="input2" name="name" defaultValue={name} onChange={(e)=>setName(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px"}}/>
                     </div>
                     <br/>
                     <div style={{fontFamily:"Do Hyeon", fontSize:"20px"}}>
-                      H/P: <input name="phoneNum" defaultValue={phoneNum} onChange={(e)=>setPhoneNum(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px"}}/>
+                      H/P: <input className="input2" name="phoneNum" defaultValue={phoneNum} onChange={(e)=>setPhoneNum(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px"}}/>
                     </div>
                     <br/>
                     <div style={{fontFamily:"Do Hyeon", fontSize:"20px"}}>
-                      이메일: <input name="email" defaultValue={email} onChange={(e)=>setEmail(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px", width:"250px"}}/>
+                      이메일: <input className="input2" name="email" defaultValue={email} onChange={(e)=>setEmail(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px", width:"250px"}}/>
                     </div>
                     <br/>
                     <div  style={{fontFamily:"Do Hyeon", fontSize:"20px"}}>
-                        URL: <input name="url" defaultValue={url} onChange={(e)=>setUrl(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px", width:"250px"}}/>
+                        URL: <input className="input2" name="url" defaultValue={url} onChange={(e)=>setUrl(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px", width:"250px"}}/>
                     </div>
                   </div>
                 </div>

@@ -151,26 +151,24 @@ console.log(id);
                   약속날짜 : <input name="rdate" style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} class="form-control-plaintext" id="staticEmail" defaultValue={param.rdate} onChange={(e)=>setRdate(e.target.value)}/>
                 </span>
                 <br/>
-                <br/>
                 <span style={{fontSize:"40px"}}>
                   제목: <input name="title" style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} class="form-control-plaintext" id="staticEmail" value={title} onChange={(e)=>setTitle(e.target.value)}/>
                 </span>
                 <br/>
                 
-                <img src={`${imgFile}`} alt="" style={{width:"200px"}} />
+                <img src={`${imgFile}`} alt="" style={{width:"100px", height:"100px"}} />
                 <br/>
                 <input type="file" name='uploadFile' onChange={imageLoad} ref={imgRef} />
                 <br/>
                 <br/>
-
                 <span style={{fontSize:"40px"}}>
-                  내용 : <input name="content" style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} class="form-control-plaintext" id="staticEmail" value={content} onChange={(e)=>setContent(e.target.value)}/>
+                  내용 : <textarea name="content" style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} class="form-control-plaintext" id="staticEmail" value={content} onChange={(e)=>setContent(e.target.value)}/>
                 </span>
               
 
                 <br/>
                 <br/>
-                <button type="submit" class="btn btn-success" style={{fontSize:"30px", marginTop:"20px", marginLeft:"50px", width:"170px", height:"60px"}}>작성완료</button>
+                <button type="submit" class="btn btn-success" style={{fontSize:"30px", marginTop:"-30px", marginLeft:"50px", width:"150px", height:"60px"}}>작성완료</button>
               </form>
       
             </div>

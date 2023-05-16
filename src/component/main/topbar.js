@@ -22,10 +22,10 @@ function Topbar() {
                 <img src={logo} alt="no" width="300px" />
             </div>
 
-            <div id="topbtns" style={{position: "absolute", marginTop: "10px"}}>
-                <Button onClick={(e) => { window.location.href = "/edit" }}>내 정보 수정</Button>
-                <Button><a href={kakaologout} style={{textDecoration: "none"}}>로그아웃</a></Button>
-                <Button onClick={showModal}>상담챗봇</Button>
+            <div id="topbtns">
+                <button id="topbtnsImg" onClick={(e) => { window.location.href = "/edit" }}>내 정보 수정</button>
+                <button id="topbtnsImg"><a href={kakaologout}  id="topbtnsImg">로그아웃</a></button>
+                <button id="topbtnsImg"onClick={showModal}>상담챗봇</button>
                 {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
             </div>
         </div>

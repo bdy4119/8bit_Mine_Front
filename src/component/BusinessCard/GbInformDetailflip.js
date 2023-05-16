@@ -8,7 +8,7 @@ import "../mine_back.css"
 import "./card.css";
 
 
-export const InformDetailFilp = () => {
+export const GbInformDetailFilp = () => {
   
   
   let param = useParams();
@@ -18,9 +18,12 @@ export const InformDetailFilp = () => {
   const [loading, setLoading] = useState(false);
 
   const id = localStorage.getItem("id"); //로그인한 아이디
+  let mineid = param.mineid;
 
+
+console.log(mineid);
   function busiDetail() {
-    axios.get("http://localhost:3000/businessDetail", {params:{"email": param.id}})
+    axios.get("http://localhost:3000/businessDetail", {params:{"email": mineid}})
          .then(function(resp){
             console.log(resp.data);
             setbusinessDetail(resp.data);
@@ -38,6 +41,18 @@ export const InformDetailFilp = () => {
   },[param.id]);
 
   console.log(id)
+
+  // function editBtn() {
+  //   if(param.id === id) {
+  //     return(
+  //       <Link to={`/informUpdate/${param.id}/${businessDetail.seq}`}>
+  //         <button id="onlineBtn" style={{width:"250px"}}>
+  //           명함수정
+  //         </button>
+  //       </Link>
+  //     )
+  //   }
+  // }
 
   //딜레이 한번 주기
   if(loading === false) {
@@ -88,6 +103,7 @@ export const InformDetailFilp = () => {
             </div>
           
             <div className="middle" style={{marginTop:"60px", paddingBottom:"30px"}}>
+              {/* {editBtn()} */}
               &nbsp;&nbsp;&nbsp;&nbsp;
               <Link to={`/back/${businessDetail.id}`}>
                 <button id="onlineBtn" style={{width:"250px"}} type="submit" >

@@ -36,7 +36,7 @@ function Main(){
         const id = localStorage.getItem("id");
         console.log(id);
 
-        axios.get("http://localhost:3000/businesscard", {params:{}})
+        axios.get("http://localhost:3000/businesscard", {params:{"email":id}})
             .then(function(resp){
             //  console.log(resp.data.list);
             setBusinessList(resp.data.list);
@@ -157,7 +157,7 @@ function Main(){
     }
 
     function getTodolist(page) {
-        axios.get("http://localhost:3000/todoList", {params:{"pageNumber":page}})
+        axios.get("http://localhost:3000/todoList", {params:{"pageNumber":page, "id":id}})
             .then(function(resp){
               setTodolist(resp.data.list);
               
