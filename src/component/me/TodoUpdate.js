@@ -85,26 +85,26 @@ function TodoUpdate() {
 
      
       <div id="todoWrite">
-        <div style={{marginTop:"-150px",marginLeft:"-150px"}}>
+        <div style={{marginTop:"-180px",marginLeft:"-150px"}}>
           <div>
-             날짜 : <input style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive", width:"150px"}} defaultValue={rdateArr}
+             날짜 : <input style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive", width:"150px", border:"none"}} defaultValue={rdateArr}
                 //리액트에서 input은 readonly가 기본값 -> defaultValue에 설정할 value값 넣으면 수정 가능하게 됨
               onChange={(e)=>setRdate(e.target.value)}/>
           </div>
           <br/>
           <br/>
           <div>
-              제목 : <input style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} defaultValue={title} onChange={(e)=>setTitle(e.target.value)}/>
+              제목 : <input style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive", border:"none"}} defaultValue={title} onChange={(e)=>setTitle(e.target.value)}/>
           </div>
           <br/>
           <br/>
           <div>
-              내용 : <input style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive"}} defaultValue={content} onChange={(e)=>setContent(e.target.value)}/>
+              내용 : <textarea style={{backgroundColor:"rgb(0, 0, 0, 0.1)", fontFamily:"Nanum Pen Script, cursive", border:"none"}} defaultValue={content} onChange={(e)=>setContent(e.target.value)}/>
           </div>
           <br/>
           <br/>
         </div>
-         <button class="btn btn-success" style={{marginTop:"20px", marginLeft:"-80px", width:"170px", height:"60px"}} onClick={handleSubmit}>수정완료</button>
+         <button class="btn btn-success" style={{ marginLeft:"-80px", width:"170px", height:"60px", fontSize:"25px"}} onClick={handleSubmit}>수정완료</button>
       </div>
     </div>
   )

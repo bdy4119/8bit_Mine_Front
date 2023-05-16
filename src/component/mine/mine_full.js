@@ -11,6 +11,8 @@ import stage2 from './images/stage2.png';
 import stage3 from './images/stage3.png';
 import logo from './images/logo.png';
 import cat from './images/cat.png';
+import portal from './images/portal.png';
+import { Button } from 'semantic-ui-react'
 
 function Mine_full(){
 
@@ -241,7 +243,7 @@ function Mine_full(){
                         { a[9] && (<img src={process.env.PUBLIC_URL + "/img/" + b[9].newfilename} alt="child" width="70px"/>)}
                         { !a[9] && (<img src={cat} alt="cat" width="70px"/>)}
                     </div>
-                    <div className="fullportal"></div>
+                    <div className="fullportal"><img src={portal} alt="portal" width="70px" height="70px"/></div>
                     <div className="fullvictory"><img src={logo} alt="vic"/></div>
                     <div>
                         {a[1] && (
@@ -283,7 +285,7 @@ function Mine_full(){
                                     </div>
                                     <div id="fullsubquestion">
                                         방문자 : <input value={guestid} onChange={(e)=>setguestid(e.target.value)}></input>
-                                        <button>제출</button>
+                                        &nbsp;&nbsp;&nbsp;<Button>제출</Button>
                                     </div>
                                 </div>
                             )}

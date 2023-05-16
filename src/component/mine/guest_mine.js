@@ -13,6 +13,7 @@ import stage3 from './images/stage3.png';
 import logo from './images/logo.png';
 import cat from './images/cat.png';
 import portal from './images/portal.png';
+import { Button } from 'semantic-ui-react'
 
 function Mine_main(){
 
@@ -245,7 +246,7 @@ function Mine_main(){
                       MINE
                       </p>
                     </div>
-                    <div id="mybtn">
+                    <div id="mybtn" onClick={(e) => { history("/guest_card/" + mineid) }}>
                       <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>
                       CARD
                       </p>
@@ -335,7 +336,7 @@ function Mine_main(){
                                     </div>
                                     <div id="subquestion">
                                         방문자 : <input value={guestid} onChange={(e)=>setguestid(e.target.value)}></input>
-                                        <button onClick={updateanswer}>제출</button>
+                                        &nbsp;&nbsp;&nbsp;<Button onClick={updateanswer}>제출</Button>
                                     </div>
                                 </div>
                             )}

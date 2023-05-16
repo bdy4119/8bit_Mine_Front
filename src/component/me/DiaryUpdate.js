@@ -78,7 +78,7 @@ function DiaryUpdate() {
          .then(function(resp){
             if(resp.data === "YES") {
               alert('글이 수정되었습니다.');
-              history('/me');
+              window.location.href="/me";
             } else {
               alert('글을 수정하지 못했습니다.');
               history('/me');
@@ -150,7 +150,7 @@ function DiaryUpdate() {
               </span>
               <br/>
 
-              <img src={`${imgFile}`} alt="" style={{width:"200px"}} />
+              <img src={`${imgFile}`} alt="" style={{width:"100px", height:"100px"}} />
               <br/>
               <input type="file" name='uploadFile' onChange={imageLoad} ref={imgRef} />
               <br/>
@@ -163,7 +163,7 @@ function DiaryUpdate() {
 
               <br/>
               <br/>
-              <button type="submit" class="btn btn-success" style={{fontSize:"30px", marginTop:"20px", marginLeft:"50px", width:"170px", height:"60px"}}>작성완료</button>
+              <button type="submit" class="btn btn-success" style={{fontSize:"30px", marginTop:"-10px", marginLeft:"50px", width:"170px", height:"60px"}}>작성완료</button>
           </form>
       </div>
 

@@ -143,7 +143,7 @@ function Gbmain() {
                             MINE
                         </p>
                     </div>
-                    <div id="mybtn">
+                    <div id="mybtn" onClick={(e) => { window.location.href = "/guest_card/" + mineid }}>
                         <p style={{ position: "relative", marginTop: "60px", fontSize: "20px" }}>
                             CARD
                         </p>

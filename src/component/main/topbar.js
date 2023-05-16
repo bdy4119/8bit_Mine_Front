@@ -2,6 +2,8 @@ import { useState } from 'react';
 import ModalBasic from '../chatbot/chatbot';
 import logo from '../mine/images/logo.png';
 import { useNavigate } from 'react-router-dom';
+import { Button } from 'semantic-ui-react'
+import "./main.css";
 
 function Topbar() {
 
@@ -21,9 +23,9 @@ function Topbar() {
             </div>
 
             <div id="topbtns">
-                <button onClick={(e) => { window.location.href = "/edit" }}>내 정보 수정</button>
-                <button><a href={kakaologout}>로그아웃</a></button>
-                <button onClick={showModal}>상담챗봇</button>
+                <button id="topbtnsImg" onClick={(e) => { window.location.href = "/edit" }}>내 정보 수정</button>
+                <button id="topbtnsImg"><a href={kakaologout}  id="topbtnsImg">로그아웃</a></button>
+                <button id="topbtnsImg"onClick={showModal}>상담챗봇</button>
                 {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
             </div>
         </div>

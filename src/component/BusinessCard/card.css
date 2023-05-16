@@ -2,7 +2,7 @@
   background-image: image('/src/component/BusinessCard/card.css');
 }
 
-input {
+.input2 {
   /* display: none; */
   background-color: rgb(0, 0, 0, 0.1);
   border: none;
@@ -190,7 +190,7 @@ input {
 
 /* 뒤집기 */
 .flip { 
-  perspective: 200000px;
+  perspective: 20000px;
 }
 
 .busicard {

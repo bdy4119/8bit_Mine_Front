@@ -73,6 +73,7 @@ const FileList = () => {
             .then(function (res) {
                 console.log(res);
                 window.location.reload();
+                alert('파일을 삭제했습니다.');
             })
             .catch(function (err) {
                 alert(err);
@@ -187,13 +188,13 @@ const FileList = () => {
                                         <Table.Cell>{file.mfRegdate}</Table.Cell>
                                         <Table.Cell>{file.mfMemo}</Table.Cell>
                                         <Table.Cell>
-                                            {<Link to={`/updateFile/${file.mfSeq}`}><button className='updatebtns'>수정</button></Link>}
-
-                                            <button className='delbtns' onClick={() => deleteFile(`${file.mfSeq}`)}>삭제</button>
+                                        {/* <button className='updatebtns'size="large" color="pink" onClick={() => { navigate('/updateFile/$file.mfSeq')}> 수정</button> */}
+                                             <Link to={`/updateFile/${file.mfSeq}`}><Button size="large" color="blue" className='updatebtns'>수정</Button></Link>
+                                            <Button className='delbtns'size="large" color="green" onClick={() => deleteFile(`${file.mfSeq}`)}>삭제</Button>
 
 
                                         </Table.Cell>
-                                        <td><button className='downbtns' onClick={() => { download(file.mfNFilename) }}>다운로드</button></td>
+                                        <td><Button className='downbtns' size="large" color="yellow" onClick={() => { download(file.mfNFilename) }}>다운로드</Button></td>
                                     </Table.Row>
                                 );
                             })}
@@ -202,6 +203,7 @@ const FileList = () => {
                     </Table>
                     <br />
                     <Button className='upbtns' size="large" color="pink" onClick={() => { navigate('/FileUpload') }} style={{ marginLeft: "1400px", color: 'white' }}>업로드</Button>
+                    {/* <button className='upbtns'  style={{marginLeft:"1050px",color:'white'}}><Link to='/FileUpload'>업로드</Link> */}
                     <br /><br />
                     <Pagination
                         activePage={page}
