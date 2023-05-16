@@ -11,6 +11,7 @@ import stage2 from './images/stage2.png';
 import stage3 from './images/stage3.png';
 import logo from './images/logo.png';
 import cat from './images/cat.png';
+import { Button } from 'semantic-ui-react'
 
 function Mine_full(){
 
@@ -303,7 +304,7 @@ function Mine_full(){
                                     </div>
                                     <div id="fullsubquestion">
                                         방문자 : <input value={guestid} onChange={(e)=>setguestid(e.target.value)}></input>
-                                        <button onClick={updateanswer}>제출</button>
+                                        &nbsp;&nbsp;&nbsp;<Button onClick={updateanswer}>제출</Button>
                                     </div>
                                 </div>
                             )}
