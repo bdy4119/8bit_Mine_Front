@@ -1,10 +1,10 @@
 
 import kakaoLogo from "../images/kakao.png";
 import logo from '../mine/images/logo.png';
-import Glogo from '../images/googleLogo.png';
-import Mlogo from '../images/microsoftLogo.png';
-import Nlogo from '../images/naverLogo.png';
-import Klogo from '../images/kakaoLogo.png';
+import Glogo from '../images/google.png';
+import Mlogo from '../images/microsoft.png';
+import Nlogo from '../images/naverW.png';
+import Klogo from '../images/kakaoB.png';
 import gateImage from '../images/mineGate.jpg';
 
 import { useEffect, useState } from "react";
@@ -109,7 +109,7 @@ function Gate() {
             <div id="logo" onClick={() => {history('/')}} style={{marginLeft:"-850px", marginTop:"-30px"}}>
                 <img src={logo} alt="no" width="300px" />
             </div>
-
+            <br />
             <div className="loginArea">
                 <h1 className="gateWord">
                     Mine에 오신것을 환영합니다!
@@ -117,17 +117,19 @@ function Gate() {
                     해당 서비스 계정을 통해 간편하게 Mine에 접속해보세요
                 </h1>
 
-                <br />
+                <img src={gateImage} alt="" className="gateImg" />
 
                 <span>
-                <img src={Glogo} alt="" className="socialLogo" />
-                <img src={Mlogo} alt="" className="socialLogo" />
-                <img src={Nlogo} alt="" className="socialLogo" />
-                <img src={Klogo} alt="" className="socialLogo" />
+                <img src={Glogo} alt="" className="socialG" />
+                <img src={Mlogo} alt="" className="socialM" />
+                <img src={Nlogo} alt="" className="socialN" />
+                <img src={Klogo} alt="" className="socialK" />
                 </span>
 
-                <br /><br />
-                <img src={gateImage} alt="" />
+                <span className="gateRed" />
+                <span className="gateBlue" />
+                <span className="gateGreen" />
+                <span className="gateYellow" />
 
                 <div>
                     <button onClick={prevBtn} className="prevBtn">{'<<<'}</button>
