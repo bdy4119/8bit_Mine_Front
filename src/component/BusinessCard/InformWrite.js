@@ -150,7 +150,7 @@ function InformWrite() {
               <div style={{ float:"left", marginLeft:"500px", marginTop:"-350px", textAlign:"left"}}>
                 <div id="talk" style={{marginTop:"50px", width:"500px", padding:"50px"}}>
                   <h3 style={{fontFamily:"Do Hyeon", fontSize:"20px"}}>소개글</h3>
-                  <input name="introduce" defaultValue={introduce} onChange={(e)=>setIntroduce(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px"}}/>
+                  <input className="input2" name="introduce" defaultValue={introduce} onChange={(e)=>setIntroduce(e.target.value)} style={{fontFamily:"Do Hyeon", fontSize:"20px"}}/>
                 </div>
                 <br/>
 

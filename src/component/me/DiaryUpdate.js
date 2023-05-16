@@ -78,7 +78,7 @@ function DiaryUpdate() {
          .then(function(resp){
             if(resp.data === "YES") {
               alert('글이 수정되었습니다.');
-              history('/me');
+              window.location.href="/me";
             } else {
               alert('글을 수정하지 못했습니다.');
               history('/me');

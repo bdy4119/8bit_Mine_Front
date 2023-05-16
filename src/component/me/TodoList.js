@@ -188,14 +188,17 @@ function TodoList() {
             </div>    
 
             
-       <Pagination
-         activePage={page} 
-         itemsCountPerPage={10}
-         totalItemsCount={totalCnt}
-         pageRangeDisplayed={5}
-         prevPageText={"이전"}
-         nextPageText={"다음"}
-         onChange={pageChange} />
+            <div style={{marginRight:"-50px", marginTop:"50px"}}>
+                  <Pagination
+                    activePage={page} //현재 페이지
+                    itemsCountPerPage={1} //한 페이지당 보여줄 리스트 개수
+                    totalItemsCount={totalCnt} //총 아이템 수
+                    pageRangeDisplayed={1}   //paginator에서 보여줄 페이지 범위
+                    prevPageText={"이전"}
+                    nextPageText={"다음"}
+                    onChange={pageChange} //페이지 핸들링
+                     />
+                </div>
                     
               
       </div>

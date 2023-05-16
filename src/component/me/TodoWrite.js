@@ -36,7 +36,7 @@ function TodoWrite() {
          .then(function(resp){
             if(resp.data === "YES") {
               alert('글이 등록되었습니다.');
-              history(`/me/${id}`);
+              history(`/me`);
             } else {
               alert('글을 등록하지 못했습니다.');
             }

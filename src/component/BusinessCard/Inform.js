@@ -70,8 +70,8 @@ function Inform() {
                     </div>
                     <br/>
                     <div>
-                      <span style={{fontFamily:'Do Hyeon', fontSize:"25px"}}>
-                        URL: <Link to={business.url}> {business.url} </Link>
+                      <span style={{fontFamily:'Do Hyeon', fontSize:"25px", marginLeft:"210px"}}>
+                        url: <Link to={business.url}> <input className="input2" style={{width:"280px"}} value={business.url} readOnly/></Link>
                       </span>
                     </div>
                   </div>

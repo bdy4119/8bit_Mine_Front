@@ -69,7 +69,7 @@ function BackOrderflip() {
 
   return(
     <div style={{ filter: "drop-shadow(10px 10px 10px #b3b2b2)"}}>
-      <div style={{backgroundColor:"#998FFF", marginTop:"150px", height:"450px", width:"1000px", overflow:"auto", marginRight:"450px", borderRadius:"30px 30px 0px 0px"}}>
+      <div style={{backgroundColor:"#998FFF", marginTop:"150px", height:"450px", width:"1000px", overflowY:"scroll", marginRight:"450px", borderRadius:"30px 30px 0px 0px"}}>
         {
           businessbackList.map(function(back, idx) {
             //짝수 오른쪽 정렬
