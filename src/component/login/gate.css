@@ -6,17 +6,54 @@
     margin-top: 60px;
 }
 
-.socialLogo {
-    width: 70px;
-    height: 70px;
-    margin-right: 70px;
-    margin-left: 70px;
+.gateImg {
+    position: absolute;
+    width: 850px;
+    height: 700px;
+    margin-top: 85px;
+    z-index: 0;
+}
+
+.socialG {
+    position: absolute;
+    width: 225px;
+    height: 90px;
+    margin-top: 70px;
+    margin-left: -690px;
+    z-index: 1;
+}
+
+.socialM {
+    position: absolute;
+    width: 275px;
+    height: 110px;
+    margin-top: 60px;
+    margin-left: 440px;
+    z-index: 1;
+}
+
+.socialN {
+    position: absolute;
+    width: 200px;
+    height: 80px;
+    margin-top: 315px;
+    margin-left: -670px;
+    z-index: 1;
+}
+
+.socialK {
+    position: absolute;
+    width: 225px;
+    height: 90px;
+    margin-top: 310px;
+    margin-left: 465px;
+    z-index: 1;
 }
 
 .prevBtn {
     position: absolute;
-    left: 625px;
-    top: 880px;
+    left: 730px;
+    top: 475px;
 
     background-color: #4e3b3b;
     color: #fff;
@@ -28,8 +65,8 @@
 
 .nextBtn {
     position: absolute;
-    right: 625px;
-    top: 880px;
+    right: 750px;
+    top: 475px;
 
     background-color: #4e3b3b;
     color: #fff;
@@ -41,28 +78,66 @@
 
 .Glogo {
     position: absolute;
-    right: 870px;
-    top: 880px;
+    right: 873px;
+    top: 470px;
 }
 
 .Mlogo {
     position: absolute;
-    right: 860px;
-    top: 880px;
+    right: 861px;
+    top: 472px;
 }
 
 .Nlogo {
     position: absolute;
-    right: 830px;
-    top: 880px;
+    right: 835px;
+    top: 463px;
 }
 
 .Klogo {
     position: absolute;
-    right: 875px;
-    top: 880px;
+    right: 877px;
+    top: 470px;
 }
 
 .gateWord {
     text-align: center;
+    margin-top: 20px;
+}
+
+.gateRed {
+    position: absolute;
+    width: 300px;
+    height: 100px;
+    /* background-color: #EA4335; */
+    background-color: gray;
+    margin-left: -1150px;
+    margin-top: 150px;
+}
+
+.gateBlue {
+    position: absolute;
+    width: 300px;
+    height: 100px;
+    background-color: #00A1F1;
+    margin-left: 1150px;
+    margin-top: 150px;
+}
+
+.gateGreen {
+    position: absolute;
+    width: 300px;
+    height: 100px;
+    background-color: #2DB400;
+    margin-left: -1150px;
+    margin-top: 390px;
+}
+
+.gateYellow {
+    position: absolute;
+    width: 300px;
+    height: 100px;
+    background-color: #FEE500;
+    margin-left: 1150px;
+    margin-top: 390px;
 }

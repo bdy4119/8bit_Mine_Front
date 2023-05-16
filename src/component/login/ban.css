@@ -5,8 +5,8 @@
 }
 
 .banImg {
-    margin-top: 10px;
-    margin-left: 625px;
+    margin-top: 40px;
+    margin-left: 660px;
     width: 600px;
     height: 600px;
 }
@@ -14,5 +14,5 @@
 .banWord2 {
     text-align: center;
     color: red;
-    margin-top: 0px;
+    margin-top: 15px;
 }
