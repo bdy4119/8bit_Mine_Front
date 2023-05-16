@@ -27,7 +27,7 @@ function Admin(){
             axios.get("http://localhost:3000/authcheck", {params:{"token":token}})
             .then(function(resp){
                 if(resp.data === 1){
-                    history("/mainpage");
+                    history("/main");
                 }
                 else if(resp.data === 2){
                     history("/ban");

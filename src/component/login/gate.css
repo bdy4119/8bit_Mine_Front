@@ -16,7 +16,7 @@
 .prevBtn {
     position: absolute;
     left: 625px;
-    top: 900px;
+    top: 880px;
 
     background-color: #4e3b3b;
     color: #fff;
@@ -29,7 +29,7 @@
 .nextBtn {
     position: absolute;
     right: 625px;
-    top: 900px;
+    top: 880px;
 
     background-color: #4e3b3b;
     color: #fff;
@@ -41,26 +41,26 @@
 
 .Glogo {
     position: absolute;
-    right: 840px;
-    top: 900px;
+    right: 870px;
+    top: 880px;
 }
 
 .Mlogo {
     position: absolute;
-    right: 830px;
-    top: 900px;
+    right: 860px;
+    top: 880px;
 }
 
 .Nlogo {
     position: absolute;
-    right: 800px;
-    top: 900px;
+    right: 830px;
+    top: 880px;
 }
 
 .Klogo {
     position: absolute;
-    right: 845px;
-    top: 900px;
+    right: 875px;
+    top: 880px;
 }
 
 .gateWord {
