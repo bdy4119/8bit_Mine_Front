@@ -1,11 +1,11 @@
 
 import kakaoLogo from "../images/kakao.png";
 import logo from '../mine/images/logo.png';
-import Glogo from '../images/google.png';
-import Mlogo from '../images/microsoft.png';
-import Nlogo from '../images/naverW.png';
-import Klogo from '../images/kakaoB.png';
-import gateImage from '../images/mineGate.jpg';
+import Glogo from '../images/googleLogo.png';
+import Mlogo from '../images/microsoftLogo.png';
+import Nlogo from '../images/naverLogo.png';
+import Klogo from '../images/kakaoLogo.png';
+import gateImg from '../images/gateWord.jpg';
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -18,16 +18,6 @@ import "./gate.css";
 
 function Gate() {
     const history = useNavigate();
-
-    const [showSocialIndex, setShowSocialIndex] = useState(0);
-
-    const prevBtn = () => {
-        setShowSocialIndex((showSocialIndex - 1 + 4) % 4);
-    };
-
-    const nextBtn = () => {
-        setShowSocialIndex((showSocialIndex + 1) % 4);
-    };
 
     const GoogleClientId = "1037718829981-9m6h7ccbotf8buufvbbjk4ictlfcf5d0.apps.googleusercontent.com";
 
@@ -95,7 +85,7 @@ function Gate() {
         }
 
         initializeNaverLogin();
-    }, [showSocialIndex]);
+    }, []);
 
     return (
         <div id="back">
@@ -112,36 +102,24 @@ function Gate() {
             <br />
             <div className="loginArea">
                 <h1 className="gateWord">
-                    Mine에 오신것을 환영합니다!
-                    <br />
-                    해당 서비스 계정을 통해 간편하게 Mine에 접속해보세요
+                    해당 서비스 계정을 통해 간편하게 접속해보세요
                 </h1>
 
-                <img src={gateImage} alt="" className="gateImg" />
-
-                <span>
-                <img src={Glogo} alt="" className="socialG" />
-                <img src={Mlogo} alt="" className="socialM" />
-                <img src={Nlogo} alt="" className="socialN" />
-                <img src={Klogo} alt="" className="socialK" />
-                </span>
-
-                <span className="gateRed" />
-                <span className="gateBlue" />
-                <span className="gateGreen" />
-                <span className="gateYellow" />
-
-                <div>
-                    <button onClick={prevBtn} className="prevBtn">{'<<<'}</button>
-                    <span className="Glogo">{showSocialIndex === 0 && <button><GoogleLogin clientId={GoogleClientId} onSuccess={onSuccess} onFailure={onFailure} /></button>}</span>
-                    <span className="Mlogo">{showSocialIndex === 1 && <MicrosoftLogin clientId={MicrosoftClientId} authCallback={callback} />}</span>
-                    <span className="Nlogo">{showSocialIndex === 2 && <span id="naverIdLogin" />}</span>
-                    <span className="Klogo">{showSocialIndex === 3 && <a href={KAKAO_AUTH_URI}><img src={kakaoLogo} alt=""/></a>}</span>
-                    <button onClick={nextBtn} className="nextBtn">{'>>>'}</button>
-                </div>
+                <span class="gateBorder"></span>
             </div>
 
+            <img src={gateImg} alt="" className="gateImg" />
 
+            <span className="socialG"><GoogleLogin clientId={GoogleClientId} onSuccess={onSuccess} onFailure={onFailure} /></span>
+            <span className="socialM"><MicrosoftLogin clientId={MicrosoftClientId} authCallback={callback} /></span>
+            <span className="socialN" id="naverIdLogin" />
+            <span className="socialK"><a href={KAKAO_AUTH_URI}><img src={kakaoLogo} alt=""/></a></span>
+
+            <img src={Glogo} alt="" className="Glogo" />
+            <img src={Mlogo} alt="" className="Mlogo" />
+            <img src={Nlogo} alt="" className="Nlogo" />
+            <img src={Klogo} alt="" className="Klogo" />
+            
             {/* 랜더링될때마다 존재하지 않으면 오류 발생 */}
             {/* id를 사용하기 때문에 상단에 존재하면 먼저 호출되어 버그 발생 */}
             {/* hidden을 이용해 항상 존재하지만 감춤 */}
