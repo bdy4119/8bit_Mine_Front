@@ -5,7 +5,8 @@ import Glogo from '../images/googleLogo.png';
 import Mlogo from '../images/microsoftLogo.png';
 import Nlogo from '../images/naverLogo.png';
 import Klogo from '../images/kakaoLogo.png';
-import gateImg from '../images/gateWord.jpg';
+import gateImg from '../images/gateImg.jpg';
+import redStone from '../images/redStone.png';
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -99,16 +100,17 @@ function Gate() {
             <div id="logo" onClick={() => {history('/')}} style={{marginLeft:"-850px", marginTop:"-30px"}}>
                 <img src={logo} alt="no" width="300px" />
             </div>
-            <br />
-            <div className="loginArea">
+            {/* <div className="loginArea">
                 <h1 className="gateWord">
                     해당 서비스 계정을 통해 간편하게 접속해보세요
                 </h1>
 
                 <span class="gateBorder"></span>
-            </div>
+            </div> */}
 
             <img src={gateImg} alt="" className="gateImg" />
+            <img src={redStone} alt="" className="gateStone1" />
+            {/* <img src={redStone} alt="" className="gateStone2" /> */}
 
             <span className="socialG"><GoogleLogin clientId={GoogleClientId} onSuccess={onSuccess} onFailure={onFailure} /></span>
             <span className="socialM"><MicrosoftLogin clientId={MicrosoftClientId} authCallback={callback} /></span>
