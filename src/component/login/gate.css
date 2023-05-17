@@ -1,4 +1,5 @@
 
+/*
 .loginArea {
     display: flex;
     flex-direction: column;
@@ -48,14 +49,32 @@
     /* font-family: "Times New Roman", serif; */
     /* font-family: "Courier New", Courier, monospace; */
     /* font-family: "Arial Black", sans-serif; */
-}
+/*}
 
 .gateImg {
     position: absolute;
-    width: 960px;
-    height: 600px;
-    top: 300px;
-    left: 20px;
+    width: 750px;
+    height: 450px;
+    top: 380px;
+    left: 120px;
+}
+
+.gateStone1 {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    top: 400px;
+    left: 130px;
+    transform: rotate(30deg);
+}
+
+.gateStone2 {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    top: 400px;
+    left: 790px;
+    transform: rotate(-30deg);
 }
 
 .gateBorder {
@@ -106,5 +125,124 @@
     position: absolute;
     right: 325px;
     top: 730px;
+    z-index: 1;
+}
+*/
+
+.Glogo {
+    position: absolute;
+    width: 130px;
+    height: 130px;
+    right: 1200px;
+    top: 700px;
+}
+
+.Mlogo {
+    position: absolute;
+    width: 95px;
+    height: 95px;
+    right: 1040px;
+    top: 720px;
+}
+
+.Nlogo {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    right: 855px;
+    top: 720px;
+}
+
+.Klogo {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    right: 675px;
+    top: 720px;
+}
+
+.gateImg {
+    position: absolute;
+    width: 1000px;
+    height: 600px;
+    top: 280px;
+    left: 430px;
+}
+
+.gateStone1 {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    top: 300px;
+    left: 850px;
+    /* transform: rotate(30deg); */
+}
+
+/* .gateStone1 {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 230px;
+    left: 565px;
+    transform: rotate(30deg);
+}
+
+.gateStone2 {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 230px;
+    left: 1180px;
+    transform: rotate(-30deg);
+} */
+
+.gateBorder {
+    border-left: 2px solid black;
+    height: 550px;
+    margin-left: 100px;
+    margin-top: 160px;
+}
+
+.socialG {
+    opacity: 0;
+    display: inline-block;
+    width: 50px;
+    overflow: hidden;
+    position: absolute;
+    right: 1240px;
+    top: 730px;
+    z-index: 1;
+}
+
+.socialM {
+    opacity: 0;
+    display: inline-block;
+    width: 50px;
+    overflow: hidden;
+    position: absolute;
+    right: 1060px;
+    top: 745px;
+    z-index: 1;
+}
+
+.socialN {
+    opacity: 0;
+    display: inline-block;
+    width: 50px;
+    overflow: hidden;
+    position: absolute;
+    right: 880px;
+    top: 740px;
+    z-index: 1;
+}
+
+.socialK {
+    opacity: 0;
+    display: inline-block;
+    width: 50px;
+    overflow: hidden;
+    position: absolute;
+    right: 700px;
+    top: 750px;
     z-index: 1;
 }
