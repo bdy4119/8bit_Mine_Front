@@ -1,12 +1,7 @@
 import axios from "axios";
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-
-import { Icon } from '@iconify/react';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./card.css";
-
 
 function Inform() {
 
@@ -18,7 +13,6 @@ function Inform() {
 
     axios.get("http://localhost:3000/businesscard", {params:{"email": id}})
          .then(function(resp){
-          //  console.log(resp.data.list);
           setBusinessList(resp.data.list);
 
          })

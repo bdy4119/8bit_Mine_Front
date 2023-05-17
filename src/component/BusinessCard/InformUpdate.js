@@ -1,11 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useRef } from "react";
-import { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../mine_back.css"
 import Topbar from "../main/topbar";
-
-
 import "./card.css";
 
 function CustomUpdate() {

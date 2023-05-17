@@ -2,7 +2,6 @@ import { useState } from 'react';
 import ModalBasic from '../chatbot/chatbot';
 import logo from '../mine/images/logo.png';
 import { useNavigate } from 'react-router-dom';
-import { Button } from 'semantic-ui-react'
 import "./main.css";
 
 function Topbar() {

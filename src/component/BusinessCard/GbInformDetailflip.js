@@ -1,8 +1,6 @@
 import axios from "axios";
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import { Link, useParams } from "react-router-dom";
 import "../mine_back.css"
 
 import "./card.css";
@@ -41,18 +39,6 @@ console.log(mineid);
   },[param.id]);
 
   console.log(id)
-
-  // function editBtn() {
-  //   if(param.id === id) {
-  //     return(
-  //       <Link to={`/informUpdate/${param.id}/${businessDetail.seq}`}>
-  //         <button id="onlineBtn" style={{width:"250px"}}>
-  //           명함수정
-  //         </button>
-  //       </Link>
-  //     )
-  //   }
-  // }
 
   //딜레이 한번 주기
   if(loading === false) {

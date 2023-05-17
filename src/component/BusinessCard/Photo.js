@@ -18,19 +18,11 @@ function Photo() {
   }
 
 
-
-
-
   function onSubmit(e) {
     e.preventDefault();
    
    let formData = new FormData();
    formData.append("uploadFile", document.frm.uploadFile.files[0]);
-  // formData.append("inform", document.frm.inform.value);
-   // formData.append("name", document.frm.inform.name.value);
-   // formData.append("phoneNum", document.frm.inform.phoneNum.value);
-   // formData.append("email", document.frm.inform.email.value);
-   // formData.append("url", document.frm.inform.url.value);
 
    axios.post("http://localhost:3000/fileUpload", formData)
         .then(function(res){
