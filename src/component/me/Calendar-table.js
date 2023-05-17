@@ -12,9 +12,9 @@ import { Icon } from '@iconify/react';
     날짜 관련 함수 라이브러리
     : npm install date-fns 
 */
-import { format, addMonths, subMonths, subYears, addYears, subWeeks, addWeeks, subDays } from 'date-fns';
+import { format, addMonths, subMonths, subYears, addYears, subWeeks, addWeeks } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
-import { isSameMonth, isSameDay, addDays, parse } from 'date-fns';
+import { addDays, parse } from 'date-fns';
 
 
 
@@ -102,28 +102,13 @@ const RenderCells = ({currentMonth, selectedDate, onDateClick, currentWeek}) => 
            days=[];
        
           
-     //   rows.push(days);
     }
-    /*
-    let row = [];
-    for(let i=0; i<7; i++) {
-            if(rows[i]. currentWeek) {
-                row.push(rows[i]);
-            }
-        
-   }
-   */
-  //  const rowlist = rows.map((row,idx)=>(<tbody>{row}</tbody>))
-  
   
 
   return (
        <tbody style={{verticalAlign:"top"}}>
             {rows}
         </tbody>
-    //   <tr>
-    //       {days}
-    //   </tr>
     );    
 }
 
@@ -197,13 +182,7 @@ function Calendar() {
                 </thead>
                 <RenderCells currentMonth={currentMonth} selectedDate={selectedDate} currentWeek={format(currentWeek, 'd')} onDateClick={onDateClick} />
             </table>
-        
-            {/* 
-                <div>
-                    <Icon icon="bi:arrow-left-circle-fill" onClick={preWeek}/>
-                    <Icon icon="bi:arrow-right-circle-fill" onClick={nextWeek}/>
-                </div>
-            */}
+    
         </div>
     );
 };

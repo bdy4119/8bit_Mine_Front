@@ -38,7 +38,6 @@ function Main(){
 
         axios.get("http://localhost:3000/businesscard", {params:{"email":id}})
             .then(function(resp){
-            //  console.log(resp.data.list);
             setBusinessList(resp.data.list);
             })
             .catch(function(err){
@@ -168,7 +167,6 @@ function Main(){
                     nottoday.push(resp.data.list[i]);
                 }
               }
-            //  console.log(nottoday);
               setTotalCnt(resp.data.cnt - nottoday.length);
             })
             .catch(function(err){
@@ -198,7 +196,7 @@ function Main(){
                     </div>
                 </div>
             </div>
-            <div /*id="toolbox"*/ style={{marginTop:"100px"}}>
+            <div style={{marginTop:"100px"}}>
                 <div>
                     <div id="i_area" onMouseOver={hover_over_i} onMouseOut={hover_out_i} onClick={()=>{movePage('/i')}}>
                         <div id="inner">

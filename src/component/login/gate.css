@@ -1,61 +1,94 @@
+#geteimg {
+    width: 900px;
+    height: 560px;
+    margin-left: 500px;
+    padding: 20px;
+    margin-top: 160px;
+    background-color: #362C45;
+}
 
-.loginArea {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 60px;
+#geteimgline {
+    width: 860px;
+    height: 520px;
+    border: 3px solid #644580;
+}
+
+@font-face {
+    font-family: 'TheJamsil5Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+#textgate {
+    color: white;
+    font-size: 25px;
+    width: 658px;
+    position: relative;
+    left: 50%;
+    margin-left: -329px;
+    top: 230px;
+    font-family: TheJamsil5Bold;
+}
+
+.textgate2 {
+    color: #A76FD2;
 }
 
 .Glogo {
-    position: absolute;
-    width: 130px;
-    height: 130px;
-    right: 590px;
-    top: 390px;
-}
-
-.Mlogo {
+    z-index: 10;
+    visibility: hidden;
     position: absolute;
     width: 90px;
     height: 90px;
-    right: 310px;
-    top: 410px;
+    right: 1190px;
+    top: 690px;
+}
+
+.Mlogo {
+    z-index: 10;
+    visibility: hidden;
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    right: 1030px;
+    top: 700px;
 }
 
 .Nlogo {
+    z-index: 10;
+    visibility: hidden;
     position: absolute;
-    width: 100px;
-    height: 100px;
-    right: 600px;
+    width: 75px;
+    height: 75px;
+    right: 845px;
     top: 700px;
 }
 
 .Klogo {
+    z-index: 10;
+    visibility: hidden;
     position: absolute;
-    width: 100px;
-    height: 100px;
-    right: 300px;
+    width: 75px;
+    height: 75px;
+    right: 665px;
     top: 700px;
-}
-
-.gateWord {
-    position: absolute;
-    text-align: center;
-    right: 145px;
-    top: 250px;
-    font-size: 30px;
-    font-family: "Lucida Console", Monaco, monospace;
-    /* font-family: "Times New Roman", serif; */
-    /* font-family: "Courier New", Courier, monospace; */
-    /* font-family: "Arial Black", sans-serif; */
 }
 
 .gateImg {
     position: absolute;
-    width: 960px;
+    width: 1000px;
     height: 600px;
+    top: 280px;
+    left: 430px;
+}
+
+.gateStone1 {
+    position: absolute;
+    width: 150px;
+    height: 150px;
     top: 300px;
-    left: 20px;
+    left: 870px;
 }
 
 .gateBorder {
@@ -68,12 +101,13 @@
 .socialG {
     opacity: 0;
     display: inline-block;
-    width: 50px;
     overflow: hidden;
     position: absolute;
-    right: 630px;
-    top: 420px;
-    z-index: 1;
+    width: 90px;
+    height: 90px;
+    right: 1190px;
+    top: 690px;
+    z-index: 11;
 }
 
 .socialM {
@@ -82,9 +116,11 @@
     width: 50px;
     overflow: hidden;
     position: absolute;
-    right: 330px;
-    top: 435px;
-    z-index: 1;
+    width: 70px;
+    height: 70px;
+    right: 1030px;
+    top: 700px;
+    z-index: 11;
 }
 
 .socialN {
@@ -93,9 +129,11 @@
     width: 50px;
     overflow: hidden;
     position: absolute;
-    right: 625px;
-    top: 720px;
-    z-index: 1;
+    width: 75px;
+    height: 75px;
+    right: 845px;
+    top: 700px;
+    z-index: 11;
 }
 
 .socialK {
@@ -104,7 +142,9 @@
     width: 50px;
     overflow: hidden;
     position: absolute;
-    right: 325px;
-    top: 730px;
-    z-index: 1;
+    width: 75px;
+    height: 75px;
+    right: 665px;
+    top: 700px;
+    z-index: 11;
 }

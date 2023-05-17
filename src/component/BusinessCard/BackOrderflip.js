@@ -7,7 +7,6 @@ function BackOrderflip() {
   let history = useNavigate();
 
   const[businessbackList, setBusinessbackList] = useState([]);
-  const[businessDetail, setbusinessDetail] = useState(); //객체로 접근하기 때문에 값을 넣지 않아도 됨
 
   const[seq, setSeq] = useState();
 

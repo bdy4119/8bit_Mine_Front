@@ -12,12 +12,11 @@ import { Icon } from '@iconify/react';
     날짜 관련 함수 라이브러리
     : npm install date-fns 
 */
-import { format, addMonths, subMonths, subYears, addYears, subWeeks, addWeeks, subDays, parseJSON } from 'date-fns';
+import { format, addMonths, subMonths, subYears, addYears } from 'date-fns';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek } from 'date-fns';
-import { isSameMonth, isSameDay, addDays, parse } from 'date-fns';
+import { addDays } from 'date-fns';
 
-import * as getDiaryList from './Diary.js';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 //현재 연월표시& 연월이동 함수
@@ -85,7 +84,6 @@ export const Calendar = () => {
     // sub() : 숫자를 입력하면 그 숫자만큼 원하는 날짜나 시간을 뺄 수 있음
     const preMonth = () => {
         setCurrentMonth(subMonths(currentMonth, 1));
-      //  history(`/date/${format(subMonths(currentMonth, 1), 'M')}`);
     }
     //다음달 이동
     const nextMonth = () => {
@@ -96,8 +94,6 @@ export const Calendar = () => {
     const preYear = () => {
         setCurrentYear(subYears(currentYear, 1));
         setCurrentMonth(subMonths(currentMonth, 12));
-
-    //    history(`/me/${format(subYears(currentYear, 1), 'yyyy')}/${format(subMonths(currentMonth, 12), 'M')}`);
     }
 
     //다음연도 이동
@@ -178,12 +174,11 @@ export const RenderCells = ({ currentYear, currentMonth, selectedDate, onDateCli
     function getHoliday() {
         axios.get("http://localhost:3000/CalendarApi", {params:{"year":format(currentYear, 'yyyy')}})
                  .then(function(resp){
-               //  console.log(JSON.stringify(resp.data.response.body.items));
+
                  setLoading(true);   //렌더링 시작해주기
                     for(let i=0; i<JSON.stringify(resp.data.response.body.items.item.length); i++) {
                         locdate[i] = JSON.stringify(resp.data.response.body.items.item[i].locdate);
                         dateName[i] = JSON.stringify(resp.data.response.body.items.item[i].dateName);
-                    //  console.log(locdate[1] + dateName[1]);
                     }
                 })
                 .catch(function(err){

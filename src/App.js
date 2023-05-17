@@ -80,21 +80,12 @@ function App() {
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
   const [music, setMusic] = useState('');
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const jwt = localStorage.getItem("token");
-
-  const showModal = () => {
-    setModalOpen(true);
-  };
 
   const fetchData = async () => {
     const id = localStorage.getItem("id");
     const resp = await axios.get('http://localhost:3000/bgm_list', { params: { "id": id } });
     setBgmlist(resp.data);
   }
-
-  const kakaologout = "https://kauth.kakao.com/oauth/logout?client_id=746d748ae3421ccabe20af6703c55dac&logout_redirect_uri=http://localhost:9001/kakao/logout";
 
   function Option(props) {
     return (
@@ -132,7 +123,7 @@ function App() {
     setState(false);
     document.getElementById("selbox").setAttribute("style", "width: 350px");
   }
-  // style={{position: "absolute", left: "1000px", top: "50px"}}
+
   return (
     <div id="back">
       <div id="backtop">

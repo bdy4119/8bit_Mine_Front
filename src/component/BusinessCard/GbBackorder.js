@@ -8,7 +8,6 @@ function GbBackorder() {
 
   const[businessbackList, setBusinessbackList] = useState([]);
   const[id, setId] = useState(param.id);
-  const login = localStorage.getItem("id"); //로그인한 아이디
 
   let mineid = param.mineid;
 
@@ -47,26 +46,6 @@ function GbBackorder() {
             alert("삭제에 실패했습니다");
           })
   }
-
-
-
-
-  // function addBtn() {
-  //   if(login === writeId) {
-  //     return(
-  //       <Link to={`/backWrite/${id}`}>
-  //         <button type="submit" id="onlineBtn" style={{width:"250px"}}>
-  //           추가
-  //         </button>
-  //       </Link>
-  //     ) 
-  //   } else {
-  //     <></>
-  //   }
-  // }
-
-
-
 
 
   return(

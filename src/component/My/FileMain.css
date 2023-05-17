@@ -1,11 +1,4 @@
-/* .rwd-table2 {
 
-  position: absolute;
-  margin-top:200px;
-  width: 700px;
-  margin-left: -100px;
-
-} */
 
 .tab {
 
@@ -22,10 +15,6 @@
 }
 
 
-
-
-
-
 .rwd-table tr:first-child {
 
   background: #E81C88;
@@ -39,9 +28,6 @@
   background-color: white;
 }
 
-/*.rwd-table tr:nth-child(odd):not(:first-child) {*/
-/*    background-color: #ebf3f9;*/
-/*}*/
 
 .rwd-table th {
   display: none;
@@ -60,7 +46,6 @@
 }
 
 .rwd-table td:before {
-  /*content: attr(data-th) ": ";*/
   font-weight: bold;
   width: 120px;
   display: inline-block;
@@ -108,7 +93,6 @@
 @media screen and (min-width: 600px) {
   .rwd-table tr:hover:not(:first-child) {
     background-color: rgba(228, 36, 235, 0.3);
-    /*background-color: #83F4B4;과 동일 opacity*/
   }
 
   .rwd-table td:before {

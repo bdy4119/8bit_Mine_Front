@@ -7,7 +7,6 @@ import Topbar from "../main/topbar";
 import Barbtns from "../main/barbtns";
 export default function UpdateFile() {
   let params = useParams();
-  const[title, setTitle] = useState('');
   const [json, setJson] = useState('');
   const [memo, setMemo] = useState('');
   const [mfTitle, setMfTitle] = useState('')
@@ -15,12 +14,9 @@ export default function UpdateFile() {
   const [mfMemo, setMfMemo] = useState('')
   const [mfFileId, setMfFileId] = useState(localStorage.getItem("id"));
   const history = useNavigate();
-  const date = new Date();
   
   
-  
-  
-  console.log(params.seq);
+
   // 원본 데이터 가져오기
   const fetchData = async () => {
     axios.get("http://localhost:3000/fileDetail", { params: { "mfSeq": params.seq } })
@@ -55,14 +51,6 @@ export default function UpdateFile() {
         alert(err);
       })
     
-
-
-
-
-  
-  const memoChange = (e) => {
-    setMemo(e.target.value);
-  }
  
   }
   useEffect(() => {
