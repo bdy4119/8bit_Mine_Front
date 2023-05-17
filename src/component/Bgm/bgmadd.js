@@ -5,7 +5,7 @@ import axios from "axios";
 import { Table, Button, Input } from 'semantic-ui-react'
 import "./bgmcss.css";
 
-import cglogo from "./ChatGptLogo.png";
+import cglogo from "./ChatGPTlogo.png";
 import ytlogo from "./youtube_logo.png";
 import redd from "../I/image/redd.png";
 import greend from "../I/image/greend.png";

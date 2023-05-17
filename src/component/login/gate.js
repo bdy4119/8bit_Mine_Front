@@ -6,7 +6,7 @@ import Mlogo from '../images/microsoftLogo.png';
 import Nlogo from '../images/naverLogo.png';
 import Klogo from '../images/kakaoLogo.png';
 import gateImg from '../images/gateImg.jpg';
-import redStone from '../images/redStone.png';
+import redStone from '../main/images/mine_icon.png';
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -88,6 +88,28 @@ function Gate() {
         initializeNaverLogin();
     }, []);
 
+    function hovergate(e){
+        document.getElementsByClassName("Glogo")[0].style.visibility = "visible";
+        document.getElementsByClassName("Mlogo")[0].style.visibility = "visible";
+        document.getElementsByClassName("Nlogo")[0].style.visibility = "visible";
+        document.getElementsByClassName("Klogo")[0].style.visibility = "visible";
+        document.getElementsByClassName("socialG")[0].style.visibility = "visible";
+        document.getElementsByClassName("socialM")[0].style.visibility = "visible";
+        document.getElementsByClassName("socialN")[0].style.visibility = "visible";
+        document.getElementsByClassName("socialK")[0].style.visibility = "visible";
+    }
+
+    function outgate(e){
+        document.getElementsByClassName("Glogo")[0].style.visibility = "hidden";
+        document.getElementsByClassName("Mlogo")[0].style.visibility = "hidden";
+        document.getElementsByClassName("Nlogo")[0].style.visibility = "hidden";
+        document.getElementsByClassName("Klogo")[0].style.visibility = "hidden";
+        document.getElementsByClassName("socialG")[0].style.visibility = "hidden";
+        document.getElementsByClassName("socialM")[0].style.visibility = "hidden";
+        document.getElementsByClassName("socialN")[0].style.visibility = "hidden";
+        document.getElementsByClassName("socialK")[0].style.visibility = "hidden";
+    }
+
     return (
         <div id="back">
             <div id="topbar">
@@ -108,24 +130,37 @@ function Gate() {
                 <span class="gateBorder"></span>
             </div> */}
 
-            <img src={gateImg} alt="" className="gateImg" />
-            <img src={redStone} alt="" className="gateStone1" />
-            {/* <img src={redStone} alt="" className="gateStone2" /> */}
+            <div id="geteimg" onMouseOver={hovergate} onMouseOut={outgate}>
+                <div id="geteimgline">
+                    <img src={redStone} alt="" className="gateStone1" />
+                    {/* <img src={redStone} alt="" className="gateStone2" /> */}
 
-            <span className="socialG"><GoogleLogin clientId={GoogleClientId} onSuccess={onSuccess} onFailure={onFailure} /></span>
-            <span className="socialM"><MicrosoftLogin clientId={MicrosoftClientId} authCallback={callback} /></span>
-            <span className="socialN" id="naverIdLogin" />
-            <span className="socialK"><a href={KAKAO_AUTH_URI}><img src={kakaoLogo} alt=""/></a></span>
+                    <div id="textgate">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span className="textgate2">MINE</span>은 광산에서 <span className="textgate2">보석</span>을 찾아내는 것처럼,<br/><br/>
+                        나의 내면에 있는 <span className="textgate2">매력</span>과 <span className="textgate2">가치</span>를 <span className="textgate2">발굴</span>하고
+                        <span className="textgate2">기록</span>하는 서비스입니다.<br/><br/><br/><br/>
 
-            <img src={Glogo} alt="" className="Glogo" />
-            <img src={Mlogo} alt="" className="Mlogo" />
-            <img src={Nlogo} alt="" className="Nlogo" />
-            <img src={Klogo} alt="" className="Klogo" />
-            
-            {/* 랜더링될때마다 존재하지 않으면 오류 발생 */}
-            {/* id를 사용하기 때문에 상단에 존재하면 먼저 호출되어 버그 발생 */}
-            {/* hidden을 이용해 항상 존재하지만 감춤 */}
-            <span hidden id="naverIdLogin" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="textgate2">MINE</span>을 통한 새로운 시선으로 나만의 <span className="textgate2">가치</span>를 발견해보세요!
+                    </div>
+
+                    <span className="socialG"><GoogleLogin clientId={GoogleClientId} onSuccess={onSuccess} onFailure={onFailure} /></span>
+                    <span className="socialM"><MicrosoftLogin clientId={MicrosoftClientId} authCallback={callback} /></span>
+                    <span className="socialN" id="naverIdLogin" />
+                    <span className="socialK"><a href={KAKAO_AUTH_URI}><img src={kakaoLogo} alt=""/></a></span>
+
+                    <img src={Glogo} alt="" className="Glogo" />
+                    <img src={Mlogo} alt="" className="Mlogo" />
+                    <img src={Nlogo} alt="" className="Nlogo" />
+                    <img src={Klogo} alt="" className="Klogo" />
+                    
+                    {/* 랜더링될때마다 존재하지 않으면 오류 발생 */}
+                    {/* id를 사용하기 때문에 상단에 존재하면 먼저 호출되어 버그 발생 */}
+                    {/* hidden을 이용해 항상 존재하지만 감춤 */}
+                    <span hidden id="naverIdLogin" />
+                </div>
+            </div>
         </div>
     );
 }

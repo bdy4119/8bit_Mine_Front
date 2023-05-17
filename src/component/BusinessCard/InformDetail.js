@@ -10,7 +10,7 @@ import Topbar from "../main/topbar";
 
 import "./card.css";
 import BackOrderflip from "./BackOrderflip";
-import { InformDetailFilp } from "./InformDetailflip";
+import { InformDetailFilp } from "./InformDetailflip.js";
 
 function InformDetail() {
 
