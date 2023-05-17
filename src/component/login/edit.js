@@ -190,7 +190,7 @@ function Edit() {
                         <br />
                         <button type="button" className="editButton" onClick={editAf}>변경 내용 수정</button>
                     </span>
-                    <span class="editBorder"></span>
+                    <span className="editBorder"></span>
                     <span className="editRight">
                         <h1>서비스 탈퇴</h1>
                         <h3>

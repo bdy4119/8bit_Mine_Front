@@ -6,138 +6,105 @@
     margin-top: 60px;
 }
 
-.gateImg {
-    position: absolute;
-    width: 850px;
-    height: 700px;
-    margin-top: 85px;
-    z-index: 0;
-}
-
-.socialG {
-    position: absolute;
-    width: 225px;
-    height: 90px;
-    margin-top: 70px;
-    margin-left: -690px;
-    z-index: 1;
-}
-
-.socialM {
-    position: absolute;
-    width: 275px;
-    height: 110px;
-    margin-top: 60px;
-    margin-left: 440px;
-    z-index: 1;
-}
-
-.socialN {
-    position: absolute;
-    width: 200px;
-    height: 80px;
-    margin-top: 315px;
-    margin-left: -670px;
-    z-index: 1;
-}
-
-.socialK {
-    position: absolute;
-    width: 225px;
-    height: 90px;
-    margin-top: 310px;
-    margin-left: 465px;
-    z-index: 1;
-}
-
-.prevBtn {
-    position: absolute;
-    left: 730px;
-    top: 475px;
-
-    background-color: #4e3b3b;
-    color: #fff;
-    border: none;
-    padding: 10px 10px;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.nextBtn {
-    position: absolute;
-    right: 750px;
-    top: 475px;
-
-    background-color: #4e3b3b;
-    color: #fff;
-    border: none;
-    padding: 10px 10px;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
 .Glogo {
     position: absolute;
-    right: 873px;
-    top: 470px;
+    width: 130px;
+    height: 130px;
+    right: 590px;
+    top: 390px;
 }
 
 .Mlogo {
     position: absolute;
-    right: 861px;
-    top: 472px;
+    width: 90px;
+    height: 90px;
+    right: 310px;
+    top: 410px;
 }
 
 .Nlogo {
     position: absolute;
-    right: 835px;
-    top: 463px;
+    width: 100px;
+    height: 100px;
+    right: 600px;
+    top: 700px;
 }
 
 .Klogo {
     position: absolute;
-    right: 877px;
-    top: 470px;
+    width: 100px;
+    height: 100px;
+    right: 300px;
+    top: 700px;
 }
 
 .gateWord {
+    position: absolute;
     text-align: center;
-    margin-top: 20px;
+    right: 145px;
+    top: 250px;
+    font-size: 30px;
+    font-family: "Lucida Console", Monaco, monospace;
+    /* font-family: "Times New Roman", serif; */
+    /* font-family: "Courier New", Courier, monospace; */
+    /* font-family: "Arial Black", sans-serif; */
 }
 
-.gateRed {
+.gateImg {
     position: absolute;
-    width: 300px;
-    height: 100px;
-    /* background-color: #EA4335; */
-    background-color: gray;
-    margin-left: -1150px;
-    margin-top: 150px;
+    width: 960px;
+    height: 600px;
+    top: 300px;
+    left: 20px;
 }
 
-.gateBlue {
-    position: absolute;
-    width: 300px;
-    height: 100px;
-    background-color: #00A1F1;
-    margin-left: 1150px;
-    margin-top: 150px;
+.gateBorder {
+    border-left: 2px solid black;
+    height: 550px;
+    margin-left: 100px;
+    margin-top: 160px;
 }
 
-.gateGreen {
+.socialG {
+    opacity: 0;
+    display: inline-block;
+    width: 50px;
+    overflow: hidden;
     position: absolute;
-    width: 300px;
-    height: 100px;
-    background-color: #2DB400;
-    margin-left: -1150px;
-    margin-top: 390px;
+    right: 630px;
+    top: 420px;
+    z-index: 1;
 }
 
-.gateYellow {
+.socialM {
+    opacity: 0;
+    display: inline-block;
+    width: 50px;
+    overflow: hidden;
     position: absolute;
-    width: 300px;
-    height: 100px;
-    background-color: #FEE500;
-    margin-left: 1150px;
-    margin-top: 390px;
+    right: 330px;
+    top: 435px;
+    z-index: 1;
+}
+
+.socialN {
+    opacity: 0;
+    display: inline-block;
+    width: 50px;
+    overflow: hidden;
+    position: absolute;
+    right: 625px;
+    top: 720px;
+    z-index: 1;
+}
+
+.socialK {
+    opacity: 0;
+    display: inline-block;
+    width: 50px;
+    overflow: hidden;
+    position: absolute;
+    right: 325px;
+    top: 730px;
+    z-index: 1;
 }
