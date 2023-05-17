@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-
 import "../mine_back.css"
 import "./friendcard.css"
 
@@ -9,9 +8,7 @@ function Mine_main() {
 
     let params = useParams();
     const history = useNavigate();
-
     let mineid = params.mineid;
-
     const id = localStorage.getItem("id");
 
     const acceptfriend = () => {

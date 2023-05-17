@@ -1,12 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useRef } from "react";
-import { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../mine_back.css"
 import Topbar from "../main/topbar";
-
-
-
 import "./card.css";
 
 function InformWrite() {
@@ -14,17 +10,12 @@ function InformWrite() {
   let param = useParams();
 
   //데이터를 모두 읽을 때까지 rendering을 조절하는 변수
-  const [loading, setLoading] = useState(false);
-
-  const[seq, setSeq] = useState('');
   const[introduce, setIntroduce] = useState('');
   const[name, setName] = useState('');
   const[phoneNum, setPhoneNum] = useState('');
   const[email, setEmail] = useState(param.id);
   const[url, setUrl] = useState('');
   const[thumbnail, setThumbnail] = useState('');
-
-
   const [imgFile, setImgFile] = useState(`/Business-img/나에대해 알아보기.png`);
   const imgRef = useRef();  //useRef.current -> useRef는 무조건 current를 통해서 감
 

@@ -38,7 +38,7 @@ function Chatbot({ setModalOpen}){
 
         let element = document.createElement('div');
         element.innerHTML = umessage;
-        element.setAttribute("class", "usermsg");   // <div align="right"><div className="usermsg">{umessage}</div></div>
+        element.setAttribute("class", "usermsg");
 
         const chatbox = document.getElementById("chatbox");
         elementUser.appendChild(element);
@@ -50,10 +50,6 @@ function Chatbot({ setModalOpen}){
         // 데이터 받기(back-end)
         axios.post("http://localhost:3000/chatBot", null, { params:{ "msg":umessage } })
         .then(function(resp){
-            // alert(JSON.stringify(resp.data));
-            // alert(resp.data.bubbles[0].type);
-            // alert(resp.data.bubbles[0].data.description);
-
             ChatbotAnswer(resp.data);
 
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -76,7 +72,7 @@ function Chatbot({ setModalOpen}){
             chatbox.appendChild(document.createElement('br'));
         }
         else if(type === "template"){
-            // image
+ 
             if(respData.bubbles[0].data.cover.type === "image"){                
                 let element = document.createElement("img");
                 element.setAttribute("src", respData.bubbles[0].data.cover.data.imageUrl);
@@ -87,10 +83,8 @@ function Chatbot({ setModalOpen}){
                 chatbox.appendChild(element);
                 chatbox.appendChild(document.createElement('br'));
             }
-            // a tag(link)
+
             else if(respData.bubbles[0].data.cover.type === "text"){
-                //alert(JSON.stringify(respData.bubbles[0].data.contentTable[0][0].data.title));
-                //alert(JSON.stringify(respData.bubbles[0].data.contentTable[0][0].data.data.action.data.url));
 
                 let title = respData.bubbles[0].data.contentTable[0][0].data.title;
                 let url = respData.bubbles[0].data.contentTable[0][0].data.data.action.data.url;
@@ -106,7 +100,7 @@ function Chatbot({ setModalOpen}){
                 chatbox.appendChild(document.createElement('br'));
             }
         }
-        // chatbox 에 추가
+
     }
 
     const activeEnter = (e) => {

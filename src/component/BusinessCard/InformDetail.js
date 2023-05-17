@@ -1,10 +1,5 @@
-
-
-import axios from "axios";
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../mine_back.css"
 import Topbar from "../main/topbar";
 

@@ -1,8 +1,6 @@
-import axios from "axios";
 import React from "react";
-import { useEffect} from "react";
 import { useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import BackOrder from "./BackOrder";
 import "./card.css";
 import "../mine_back.css"
@@ -11,8 +9,6 @@ import Topbar from "../main/topbar";
 function Back() {
   let param = useParams();
   const history = useNavigate();
-
-  const[id, setId] = useState(param.id);
 
   return(
     <div id="back">

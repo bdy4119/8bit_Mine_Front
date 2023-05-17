@@ -1,10 +1,8 @@
-
 import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from '../mine/images/logo.png';
 import ban from '../images/ban.png';
-
 import './ban.css'
 
 function Ban(){

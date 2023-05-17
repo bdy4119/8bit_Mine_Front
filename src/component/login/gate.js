@@ -1,20 +1,17 @@
-
 import kakaoLogo from "../images/kakao.png";
 import logo from '../mine/images/logo.png';
 import Glogo from '../images/googleLogo.png';
 import Mlogo from '../images/microsoftLogo.png';
 import Nlogo from '../images/naverLogo.png';
 import Klogo from '../images/kakaoLogo.png';
-import gateImg from '../images/gateImg.jpg';
 import redStone from '../main/images/mine_icon.png';
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import {GoogleLogin} from "react-google-login";
 import {gapi} from "gapi-script";
 import MicrosoftLogin from "react-microsoft-login";
-
 import "./gate.css";
 
 function Gate() {
@@ -122,18 +119,10 @@ function Gate() {
             <div id="logo" onClick={() => {history('/')}} style={{marginLeft:"-850px", marginTop:"-30px"}}>
                 <img src={logo} alt="no" width="300px" />
             </div>
-            {/* <div className="loginArea">
-                <h1 className="gateWord">
-                    해당 서비스 계정을 통해 간편하게 접속해보세요
-                </h1>
-
-                <span class="gateBorder"></span>
-            </div> */}
 
             <div id="geteimg" onMouseOver={hovergate} onMouseOut={outgate}>
                 <div id="geteimgline">
                     <img src={redStone} alt="" className="gateStone1" />
-                    {/* <img src={redStone} alt="" className="gateStone2" /> */}
 
                     <div id="textgate">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

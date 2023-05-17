@@ -1,7 +1,5 @@
 import React from "react";
-
 import "./card.css";
-
 import "../mine_back.css"
 import Topbar from "../main/topbar";
 import Inform from "./Inform";

@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +5,6 @@ import logo from '../mine/images/logo.png';
 import warn from '../images/warn.png';
 import editImg from '../images/editImg.png';
 import Topbar from "../main/topbar";
-
 import './edit.css';
 
 function Edit() {
