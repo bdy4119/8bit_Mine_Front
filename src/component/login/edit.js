@@ -151,7 +151,7 @@ function Edit() {
             <Topbar />
             <div id="topbar">
                 <div id="barbtns">
-                    <div id="mainbtn" onClick={(e) => { window.location.href = "/main" }}>
+                    <div id="mainbtn" onClick={(e) => { history('/main') }}>
                        <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>MAIN</p>
                     </div>
                 </div>

@@ -9,13 +9,13 @@ import "./main.css";
 import { useNavigate } from "react-router-dom";
 import Topbar from "./topbar";
 
-function Main(){
+function Main() {
 
-    const[today, setToday] = useState(format(new Date(),'yyyy-MM-dd'));
+    const [today, setToday] = useState(format(new Date(), 'yyyy-MM-dd'));
     let todayStr = today.toString();
 
     const [totalCnt, setTotalCnt] = useState(0);
-    const[todolist, setTodolist] = useState([]);
+    const [todolist, setTodolist] = useState([]);
 
     const movePage = useNavigate();
     const [profMsg, setProfMsg] = useState('');
@@ -29,29 +29,29 @@ function Main(){
     const id = localStorage.getItem("id");
 
 
-    const[businessList, setBusinessList] = useState([]);
+    const [businessList, setBusinessList] = useState([]);
 
-  
+
     function business() {
         const id = localStorage.getItem("id");
         console.log(id);
 
-        axios.get("http://localhost:3000/businesscard", {params:{"email":id}})
-            .then(function(resp){
-            setBusinessList(resp.data.list);
+        axios.get("http://localhost:3000/businesscard", { params: { "email": id } })
+            .then(function (resp) {
+                setBusinessList(resp.data.list);
             })
-            .catch(function(err){
+            .catch(function (err) {
                 alert("정보를 추가해주세요");
             })
     }
 
-    const noticemine = async() => {
-        const response = await axios.post('http://localhost:3000/noticemine', null, { params:{"id":id} });
+    const noticemine = async () => {
+        const response = await axios.post('http://localhost:3000/noticemine', null, { params: { "id": id } });
         setMinenumber(response.data);
     }
 
-    const noticebook = async() => {
-        const response = await axios.post('http://localhost:3000/noticebook', null, { params:{"id":id} });
+    const noticebook = async () => {
+        const response = await axios.post('http://localhost:3000/noticebook', null, { params: { "id": id } });
         setBooknumber(response.data);
     }
 
@@ -155,26 +155,21 @@ function Main(){
         }
     }
 
-    function getTodolist(page) {
-        axios.get("http://localhost:3000/todoList", {params:{"pageNumber":page, "id":id}})
-            .then(function(resp){
-              setTodolist(resp.data.list);
-              
-              let nottoday = []; //오늘이랑 다른 날짜
-              for(let i=0; i<resp.data.list.length; i++){
-                if(resp.data.list[i].rdate !== todayStr
-                  || (resp.data.list[i].rdate).substr(0,10) !== todayStr){
-                    nottoday.push(resp.data.list[i]);
-                }
-              }
-              setTotalCnt(resp.data.cnt - nottoday.length);
-            })
-            .catch(function(err){
-                alert(err);
-            })
-      }
+    function forMainTodo() {
+        var today1 = new Date();
+        var year = today1.getFullYear();
+        var month = ('0' + (today1.getMonth() + 1)).slice(-2);
+        var day = ('0' + today1.getDate()).slice(-2);
+        var dateString = year + '-' + month + '-' + day;
+    
 
-      
+        axios.get('http://localhost:3000/forMainTodo', { params: { "id": id, "rdate": dateString} })
+        .then(function (resp){
+            console.log(resp);
+            setTodolist(resp.data);
+        })
+    }
+
 
     useEffect(() => {
         document.getElementById("backtop").style.visibility = "visible";
@@ -182,30 +177,30 @@ function Main(){
         getUser();
         noticemine();
         noticebook();
-        getTodolist();
+        forMainTodo();
         business();
     }, []);
 
     return (
         <div id="back">
-            <Topbar/>
+            <Topbar />
             <div id="topbar">
                 <div id="barbtns">
                     <div id="mainbtn" onClick={(e) => { window.location.href = "/main" }}>
-                       <p style={{position:"relative", marginTop:"60px", fontSize:"20px"}}>MAIN</p>
+                        <p style={{ position: "relative", marginTop: "60px", fontSize: "20px" }}>MAIN</p>
                     </div>
                 </div>
             </div>
-            <div style={{marginTop:"100px"}}>
+            <div style={{ marginTop: "100px" }}>
                 <div>
-                    <div id="i_area" onMouseOver={hover_over_i} onMouseOut={hover_out_i} onClick={()=>{movePage('/i')}}>
+                    <div id="i_area" onMouseOver={hover_over_i} onMouseOut={hover_out_i} onClick={() => { movePage('/i') }}>
                         <div id="inner">
                             <div id="profile"><img src={`${process.env.PUBLIC_URL}/profPic/${profPic}`} alt="no"></img></div>
                             <div id="proname">{name}</div>
                             <div id="protext">{profMsg}</div>
                             <div id="hover_i">
                                 “I” 를 채우며 “나” 에 대해 찾아가봐요!
-                                <br /><br/>
+                                <br /><br />
                                 프로필 작성, 나의 분류, 7문 7답
                             </div>
                         </div>
@@ -219,24 +214,24 @@ function Main(){
                             </p>
 
                             {
-                                todolist.map(function(todo, idx){
-                                        return (
-                                            <div id="medivbox" key={idx}>
+                                todolist.map(function (todo, idx) {
+                                    return (
+                                        <div id="medivbox" key={idx}>
 
-                                                <span style={{fontSize:"25px"}}>
-                                                    {todo.title} &nbsp;&nbsp;&nbsp;
-                                                </span>
-                                                <span style={{fontSize:"25px"}}>
-                                                    : {todo.content}
-                                                </span>
-                                            </div>
-                                        )
+                                            <span style={{ fontSize: "25px" }}>
+                                                {todo.title} &nbsp;&nbsp;&nbsp;
+                                            </span>
+                                            <span style={{ fontSize: "25px" }}>
+                                                : {todo.content}
+                                            </span>
+                                        </div>
+                                    )
                                 })
                             }
 
                             <div id="hover_me">
                                 “ME” 를 작성하며 "나" 의 일정을 기록해봐요!
-                                <br /><br/>
+                                <br /><br />
                                 다이어리, to-do
                             </div>
                         </div>
@@ -246,38 +241,38 @@ function Main(){
                     <div id="card_area" onMouseOver={hover_over_card} onMouseOut={hover_out_card} onClick={() => { movePage('/card') }}>
                         <div id="inner">
 
-                            <div className="middle" id="carddivbox" style={{marginLeft:"-650px"}}>
+                            <div className="middle" id="carddivbox" style={{ marginLeft: "-650px" }}>
                                 {
-                                    businessList.map(function(business, idx){
-                                        return(
-                                        <div style={{marginBottom:"-100px", marginRight:"-400px"}} key={idx}>
-                                            <div style={{float:"left"}}>
-                                            <img src={business.thumbnail ? `${process.env.PUBLIC_URL}/Business-img/${business.thumbnail}`:'/Business-img/나에대해 알아보기.png'}
-                                                    alt="프로필 이미지" id="cardcircle" style={{marginLeft:"-500px", marginTop:"-50px"}} />    
-                                            </div>
-
-                                            <div>
-                                                <div id="cardtalk">
-                                                    <span style={{fontFamily:'Do Hyeon', fontSize:"15px", width:"150px", left:"40px", position:"absolute"}}>
-                                                        {business.introduce}
-                                                    </span>
+                                    businessList.map(function (business, idx) {
+                                        return (
+                                            <div style={{ marginBottom: "-100px", marginRight: "-400px" }} key={idx}>
+                                                <div style={{ float: "left" }}>
+                                                    <img src={business.thumbnail ? `${process.env.PUBLIC_URL}/Business-img/${business.thumbnail}` : '/Business-img/나에대해 알아보기.png'}
+                                                        alt="프로필 이미지" id="cardcircle" style={{ marginLeft: "-500px", marginTop: "-50px" }} />
                                                 </div>
 
-                                                <div style={{marginLeft:"-250px"}}>
-                                                    <div>
-                                                        <span style={{fontFamily:'Do Hyeon', fontSize:"15px"}}>
-                                                            이름: {business.name}
+                                                <div>
+                                                    <div id="cardtalk">
+                                                        <span style={{ fontFamily: 'Do Hyeon', fontSize: "15px", width: "150px", left: "40px", position: "absolute" }}>
+                                                            {business.introduce}
                                                         </span>
                                                     </div>
-                                                    <div>
-                                                        <span style={{fontFamily:'Do Hyeon', fontSize:"15px"}}>
-                                                            H/P: {business.phoneNum}
-                                                        </span>
+
+                                                    <div style={{ marginLeft: "-250px" }}>
+                                                        <div>
+                                                            <span style={{ fontFamily: 'Do Hyeon', fontSize: "15px" }}>
+                                                                이름: {business.name}
+                                                            </span>
+                                                        </div>
+                                                        <div>
+                                                            <span style={{ fontFamily: 'Do Hyeon', fontSize: "15px" }}>
+                                                                H/P: {business.phoneNum}
+                                                            </span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                        </div>
+                                            </div>
                                         )
                                     })
                                 }
@@ -285,7 +280,7 @@ function Main(){
 
                             <div id="hover_card">
                                 "Online card" 를 꾸며 "나" 를 공유해봐요!
-                                <br /><br/>
+                                <br /><br />
                                 custom 온라인 명함
                             </div>
                         </div>
@@ -301,14 +296,14 @@ function Main(){
 
                             <div id="hover_my">
                                 "MY" 를 통해 "나" 의 문서를 정리해봐요!
-                                <br /><br/>
+                                <br /><br />
                                 File 정리함
                             </div>
                         </div>
                         <div id="caterlogo">MY</div>
                     </div>
 
-                    <div id="mine_area" onMouseOver={hover_over_mine} onMouseOut={hover_out_mine} onClick={(e) => {window.location.href = "/mine"}}>
+                    <div id="mine_area" onMouseOver={hover_over_mine} onMouseOut={hover_out_mine} onClick={(e) => { window.location.href = "/mine" }}>
                         <div id="inner">
 
                             <div id="mineicon">
@@ -318,12 +313,12 @@ function Main(){
                             {!(minenumber === 0) && (
                                 <div id="minenumber">
                                     {minenumber}
-                                </div>                    
-                            )} 
+                                </div>
+                            )}
 
                             <div id="hover_mine">
                                 "MINE" 을 채워나가며 "나" 를 소개해봐요!
-                                <br /><br/>
+                                <br /><br />
                                 custom 게임, 질문 방명록
                             </div>
                         </div>
@@ -333,7 +328,7 @@ function Main(){
 
                     <div id="book_area" onMouseOver={hover_over_book} onMouseOut={hover_out_book} onClick={() => { movePage('/gbmain') }}>
                         <div id="inner">
-                            
+
                             <div id="guesticon">
                                 <img src={guest_icon} alt="no" width="180px"></img>
                             </div>
@@ -341,12 +336,12 @@ function Main(){
                             {!(booknumber === 0) && (
                                 <div id="guestnumber">
                                     {booknumber}
-                                </div>          
-                            )}          
+                                </div>
+                            )}
 
                             <div id="hover_book">
                                 "Guestbook" 을 통해 소통해봐요!
-                                <br /><br/>
+                                <br /><br />
                                 음성 방명록, 친구 목록
                             </div>
                         </div>

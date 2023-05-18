@@ -22,7 +22,7 @@ function Topbar() {
             </div>
 
             <div id="topbtns">
-                <button id="topbtnsImg" onClick={(e) => { window.location.href = "/edit" }}>내 정보 수정</button>
+                <button id="topbtnsImg" onClick={(e) => { movePage("/edit") }}>내 정보 수정</button>
                 <button id="topbtnsImg"><a href={kakaologout}  id="topbtnsImg">로그아웃</a></button>
                 <button id="topbtnsImg"onClick={showModal}>상담챗봇</button>
                 {modalOpen && <ModalBasic setModalOpen={setModalOpen} />}
